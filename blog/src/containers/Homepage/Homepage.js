@@ -25,7 +25,7 @@ return(
 </Articolo>
 
 
-<button className = {classes.NuovoArticoloButton}>Nuovo articolo</button>
+
 </div>
 
 );
