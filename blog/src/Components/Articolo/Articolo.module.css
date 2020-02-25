@@ -1,0 +1,14 @@
+.Articolo{
+    width:60%;
+    margin:auto;
+    background-color: white;
+    
+}
+
+.Img{
+    border: 2px solid orange;
+}
+
+.Testo{
+    font-weight: bold;
+}
