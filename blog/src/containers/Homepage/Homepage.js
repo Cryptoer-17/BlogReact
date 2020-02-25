@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-
 import classes from './Homepage.module.css';
 import Articolo from '../../Components/Articolo/Articolo';
 
-
-
 class Homepage extends Component{
+
+state = {
+   tag : ""
+}
+
 
 render(){
 
@@ -23,7 +25,7 @@ return(
 <h1 className = {classes.Titolo}>Blog</h1>
 
 <div className = {classes.FiltroTag}>
-   Filtra per <input type = "text" placeholder = "#tag" />
+   Filtra per <input type = "text" placeholder = "#tag" onChange={( event ) => this.setState( { tag: event.target.value } )} />
 </div>
 
 <Articolo>
