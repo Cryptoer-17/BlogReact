@@ -1,11 +1,13 @@
 .Articolo{
-    width:60%;
+    width:70%;
     margin:auto;
     background-color: white;
     display: flex;
     align-items: center;
     flex-flow: column;
-    height: 650px;
+    height: 10%;
+    padding:5px;
+    border: 1px solid lightgrey;
 }
 
 
@@ -18,5 +20,5 @@
 .Testo{
     font-size: medium;
     font-family: auto;
-    height: 200px;
+    height: 50%;
 }
