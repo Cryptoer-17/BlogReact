@@ -2,13 +2,21 @@
     width:60%;
     margin:auto;
     background-color: white;
-    
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    height: 650px;
 }
+
 
 .Img{
     border: 2px solid orange;
+    width: 90%;
 }
 
+
 .Testo{
-    font-weight: bold;
+    font-size: medium;
+    font-family: auto;
+    height: 200px;
 }
