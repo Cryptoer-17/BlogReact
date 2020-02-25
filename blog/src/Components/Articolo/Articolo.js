@@ -9,12 +9,14 @@ const article = (props) =>{
         <p>Titolo</p>
         </div>
         <div>
-        <p>Sottotitolo</p>
+        <p>Sottotitolo - Autore</p>
         </div>
         <div>
         <img className={classes.Img} src={HackerArticle} alt="Hack" />
         </div>
+        <div className={classes.Testo}>
         {props.children}
+        </div>
     </div>
     
     );
