@@ -18,10 +18,13 @@ return(
 <a href ="" className = {classes.Link}><i className="material-icons">home</i> </a>
 <a href ="" className = {classes.Link}><i className="material-icons" style = {{verticalAlign:'middle'}}>add_box</i> </a>
 <a href ="" className = {classes.LoginLink}> Login </a>
-
 </div>
 
 <h1 className = {classes.Titolo}>Blog</h1>
+
+<div className = {classes.FiltroTag}>
+   Filtra per <input type = "text" placeholder = "#tag" />
+</div>
 
 <Articolo>
    The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
