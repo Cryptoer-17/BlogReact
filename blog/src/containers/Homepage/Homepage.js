@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import './Homepage.module.css';
+import classes from './Homepage.module.css';
+import Articolo from '../../Components/Articolo/Articolo';
+
 
 class Homepage extends Component{
 
@@ -10,13 +12,16 @@ render(){
 
 return(
 
-<div>
+<div className = {classes.Homepage}>
 
 <h1>Blog</h1>
 
+<Articolo>
+    testo
+</Articolo>
 
 
-
+<button className = {classes.NuovoArticolo}>Nuovo articolo</button>
 </div>
 
 );

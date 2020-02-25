@@ -1,0 +1,21 @@
+.Homepage{
+width:100%;
+margin:auto;
+}
+
+.NuovoArticolo{
+    background-color: white;
+    width:25%;
+    border-radius: 4px;
+    padding:10px;
+    position:fixed;
+    bottom:40px;
+    right:35%;
+    outline:none;
+    box-shadow:  2px 3px #ccc;
+  
+}
+
+.NuovoArticolo:hover{
+    background-color: lightgray; 
+}
