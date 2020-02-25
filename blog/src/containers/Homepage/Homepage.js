@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
-import './Homepage.module.css';
+
+import classes from './Homepage.module.css';
 import Articolo from '../../Components/Articolo/Articolo';
+
+
 
 class Homepage extends Component{
 
@@ -16,15 +19,16 @@ const testo = <p>The continuous evolution of any technology is often accompanied
 
 return(
 
-<div>
+<div className = {classes.Homepage}>
 
 <h1>Blog</h1>
-<Articolo >
-<p>{testo}</p>
+
+<Articolo>
+   {testo}
 </Articolo>
 
 
-
+<button className = {classes.NuovoArticolo}>Nuovo articolo</button>
 </div>
 
 );
