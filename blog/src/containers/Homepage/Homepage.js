@@ -7,9 +7,6 @@ import Articolo from '../../Components/Articolo/Articolo';
 
 class Homepage extends Component{
 
-
-
-
 render(){
 
 const testo = <p>The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
@@ -28,7 +25,7 @@ return(
 </Articolo>
 
 
-<button className = {classes.NuovoArticolo}>Nuovo articolo</button>
+<button className = {classes.NuovoArticoloButton}>Nuovo articolo</button>
 </div>
 
 );
