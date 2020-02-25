@@ -3,6 +3,10 @@ width:100%;
 margin:auto;
 }
 
+.Titolo{
+    color: rgba(0, 0, 0, 0.84);
+    font-size:50px;
+}
 .NuovoArticoloButton{
     background-color: white;
     width:25%;
@@ -17,4 +21,35 @@ margin:auto;
 
 .NuovoArticoloButton:hover{
     background-color: lightgray; 
+}
+
+.BarraNavigazione{
+    width:100%;
+    text-decoration: none;
+    position:fixed;
+    top:5px;
+    margin-right:10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.BarraNavigazione a{
+    margin-right:10px;
+    margin-left: 10px;
+    text-decoration: none;   
+    color:black;
+    font-size:18px; 
+}
+.Link{
+    float:left;
+}
+
+.BarraNavigazione a:hover{
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+.LoginLink{
+    position:fixed;
+    right:10px;
+    float:right;
 }
