@@ -1,0 +1,42 @@
+.BarraNavigazione{
+    width:100%;
+    text-decoration: none;
+    position:fixed;
+    top:5px;
+    margin-right:10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size:20px;
+}
+.BarraNavigazione a{
+    margin-right:10px;
+    margin-left: 10px;
+    text-decoration: none;   
+    color:black;
+  
+}
+.BarraNavigazione i{
+    font-size: 28px;
+}
+
+.BarraNavigazione a:hover{
+    font-weight: bold;
+    color: rgb(77, 72, 72);
+}
+
+.Link{
+    float:left;
+    font-size:20px;
+    outline: none;
+}
+
+.LoginLink {
+    position:fixed;
+    right:10px;
+    float:right;
+}
+
+ .LinkAttivo i{
+  
+   color: #5d5d79; 
+}
