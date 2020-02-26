@@ -5,16 +5,13 @@ import Articolo from '../../Components/Articolo/Articolo';
 class Homepage extends Component{
 
 state = {
-   tag : ""
+   cerca : ""
 }
-
-
 
 
 render(){
 
-   console.log(this.state)
-
+ 
 return(
 
 <div className = {classes.Homepage}>
@@ -28,7 +25,7 @@ return(
 <h1 className = {classes.Titolo}>Blog</h1>
 
 <div className = {classes.CercaArticoli}>
- <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { tag: event.target.value } )} />
+ <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { cerca: event.target.value } )} />
    <button className = {classes.CercaButton}><i className="material-icons">search</i></button>
 </div>
 
@@ -49,8 +46,6 @@ return(
 <Articolo>qwertyuiop</Articolo>
 
 </div>
-
-
 
 
 

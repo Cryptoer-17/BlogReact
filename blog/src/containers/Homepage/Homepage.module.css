@@ -15,21 +15,6 @@ margin: 10px auto 10px auto;
     color: rgba(0, 0, 0, 0.84);
     font-size:50px;
 }
-.NuovoArticoloButton{
-    background-color: white;
-    width:25%;
-    border-radius: 4px;
-    padding:10px;
-    position:fixed;
-    bottom:40px;
-    right:35%;
-    outline:none;
-    box-shadow:  2px 3px #ccc;
-}
-
-.NuovoArticoloButton:hover{
-    background-color: lightgray; 
-}
 
 .BarraNavigazione{
     width:100%;
@@ -47,13 +32,14 @@ margin: 10px auto 10px auto;
     color:black;
     font-size:18px; 
 }
-.Link{
-    float:left;
-}
 
 .BarraNavigazione a:hover{
     font-weight: bold;
     color: rgb(77, 72, 72);
+}
+
+.Link{
+    float:left;
 }
 
 .LoginLink{
@@ -63,14 +49,13 @@ margin: 10px auto 10px auto;
 }
 
 .CercaArticoli{
-  margin-top: 40px;  
-  margin-bottom:40px;
+  margin-top: 20px;  
+  margin-bottom:20px;
   box-sizing: border-box;
   display:inline-flex;
   width:100%;
   margin-left:auto;
   margin-right:auto;
- 
 }
 
 .CercaArticoli input[type =text]{
@@ -82,9 +67,7 @@ margin: 10px auto 10px auto;
     border-top-right-radius:0;
     border-bottom-right-radius:0;
     margin-left:auto;
-
 }
-
 
 .CercaButton{
     width: 8%;
@@ -100,7 +83,6 @@ margin: 10px auto 10px auto;
     float: left;
     border-left: none; 
     cursor: pointer;
-  
     margin-right:auto;
 }
 
@@ -109,7 +91,6 @@ margin: 10px auto 10px auto;
 }
 
 .TornaSuButton{
-
     background: dimgray;
     cursor: pointer;
     position: relative;
@@ -119,7 +100,8 @@ margin: 10px auto 10px auto;
     border:none;
     padding:2px;
     outline: none;
- text-align: center;
- font-size-adjust: inherit;
+    text-align: center;
+    font-size-adjust: inherit;
     margin:auto;
+    border-radius: 2px;
 }
