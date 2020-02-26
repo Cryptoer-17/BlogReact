@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
+import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
 import NuovoArticolo from './containers/NuovoArticolo/NuovoArticolo';
@@ -15,7 +15,6 @@ function App() {
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
            </Switch>
-           <Redirect to = "/"/>
          </BrowserRouter>
     </div>
   );

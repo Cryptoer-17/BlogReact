@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 
-
 class NuovoArticolo extends Component{
 
 state = {
@@ -17,7 +16,6 @@ state = {
 
 
 render(){
-
 
 return(
 

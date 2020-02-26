@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import classes from './RisultatiRicerca.module.css';
-import {Route, NavLink} from 'react-router-dom';
-
 
 class RisultatiRicerca extends Component{
 
@@ -24,6 +22,8 @@ class RisultatiRicerca extends Component{
             tags:['ciao','react']
         }
         ],
+        classeCat :null,
+        classeTag : null,
         risultati:[]
     }
 
@@ -31,16 +31,14 @@ class RisultatiRicerca extends Component{
     render(){
        
 
-        
-
        const displayCategoryResultsHandler = (cerca) =>{
            let risultatiCat = [];
            risultatiCat= this.state.articoli.filter(art => art.categoria === cerca);
            risultatiCat = risultatiCat.map(r => <li key = {r.titolo}> {r.titolo} </li>);
            if (risultatiCat.length === 0){
-            risultatiCat = "Nessun risultato :(";
-        }
-           this.setState({risultati:risultatiCat});
+               risultatiCat = "Nessun risultato.";
+           }
+           this.setState({risultati:risultatiCat, classeCat: classes.OpzioneSelezionata,classeTag: null});
         }
 
        const displayTagResultsHandler = (cerca) =>{
@@ -48,42 +46,31 @@ class RisultatiRicerca extends Component{
             risultatiTag = this.state.articoli.filter(art =>  art.tags.indexOf(cerca)>= 0);
             risultatiTag = risultatiTag.map(r => <li key = {r.titolo}> {r.titolo} </li>);
             if (risultatiTag.length === 0){
-                risultatiTag = "Nessun risultato :(";
+                risultatiTag = "Nessun risultato.";
             }
-            this.setState({risultati:risultatiTag});
-          
+            this.setState({risultati:risultatiTag,  classeTag: classes.OpzioneSelezionata,classeCat: null}); 
         }
-
 
 
         return(
             <div className = {classes.RisultatiRicerca}>
-
-            <div>
+              <div>
                 <input autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""   onChange={( event ) => this.setState( { cerca: event.target.value } )}  />
+              </div>
 
-            </div>
-
-                <div className = {classes.OpzioniRicerca}>
-                   Filtra per <br/>
-                <p onClick = {() =>displayCategoryResultsHandler(this.state.cerca)}>Categoria</p> | <p onClick = {() =>displayTagResultsHandler(this.state.cerca)}>Tag</p>
-
+              <div className = {classes.OpzioniRicerca}>
+                Filtra per <br/>
+                <p className = {this.state.classeCat} onClick = {() =>displayCategoryResultsHandler(this.state.cerca)}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {() =>displayTagResultsHandler(this.state.cerca)}>Tag</p>
                 <hr  className = {classes.Divisore} />
+              </div>
 
-                </div>
-
-
-            <div className = {classes.ContainerRisultati}>
-
-            <ul>
-            {this.state.risultati }
-            </ul>
-
+               <div className = {classes.ContainerRisultati}>
+                <ul>
+                {this.state.risultati}
+                </ul>
+               </div>
             </div>
 
-
-            </div>
-   
         );
      }
     
