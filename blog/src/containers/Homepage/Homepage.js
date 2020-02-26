@@ -25,7 +25,8 @@ return(
 <h1 className = {classes.Titolo}>Blog</h1>
 
 <div className = {classes.FiltroTag}>
-   Filtra per <input type = "text" placeholder = "#tag" onChange={( event ) => this.setState( { tag: event.target.value } )} />
+ <input type = "text" placeholder = " #tag " onChange={( event ) => this.setState( { tag: event.target.value } )} />
+   <button className = {classes.CercaButton}><i class="material-icons">search</i></button>
 </div>
 
 <Articolo>

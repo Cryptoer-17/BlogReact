@@ -56,11 +56,37 @@ margin:auto;
 
 .FiltroTag{
   margin: 40px 10px 40px 10px;  
+  box-sizing: border-box;
+  display:inline-flex;
+  width:15%;
 }
 
 .FiltroTag input[type =text]{
-    border: 1px solid grey;
+    border: 1px solid rgb(77, 72, 72);;
     outline:none;
-    border-radius: 4px;
-    padding:5px;
+    border-radius: 3px;
+    padding:2px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+}
+
+
+.CercaButton{
+    width: 20%;
+    padding: 3px;
+    background: dimgray;
+    color: white;
+    font-size: 15px;
+    border: 1px solid rgb(77, 72, 72);;
+    outline:none;
+    border-radius: 2px;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    float: left;
+    border-left: none; 
+    cursor: pointer;
+}
+
+.CercaButton:hover{
+    background: rgb(73, 68, 68);
 }
