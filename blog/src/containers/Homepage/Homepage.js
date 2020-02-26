@@ -9,8 +9,11 @@ state = {
 }
 
 
+
+
 render(){
 
+   console.log(this.state)
 
 return(
 
@@ -24,9 +27,9 @@ return(
 
 <h1 className = {classes.Titolo}>Blog</h1>
 
-<div className = {classes.FiltroTag}>
- <input type = "text" placeholder = " #tag " onChange={( event ) => this.setState( { tag: event.target.value } )} />
-   <button className = {classes.CercaButton}><i class="material-icons">search</i></button>
+<div className = {classes.CercaArticoli}>
+ <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { tag: event.target.value } )} />
+   <button className = {classes.CercaButton}><i className="material-icons">search</i></button>
 </div>
 
 <Articolo>
