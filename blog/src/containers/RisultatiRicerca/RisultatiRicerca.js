@@ -25,7 +25,7 @@ class RisultatiRicerca extends Component{
     render(){
         console.log(this.state)
 
-let risultati = [];
+        let risultati = [];
 
        const displayCategoryResultsHandler = (cerca) =>{
 

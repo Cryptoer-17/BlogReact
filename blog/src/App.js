@@ -6,11 +6,11 @@ import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
 function App() {
   return (
     <div className="App">
-  <RisultatiRicerca/>
+      
+      <Homepage/>
 
     </div>
   );
 }
 
 export default App;
- //  <Homepage/>
