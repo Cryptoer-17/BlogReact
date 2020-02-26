@@ -64,8 +64,8 @@ class RisultatiRicerca extends Component{
                 <hr  className = {classes.Divisore} />
               </div>
 
-               <div className = {classes.ContainerRisultati}>
-                <ul>
+               <div >
+                <ul className = {classes.ContainerRisultati}>
                 {this.state.risultati}
                 </ul>
                </div>
