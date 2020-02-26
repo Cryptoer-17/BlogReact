@@ -9,8 +9,8 @@ state = {
     sottotitolo : "",
     autore : "",
     img : null,
-    categoria= "",
-    tags = [],
+    categoria: "",
+    tags : [],
     testo : ""
 }
 
