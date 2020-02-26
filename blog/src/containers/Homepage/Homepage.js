@@ -1,31 +1,56 @@
 import React, {Component} from 'react';
-
 import classes from './Homepage.module.css';
 import Articolo from '../../Components/Articolo/Articolo';
 
-
-
 class Homepage extends Component{
+
+state = {
+   cerca : ""
+}
+
 
 render(){
 
-const testo = <p>The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
-                 The same happened on the Internet as well. It has been a boon for every existing technology. 
-                 Manual working has been greatly reduced with the automation brought about with the internet. 
-                 But the Cyber Security threats that are rising with it are certainly impossible to eliminate completely.</p>
-
+ 
 return(
 
 <div className = {classes.Homepage}>
 
-<h1>Blog</h1>
+<div className ={classes.BarraNavigazione}>
+<a href ="" className = {classes.Link}><i className="material-icons">home</i> </a>
+<a href ="" className = {classes.Link}><i className="material-icons" style = {{verticalAlign:'middle'}}>add_box</i> </a>
+<a href ="" className = {classes.LoginLink}> Login </a>
+</div>
 
+<h1 className = {classes.Titolo}>Blog</h1>
+
+<div className = {classes.CercaArticoli}>
+ <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { cerca: event.target.value } )} />
+   <button className = {classes.CercaButton}><i className="material-icons">search</i></button>
+</div>
+
+<div className = {classes.ContainerArticoli} >
 <Articolo>
-   {testo}
+   The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
+   The same happened on the Internet as well. It has been a boon for every existing technology. 
+   Manual working has been greatly reduced with the automation brought about with the internet. 
+   But the Cyber Security threats that are rising with it are certainly impossible to eliminate completely.
 </Articolo>
 
+<Articolo>Testo di prova</Articolo>
 
-<button className = {classes.NuovoArticoloButton}>Nuovo articolo</button>
+<Articolo>sadgfdsgdgdfshfdhfdhghgfdg</Articolo>
+
+<Articolo>Hello world</Articolo>
+
+<Articolo>qwertyuiop</Articolo>
+
+</div>
+
+
+
+
+<button className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">	arrow_drop_up</i></button>
 </div>
 
 );
