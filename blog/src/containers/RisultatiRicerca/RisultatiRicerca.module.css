@@ -1,0 +1,41 @@
+.RisultatiRicerca{
+margin:auto;
+height:100%;
+}
+
+
+.OpzioniRicerca{
+   width:100%;
+}
+
+.OpzioniRicerca a{
+    text-decoration: none;
+    color:black;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.InputRicerca{
+    margin:auto;
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color: transparent;
+    outline: none;
+    width:50%;
+    padding:5px;
+    border:none;
+    border-bottom: 1px solid  rgba(0,0,0,.84);
+    font-size: 25px;
+}
+.ContainerRisultati{
+    width:80%;
+    margin:auto;
+    margin-bottom:10px;
+    margin-top:10px;
+}
+
+.Divisore{
+    border: 0.5px solid grey;
+    width:80%;
+}

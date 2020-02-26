@@ -1,0 +1,46 @@
+.Anteprimaarticolo{
+    width:60%;
+    margin:auto;
+    background-color: white;
+    height: 300px;
+    padding:5px;
+    border: 1px solid lightgrey;
+    margin-bottom: 10px;
+}
+
+
+.Imgdiv{
+    margin-left: 53%;
+    margin-top:-10%;
+    width: 50%;
+}
+
+.Img{
+    width: 80%;
+}
+
+.Testo{
+    font-size: medium;
+    font-family: auto;
+    height: 50%;
+    width: 50%;
+    margin-top: -11%;
+    
+}
+
+.Titolo{
+    width: 40%;
+    
+}
+
+.Sottotitolo{
+    width: 40%;
+}
+
+.Icon{
+    width:6%;
+}
+
+.RedHeart{
+    color: red;
+}
