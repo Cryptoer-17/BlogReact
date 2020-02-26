@@ -6,13 +6,17 @@
     margin-right:10px;
     margin-left: 10px;
     margin-bottom: 10px;
+    font-size:20px;
 }
 .BarraNavigazione a{
     margin-right:10px;
     margin-left: 10px;
     text-decoration: none;   
     color:black;
-    font-size:18px; 
+  
+}
+.BarraNavigazione i{
+    font-size: 28px;
 }
 
 .BarraNavigazione a:hover{
@@ -22,19 +26,17 @@
 
 .Link{
     float:left;
+    font-size:20px;
+    outline: none;
 }
-.LoginLink p {
-    padding:0;
-    margin-top:5px;
-}
+
 .LoginLink {
     position:fixed;
-    top:0;
     right:10px;
     float:right;
 }
 
- .LinkAttivo i, .LinkAttivo p{
-
-   color:red; 
+ .LinkAttivo i{
+  
+   color: #5d5d79; 
 }

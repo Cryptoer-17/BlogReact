@@ -8,7 +8,7 @@ const Navigazione = () =>{
         <div className ={classes.BarraNavigazione}>
             <NavLink to="/" exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica"exact className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink>
-            <NavLink to="/ricerca" exact className = {classes.LoginLink}  activeClassName = {classes.LinkAttivo}> <p>Login </p></NavLink>
+            <NavLink to="/ricerca" exact className = {classes.LoginLink}  activeClassName = {classes.LinkAttivo}> <i class="material-icons">account_circle</i></NavLink>
         </div>
     );
 }
