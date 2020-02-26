@@ -5,13 +5,13 @@ import Articolo from '../../Components/Articolo/Articolo';
 class Homepage extends Component{
 
 state = {
-   tag : ""
+   cerca : ""
 }
 
 
 render(){
 
-
+ 
 return(
 
 <div className = {classes.Homepage}>
@@ -24,10 +24,12 @@ return(
 
 <h1 className = {classes.Titolo}>Blog</h1>
 
-<div className = {classes.FiltroTag}>
-   Filtra per <input type = "text" placeholder = "#tag" onChange={( event ) => this.setState( { tag: event.target.value } )} />
+<div className = {classes.CercaArticoli}>
+ <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { cerca: event.target.value } )} />
+   <button className = {classes.CercaButton}><i className="material-icons">search</i></button>
 </div>
 
+<div className = {classes.ContainerArticoli} >
 <Articolo>
    The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
    The same happened on the Internet as well. It has been a boon for every existing technology. 
@@ -43,6 +45,12 @@ return(
 
 <Articolo>qwertyuiop</Articolo>
 
+</div>
+
+
+
+
+<button className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">	arrow_drop_up</i></button>
 </div>
 
 );
