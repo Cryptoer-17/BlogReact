@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+import {NavLink} from 'react-router-dom';
 
 class Homepage extends Component{
 
@@ -20,8 +21,12 @@ return(
 <h1 className = {classes.Titolo}>Blog</h1>
 
 <div className = {classes.CercaArticoli}>
- <input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { cerca: event.target.value } )} />
-   <button className = {classes.CercaButton}><i className="material-icons">search</i></button>
+
+<input type = "text" placeholder = " Cerca..." onChange={( event ) => this.setState( { cerca: event.target.value } )} />
+
+
+<NavLink to = "/ricerca" exact className = {classes.CercaButton} ><i className="material-icons">search</i></NavLink>
+  
 </div>
 
 <div className = {classes.ContainerArticoli} >

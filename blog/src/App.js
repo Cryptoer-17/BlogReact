@@ -12,8 +12,8 @@ function App() {
          <Navigazione/>
           <Switch>
             <Route path="/" exact component={Homepage} /> 
-            <Route path="/ricerca" exact  component={RisultatiRicerca} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
+            <Route path="/ricerca"  component = {RisultatiRicerca} /> 
            </Switch>
            <Redirect to = "/"/>
          </BrowserRouter>
