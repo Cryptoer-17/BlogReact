@@ -30,12 +30,12 @@ return(
 </div>
 
 <div className = {classes.ContainerArticoli} >
-<Anteprimaarticolo>
+<Anteprimaarticolo color={false}>
    The continuous evolution of any technology is often accompanied by the greater risks associated with it. 
    But the Cyber Security threats that are rising with it are certainly impossible to eliminate completely.
 </Anteprimaarticolo>
 
-<Anteprimaarticolo>Testo di prova</Anteprimaarticolo>
+<Anteprimaarticolo color={true}>Testo di prova</Anteprimaarticolo>
 
 <Anteprimaarticolo>sadgfdsgdgdfshfdhfdhghgfdg</Anteprimaarticolo>
 

@@ -2,7 +2,7 @@
     width:60%;
     margin:auto;
     background-color: white;
-    height: 10%;
+    height: 300px;
     padding:5px;
     border: 1px solid lightgrey;
     margin-bottom: 10px;
@@ -10,8 +10,9 @@
 
 
 .Imgdiv{
-    margin-left: 45%;
-    margin-top:-13%;
+    margin-left: 53%;
+    margin-top:-10%;
+    width: 50%;
 }
 
 .Img{
@@ -23,6 +24,8 @@
     font-family: auto;
     height: 50%;
     width: 50%;
+    margin-top: -11%;
+    
 }
 
 .Titolo{
@@ -32,4 +35,12 @@
 
 .Sottotitolo{
     width: 40%;
+}
+
+.Icon{
+    width:6%;
+}
+
+.RedHeart{
+    color: red;
 }
