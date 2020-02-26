@@ -1,10 +1,7 @@
-.Articolo{
+.Anteprimaarticolo{
     width:60%;
     margin:auto;
     background-color: white;
-    display: flex;
-    align-items: center;
-    flex-flow: column;
     height: 10%;
     padding:5px;
     border: 1px solid lightgrey;
@@ -12,14 +9,27 @@
 }
 
 
-.Img{
-    border: 2px solid orange;
-    width: 90%;
+.Imgdiv{
+    margin-left: 45%;
+    margin-top:-13%;
 }
 
+.Img{
+    width: 80%;
+}
 
 .Testo{
     font-size: medium;
     font-family: auto;
     height: 50%;
+    width: 50%;
+}
+
+.Titolo{
+    width: 40%;
+    
+}
+
+.Sottotitolo{
+    width: 40%;
 }
