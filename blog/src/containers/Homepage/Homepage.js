@@ -16,11 +16,6 @@ return(
 
 <div className = {classes.Homepage}>
 
-<div className ={classes.BarraNavigazione}>
-<a href ="/" className = {classes.Link}><i className="material-icons">home</i> </a>
-<a href ="/" className = {classes.Link}><i className="material-icons" style = {{verticalAlign:'middle'}}>add_box</i> </a>
-<a href ="/" className = {classes.LoginLink}> Login </a>
-</div>
 
 <h1 className = {classes.Titolo}>Blog</h1>
 
