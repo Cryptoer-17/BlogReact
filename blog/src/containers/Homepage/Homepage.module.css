@@ -3,6 +3,14 @@ width:100%;
 margin:auto;
 }
 
+.ContainerArticoli{
+height:70%;
+margin:auto;
+overflow:auto;
+width:90%;
+margin: 10px auto 10px auto;
+}
+
 .Titolo{
     color: rgba(0, 0, 0, 0.84);
     font-size:50px;
@@ -62,6 +70,7 @@ margin:auto;
   width:100%;
   margin-left:auto;
   margin-right:auto;
+ 
 }
 
 .CercaArticoli input[type =text]{
@@ -97,4 +106,20 @@ margin:auto;
 
 .CercaButton:hover{
     background: rgb(73, 68, 68);
+}
+
+.TornaSuButton{
+
+    background: dimgray;
+    cursor: pointer;
+    position: relative;
+    bottom:5px;
+    width:35px;
+    height:25px;
+    border:none;
+    padding:2px;
+    outline: none;
+ text-align: center;
+ font-size-adjust: inherit;
+    margin:auto;
 }
