@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+
 
 class NuovoArticolo extends Component{
 
@@ -41,6 +45,30 @@ deleteTagHandler = (tag) =>{
 
 
 
+publishArticleHandler = () =>{
+    const articolo = {
+        titolo: this.state.titolo,
+        sottotitolo: this.state.sottotitolo,
+        autore: this.state.autore,
+        testo: this.state.testo,
+        categoria: this.state.categoria,
+        tags: this.state.tags,
+        immagine: this.state.img
+    }
+
+    axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
+    .then( res => {
+       console.log("ok")
+    } )
+    .catch( err => {
+    
+        console.log(err.message)
+    } );
+}
+
+
+
+
 
 
 render(){
@@ -71,7 +99,7 @@ return(
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
 <input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={( event ) => this.setState( {img: event.target.files} )} />
 
-<button className = {classes.PubblicaButton}>Pubblica</button>
+<Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
 
 
 
