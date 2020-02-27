@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 
+
 class NuovoArticolo extends Component{
 
 state = {
@@ -11,11 +12,16 @@ state = {
     categoria: "",
     tags : [],
     testo : ""
+  
 }
 
 
 
+
+
+
 render(){
+
 
 return(
 
@@ -28,10 +34,17 @@ return(
 <input className = {classes.Input}  type = "text" placeholder = "Autore"  onChange={( event ) => this.setState( { autore: event.target.value } )}   />
 <textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}   />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
-<input className = {classes.Input}  type = "text" placeholder = "Tags"  onChange={( event ) => this.setState( { tags: event.target.value } )}  />
+<div className = {classes.InputTags}>
+<input className = {classes.Input}  type = "text" placeholder = "#tag"  onChange={( event ) => this.setState( { tags: event.target.value } )}  />
+</div>
+<br/>
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
 <input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={( event ) => this.setState( {img: event.target.files} )} />
 <button className = {classes.PubblicaButton}>Pubblica</button>
+
+
+
+
 </div>
 
 );

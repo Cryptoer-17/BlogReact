@@ -73,7 +73,17 @@
     background-color: lightgray; 
 }
 
+.InputTags  {
+   margin-bottom:50px;
+    margin:auto;
+    width:400px;
+    cursor: text;
+}
+
+
 .Label{
     vertical-align: middle;
     font-size:18px;
+    margin-top:50px;
+    margin-bottom:20px;
 }
