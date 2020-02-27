@@ -75,9 +75,9 @@
 
 .InputTags  {
    margin-bottom:50px;
-    margin:auto;
-    width:400px;
-    cursor: text;
+   width:500px;
+   max-height:250px;
+   display:-webkit-box;
 }
 
 

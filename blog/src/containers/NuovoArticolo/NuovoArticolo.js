@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
-
+import Tag from '../../Components/Tag/Tag';
 
 class NuovoArticolo extends Component{
 
@@ -10,14 +10,23 @@ state = {
     autore : "",
     img : null,
     categoria: "",
-    tags : [],
+    tagsArr : [],
+    tagsList:[],
     testo : ""
   
 }
 
 
-
-
+addTagHandler = (tag) =>{
+    let tagsList = [...this.state.tagsList];
+    let tags = this.state.tagsArr;
+    if(tags.indexOf(tag) < 0){
+    tagsList.push(<Tag key = {tag}>{tag} </Tag>);
+    tags = tags.concat(tag);
+    this.setState( { tagsList:tagsList, tagsArr:tags } );
+    console.log(this.state)
+    }
+}
 
 
 render(){
@@ -34,8 +43,13 @@ return(
 <input className = {classes.Input}  type = "text" placeholder = "Autore"  onChange={( event ) => this.setState( { autore: event.target.value } )}   />
 <textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}   />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
+
+<input className = {classes.Input}  type = "text" placeholder = "#tag"  
+   
+    onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value)} }}/>
+<br/>
 <div className = {classes.InputTags}>
-<input className = {classes.Input}  type = "text" placeholder = "#tag"  onChange={( event ) => this.setState( { tags: event.target.value } )}  />
+{this.state.tagsList}
 </div>
 <br/>
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
