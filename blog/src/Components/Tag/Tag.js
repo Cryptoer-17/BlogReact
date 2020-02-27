@@ -7,7 +7,7 @@ const Tag = (props) =>{
     return(
         <div className ={classes.Tag}>
           {props.children}
-         <i className="material-icons">close</i>
+         <i className="material-icons" onClick = {props.click}>close</i>
         </div>
     );
 }

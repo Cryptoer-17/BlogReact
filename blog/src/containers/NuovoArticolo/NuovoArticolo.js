@@ -21,11 +21,25 @@ addTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
     if(tags.indexOf(tag) < 0 && tags.length < 15){
-    tagsList.push(<Tag key = {tag}>{tag} </Tag>);
+    tagsList.push(<Tag key = {tag} click = {() =>this.deleteTagHandler(tag)}>{tag} </Tag>);
     tags = tags.concat(tag);
     this.setState( { tagsList:tagsList, tags:tags } );
     }
 }
+
+
+deleteTagHandler = (tag) =>{
+    let tagsList = [...this.state.tagsList];
+    let tags = this.state.tags;
+    let i = tags.indexOf(tag);
+    tags = tags.splice(i,1);
+    tagsList = tagsList.filter(t => t.key !== tag);
+    this.setState( { tagsList:tagsList, tags:tags } );
+   console.log(this.state)
+}
+
+
+
 
 
 render(){
@@ -52,8 +66,10 @@ return(
 {this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
 </div>
 <br/>
+<hr/>
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
 <input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={( event ) => this.setState( {img: event.target.files} )} />
+
 <button className = {classes.PubblicaButton}>Pubblica</button>
 
 
