@@ -10,7 +10,7 @@ state = {
     autore : "",
     img : null,
     categoria: "",
-    tagsArr : [],
+    tags : [],
     tagsList:[],
     testo : ""
   
@@ -19,12 +19,11 @@ state = {
 
 addTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
-    let tags = this.state.tagsArr;
-    if(tags.indexOf(tag) < 0){
+    let tags = this.state.tags;
+    if(tags.indexOf(tag) < 0 && tags.length < 15){
     tagsList.push(<Tag key = {tag}>{tag} </Tag>);
     tags = tags.concat(tag);
-    this.setState( { tagsList:tagsList, tagsArr:tags } );
-    console.log(this.state)
+    this.setState( { tagsList:tagsList, tags:tags } );
     }
 }
 
@@ -50,6 +49,7 @@ return(
 <br/>
 <div className = {classes.InputTags}>
 {this.state.tagsList}
+{this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
 </div>
 <br/>
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>

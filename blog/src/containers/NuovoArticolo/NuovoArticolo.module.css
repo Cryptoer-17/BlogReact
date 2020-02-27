@@ -76,8 +76,8 @@
 .InputTags  {
    margin-bottom:50px;
    width:500px;
-   max-height:250px;
-   display:-webkit-box;
+   max-height:350px;
+   margin:auto;
 }
 
 
