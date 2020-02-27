@@ -12,7 +12,8 @@ state = {
     categoria: "",
     tags : [],
     tagsList:[],
-    testo : ""
+    testo : "",
+    tagInput:""
   
 }
 
@@ -20,7 +21,7 @@ state = {
 addTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
-    if(tags.indexOf(tag) < 0 && tags.length < 15){
+    if(tags.indexOf(tag) < 0 && tags.length < 15 && tag.length>0){
     tagsList.push(<Tag key = {tag} click = {() =>this.deleteTagHandler(tag)}>{tag} </Tag>);
     tags = tags.concat(tag);
     this.setState( { tagsList:tagsList, tags:tags } );
@@ -57,9 +58,9 @@ return(
 <textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}   />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
 
-<input className = {classes.Input}  type = "text" placeholder = "#tag"  
-   
-    onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value)} }}/>
+<input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
+    onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
+    onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
 <br/>
 <div className = {classes.InputTags}>
 {this.state.tagsList}
