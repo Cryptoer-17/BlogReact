@@ -5,6 +5,7 @@ import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
 import NuovoArticolo from './containers/NuovoArticolo/NuovoArticolo';
 import Navigazione from './Components/Navigazione/Navigazione';
+import Articolo from './Components/Articolo/Articolo';
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" exact component={Homepage} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
+            <Route path="/articolo" component ={Articolo} />
            </Switch>
          </BrowserRouter>
     </div>

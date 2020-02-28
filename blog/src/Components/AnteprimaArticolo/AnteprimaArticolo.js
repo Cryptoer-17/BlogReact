@@ -2,6 +2,7 @@ import React from 'react';
 import HackerArticle from '../../assets/images/Hack-image-article.png';
 import classes from './Anteprimaarticolo.module.css';
 import { FaHeart } from "react-icons/fa";
+import {NavLink} from 'react-router-dom';
 
 const anteprimaArticle = (props) =>{
 
@@ -14,7 +15,11 @@ const anteprimaArticle = (props) =>{
     return (
     <div className={classes.Anteprimaarticolo}>
         <div className={classes.Titolo}>
-        <p>Titolo</p>
+        <NavLink to="/articolo" style={{
+            textDecoration : 'none',
+            color : 'black',
+            fontWeight : 'bold'
+        }}>Titolo</NavLink>
         </div>
         <div className={classes.Sottotitolo}>
         <p>Sottotitolo - Autore</p>
