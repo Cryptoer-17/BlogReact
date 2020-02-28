@@ -2,5 +2,7 @@ body {
   margin: 0;
   font-family: 'Ubuntu';
   text-align: center;
-  background-color: #DFDFE6 ;
+  background-color: #efeff2;
 }
+
+::selection { background-color:transparent; }

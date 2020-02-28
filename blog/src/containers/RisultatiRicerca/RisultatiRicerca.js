@@ -7,66 +7,89 @@ class RisultatiRicerca extends Component{
         cerca:"",
         articoli:[
         {
+            titolo: "art1",
             categoria: 'test',
             tags:['prova','react']
         },
         {
+            titolo: "art2",
             categoria: 'test',
             tags:['ciao','react']
         },
         {
+            titolo: "art3",
             categoria: 'prova',
             tags:['ciao','react']
         }
-        ]
+        ],
+        classeCat :null,
+        classeTag : null,
+        risultatiCat : [],
+        risultatiTag: []
     }
 
+componentDidMount(){
+
+
+}
+
+
+searchArticlesHandler = (cerca) =>{
+    let risultatiCat = [];
+    risultatiCat= this.state.articoli.filter(art => art.categoria === cerca);
+    risultatiCat = risultatiCat.map(r => <li key = {r.titolo}> {r.titolo} </li>);
+    if (risultatiCat.length === 0){
+        risultatiCat = "Nessun risultato.";
+    }
+
+    let risultatiTag = [];
+    risultatiTag = this.state.articoli.filter(art =>  art.tags.indexOf(cerca)>= 0);
+    risultatiTag = risultatiTag.map(r => <li key = {r.titolo}> {r.titolo} </li>);
+    if (risultatiTag.length === 0){
+        risultatiTag = "Nessun risultato.";
+    }
+this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
+
+}
+
+
+
+ displayCategoryResultsHandler = () =>{
+
+    this.setState({classeCat: classes.OpzioneSelezionata,classeTag: null});
+ }
+
+ displayTagResultsHandler = () =>{
+
+     this.setState({classeTag: classes.OpzioneSelezionata,classeCat: null}); 
+ }
+ 
 
     render(){
-        console.log(this.state)
-
-        let risultati = [];
-
-       const displayCategoryResultsHandler = (cerca) =>{
-
-           risultati= this.state.articoli.filter(art => art.categoria === cerca)
-           console.log(risultati.map(r => r))
-
-        }
-
-       const displayTagResultsHandler = (cerca) =>{
-
-            risultati = this.state.articoli.filter(art =>  art.tags.indexOf(cerca)>= 0)
-            console.log(risultati.map(r => r))
-
-        }
-
-
-
+       
         return(
             <div className = {classes.RisultatiRicerca}>
+              <div>  
+                <input  autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""  onKeyPress={ event => { if(event.key === 'Enter'){ this.searchArticlesHandler(this.state.cerca)} } } onChange={( event ) => {this.setState( { cerca: event.target.value } );
+                 setTimeout(() => {this.searchArticlesHandler(this.state.cerca)}, 500);  } }  />
+              </div>
 
-            <div>
-                <input autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""   onChange={( event ) => this.setState( { cerca: event.target.value } )}  />
-
-            </div>
-
-                <div className = {classes.OpzioniRicerca}>
-                    <p>Filtra per </p>
-                <a  onClick = {() =>displayCategoryResultsHandler(this.state.cerca)}>Categoria</a> | <a  onClick = {() =>displayTagResultsHandler(this.state.cerca)}>Tag</a>
+              <div className = {classes.OpzioniRicerca}>
+                Filtra per <br/>
+                <p className = {this.state.classeCat}  onClick = {() =>this.displayCategoryResultsHandler()}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {() =>this.displayTagResultsHandler()}>Tag</p>
                 <hr  className = {classes.Divisore} />
-                </div>
+              </div>
 
+               <div >
+                <ul className = {classes.ContainerRisultati}>
 
-            <div className = {classes.ContainerRisultati}>
-
-            {/* risultati */}
-                
+                {this.state.classeCat && this.state.cerca ? this.state.risultatiCat : null }
+                {this.state.classeTag && this.state.cerca ? this.state.risultatiTag : null }
+             
+                </ul>
+               </div>
             </div>
 
-
-            </div>
-   
         );
      }
     
