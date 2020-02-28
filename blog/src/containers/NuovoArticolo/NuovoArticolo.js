@@ -17,7 +17,8 @@ state = {
     tags : [],
     tagsList:[],
     testo : "",
-    tagInput:""
+    tagInput:"",
+    anteprimaImg:null
 }
 
 
@@ -46,7 +47,7 @@ deleteTagHandler = (tag) =>{
         let reader = new FileReader();
         reader.readAsDataURL(e);
         reader.onloadend = () => {
-        this.setState({img: reader.result})
+        this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
         }
 
       };
@@ -89,19 +90,27 @@ return(
 <input className = {classes.Input}  type = "text" placeholder = "Autore"  onChange={( event ) => this.setState( { autore: event.target.value } )}   />
 <textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
-
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
     onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
 <br/>
+
 <div className = {classes.InputTags}>
-{this.state.tagsList}
-{this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
+    {this.state.tagsList}
+    {this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
 </div>
+
 <br/>
 <hr/>
-<label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
-<input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } />
+
+<div className = {classes.InputImg}>
+    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+
+    <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
+    {this.state.anteprimaImg ? this.state.anteprimaImg : null}
+</div>
+
+<hr/>
 
 <Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
 
