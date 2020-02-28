@@ -1,0 +1,22 @@
+.Input{
+    display:block;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding:12px;
+    width:50%;
+    outline:none;
+    padding:5px;
+    border:none;
+    background-color: transparent;
+    border-bottom: 0.5px solid  rgba(0,0,0,.84);
+}
+
+.Input:focus{
+    border-bottom: 1px solid black;
+}
+
+
+.Login{
+    
+}
