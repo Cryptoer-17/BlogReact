@@ -22,7 +22,7 @@ class anteprimaArticle extends Component{
             //console.log(response.data);
           this.setState({articolo : response.data})
           this.setState({loading:false})
-      
+            console.log(this.state.articolo.titolo);
         })
         .catch(error => {
           //  this.setState({error:true})
@@ -38,52 +38,46 @@ class anteprimaArticle extends Component{
     if(this.props.color){
         assignedClasses.push(classes.RedHeart);
     }
-    if(this.state.loading !== null){
-        return (
-            this.state.articolo.map(ctrl =>{
-            
-
-            let variabile = <div className={classes.Anteprimaarticolo}>
-                <div className={classes.Titolo}>
-                    <NavLink to="/articolo" style={{
-                        textDecoration: 'none',
-                        color: 'black',
-                        fontWeight: 'bold'
-                    }}>Titolo</NavLink>
-                </div>
-                <div className={classes.Sottotitolo}>
-                    <p>Sottotitolo - Autore</p>
-                </div>
-                <div className={classes.Imgdiv}>
-                    <img className={classes.Img} src={HackerArticle} alt="Hack" />
-                </div>
-                <div className={classes.Testo}>
-                    {this.props.children}
-                </div>
-                <div className={classes.Icon}>
-                    <FaHeart className={assignedClasses.join(' ')} />
-                </div>
+    
+    
+    let variabile ; 
+    if(this.state.articolo!==null){
+        variabile = <div className={classes.Anteprimaarticolo}>
+            <div className={classes.Titolo}>
+                <NavLink to="/articolo" style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                    fontWeight: 'bold'
+                }}>{this.state.articolo.titolo}</NavLink>
             </div>
-
-            if(this.state.loading){
-                variabile= <Spinner />;
-            }
-            return (
-            <div>
-                {variabile}
-            </div> 
-            );
-        })
-        );
-  
-    }    
-    else return null;
-        
-
-
-    
+            <div className={classes.Sottotitolo}>
+            <p>{this.state.articolo.sottotitolo} - {this.state.articolo.autore}</p>
+            </div>
+            <div className={classes.Imgdiv}>
+                <img className={classes.Img} src={HackerArticle} alt="Hack" />
+            </div>
+            <div className={classes.Testo}>
+            {this.state.articolo.testo}
+            </div>
+            <div className={classes.Icon}>
+                <FaHeart className={assignedClasses.join(' ')} />
+            </div>
+        </div>
     }
-    
+
+
+    if(this.state.loading){
+        variabile= <Spinner />;
+    }
+
+    return(
+        <div>
+            {variabile}
+        </div>
+    );
+
+
+    }
 
 
 } 
