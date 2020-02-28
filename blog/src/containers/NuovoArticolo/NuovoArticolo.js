@@ -68,12 +68,14 @@ deleteTagHandler = (tag) =>{
     }
 
     axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
-    .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."}) } )
+    .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."});
+    setTimeout(() => this.props.history.push("/") , 1000) 
+} )
     .catch( err => {
         this.setState({esitoCaricamento: "Errore. Caricamento non eseguito."})
     } );
 
-setTimeout(() => this.props.history.push("/") , 2000)
+
 }
 
 
