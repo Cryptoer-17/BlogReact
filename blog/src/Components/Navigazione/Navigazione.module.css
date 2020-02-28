@@ -19,7 +19,7 @@
     font-size: 28px;
 }
 
-.BarraNavigazione a:hover{
+.BarraNavigazione a:hover, .LoginButton:hover{
     font-weight: bold;
     color: rgb(77, 72, 72);
 }
@@ -30,10 +30,13 @@
     outline: none;
 }
 
-.LoginLink {
+.LoginButton{
     position:fixed;
     right:10px;
     float:right;
+    border:none;
+    background-color: transparent;
+    outline: none;
 }
 
  .LinkAttivo i{

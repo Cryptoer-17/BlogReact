@@ -8,26 +8,14 @@ class Login extends Component{
 
 state = {
 username:"",
-password:"",
-show:true
+password:""
 }
-
-showModal = () =>{
-    this.setState({show : true});
-    }
-
-hideModal = () =>{
-        this.setState({show : false});
-        }
 
 render(){
 
- 
 return(
 
-
-
-<Modal show = {  this.state.show}  modalClosed = {this.hideModal}>
+<Modal show = {  this.props.show}  modalClosed = {this.props.hideModal}>
 <div className = {classes.Login}>
 <h3>Login</h3>
 <input autoFocus className = {classes.Input}  type = "text" placeholder = "Username" onChange={( event ) => this.setState( { titolo: event.target.value } )}  required  />
