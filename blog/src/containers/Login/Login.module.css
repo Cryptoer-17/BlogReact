@@ -1,10 +1,10 @@
 .Input{
     display:block;
     margin:auto;
-    margin-top: 10px;
-    margin-bottom: 12px;
+    margin-top:50px;
+    margin-bottom:50px;
     padding:12px;
-    width:50%;
+    width:90%;
     outline:none;
     padding:5px;
     border:none;
@@ -18,5 +18,54 @@
 
 
 .Login{
-    
+    height:350px;
+    width:50%;
+    margin:auto;
+  
+}
+
+.AccediButton{
+    width:100px;
+    height:45px;
+    outline:none;
+    padding:5px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid grey;
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor:pointer;
+    margin-right: 2px;
+ 
+}
+
+.ButtonContainer{
+    display:inline-flex;
+}
+.AccediButton:hover, .RegistratiButton:hover{
+    background-color: lightgray; 
+}
+
+
+.AccediButton:disabled{
+    cursor:not-allowed;
+    background-color: lightgray; 
+}
+
+.RegistratiButton{
+    width:100px;
+    outline:none;
+    padding:5px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid grey;
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor:pointer;
 }

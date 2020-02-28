@@ -67,6 +67,7 @@
     font-size:18px;
     font-family: inherit;
     font-weight: bold;
+    cursor:pointer;
 }
 
 .Input:focus, .InputTextarea:focus, .InputTitolo:focus{
@@ -105,6 +106,7 @@
     border: 1px solid grey;
     display:block;
     font-family: inherit;
+    cursor:pointer;
 }
 
 
