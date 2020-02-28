@@ -112,7 +112,11 @@ return(
 
 <hr/>
 
-<Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
+{   this.state.titolo === "" || this.state.testo === "" ?   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler} disabled>Pubblica</button>   :         
+    <Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
+
+}
+
 
 
 </div>

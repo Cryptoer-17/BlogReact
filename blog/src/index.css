@@ -4,3 +4,5 @@ body {
   text-align: center;
   background-color: #efeff2;
 }
+
+::selection { background-color:transparent; }
