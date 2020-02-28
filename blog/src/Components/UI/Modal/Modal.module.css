@@ -1,0 +1,27 @@
+
+.Modal {
+    position: fixed;
+    z-index: 300;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    top: 20%;
+    left: 25%;
+    width: 80%;
+    height:auto;
+    max-height:70%;
+    overflow-y: auto;
+    border-radius: 8px;
+ 
+}
+
+@media (min-width: 500px) {
+    .Modal {
+        width: 400px;
+        left: calc(50% - 200px);
+    }
+   
+}
