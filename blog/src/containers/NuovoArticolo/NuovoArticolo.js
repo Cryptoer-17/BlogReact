@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
-import axios from 'axios';
-
-
+import axios from '../../axios';
 
 
 class NuovoArticolo extends Component{
@@ -55,7 +53,6 @@ deleteTagHandler = (tag) =>{
   
 
   publishArticleHandler = () => {
- 
     const articolo = {
         titolo: this.state.titolo,
         sottotitolo: this.state.sottotitolo,
@@ -66,14 +63,13 @@ deleteTagHandler = (tag) =>{
         img: this.state.img
     }
 
-    axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
+    axios.post('/articoli.json', articolo )
     .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."});
     setTimeout(() => this.props.history.push("/") , 1000) 
 } )
     .catch( err => {
         this.setState({esitoCaricamento: "Errore. Caricamento non eseguito."})
     } );
-
 
 }
 

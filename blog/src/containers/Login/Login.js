@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './Login.module.css';
 import {NavLink} from 'react-router-dom';
 import Modal from '../../Components/UI/Modal/Modal';
-import {AiFillGoogleCircle} from 'react-icons/ai';
+
 
 class Login extends Component{
 

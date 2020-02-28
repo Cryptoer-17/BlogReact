@@ -46,7 +46,7 @@ return(
 </div>
 
 
-<button className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">	arrow_drop_up</i></button>
+<button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
 </div>
 
 );

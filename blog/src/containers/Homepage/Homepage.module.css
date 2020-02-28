@@ -64,13 +64,18 @@ margin: 10px auto 10px auto;
     cursor: pointer;
     position: relative;
     bottom:5px;
-    width:35px;
-    height:25px;
+    width:50px;
+    height:35px;
     border:none;
-    padding:2px;
+    padding:1px;
     outline: none;
     text-align: center;
     font-size-adjust: inherit;
     margin:auto;
     border-radius: 2px;
+    display:grid;
+    font-family: inherit;
+}
+.TornaSuButton i {
+    font-size:25px;
 }
