@@ -36,7 +36,7 @@ deleteTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
     let i = tags.indexOf(tag);
-    tags = tags.splice(i,1);
+    tags = tags.filter(t => t!== tag);
     tagsList = tagsList.filter(t => t.key !== tag);
     this.setState( { tagsList:tagsList, tags:tags } );
 }
@@ -55,7 +55,6 @@ deleteTagHandler = (tag) =>{
 
   publishArticleHandler = () => {
  
-
     const articolo = {
         titolo: this.state.titolo,
         sottotitolo: this.state.sottotitolo,
@@ -67,11 +66,8 @@ deleteTagHandler = (tag) =>{
     }
 
     axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
-    .then( res => {
-       console.log(res)
-    } )
+    .then( res => { } )
     .catch( err => {
-    
         console.log(err.message)
     } );
 }
