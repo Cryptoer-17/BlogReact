@@ -2,20 +2,20 @@ import React from 'react';
 import HackerArticle from '../../assets/images/Hack-image-article.png';
 import classes from './Articolo.module.css';
 
-const article = (props) =>{
+const articolo = () =>{
     return (
     <div className={classes.Articolo}>
-        <div >
+        <div className={classes.Titolo}>
         <p>Titolo</p>
         </div>
         <div>
         <p>Sottotitolo - Autore</p>
         </div>
         <div>
-        <img className={classes.Img} src={HackerArticle} alt="Hack" />
+        <img  src={HackerArticle} alt="Hack" />
         </div>
         <div className={classes.Testo}>
-        {props.children}
+       Testo ....
         </div>
     </div>
     
@@ -23,4 +23,4 @@ const article = (props) =>{
     
 } 
 
-export default article;
+export default articolo;
