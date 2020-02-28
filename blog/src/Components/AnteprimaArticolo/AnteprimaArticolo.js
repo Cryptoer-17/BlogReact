@@ -10,7 +10,6 @@ class anteprimaArticle extends Component{
     state={
         articolo : null,
         loading : false,
-       // error : false
     }
 
     
@@ -21,13 +20,12 @@ class anteprimaArticle extends Component{
         this.setState({loading : true})
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
         .then(response =>{
-            //console.log(response.data);
           this.setState({articolo : response.data})
           this.setState({loading:false})
            // console.log(this.state.articolo.titolo);
         })
         .catch(error => {
-          //  this.setState({error:true})
+       
             this.setState({loading:false})
         });
     }
