@@ -16,13 +16,15 @@ class anteprimaArticle extends Component{
     
 
     componentDidMount(){
+        console.log(this.props);
+        const id= this.props.id;
         this.setState({loading : true})
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/-M16ULH3DO_zBRV-OhIL.json')
+        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
         .then(response =>{
             //console.log(response.data);
           this.setState({articolo : response.data})
           this.setState({loading:false})
-            console.log(this.state.articolo.titolo);
+           // console.log(this.state.articolo.titolo);
         })
         .catch(error => {
           //  this.setState({error:true})
