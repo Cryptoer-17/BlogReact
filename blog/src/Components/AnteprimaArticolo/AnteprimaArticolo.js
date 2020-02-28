@@ -54,10 +54,10 @@ class anteprimaArticle extends Component{
             <p>{this.state.articolo.sottotitolo} - {this.state.articolo.autore}</p>
             </div>
             <div className={classes.Imgdiv}>
-                <img className={classes.Img} src={HackerArticle} alt="Hack" />
+                <img className={classes.Img} src={this.state.articolo.img} alt="" />
             </div>
             <div className={classes.Testo}>
-            {this.state.articolo.testo}
+            <p>{this.state.articolo.testo}</p>
             </div>
             <div className={classes.Icon}>
                 <FaHeart className={assignedClasses.join(' ')} />
