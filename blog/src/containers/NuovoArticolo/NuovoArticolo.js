@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
 import axios from 'axios';
-import { Link,Redirect } from 'react-router-dom';
+
 
 
 
@@ -37,7 +37,6 @@ addTagHandler = (tag) =>{
 deleteTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
-    let i = tags.indexOf(tag);
     tags = tags.filter(t => t!== tag);
     tagsList = tagsList.filter(t => t.key !== tag);
     this.setState( { tagsList:tagsList, tags:tags } );
