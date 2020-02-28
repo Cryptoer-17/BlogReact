@@ -18,7 +18,6 @@ state = {
     tagsList:[],
     testo : "",
     tagInput:""
-  
 }
 
 
@@ -40,12 +39,23 @@ deleteTagHandler = (tag) =>{
     tags = tags.splice(i,1);
     tagsList = tagsList.filter(t => t.key !== tag);
     this.setState( { tagsList:tagsList, tags:tags } );
-   console.log(this.state)
 }
 
 
+ convertFile = (e)=>  { 
+        let reader = new FileReader();
+        reader.readAsDataURL(e);
+        reader.onloadend = () => {
+        this.setState({img: reader.result})
+        }
 
-publishArticleHandler = () =>{
+      };
+  
+  
+
+  publishArticleHandler = () => {
+ 
+
     const articolo = {
         titolo: this.state.titolo,
         sottotitolo: this.state.sottotitolo,
@@ -53,20 +63,18 @@ publishArticleHandler = () =>{
         testo: this.state.testo,
         categoria: this.state.categoria,
         tags: this.state.tags,
-        immagine: this.state.img
+        img: this.state.img
     }
 
     axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
     .then( res => {
-       console.log("ok")
+       console.log(res)
     } )
     .catch( err => {
     
         console.log(err.message)
     } );
 }
-
-
 
 
 
@@ -80,10 +88,10 @@ return(
 
 <h2>Nuovo articolo</h2>
 
-<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo" onChange={( event ) => this.setState( { titolo: event.target.value } )}    />
+<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo" onChange={( event ) => this.setState( { titolo: event.target.value } )}  required  />
 <input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
 <input className = {classes.Input}  type = "text" placeholder = "Autore"  onChange={( event ) => this.setState( { autore: event.target.value } )}   />
-<textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}   />
+<textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
 
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
@@ -97,11 +105,9 @@ return(
 <br/>
 <hr/>
 <label className = {classes.Label}><i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto </label>
-<input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={( event ) => this.setState( {img: event.target.files} )} />
+<input className = {classes.Input}  type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } />
 
 <Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
-
-
 
 
 </div>
