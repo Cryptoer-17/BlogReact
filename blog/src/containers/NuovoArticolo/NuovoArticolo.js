@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 
 
 
@@ -18,7 +18,8 @@ state = {
     tagsList:[],
     testo : "",
     tagInput:"",
-    anteprimaImg:null
+    anteprimaImg:null,
+    esitoCaricamento:""
 }
 
 
@@ -67,10 +68,12 @@ deleteTagHandler = (tag) =>{
     }
 
     axios.post('https://blog-monika-andrea.firebaseio.com/articoli.json', articolo )
-    .then( res => { } )
+    .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."}) } )
     .catch( err => {
-        console.log(err.message)
+        this.setState({esitoCaricamento: "Errore. Caricamento non eseguito."})
     } );
+
+setTimeout(() => this.props.history.push("/") , 2000)
 }
 
 
@@ -111,11 +114,12 @@ return(
 </div>
 
 <hr/>
+{this.state.esitoCaricamento}
+<br/>
 
-{   this.state.titolo === "" || this.state.testo === "" ?   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler} disabled>Pubblica</button>   :         
-    <Link to = "/"><button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button></Link>
+{   this.state.titolo === "" || this.state.testo === "" ?   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler} disabled>Pubblica</button>  :         
+   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button>    }
 
-}
 
 
 
