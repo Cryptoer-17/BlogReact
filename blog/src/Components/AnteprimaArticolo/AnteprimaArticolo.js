@@ -4,6 +4,8 @@ import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
+import Autore from '../Autore/Autore';
+
 
 class anteprimaArticle extends Component{
     state={
@@ -42,7 +44,8 @@ class anteprimaArticle extends Component{
     let variabile ; 
     if(this.state.articolo!==null){
         variabile = <div className={classes.Anteprimaarticolo}>
-                 <p className={classes.Autore}> {this.state.articolo.autore}</p>
+           <div className={classes.Autore}> <Autore name = {this.state.articolo.autore}  /> </div>
+           
             <div className={classes.Titolo}>
        
                 <NavLink to={"/articolo/" + this.props.id} style={{
