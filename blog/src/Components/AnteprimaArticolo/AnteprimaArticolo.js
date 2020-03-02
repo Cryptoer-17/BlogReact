@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import HackerArticle from '../../assets/images/Hack-image-article.png';
 import classes from './Anteprimaarticolo.module.css';
 import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
@@ -57,7 +56,7 @@ class anteprimaArticle extends Component{
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />
             </div>
             <div className={classes.Testo}>
-            <p>{this.state.articolo.testo}</p>
+            <p>{this.state.articolo.descrizione}</p>
             </div>
             <div className={classes.Icon}>
                 <FaHeart className={assignedClasses.join(' ')} />
