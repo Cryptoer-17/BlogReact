@@ -61,7 +61,7 @@ deleteTagHandler = (tag) =>{
         sottotitolo: this.state.sottotitolo,
         autore: this.state.autore,
         testo: this.state.testo,
-       descrizione: this.state.descrizione,
+        descrizione: this.state.descrizione,
         categoria: this.state.categoria,
         tags: this.state.tags,
         img: this.state.img
@@ -118,9 +118,8 @@ return(
 {this.state.esitoCaricamento}
 <br/>
 
-{   this.state.titolo === "" || this.state.testo === "" ?   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler} disabled>Pubblica</button>  :         
-   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button>    }
-
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.titolo === "" || this.state.testo === "" ? true : false }   >Pubblica</button>           
+ 
 
 
 
