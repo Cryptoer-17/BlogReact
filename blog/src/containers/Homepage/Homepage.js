@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import {NavLink} from 'react-router-dom';
-import axios from '../../axios';
+import axios from '../../utility/axios';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Homepage extends Component{
@@ -59,28 +59,18 @@ return(
 
    <div className={classes.Homepage}>
 
-
       <h1 className={classes.Titolo}>Blog</h1>
 
       <div className={classes.CercaArticoli}>
-
          <input type="text" placeholder=" Cerca..." onChange={(event) => this.setState({ cerca: event.target.value })} />
-
-         
          <NavLink to="/ricerca" exact className={classes.CercaButton} ><i className="material-icons">search</i></NavLink>
-
       </div>
 
       <div className={classes.ContainerArticoli} >
-      
-
       {this.state.articoli ? articolo : null}
-
-
       </div>
 
-
-<button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
+      <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
 </div>
 
 );

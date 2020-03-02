@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
-import axios from '../../axios';
-import Autore from '../../Components/Autore/Autore';
+import axios from '../../utility/axios';
+
+
+
 
 class NuovoArticolo extends Component{
 
@@ -13,6 +15,7 @@ state = {
     categoria: "",
     tags : [],
     tagsList:[],
+    descrizione: "",
     autore: "Moni",
     testo : "",
     tagInput:"",
@@ -58,6 +61,7 @@ deleteTagHandler = (tag) =>{
         sottotitolo: this.state.sottotitolo,
         autore: this.state.autore,
         testo: this.state.testo,
+        descrizione: this.state.descrizione,
         categoria: this.state.categoria,
         tags: this.state.tags,
         img: this.state.img
@@ -84,12 +88,11 @@ return(
 
 <h2>Nuovo articolo</h2>
 
-<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo" onChange={( event ) => this.setState( { titolo: event.target.value } )}  required  />
+<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo * " onChange={( event ) => this.setState( { titolo: event.target.value } )}  required  /> 
 <input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
 
- <Autore name = {this.state.autore}></Autore>
-
-<textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
+<textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa...   *"  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
+<input className = {classes.InputDescrizione}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
@@ -115,9 +118,8 @@ return(
 {this.state.esitoCaricamento}
 <br/>
 
-{   this.state.titolo === "" || this.state.testo === "" ?   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler} disabled>Pubblica</button>  :         
-   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}>Pubblica</button>    }
-
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.titolo === "" || this.state.testo === "" ? true : false }   >Pubblica</button>           
+ 
 
 
 
