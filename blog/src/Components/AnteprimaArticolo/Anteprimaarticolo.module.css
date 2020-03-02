@@ -16,6 +16,7 @@
     padding:0px;
     border:none;
     outline: none;
+   
 }
 
 .Img{
@@ -25,6 +26,7 @@
  width: 80%;
  max-width:250px;
  height:80%;
+ margin-top: -20%;
 }
 
 .Testo{
@@ -54,6 +56,7 @@
     font-size:24px;
     margin-bottom: 0px;
     height:auto;
+    font-weight: bold;
 }
 
 .Sottotitolo{
@@ -77,7 +80,7 @@
     float:left;
     position: relative;
     bottom:0;
-    margin-top:10px;
+    margin-top:1px;
     margin-left:1px;
 }
 

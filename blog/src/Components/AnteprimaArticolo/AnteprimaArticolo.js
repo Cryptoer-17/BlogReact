@@ -78,16 +78,18 @@ class anteprimaArticle extends Component{
         }
 
 
-        variabile = <div className={classes.Anteprimaarticolo}>
-           <div className={classes.Autore}> <Autore name = {this.state.articolo.autore}  /> </div>
+        variabile = 
+        
+       <div className={classes.Anteprimaarticolo}>
            
+           <div className={classes.Autore}> <Autore name = {this.state.articolo.autore}  /> </div>
+           <NavLink to={"/articolo/" + this.props.id} style={{
+                textDecoration : 'none',
+                color : 'black'
+            }}>
             <div className={classes.Titolo}>
-       
-                <NavLink to={"/articolo/" + this.props.id} style={{
-                    textDecoration: 'none',
-                    color: 'black',
-                    fontWeight: 'bold'
-                }}>{this.state.articolo.titolo}</NavLink>
+            
+            <p>{this.state.articolo.titolo}</p>
             </div>
             <div className={classes.Sottotitolo}>
        
@@ -98,7 +100,7 @@ class anteprimaArticle extends Component{
             </div>
             <div className={classes.Testo}>
             <p>{this.state.articolo.descrizione}</p>
-            </div>
+            </div></NavLink>
            
 
          <FaHeart className={classes.Icon} style={{color : colore}} onClick={() => this.clickHeartHandler()} />
