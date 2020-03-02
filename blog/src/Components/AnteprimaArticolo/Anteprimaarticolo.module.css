@@ -10,21 +10,24 @@
 
 
 .Imgdiv{
-    margin-left: 53%;
-    width: 50%;
-    height: 1%;
+    width: 60%;
+    height: 100%;
+    float:right;
 }
 
 .Img{
-    width: 80%;
-    margin-top: -55px;
+    border:none;
+outline: none;
+ float:right;
+ width: 60%;
+ height:80%;
 }
 
 .Testo{
     font-size: medium;
     font-family: auto;
-    height: 53%;
-    width: 50%;
+    height: 105px;
+    width: 40%;
     margin-top: -3%;
     word-wrap: break-word;
     text-align: justify;
@@ -32,19 +35,37 @@
 
 .Titolo{
     width: 40%;
-    
+    font-size:25px;
+    margin-bottom: 0px;
+    height:auto;
 }
 
 .Sottotitolo{
     width: 40%;
+    height:40px;
+    display:inline-flex;
+    float:left;
+    border-bottom: 0.5px solid grey;
 }
 
+.Sottotitolo p {
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+
+
 .Icon{
-    width:6%;
+    float:left;
+    position: relative;
+    bottom:0;
+    margin-top:10px;
+    margin-left:1px;
 }
 
 .RedHeart{
     color: red;
+   
 }
 
 /* media quesry scroll text*/

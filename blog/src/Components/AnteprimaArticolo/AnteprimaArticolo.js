@@ -33,7 +33,7 @@ class anteprimaArticle extends Component{
 
     render(){
 
-    const assignedClasses = [];
+    const assignedClasses = [classes.Icon];
     if(this.props.color){
         assignedClasses.push(classes.RedHeart);
     }
@@ -50,17 +50,18 @@ class anteprimaArticle extends Component{
                 }}>{this.state.articolo.titolo}</NavLink>
             </div>
             <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} - {this.state.articolo.autore}</p>
+            <p>{this.state.articolo.sottotitolo} </p> <p> {this.state.articolo.autore}</p>
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />
             </div>
             <div className={classes.Testo}>
-            <p>{this.state.articolo.testo}</p>
+            <p>{this.state.articolo.descrizione}</p>
             </div>
-            <div className={classes.Icon}>
-                <FaHeart className={assignedClasses.join(' ')} />
-            </div>
+           
+
+         <FaHeart className={assignedClasses.join(' ')} />
+          
         </div>
     }
 
