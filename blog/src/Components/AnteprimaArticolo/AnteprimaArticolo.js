@@ -51,7 +51,7 @@ class anteprimaArticle extends Component{
         console.log(anteprima);
 
         const id= this.props.id;
-        console.log("ok");
+        
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
         .then(response => console.log(response))
         .catch(error => console.log(error));
