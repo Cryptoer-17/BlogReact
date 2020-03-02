@@ -32,9 +32,16 @@ class Articolo extends Component{
     render(){
        
         let variabile; 
-
+        let colore = 'black';
 
         if(this.state.articolo!==null){
+
+            if(this.state.articolo.like){
+                console.log("entrato");
+              //  assignedClasses.push(classes.RedHeart);
+                colore = 'red';
+            }
+
             variabile =  <div className={classes.Titolo}>
                <p>{this.state.articolo.titolo}</p>
             
@@ -48,7 +55,7 @@ class Articolo extends Component{
             <p>{this.state.articolo.testo}</p>
             </div>
             <div className={classes.Icon}>
-                <FaHeart  />
+                <FaHeart style={{color: colore}} />
             </div>
         </div>
         }

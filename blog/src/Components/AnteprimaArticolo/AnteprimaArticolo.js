@@ -33,14 +33,20 @@ class anteprimaArticle extends Component{
 
     render(){
 
-    const assignedClasses = [];
-    if(this.props.color){
-        assignedClasses.push(classes.RedHeart);
-    }
-    
-    
+   // const assignedClasses = [];
+    let colore = 'black';  
     let variabile ; 
+
+
     if(this.state.articolo!==null){
+
+        if(this.state.articolo.like){
+            console.log("entrato");
+          //  assignedClasses.push(classes.RedHeart);
+            colore = 'red';
+        }
+
+
         variabile = <div className={classes.Anteprimaarticolo}>
             <div className={classes.Titolo}>
                 <NavLink to={"/articolo/" + this.props.id} style={{
@@ -59,7 +65,7 @@ class anteprimaArticle extends Component{
             <p>{this.state.articolo.descrizione}</p>
             </div>
             <div className={classes.Icon}>
-                <FaHeart className={assignedClasses.join(' ')} />
+                <FaHeart style={{color : colore}}/>          
             </div>
         </div>
     }
