@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
-import axios from '../../axios';
-import Autore from '../../Components/Autore/Autore';
+import axios from '../../utility/axios';
+
+
+
 
 class NuovoArticolo extends Component{
 
