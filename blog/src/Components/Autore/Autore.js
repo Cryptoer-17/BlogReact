@@ -5,7 +5,7 @@ const Autore = (props) =>{
     return(
         <div className ={classes.Autore}>
         
-         <i className="material-icons" >account_circle</i>
+      {props.img ? props.img :   <i className="material-icons" >account_circle</i>}
          {props.name}
         </div>
     );
