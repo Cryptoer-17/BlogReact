@@ -42,7 +42,9 @@ class anteprimaArticle extends Component{
     let variabile ; 
     if(this.state.articolo!==null){
         variabile = <div className={classes.Anteprimaarticolo}>
+                 <p className={classes.Autore}> {this.state.articolo.autore}</p>
             <div className={classes.Titolo}>
+       
                 <NavLink to={"/articolo/" + this.props.id} style={{
                     textDecoration: 'none',
                     color: 'black',
@@ -50,7 +52,8 @@ class anteprimaArticle extends Component{
                 }}>{this.state.articolo.titolo}</NavLink>
             </div>
             <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} </p> <p> {this.state.articolo.autore}</p>
+       
+            <p>{this.state.articolo.sottotitolo} </p> 
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />
