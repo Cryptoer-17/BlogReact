@@ -3,13 +3,34 @@ import classes from './Login.module.css';
 import {NavLink} from 'react-router-dom';
 import Modal from '../../Components/UI/Modal/Modal';
 import Logo from '../../assets/images/logoGoogle.png'
+import axios from 'axios';
+
 
 class Login extends Component{
 
 state = {
-username:"",
+email:"",
 password:""
 }
+
+
+
+
+
+loginWithPassword = () =>{
+
+    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
+    const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
+    axios.post(url,data ).then( response => {
+        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+        localStorage.setItem('token',response.data.idToken);
+        localStorage.setItem('userId',response.data.localId);
+        localStorage.setItem('expirationDate', expirationDate);
+}).catch(err => console.log(err));
+}
+
+
+
 
 
 render(){
@@ -20,11 +41,11 @@ return(
 <div className = {classes.Login}>
 <h3>Login</h3>
 <form>
-<input autoFocus className = {classes.Input}  type = "text" placeholder = "Username" onChange={( event ) => this.setState( { username: event.target.value } )}  required autoComplete = "username" />
+<input autoFocus className = {classes.Input}  type = "text" placeholder = "Email" onChange={( event ) => this.setState( { email: event.target.value } )}  required autoComplete = "username" />
 <input className = {classes.Input} type = "password" placeholder = "Password" onChange={( event ) => this.setState( { password: event.target.value } )} autoComplete = "password"   />
 </form>
 <div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
+    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
     <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
 
