@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './Login.module.css';
 import {NavLink} from 'react-router-dom';
 import Modal from '../../Components/UI/Modal/Modal';
-
+import Logo from '../../assets/images/logoGoogle.png'
 
 class Login extends Component{
 
@@ -25,7 +25,7 @@ return(
 </form>
 <div className = {classes.ButtonContainer}>
     <button className = {classes.AccediButton}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
-    <button className = {classes.AccediButton} > Accedi con Google</button>
+    <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
 
 <NavLink to = "/" onClick = {this.props.hideModal}> <button className = {classes.RegistratiButton} > Registrati</button> </NavLink>
