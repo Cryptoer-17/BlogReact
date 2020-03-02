@@ -23,8 +23,16 @@
     font-family: auto;
     height: 50%;
     word-break: break-word;
+    font-weight: normal;
+    text-align: justify;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .Titolo{
     font-weight: bold;
+}
+
+.Icon{
+    width:6%;
 }
