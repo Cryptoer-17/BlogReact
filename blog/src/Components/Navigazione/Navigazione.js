@@ -18,7 +18,7 @@ const Navigazione = () =>{
     
 
     return(
-        <div className ={classes.BarraNavigazione}>
+        <nav className ={classes.BarraNavigazione}>
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink>
             
@@ -27,7 +27,7 @@ const Navigazione = () =>{
 
             <Login show = {show} hideModal = {hideModal} />
            
-        </div>
+        </nav>
     );
 }
 export default Navigazione;
