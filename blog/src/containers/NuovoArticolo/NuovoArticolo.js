@@ -13,6 +13,7 @@ state = {
     categoria: "",
     tags : [],
     tagsList:[],
+    descrizione: "",
     autore: "Moni",
     testo : "",
     tagInput:"",
@@ -58,6 +59,7 @@ deleteTagHandler = (tag) =>{
         sottotitolo: this.state.sottotitolo,
         autore: this.state.autore,
         testo: this.state.testo,
+       descrizione: this.state.descrizione,
         categoria: this.state.categoria,
         tags: this.state.tags,
         img: this.state.img
@@ -90,6 +92,7 @@ return(
  <Autore name = {this.state.autore}></Autore>
 
 <textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa..."  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
+<input className = {classes.Input}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
 <input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
