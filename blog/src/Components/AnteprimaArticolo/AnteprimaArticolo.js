@@ -61,10 +61,7 @@ class anteprimaArticle extends Component{
 
         
    
-    if(this.props.color){
-        assignedClasses.push(classes.RedHeart);
-    }
-
+   
 
 
     let colore = 'black';  
