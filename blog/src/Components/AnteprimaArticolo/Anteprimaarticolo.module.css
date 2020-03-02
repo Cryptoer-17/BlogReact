@@ -10,16 +10,20 @@
 
 
 .Imgdiv{
-    width: 60%;
+  
     height: 100%;
     float:right;
+    padding:0px;
+    border:none;
+    outline: none;
 }
 
 .Img{
-    border:none;
-outline: none;
+ border:none;
+ outline: none;
  float:right;
- width: 60%;
+ width: 80%;
+ max-width:250px;
  height:80%;
 }
 
@@ -32,6 +36,13 @@ outline: none;
     word-wrap: break-word;
     text-align: justify;
 }
+
+
+.Testo p{
+  
+}
+
+
 
 .Titolo{
     width: 40%;
@@ -46,6 +57,7 @@ outline: none;
     display:inline-flex;
     float:left;
     border-bottom: 0.5px solid grey;
+    margin-bottom:10px;
 }
 
 .Sottotitolo p {
@@ -68,4 +80,8 @@ outline: none;
    
 }
 
-/* media quesry scroll text*/
+/* media quesry scroll text
+
+ min-width:800 aggiustare dimenstioni immagine
+
+*/
