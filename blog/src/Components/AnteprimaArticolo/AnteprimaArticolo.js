@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import HackerArticle from '../../assets/images/Hack-image-article.png';
 import classes from './Anteprimaarticolo.module.css';
 import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
