@@ -88,7 +88,6 @@ class anteprimaArticle extends Component{
                 color : 'black'
             }}>
             <div className={classes.Titolo}>
-            
             <p>{this.state.articolo.titolo}</p>
             </div>
             <div className={classes.Sottotitolo}>
