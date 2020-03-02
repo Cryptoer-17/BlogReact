@@ -28,6 +28,32 @@ class Articolo extends Component{
     }
 
 
+    clickHeartHandler(){
+       
+        const anteprima = {
+            autore : this.state.articolo.autore,
+            categoria : this.state.articolo.categoria,
+            descrizione : this.state.articolo.descrizione,
+            img : this.state.articolo.img,
+            like: !this.state.articolo.like,
+            sottotitolo : this.state.articolo.sottotitolo,
+            testo : this.state.articolo.testo,
+            titolo : this.state.articolo.titolo
+        } 
+
+        this.setState({
+            articolo : anteprima
+        })
+        console.log(anteprima);
+        
+        const id= this.props.match.params.id;
+        console.log(this.props.match.params.id);
+        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+
+    }
+
 
     render(){
        
@@ -55,7 +81,7 @@ class Articolo extends Component{
             <p>{this.state.articolo.testo}</p>
             </div>
             <div className={classes.Icon}>
-                <FaHeart style={{color: colore}} />
+                <FaHeart style={{color: colore}} onClick={() => this.clickHeartHandler()}/>
             </div>
         </div>
         }
