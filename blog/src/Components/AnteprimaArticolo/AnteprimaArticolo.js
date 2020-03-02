@@ -43,7 +43,7 @@ class anteprimaArticle extends Component{
     if(this.state.articolo!==null){
         variabile = <div className={classes.Anteprimaarticolo}>
             <div className={classes.Titolo}>
-                <NavLink to="/articolo" style={{
+                <NavLink to={"/articolo/" + this.props.id} style={{
                     textDecoration: 'none',
                     color: 'black',
                     fontWeight: 'bold'

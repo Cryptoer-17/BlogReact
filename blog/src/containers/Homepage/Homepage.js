@@ -46,14 +46,13 @@ render(){
       ...this.state.articoli
   };
 
-   const articolo = Object.keys(newarticolo)
-   .map((igKey) =>{
-      console.log(newarticolo[igKey]);
-   return (
-   <li key={igKey}>
-      <Anteprimaarticolo id={newarticolo[igKey]}/>
-   </li>);
-   })
+   
+ const articolo = Object.keys(newarticolo)
+   .map((igKey) =>{
+      console.log(newarticolo[igKey]);
+   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
+   })
+  
   
 
 return(
