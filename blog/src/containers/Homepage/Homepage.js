@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Homepage extends Component{
@@ -15,7 +15,7 @@ state = {
 
 componentDidMount(){
    this.setState({loading : true})
-   axios.get('https://blog-monika-andrea.firebaseio.com/articoli.json')
+   axios.get('/articoli.json')
    .then(response =>{
        //console.log(response.data);
      
@@ -46,14 +46,13 @@ render(){
       ...this.state.articoli
   };
 
-   const articolo = Object.keys(newarticolo)
-   .map((igKey) =>{
-      console.log(newarticolo[igKey]);
-   return (
-   <li key={igKey}>
-      <Anteprimaarticolo id={newarticolo[igKey]}/>
-   </li>);
-   })
+   
+ const articolo = Object.keys(newarticolo)
+   .map((igKey) =>{
+      console.log(newarticolo[igKey]);
+   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
+   })
+  
   
 
 return(
