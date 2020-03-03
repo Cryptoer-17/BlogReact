@@ -7,16 +7,29 @@ import checkValidity from '../../utility/validation';
 class Login extends Component{
 
 state = {
-email:{
-    value:"",
-    isEmail:true,
-    isRequired:true
-},
-password:{
-    value: "",
-    isRequired:true,
-    minLength:6
-
+loginForm: {
+    email:{
+        type:"text",
+        value:"",
+        valid:false,
+        touched:false,
+        placeholder: "Email",
+        validation: {
+        isEmail:true,
+        required:true
+        }
+    },
+    password:{
+        type:"password",
+        value: "",
+        valid:false,
+        touched:false,
+        placeholder: "Password",
+        validation: {
+            minLength: 6,
+            required:true
+        }
+    }
 },
 isFormValid : false
 }
@@ -47,23 +60,55 @@ signUpWithPassword = () =>{
 }).catch(err => console.log(err));
 
 this.props.hideModal();
+}
 
+
+checkValidityOfInput = (event, id) =>{
+
+let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
+
+let newForm = {...this.state.loginForm,  [id]: {...newObj}}
+
+let formIsValid = true;
+
+for (let key in newForm) {
+    formIsValid = newForm[key].valid && formIsValid;
+}
+    this.setState({isFormValid:formIsValid, loginForm: newForm})
 
 }
 
 
-
 render(){
+    console.log(this.state)
+const formData = [];
+
+for(let key in this.state.loginForm){
+    formData.push( {id: key , obj: this.state.loginForm[key] });
+};
+
+
 
 return(
 
 <Modal show = {  this.props.show}  modalClosed = {this.props.hideModal}>
 <div className = {classes.Login}>
 <h3>Login</h3>
+
 <form>
-<input autoFocus className = {classes.Input}  type = "text" placeholder = "Email" onChange={( event ) => this.setState( { email: event.target.value } )}  required autoComplete = "username" />
-<input className = {classes.Input} type = "password" placeholder = "Password" onChange={( event ) => this.setState( { password: event.target.value } )} autoComplete = "password"   />
+{formData.map(el =>
+    <input 
+    key = {el.id}
+    type = {el.type}
+    placeholder = {el.obj.placeholder}
+    Touched = {el.obj.touched}
+    Valid = {el.obj.valid}
+    className = {classes.Input}
+    onChange = {(e) => this.checkValidityOfInput(e, el.id)}
+    />
+    )}
 </form>
+
 <div className = {classes.ButtonContainer}>
     <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
     <button className = {classes.AccediGoogleButton} > Accedi con Google</button>

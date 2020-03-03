@@ -22,7 +22,7 @@ componentDidMount(){
      for(let key in response.data){
         this.state.articoli.push(key);
    };
-      console.log(this.state.articoli);
+ 
       this.setState({loading:false})
    })
    .catch(error => {
@@ -49,7 +49,7 @@ render(){
    
  const articolo = Object.keys(newarticolo)
    .map((igKey) =>{
-      console.log(newarticolo[igKey]);
+  
    return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
    })
   
