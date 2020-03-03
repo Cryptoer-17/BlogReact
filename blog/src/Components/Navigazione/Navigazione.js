@@ -20,12 +20,11 @@ const Navigazione = () =>{
     return(
         <nav className ={classes.BarraNavigazione}>
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
-            <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink>
+            <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>
             <button className = {classes.LoginButton} onClick ={ showModal} > <i className="material-icons">account_circle</i>   </button>
 
-
-            <Login show = {show} hideModal = {hideModal} />
+             { show ? <Login show = {show} hideModal = {hideModal} /> : null}
            
         </nav>
     );

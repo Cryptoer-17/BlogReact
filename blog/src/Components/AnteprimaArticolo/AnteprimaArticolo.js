@@ -16,7 +16,7 @@ class anteprimaArticle extends Component{
     
 
     componentDidMount(){
-        console.log(this.props);
+
         const id= this.props.id;
         this.setState({loading : true})
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
@@ -48,7 +48,7 @@ class anteprimaArticle extends Component{
         this.setState({
             articolo : anteprima
         })
-        console.log(anteprima);
+    
 
         const id= this.props.id;
         
@@ -60,8 +60,6 @@ class anteprimaArticle extends Component{
     render(){
 
         
-   
-   
 
 
     let colore = 'black';  
@@ -72,8 +70,7 @@ class anteprimaArticle extends Component{
 
         
         if(this.state.articolo.like){
-            console.log("entrato");
-         
+        
             colore = 'red';
         }
 

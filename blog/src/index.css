@@ -8,4 +8,11 @@ body {
   background-repeat: no-repeat;
 }
 
-::selection { background-color:transparent; }
+
+button:disabled{
+  cursor:not-allowed;
+  background-color: lightgray; 
+}
+
+
+::selection { background-color:#ECE5E4  ; }
