@@ -8,7 +8,6 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 class Homepage extends Component{
 
 state = {
-   cerca : "",
    articoli:[],
    loading : false
 }
@@ -17,8 +16,7 @@ componentDidMount(){
    this.setState({loading : true})
    axios.get('/articoli.json')
    .then(response =>{
-       //console.log(response.data);
-     
+    
      for(let key in response.data){
         this.state.articoli.push(key);
    };
@@ -26,7 +24,7 @@ componentDidMount(){
       this.setState({loading:false})
    })
    .catch(error => {
-     //  this.setState({error:true})
+
        this.setState({loading:false})
    });
 }
@@ -61,10 +59,6 @@ return(
 
       <h1 className={classes.Titolo}>Blog</h1>
 
-      <div className={classes.CercaArticoli}>
-         <input type="text" placeholder=" Cerca..." onChange={(event) => this.setState({ cerca: event.target.value })} />
-         <NavLink to="/ricerca" exact className={classes.CercaButton} ><i className="material-icons">search</i></NavLink>
-      </div>
 
       <div className={classes.ContainerArticoli} >
       {this.state.articoli ? articolo : null}
