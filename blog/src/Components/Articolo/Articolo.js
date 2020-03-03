@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HackerArticle from '../../assets/images/Hack-image-article.png';
 import classes from './Articolo.module.css';
 import axios from 'axios';
 import { FaHeart } from "react-icons/fa";

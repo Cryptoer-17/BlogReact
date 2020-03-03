@@ -39,6 +39,7 @@ isFormValid : false
 
 
 loginWithPassword = () =>{
+    /*
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
     const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
     axios.post(url,data ).then( response => {
@@ -48,10 +49,13 @@ loginWithPassword = () =>{
         localStorage.setItem('expirationDate', expirationDate);
 }).catch(err => console.log(err));
 
+*/
+
 this.props.hideModal();
 }
 
 signUpWithPassword = () =>{
+    /*
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
     const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
     axios.post(url,data ).then( response => {
@@ -60,7 +64,7 @@ signUpWithPassword = () =>{
         localStorage.setItem('userId',response.data.localId);
         localStorage.setItem('expirationDate', expirationDate);
 }).catch(err => console.log(err));
-
+*/
 this.props.hideModal();
 }
 
