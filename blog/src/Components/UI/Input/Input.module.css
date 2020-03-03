@@ -17,10 +17,11 @@
 }
 
 .Invalid{
-    border-radius: 4px;
-    border-bottom: 1px solid red;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     background-color: #ffb3b3;
        }
+
    
 .Label{
         font-weight: bold;

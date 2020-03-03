@@ -82,7 +82,6 @@ for (let key in newForm) {
 
 
 render(){
-    console.log(this.state)
 const formData = [];
 
 for(let key in this.state.loginForm){
@@ -93,7 +92,7 @@ for(let key in this.state.loginForm){
 
 return(
 
-<Modal show = {  this.props.show}  modalClosed = {this.props.hideModal}>
+<Modal show = {this.props.show}  modalClosed = {this.props.hideModal}>
 <div className = {classes.Login}>
 <h3>Login</h3>
 
@@ -101,17 +100,17 @@ return(
 
 
 <form>
-{formData.map(el =>
-    <Input 
-    key = {el.id}
-    type = {el.type}
-    placeholder = {el.obj.placeholder}
-    touched = {el.obj.touched}
-    valid = {el.obj.valid}
-    changed = {(e) => this.checkValidityOfInput(e, el.id)}
-    shouldValidate = {el.obj.validation}
-    />
-    )}
+    {formData.map(el =>
+        <Input 
+        key = {el.id}
+        type = {el.type}
+        placeholder = {el.obj.placeholder}
+        touched = {el.obj.touched}
+        valid = {el.obj.valid}
+        changed = {(e) => this.checkValidityOfInput(e, el.id)}
+        shouldValidate = {el.obj.validation}
+        />
+        )}
 </form>
 
 <div className = {classes.ButtonContainer}>
