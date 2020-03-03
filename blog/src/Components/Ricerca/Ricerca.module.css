@@ -1,0 +1,45 @@
+
+.Ricerca{
+    box-sizing: border-box;
+    display:flex;
+    width:250px;
+    margin:none;
+    height:30px;
+  }
+  
+
+  .Ricerca input[type = text]{
+      width:80%;
+      border: 1px solid rgb(77, 72, 72);;
+      outline:none;
+      border-radius: 3px;
+      padding:4px;
+      border-top-right-radius:0;
+      border-bottom-right-radius:0;
+      margin-right:0;
+  }
+  
+  .CercaButton{
+      width: 20%;
+      padding: 3px;
+      background: dimgray;
+      color: white;
+      border: 1px solid rgb(77, 72, 72);;
+      outline:none;
+      border-radius: 2px;
+      border-top-left-radius:0;
+      border-bottom-left-radius:0;
+      float: left;
+      border-left: none; 
+      cursor: pointer;
+      margin-left: 0;
+  }
+  
+  .CercaButton i {
+    font-size: 24px; 
+  }
+
+
+  .CercaButton:hover{
+      background: rgb(73, 68, 68);
+  }
