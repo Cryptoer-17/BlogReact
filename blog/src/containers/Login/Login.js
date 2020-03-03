@@ -3,6 +3,8 @@ import classes from './Login.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
 import axios from 'axios';
 import checkValidity from '../../utility/validation';
+import Input from '../../Components/UI/Input/Input';
+
 
 class Login extends Component{
 
@@ -95,25 +97,28 @@ return(
 <div className = {classes.Login}>
 <h3>Login</h3>
 
+
+
+
 <form>
 {formData.map(el =>
-    <input 
+    <Input 
     key = {el.id}
     type = {el.type}
     placeholder = {el.obj.placeholder}
-    Touched = {el.obj.touched}
-    Valid = {el.obj.valid}
-    className = {classes.Input}
-    onChange = {(e) => this.checkValidityOfInput(e, el.id)}
+    touched = {el.obj.touched}
+    valid = {el.obj.valid}
+    changed = {(e) => this.checkValidityOfInput(e, el.id)}
+    shouldValidate = {el.obj.validation}
     />
     )}
 </form>
 
 <div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
+    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !this.state.isFormValid} > Accedi</button>
     <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
- <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { this.state.username === "" || this.state.password === "" ? true : false}> Registrati</button> 
+ <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !this.state.isFormValid}> Registrati</button> 
 
 </div>
 
