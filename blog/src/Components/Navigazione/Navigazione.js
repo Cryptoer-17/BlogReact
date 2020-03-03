@@ -19,8 +19,7 @@ const Navigazione = () =>{
             }
     
             const AnimatedModal = styled.div`
-            animation: 0.2s ${keyframes`${fadeIn}`};
-        `;
+            animation: 0.2s ${keyframes`${fadeIn}`} `;
         
 
 

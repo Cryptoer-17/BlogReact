@@ -8,7 +8,7 @@ height:70%;
 margin:auto;
 overflow:auto;
 width:90%;
-margin: 10px auto 10px auto;
+margin: 10px auto 5px auto;
 overflow-x:hidden;
 overflow-y: auto;
 }
@@ -17,8 +17,6 @@ overflow-y: auto;
     color: rgba(0, 0, 0, 0.84);
     font-size:50px;
 }
-
-
 
 
 .TornaSuButton{
@@ -37,6 +35,7 @@ overflow-y: auto;
     border-radius: 2px;
     display:grid;
     font-family: inherit;
+    margin-bottom:10px;
 }
 .TornaSuButton i {
     font-size:25px;
