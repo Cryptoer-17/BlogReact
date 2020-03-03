@@ -62,8 +62,6 @@ class Articolo extends Component{
         if(this.state.articolo!==null){
 
             if(this.state.articolo.like){
-                console.log("entrato");
-              //  assignedClasses.push(classes.RedHeart);
                 colore = 'red';
             }
 

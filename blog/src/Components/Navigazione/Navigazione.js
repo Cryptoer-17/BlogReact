@@ -3,6 +3,8 @@ import classes from './Navigazione.module.css';
 import {NavLink} from 'react-router-dom';
 import Login from '../../containers/Login/Login';
 import Ricerca from '../Ricerca/Ricerca';
+import { fadeIn} from 'react-animations'
+import styled, { keyframes } from 'styled-components';
 
 const Navigazione = () =>{
 
@@ -16,6 +18,11 @@ const Navigazione = () =>{
            setShow(false);
             }
     
+            const AnimatedModal = styled.div`
+            animation: 0.2s ${keyframes`${fadeIn}`};
+        `;
+        
+
 
     return(
         <nav className ={classes.BarraNavigazione}>
@@ -24,8 +31,8 @@ const Navigazione = () =>{
             <Ricerca className = {classes.Ricerca}/>
             <button className = {classes.LoginButton} onClick ={ showModal} > <i className="material-icons">account_circle</i>   </button>
 
-             { show ? <Login show = {show} hideModal = {hideModal} /> : null}
-           
+           {show ?  <AnimatedModal><Login show = {show} hideModal = {hideModal} /> </AnimatedModal>   : null}
+             
         </nav>
     );
 }

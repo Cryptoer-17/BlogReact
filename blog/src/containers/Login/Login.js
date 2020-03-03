@@ -38,6 +38,7 @@ isFormValid : false
 
 
 
+
 loginWithPassword = () =>{
     /*
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
@@ -96,25 +97,27 @@ for(let key in this.state.loginForm){
 
 return(
 
-<Modal show = {this.props.show}  modalClosed = {this.props.hideModal}>
+<Modal show = {this.props.show}  modalClosed = {  this.props.hideModal }>
 <div className = {classes.Login}>
 <h3>Login</h3>
 
-
-
-
 <form>
+    
     {formData.map(el =>
         <Input 
+        show = {this.props.show}
+        value = {this.state[el.id]}
         key = {el.id}
         type = {el.type}
         placeholder = {el.obj.placeholder}
-        touched = {el.obj.touched}
-        valid = {el.obj.valid}
+        touched = { el.obj.touched}
+        valid = { el.obj.valid}
         changed = {(e) => this.checkValidityOfInput(e, el.id)}
         shouldValidate = {el.obj.validation}
         />
-        )}
+        ) }
+
+    
 </form>
 
 <div className = {classes.ButtonContainer}>
