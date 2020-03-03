@@ -21,7 +21,7 @@ const Navigazione = () =>{
         <nav className ={classes.BarraNavigazione}>
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink>
-            <Ricerca/>
+            <Ricerca className = {classes.Ricerca}/>
             <button className = {classes.LoginButton} onClick ={ showModal} > <i className="material-icons">account_circle</i>   </button>
 
 

@@ -19,47 +19,7 @@ overflow-y: auto;
 }
 
 
-.CercaArticoli{
-  margin-top: 20px;  
-  margin-bottom:20px;
-  box-sizing: border-box;
-  display:inline-flex;
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
-}
 
-.CercaArticoli input[type =text]{
-    width:25%;
-    border: 1px solid rgb(77, 72, 72);;
-    outline:none;
-    border-radius: 3px;
-    padding:2px;
-    border-top-right-radius:0;
-    border-bottom-right-radius:0;
-    margin-left:auto;
-}
-
-.CercaButton{
-    width: 8%;
-    padding: 3px;
-    background: dimgray;
-    color: white;
-    font-size: 15px;
-    border: 1px solid rgb(77, 72, 72);;
-    outline:none;
-    border-radius: 2px;
-    border-top-left-radius:0;
-    border-bottom-left-radius:0;
-    float: left;
-    border-left: none; 
-    cursor: pointer;
-    margin-right:auto;
-}
-
-.CercaButton:hover{
-    background: rgb(73, 68, 68);
-}
 
 .TornaSuButton{
     background: dimgray;

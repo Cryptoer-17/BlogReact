@@ -8,7 +8,6 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 class Homepage extends Component{
 
 state = {
-   cerca : "",
    articoli:[],
    loading : false
 }
@@ -61,10 +60,6 @@ return(
 
       <h1 className={classes.Titolo}>Blog</h1>
 
-      <div className={classes.CercaArticoli}>
-         <input type="text" placeholder=" Cerca..." onChange={(event) => this.setState({ cerca: event.target.value })} />
-         <NavLink to="/ricerca" exact className={classes.CercaButton} ><i className="material-icons">search</i></NavLink>
-      </div>
 
       <div className={classes.ContainerArticoli} >
       {this.state.articoli ? articolo : null}
