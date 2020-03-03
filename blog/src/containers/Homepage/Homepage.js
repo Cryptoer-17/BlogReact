@@ -16,8 +16,7 @@ componentDidMount(){
    this.setState({loading : true})
    axios.get('/articoli.json')
    .then(response =>{
-       //console.log(response.data);
-     
+    
      for(let key in response.data){
         this.state.articoli.push(key);
    };
@@ -25,7 +24,7 @@ componentDidMount(){
       this.setState({loading:false})
    })
    .catch(error => {
-     //  this.setState({error:true})
+
        this.setState({loading:false})
    });
 }

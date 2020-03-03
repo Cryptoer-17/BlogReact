@@ -15,7 +15,14 @@
       margin-right:0;
       border-bottom: 0.5px solid whitesmoke;
   }
-  
+
+  .Ricerca input[type = text]:focus{
+ 
+    border-bottom: 0.5px solid #cacaca;
+}
+
+
+
   ::-webkit-input-placeholder { 
     color: gray;
   }
