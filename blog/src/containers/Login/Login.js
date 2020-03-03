@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
 import classes from './Login.module.css';
-import {NavLink} from 'react-router-dom';
 import Modal from '../../Components/UI/Modal/Modal';
-import Logo from '../../assets/images/logoGoogle.png'
 import axios from 'axios';
-
+import checkValidity from '../../utility/validation';
 
 class Login extends Component{
 
 state = {
-email:"",
-password:""
+email:{
+    value:"",
+    isEmail:true,
+    isRequired:true
+},
+password:{
+    value: "",
+    isRequired:true,
+    minLength:6
+
+},
+isFormValid : false
 }
-
-
 
 
 
@@ -62,8 +68,7 @@ return(
     <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { this.state.username === "" || this.state.password === "" ? true : false}  > Accedi</button>
     <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
-
-<NavLink to = "/" onClick = {this.props.hideModal}> <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword}> Registrati</button> </NavLink>
+ <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { this.state.username === "" || this.state.password === "" ? true : false}> Registrati</button> 
 
 </div>
 

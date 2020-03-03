@@ -5,4 +5,11 @@ body {
   background-color: #efeff2;
 }
 
+
+button:disabled{
+  cursor:not-allowed;
+  background-color: lightgray; 
+}
+
+
 ::selection { background-color:#ECE5E4  ; }

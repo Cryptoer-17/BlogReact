@@ -66,21 +66,14 @@
 
 
 
-
-
 .ButtonContainer{
     display:inline-flex;
 }
 .AccediButton:hover,.AccediGoogleButton:hover, .RegistratiButton:hover{
     background-color: lightgray; 
-    background-image: unset;
+   
 }
 
-
-.AccediButton:disabled{
-    cursor:not-allowed;
-    background-color: lightgray; 
-}
 
 .RegistratiButton{
     width:100px;
