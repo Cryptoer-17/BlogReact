@@ -28,7 +28,8 @@ loginForm: {
         valid:false,
         touched:false,
         config:
-        {placeholder: "Password"},
+        {placeholder: "Password",
+         autoComplete: "current-password"},
         validation: {
             minLength: 6,
             required:true

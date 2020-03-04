@@ -6,7 +6,7 @@ import classes from './Tag.module.css';
 const Tag = (props) =>{
     return(
         <div className ={classes.Tag}>
-          {props.children}
+         <span className ={classes.Content}> {props.children}</span> 
          <i className="material-icons" onClick = {props.click}>close</i>
         </div>
     );
