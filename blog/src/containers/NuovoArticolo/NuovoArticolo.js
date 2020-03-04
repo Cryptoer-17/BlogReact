@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
-import axios from '../../utility/axios';
 import Input from '../../Components/UI/Input/Input';
 import checkValidity from '../../utility/validation';
 import {connect} from 'react-redux';
@@ -116,16 +115,7 @@ deleteTagHandler = (tag) =>{
     }
 
     this.props.onPostArticolo(articolo);
-
-    /*
-    axios.post('/articoli.json', articolo )
-    .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."});
-    setTimeout(() => this.props.history.push("/") , 1000) 
-} )
-    .catch( err => {
-        this.setState({esitoCaricamento: "Errore. Caricamento non eseguito."})
-    } );
-    */
+    setTimeout(() => this.props.history.push("/") , 1000)  
 
 }
 
