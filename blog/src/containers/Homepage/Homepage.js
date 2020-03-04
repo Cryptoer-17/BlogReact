@@ -3,29 +3,19 @@ import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import axios from '../../utility/axios';
 import Spinner from '../../Components/UI/Spinner/Spinner';
+import * as actionArticoli from '../../store/actions/index';
+import {connect} from 'react-redux';
+
 
 class Homepage extends Component{
-
+/*
 state = {
    articoli:[],
-   loading : false
-}
+  
+}*/
 
 componentDidMount(){
-   this.setState({loading : true})
-   axios.get('/articoli.json')
-   .then(response =>{
-    
-     for(let key in response.data){
-        this.state.articoli.push(key);
-   };
- 
-      this.setState({loading:false})
-   })
-   .catch(error => {
-
-       this.setState({loading:false})
-   });
+   this.props.onInitArticoli();
 }
 
 
@@ -34,13 +24,12 @@ render(){
 
    let variabile ; 
 
-   if(this.state.loading){
-      variabile= <Spinner />;
-  }
+   
   
   
   const newarticolo = {
-      ...this.state.articoli
+      ...this.props.arti
+     
   };
 
    
@@ -60,7 +49,7 @@ return(
 
 
       <div className={classes.ContainerArticoli} >
-      {this.state.articoli ? articolo : null}
+      {this.props.arti ? articolo : null}
       </div>
 
       <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
@@ -72,4 +61,20 @@ return(
 }
 
 }
-export default Homepage;
+
+
+const mapStateToProps = state =>{
+  
+   return{
+      arti : state.articolo.articoli
+   }
+}
+
+
+const mapDispatchToProps = dispatch =>{
+   return{
+      onInitArticoli: () => dispatch(actionArticoli.initArticoli())
+   }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Homepage);

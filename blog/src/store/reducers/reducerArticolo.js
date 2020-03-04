@@ -2,7 +2,6 @@ import updateObject from '../../utility/updateObject';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    articolo: null,
     articoli: [],
     loading:false,
     esitoCaricamento:""
@@ -30,6 +29,11 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
+        case actionTypes.SET_ARTICOLI : 
+        return{
+            ...state,
+            articoli : action.articoli
+        }
         default: return state;
     }
 }
