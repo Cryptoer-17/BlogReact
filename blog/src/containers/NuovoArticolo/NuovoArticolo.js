@@ -103,7 +103,6 @@ deleteTagHandler = (tag) =>{
         reader.onloadend = () => {
         this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
         }
-
       };
   
   
@@ -119,7 +118,6 @@ deleteTagHandler = (tag) =>{
         tags: this.state.tags,
         img: this.state.img
     }
-
     this.props.onPostArticolo(articolo);
     this.showModal();
     if(!this.props.loading)
@@ -129,11 +127,11 @@ deleteTagHandler = (tag) =>{
 
 
  showModal = () =>{
-    this.setState( {show:true } );
+    this.setState( {show:true} );
 }
 
  hideModal = () =>{
-    this.setState( { show:false } );
+    this.setState( {show:false} );
         }
 
      
