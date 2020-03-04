@@ -4,24 +4,24 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     articolo: null,
     articoli: [],
-    loading:false
+    loading:false,
+    esitoCaricamento:""
 }
 
 
 
-
-const postArticoloStart = ( state, action ) => {
+const postArticoloStart = ( state ) => {
     return updateObject( state, { loading:true } );
 };
 
-const postArticoloFail = ( state, action ) => {
-    return updateObject( state, {  loading:false } );
+const postArticoloFail = ( state) => {
+    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nel caricamento del post."} );
 };
 
 const postArticoloSuccess = ( state, action ) => {
      let arrayArt = [...state.articoli];
      arrayArt.push(action.articolo);
-    return updateObject( state, { loading: false, articoli: arrayArt } );
+    return updateObject( state, { loading: false, articoli: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
 
 

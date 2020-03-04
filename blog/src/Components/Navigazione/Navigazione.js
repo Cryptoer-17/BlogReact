@@ -6,6 +6,9 @@ import Ricerca from '../Ricerca/Ricerca';
 import { fadeIn} from 'react-animations'
 import styled, { keyframes } from 'styled-components';
 
+const AnimatedModal = styled.div`
+animation: 0.3s ${keyframes`${fadeIn}`} `;
+
 const Navigazione = () =>{
 
     const [show,setShow] = useState(false);
@@ -18,9 +21,7 @@ const Navigazione = () =>{
            setShow(false);
             }
     
-            const AnimatedModal = styled.div`
-            animation: 0.3s ${keyframes`${fadeIn}`} `;
-        
+           
 
 
     return(

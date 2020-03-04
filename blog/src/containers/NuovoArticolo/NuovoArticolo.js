@@ -6,6 +6,12 @@ import checkValidity from '../../utility/validation';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
+import Modal from '../../Components/UI/Modal/Modal';
+import Spinner from '../../Components/UI/Spinner/Spinner';
+
+
+
+
 class NuovoArticolo extends Component{
 
 state = {
@@ -66,8 +72,8 @@ state = {
     tagsList:[],
     img : null,
     anteprimaImg:null,
-    esitoCaricamento:"",
-    isFormValid : false
+    isFormValid : false,
+    show:false
 }
 
 
@@ -115,11 +121,23 @@ deleteTagHandler = (tag) =>{
     }
 
     this.props.onPostArticolo(articolo);
-    setTimeout(() => this.props.history.push("/") , 1000)  
+    this.showModal();
+    if(!this.props.loading)
+    setTimeout(() => this.props.history.push("/") , 2000)  
 
 }
 
 
+ showModal = () =>{
+    this.setState( {show:true } );
+}
+
+ hideModal = () =>{
+    this.setState( { show:false } );
+        }
+
+     
+    
 
 checkValidityOfInput = (event, id) =>{
 
@@ -137,6 +155,7 @@ checkValidityOfInput = (event, id) =>{
 
 render(){
 
+   
     const formData = [];
     for(let key in this.state.form){
         formData.push( {id: key , obj: this.state.form[key] });
@@ -192,6 +211,16 @@ return(
   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true } >Pubblica</button>           
  
 
+
+ <Modal  show = {this.state.show}  modalClosed = {  this.hideModal } >
+         {this.props.loading ? 
+         <Spinner/>
+        : this.props.esito }
+    </Modal>
+  
+
+
+
 </div>
 
 );
@@ -202,6 +231,13 @@ return(
 }
 
 
+const mapStateToProps = state =>{
+    return{
+   loading: state.articolo.loading,
+   esito: state.articolo.esitoCaricamento
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return{
     onPostArticolo: (articolo) => dispatch(actions.postArticolo(articolo))
@@ -209,5 +245,5 @@ const mapDispatchToProps = dispatch => {
   };
 
 
-export default connect(null,mapDispatchToProps)(NuovoArticolo);
+export default connect(mapStateToProps,mapDispatchToProps)(NuovoArticolo);
 
