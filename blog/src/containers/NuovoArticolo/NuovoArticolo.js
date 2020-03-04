@@ -5,7 +5,6 @@ import Input from '../../Components/UI/Input/Input';
 import checkValidity from '../../utility/validation';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 

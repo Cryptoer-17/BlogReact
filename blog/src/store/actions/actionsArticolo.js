@@ -69,10 +69,19 @@ export const postArticolo = (articolo) => {
 }
 
 
-export const ricercaArticoli = (cerca, filtro) =>{
+
+export const startRicerca = (cerca) =>{
+    return{
+        type: actionTypes.START_RICERCA,
+        cerca:cerca
+    };
+
+}
+
+
+export const ricercaArticoli = ( filtro) =>{
     return{
         type: actionTypes.RICERCA_ARTICOLI,
-        cerca:cerca,
         filtro:filtro
     };
 
