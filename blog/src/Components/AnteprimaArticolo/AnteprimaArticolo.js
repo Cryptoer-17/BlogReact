@@ -5,30 +5,20 @@ import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../Autore/Autore';
-
+import {connect } from 'react-redux';
+import * as aticoloAction from '../../store/actions/index';
 
 class anteprimaArticle extends Component{
     state={
         articolo : null,
-        loading : false,
+     //   loading : false,
     }
 
     
 
     componentDidMount(){
 
-        const id= this.props.id;
-        this.setState({loading : true})
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
-        .then(response =>{
-          this.setState({articolo : response.data})
-          this.setState({loading:false})
-           // console.log(this.state.articolo.titolo);
-        })
-        .catch(error => {
-       
-            this.setState({loading:false})
-        });
+      
     }
 
     
@@ -105,9 +95,9 @@ class anteprimaArticle extends Component{
     }
 
 
-    if(this.state.loading){
+  /*  if(this.state.loading){
         variabile= <Spinner />;
-    }
+    }*/
 
     return(
         <div>
@@ -122,4 +112,19 @@ class anteprimaArticle extends Component{
 } 
 
 
-export default anteprimaArticle;
+
+const mapStateToProps = state =>{
+    return{
+       art : state.articolo
+    };
+ }
+ 
+ const mapDispatchToProps = dispatch =>{
+    return{
+       onFetchPosts: () => dispatch({type: 'FETCH_POSTS'})
+    };
+ };
+ 
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(anteprimaArticle);

@@ -17,7 +17,7 @@ componentDidMount(){
    .then(response =>{
     
      for(let key in response.data){
-        this.state.articoli.push(key);
+        this.props.art.push(key);
    };
  
       this.setState({loading:false})
@@ -40,7 +40,7 @@ render(){
   
   
   const newarticolo = {
-      ...this.state.articoli
+      ...this.props.art
   };
 
    
@@ -60,7 +60,7 @@ return(
 
 
       <div className={classes.ContainerArticoli} >
-      {this.state.articoli ? articolo : null}
+      {/*{this.props.art ? articolo : null}*/} 
       </div>
 
       <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
@@ -72,4 +72,5 @@ return(
 }
 
 }
+
 export default Homepage;
