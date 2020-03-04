@@ -17,7 +17,7 @@ componentDidMount(){
    .then(response =>{
     
      for(let key in response.data){
-        this.props.art.push(key);
+        this.state.articoli.push(key);
    };
  
       this.setState({loading:false})
@@ -40,16 +40,16 @@ render(){
   
   
   const newarticolo = {
-      ...this.props.art
+      ...this.state.articoli
   };
 
    
- const articolo = Object.keys(newarticolo)
-   .map((igKey) =>{
-  
-   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
-   })
-  
+ const articolo = Object.keys(newarticolo)
+   .map((igKey) =>{
+  
+   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
+   })
+  
   
 
 return(
@@ -60,7 +60,7 @@ return(
 
 
       <div className={classes.ContainerArticoli} >
-      {/*{this.props.art ? articolo : null}*/} 
+      {this.state.articoli ? articolo : null}
       </div>
 
       <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
@@ -72,5 +72,4 @@ return(
 }
 
 }
-
 export default Homepage;
