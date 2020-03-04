@@ -1,7 +1,7 @@
 .NuovoArticolo{
     height:100%;
     margin:auto;
-    width:80%;  
+    width:60%;  
     margin-top:60px;
 }
 
@@ -20,54 +20,6 @@
 }
 
 
-.InputTitolo{
-    display:block;
-    margin:auto;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding:10px;
-    width:50%;
-    outline:none;
-    padding:5px;
-    border:none;
-    background-color: transparent;
-    border-bottom: 0.5px solid  rgba(0,0,0,.84);
-    font-size:25px;
-}
-
-
-.InputDescrizione{
-    display:block;
-    margin:auto;
-    margin-top: 10px;
-    margin-bottom: 12px;
-    padding:12px;
-    width:60%;
-    outline:none;
-    padding:5px;
-    border:none;
-    background-color: transparent;
-    border-bottom: 0.5px solid  rgba(0,0,0,.84);
-}
-
-
-.InputTextarea{
-    display:block;
-    margin:auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding:10px;
-    resize:none;
-    width:70%;
-    height:400px;
-    outline:none;
-    border-radius: 2px;
-    border: 0.5px solid grey;
-    background-color: transparent;
-    overflow-y: auto;
-    font-family: inherit;
-    font-size: 15px;
-}
 
 .PubblicaButton{
     width:150px;
@@ -84,7 +36,7 @@
     cursor:pointer;
 }
 
-.Input:focus, .InputTextarea:focus, .InputTitolo:focus{
+.Input:focus{
     border-bottom: 1px solid black;
 }
 
@@ -99,7 +51,7 @@
 }
 
 
-.InputTags  {
+.InputTags {
    margin-bottom:50px;
    width:500px;
    max-height:350px;

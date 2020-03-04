@@ -15,7 +15,8 @@ loginForm: {
         value:"",
         valid:false,
         touched:false,
-        placeholder: "Email",
+      config:
+      {  placeholder: "Email"},
         validation: {
         isEmail:true,
         required:true
@@ -26,7 +27,8 @@ loginForm: {
         value: "",
         valid:false,
         touched:false,
-        placeholder: "Password",
+        config:
+        {placeholder: "Password"},
         validation: {
             minLength: 6,
             required:true
@@ -106,10 +108,10 @@ return(
     {formData.map(el =>
         <Input 
         show = {this.props.show}
-        value = {this.state[el.id]}
+        value = {el.obj.value}
         key = {el.id}
-        type = {el.type}
-        placeholder = {el.obj.placeholder}
+        type = {el.obj.type}
+        config = {el.obj.config}
         touched = { el.obj.touched}
         valid = { el.obj.valid}
         changed = {(e) => this.checkValidityOfInput(e, el.id)}
