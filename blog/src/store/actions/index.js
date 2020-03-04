@@ -1,0 +1,3 @@
+export {
+    postArticolo
+}from './actionsArticolo';
