@@ -4,7 +4,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     articoli: [],
     loading:false,
-    esitoCaricamento:""
+    esitoCaricamento:"",
+    cerca: "",
+    risultatiRicerca:[]
 }
 
 
@@ -22,6 +24,24 @@ const postArticoloSuccess = ( state, action ) => {
      arrayArt.push(action.articolo);
     return updateObject( state, { loading: false, articoli: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
+
+
+
+
+const ricercaArticoli = (state,action) =>{
+let articoli = [];
+
+if(action.filtro === "")
+
+
+
+    return updateObject( state, { risultatiRicerca: articoli} );
+
+}
+
+
+
+
 
 
 const reducer = (state = initialState, action) =>  {

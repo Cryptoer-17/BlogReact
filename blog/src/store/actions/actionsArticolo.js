@@ -67,3 +67,13 @@ export const postArticolo = (articolo) => {
         });
     }
 }
+
+
+export const ricercaArticoli = (cerca, filtro) =>{
+    return{
+        type: actionTypes.RICERCA_ARTICOLI,
+        cerca:cerca,
+        filtro:filtro
+    };
+
+}
