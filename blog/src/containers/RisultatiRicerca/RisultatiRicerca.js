@@ -70,8 +70,8 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
         return(
             <div className = {classes.RisultatiRicerca}>
               <div>  
-                <input  autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""  onKeyPress={ event => { if(event.key === 'Enter'){ this.searchArticlesHandler(this.state.cerca)} } } onChange={( event ) => {this.setState( { cerca: event.target.value } );
-                 setTimeout(() => {this.searchArticlesHandler(this.state.cerca)}, 500);  } }  />
+               {/* <input  autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""  onKeyPress={ event => { if(event.key === 'Enter'){ this.searchArticlesHandler(this.state.cerca)} } } onChange={( event ) => {this.setState( { cerca: event.target.value } );
+                 setTimeout(() => {this.searchArticlesHandler(this.state.cerca)}, 500);  } }  /> */}
               </div>
 
               <div className = {classes.OpzioniRicerca}>
