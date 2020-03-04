@@ -2,25 +2,67 @@ import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
 import axios from '../../utility/axios';
-
-
-
+import Input from '../../Components/UI/Input/Input';
 
 class NuovoArticolo extends Component{
 
 state = {
-    titolo : "",
-    sottotitolo : "",
-    img : null,
-    categoria: "",
+    form :{
+        titolo :{ 
+            type: "text",
+            value:"",
+            validation:{
+                required:true},
+            touched:false,
+            valid:false,
+            placeholder: "Titolo"
+        },
+        sottotitolo : { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            placeholder: "Sottotitolo"
+        },
+    
+        categoria: { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            placeholder: "Categoria"
+        },
+    
+        descrizione: { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            placeholder: "Descrizione"
+        },
+
+        testo :{ 
+            type: "textarea",
+            value:"",
+            touched:false,
+            valid:false,
+            placeholder: "Scrivi qualcosa..."
+        },
+        tagInput:{ 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            placeholder: "#tag"
+        }
+    },
+    autore: "Moni",
     tags : [],
     tagsList:[],
-    descrizione: "",
-    autore: "Moni",
-    testo : "",
-    tagInput:"",
+    img : null,
     anteprimaImg:null,
-    esitoCaricamento:""
+    esitoCaricamento:"",
+    isFormValid : false
 }
 
 
