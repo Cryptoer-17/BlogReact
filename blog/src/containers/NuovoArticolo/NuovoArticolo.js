@@ -197,8 +197,6 @@ return(
   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true }   >Pubblica</button>           
  
 
-
-
 </div>
 
 );
@@ -209,18 +207,3 @@ return(
 }
 export default NuovoArticolo;
 
-/*
-
-<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo * " onChange={( event ) => this.setState( { titolo: event.target.value } )}    /> 
-<input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
-
-
-<input className = {classes.InputDescrizione}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
-<input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
-
-<br/>
-
-
-
-
-*/
