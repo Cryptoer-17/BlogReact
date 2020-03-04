@@ -1,4 +1,6 @@
 import axios from '../../utility/axios';
+import * as actionTypes from './actionTypes';
+
 
 export const postArticoloSuccess = (articolo) =>{
     return{
@@ -23,13 +25,13 @@ export const postArticoloStart = () =>{
 
 export const postArticolo = (articolo) => {
     return dispatch => {
-        dispatch(purchaseBurgerStart());
+        dispatch(postArticoloStart());
         axios.post('/articoli.json', articolo)
         .then(res =>{ 
-            dispatch(purchaseBurgerSuccess(articolo))
+            dispatch(postArticoloSuccess(articolo))
           })
         .catch(error => { 
-            dispatch(purchaseBurgerFail(error));
+            dispatch(postArticoloFail(error));
         });
     }
 }
