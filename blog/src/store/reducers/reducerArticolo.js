@@ -25,6 +25,11 @@ const postArticoloSuccess = ( state, action ) => {
     return updateObject( state, { loading: false, articoli: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
 
+const setArticoli = (state,action) =>{
+    return updateObject(state , {articoli : action.articoli})
+};
+
+
 
 
 
@@ -49,11 +54,11 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
-        case actionTypes.SET_ARTICOLI : 
-        return{
+        case actionTypes.SET_ARTICOLI : return setArticoli(state,action);
+    /*    return{
             ...state,
             articoli : action.articoli
-        }
+        }*/
         default: return state;
     }
 }
