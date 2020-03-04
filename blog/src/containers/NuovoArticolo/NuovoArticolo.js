@@ -3,6 +3,8 @@ import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
 import axios from '../../utility/axios';
 import Input from '../../Components/UI/Input/Input';
+import checkValidity from '../../utility/validation';
+
 
 class NuovoArticolo extends Component{
 
@@ -12,50 +14,53 @@ state = {
             type: "text",
             value:"",
             validation:{
-                required:true},
+            required:true},
             touched:false,
             valid:false,
-            placeholder: "Titolo"
+            config:{
+            placeholder: "Titolo *",
+            autoFocus:true
+            }
         },
         sottotitolo : { 
             type: "text",
             value:"",
             touched:false,
             valid:true,
-            placeholder: "Sottotitolo"
+            config:{
+            placeholder: "Sottotitolo"}
         },
-    
-        categoria: { 
-            type: "text",
-            value:"",
-            touched:false,
-            valid:true,
-            placeholder: "Categoria"
-        },
-    
-        descrizione: { 
-            type: "text",
-            value:"",
-            touched:false,
-            valid:true,
-            placeholder: "Descrizione"
-        },
-
         testo :{ 
             type: "textarea",
             value:"",
             touched:false,
             valid:false,
-            placeholder: "Scrivi qualcosa..."
+            validation:{
+                required:true},
+                config:{
+                placeholder: "Scrivi qualcosa...  *"
+                }
         },
-        tagInput:{ 
+        descrizione: { 
             type: "text",
             value:"",
             touched:false,
             valid:true,
-            placeholder: "#tag"
-        }
+            config:{
+            placeholder: "Breve descrizione dell'articolo"
+             }
+        },
+
+        categoria: { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            config:{
+            placeholder: "Categoria"}
+        },
     },
+    tagInput:"",
     autore: "Moni",
     tags : [],
     tagsList:[],
@@ -99,12 +104,12 @@ deleteTagHandler = (tag) =>{
 
   publishArticleHandler = () => {
     const articolo = {
-        titolo: this.state.titolo,
-        sottotitolo: this.state.sottotitolo,
+        titolo: this.state.form.titolo.value,
+        sottotitolo: this.state.form.sottotitolo.value,
         autore: this.state.autore,
-        testo: this.state.testo,
-        descrizione: this.state.descrizione,
-        categoria: this.state.categoria,
+        testo: this.state.form.testo.value,
+        descrizione: this.state.form.descrizione.value,
+        categoria: this.state.form.categoria.value,
         tags: this.state.tags,
         img: this.state.img
     }
@@ -121,8 +126,28 @@ deleteTagHandler = (tag) =>{
 
 
 
+checkValidityOfInput = (event, id) =>{
+
+    let newObj = { ...this.state.form[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.form[id].validation), touched:true };
+    let newForm = {...this.state.form,  [id]: {...newObj}}
+    let formIsValid = true;
+    for (let key in newForm) {
+        formIsValid = newForm[key].valid && formIsValid;
+    }
+        this.setState({isFormValid:formIsValid, form: newForm})
+    }
+
+
+
+
 render(){
 
+    const formData = [];
+    for(let key in this.state.form){
+        formData.push( {id: key , obj: this.state.form[key] });
+    };
+    
+    
 
 return(
 
@@ -130,16 +155,25 @@ return(
 
 <h2>Nuovo articolo</h2>
 
-<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo * " onChange={( event ) => this.setState( { titolo: event.target.value } )}  required  /> 
-<input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
+ 
+{formData.map(el =>
+        <Input 
+        value = {el.obj.value}
+        key = {el.id}
+        type = {el.obj.type}
+        config = {el.obj.config}
+        touched = { el.obj.touched}
+        valid = { el.obj.valid}
+        changed = {(e) => this.checkValidityOfInput(e, el.id)}
+        shouldValidate = {el.obj.validation}
+        />
+        ) }
 
-<textarea  className = {classes.InputTextarea}  placeholder = "Scrivi qualcosa...   *"  onChange={( event ) => this.setState( { testo: event.target.value } )}  required />
-<input className = {classes.InputDescrizione}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
-<input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
+
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
     onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
-<br/>
+
 
 <div className = {classes.InputTags}>
     {this.state.tagsList}
@@ -160,7 +194,7 @@ return(
 {this.state.esitoCaricamento}
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.titolo === "" || this.state.testo === "" ? true : false }   >Pubblica</button>           
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true }   >Pubblica</button>           
  
 
 
@@ -174,3 +208,19 @@ return(
 
 }
 export default NuovoArticolo;
+
+/*
+
+<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo * " onChange={( event ) => this.setState( { titolo: event.target.value } )}    /> 
+<input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
+
+
+<input className = {classes.InputDescrizione}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
+<input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
+
+<br/>
+
+
+
+
+*/
