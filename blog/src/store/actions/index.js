@@ -1,3 +1,5 @@
 export {
-    postArticolo
+    postArticolo,
+    initArticoli
 }from './actionsArticolo';
+
