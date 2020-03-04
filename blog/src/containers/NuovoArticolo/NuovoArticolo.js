@@ -189,7 +189,7 @@ return(
 {this.state.esitoCaricamento}
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true }   >Pubblica</button>           
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true } >Pubblica</button>           
  
 
 </div>
