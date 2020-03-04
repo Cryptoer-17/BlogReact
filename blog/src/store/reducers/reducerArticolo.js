@@ -19,9 +19,9 @@ const postArticoloFail = ( state, action ) => {
 };
 
 const postArticoloSuccess = ( state, action ) => {
-    let articoli = [...state.articoli];
-    articoli = articoli.push(action.articolo);
-    return updateObject( state, { loading: false, articoli: articoli} );
+     let arrayArt = [...state.articoli];
+     arrayArt.push(action.articolo);
+    return updateObject( state, { loading: false, articoli: arrayArt } );
 };
 
 

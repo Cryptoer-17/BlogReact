@@ -27,10 +27,11 @@ export const postArticolo = (articolo) => {
     return dispatch => {
         dispatch(postArticoloStart());
         axios.post('/articoli.json', articolo)
-        .then(res =>{ 
+        .then(res =>{ console.log(res)
             dispatch(postArticoloSuccess(articolo))
           })
         .catch(error => { 
+            console.log(error)
             dispatch(postArticoloFail(error));
         });
     }
