@@ -55,11 +55,11 @@ class AnteprimaArticle extends Component{
             <p>{descrizione}</p>
             </div></NavLink>
            
-        {/* <ActionBar className = {classes.Actions}/>*/}   
+         <ActionBar className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
 
-         <FaHeart className={classes.Icon} style={{color : colore}} onClick={clickHeart} />
-          
+       {/*<FaHeart className={classes.Icon} style={{color : colore}} onClick={clickHeart} />
+          */ }  
         </div>
     
   

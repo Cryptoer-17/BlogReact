@@ -8,10 +8,9 @@ const ActionBar = (props) =>{
         <div className ={classes.ActionBar}>
         
 
-
                 <div className = {classes.Actions}>
-                <FaHeart className={classes.Like} />
-                <FaRegCommentDots className={classes.Comments} />
+                <FaHeart className={classes.Like} style={{color : props.color}} onClick={props.onClick}/>
+                <FaRegCommentDots className={classes.Comments}  />
                 </div>
 
                  <div className= {classes.MoreDiv}>
