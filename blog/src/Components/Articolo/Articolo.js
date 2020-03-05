@@ -39,6 +39,7 @@ class Articolo extends Component{
             categoria : this.state.articolo.categoria,
             descrizione : this.state.articolo.descrizione,
             img : this.state.articolo.img,
+            tags : this.state.articolo.tags,
             like: !this.state.articolo.like,
             sottotitolo : this.state.articolo.sottotitolo,
             testo : this.state.articolo.testo,

@@ -12,7 +12,6 @@ class AnteprimaArticle extends Component{
    
     render(){
 
-
     
     let colore = 'black';  
     let variabile ; 
@@ -21,6 +20,8 @@ class AnteprimaArticle extends Component{
     const {sottotitolo} =this.props;
     const {img} = this.props;
     const {descrizione} = this.props;
+    const {clickHeart} = this.props;
+
 
         console.log(this.props.titolo);
 
@@ -55,7 +56,7 @@ class AnteprimaArticle extends Component{
             </div></NavLink>
            
 
-         <FaHeart className={classes.Icon} style={{color : colore}} onClick={this.props.clickHeart} />
+         <FaHeart className={classes.Icon} style={{color : colore}} onClick={clickHeart} />
           
         </div>
     
