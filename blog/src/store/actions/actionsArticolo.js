@@ -26,30 +26,6 @@ export const initArticoli = () =>{
 };
 
 
-export const setArticolo = (articolo) =>{
-    return{
-        type: actionTypes.SET_ARTICOLO,
-        articolo: articolo
-    }
-} 
-
-
-export const initArticolo = (props) =>{
-    return dispatch =>{
-        const id = props;
-         //    this.setState({loading : true})
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
-        .then(response =>{
-         // this.setState({articolo : response.data})
-            dispatch(setArticolo(response.data))
-
-           // console.log(this.state.articolo.titolo);
-        })
-        .catch(error => {
-
-        });
-    }
-}
 
 
 
