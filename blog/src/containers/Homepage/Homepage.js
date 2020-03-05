@@ -8,21 +8,14 @@ import {connect} from 'react-redux';
 
 
 class Homepage extends Component{
-/*
-state = {
-   articoli:[],
-  
-}*/
 
-componentDidMount(){
-   this.props.onInitArticoli();
-}
+
 
 
 
 render(){
 
-   let variabile ; 
+   let variabile; 
 
    
   
@@ -32,6 +25,9 @@ render(){
      
   };
 
+
+
+console.log(this.props.arti.map(a => a.articolo))
    
  const articolo = Object.keys(newarticolo)
    .map((igKey) =>{
@@ -71,10 +67,5 @@ const mapStateToProps = state =>{
 }
 
 
-const mapDispatchToProps = dispatch =>{
-   return{
-      onInitArticoli: () => dispatch(actionArticoli.initArticoli())
-   }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(Homepage);
+export default connect(mapStateToProps)(Homepage);
