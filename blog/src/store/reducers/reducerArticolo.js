@@ -5,6 +5,7 @@ const initialState = {
     articoli: [],
     loading:false,
     esitoCaricamento:"",
+    articolo:null,
     cerca: "",
     risultatiRicerca:[]
 }
@@ -29,6 +30,9 @@ const setArticoli = (state,action) =>{
     return updateObject(state , {articoli : action.articoli})
 };
 
+const setArticolo = (state, action) =>{
+        return updateObject(state , {articolo : action.articolo})
+}
 
 
 const startRicerca = (state,action) => {
