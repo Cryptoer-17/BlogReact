@@ -23,7 +23,7 @@ componentDidMount(){
          <BrowserRouter>
          <Navigazione/>
           <Switch>
-            <Route path="/" exact component={Homepage} /> 
+            <Route path="/" exact render={() =>(<Homepage mount={() => this.componentDidMount()}/>)} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
             <Route path="/articolo/:id" component ={Articolo} />
