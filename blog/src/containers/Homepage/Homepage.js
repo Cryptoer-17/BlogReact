@@ -37,28 +37,24 @@ class Homepage extends Component{
 
 render(){
 
-
   let articoliVisualizzati = <Spinner/>; 
 
-   
   const {articoli} = this.props;
   
  
-
-
     articoliVisualizzati = articoli.map((art) =>{
-   return (<AnteprimaArticolo 
-      id={art.key} 
-      autore={art.articolo.autore}
-      categoria = {art.articolo.categoria}
-      descrizione = {art.articolo.descrizione}
-      img = {art.articolo.img}
-      like = {art.articolo.like}
-      sottotitolo = {art.articolo.sottotitolo}
-      testo = {art.articolo.testo}
-      titolo = {art.articolo.titolo}
-      clickHeart = {() => this.clickHeartHandler(art)}
-      key={art.key}/>);
+      return (<AnteprimaArticolo 
+         id={art.key} 
+         autore={art.articolo.autore}
+         categoria = {art.articolo.categoria}
+         descrizione = {art.articolo.descrizione}
+         img = {art.articolo.img}
+         like = {art.articolo.like}
+         sottotitolo = {art.articolo.sottotitolo}
+         testo = {art.articolo.testo}
+         titolo = {art.articolo.titolo}
+         clickHeart = {() => this.clickHeartHandler(art)}
+         key={art.key}/>);
    })
   
   
@@ -69,11 +65,14 @@ return(
 
       <h1 className={classes.Titolo}>Blog</h1>
 
-
       <div className={classes.ContainerArticoli} >
-      {articoli ? articoliVisualizzati : null}
+         {
+         articoli ?
+         articoliVisualizzati 
+         : null
+         }
       </div>
-      
+
    <ScrollTopButton/>
   
 </div>
