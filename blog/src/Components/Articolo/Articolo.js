@@ -4,6 +4,8 @@ import axios from 'axios';
 import { FaHeart } from "react-icons/fa";
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../../Components/Autore/Autore';
+import ActionBar from '../ActionBar/ActionBar';
+import Tag from '../Tag/Tag';
 
 class Articolo extends Component{
     state={
@@ -75,7 +77,7 @@ class Articolo extends Component{
                 tags = newtags.map((tag,index) =>{
                    return (
                        <div className={classes.Tag} key={index}>
-                           {tag}
+                         <Tag>{tag}</Tag>
                        </div>
                    );
                    })
@@ -89,11 +91,17 @@ class Articolo extends Component{
             }
 
             variabile =  <div className={classes.Titolo}>
-               <p>{this.state.articolo.titolo}</p>
-            
-            <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} -</p>  <Autore name={this.state.articolo.autore}/>
+               <h1>{this.state.articolo.titolo}</h1>
+               <div>
+                <h5>{this.state.articolo.categoria}</h5>
             </div>
+            <div className={classes.Sottotitolo}>
+            <p>{this.state.articolo.sottotitolo} </p>
+            </div>
+            <div>
+            <Autore name={this.state.articolo.autore} />
+            </div>
+
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />
             </div>
@@ -102,11 +110,9 @@ class Articolo extends Component{
             </div>
             <div className={classes.TagConteiner}>
                {tags} 
-            </div>
-               
-            <div className={classes.Icon}>
-                <FaHeart style={{color: colore, marginTop : '100%'}} onClick={() => this.clickHeartHandler()}/>
-            </div>
+            </div>          
+                <ActionBar className={classes.Action} color={colore} onClick={() => this.clickHeartHandler()}/>
+                {/** <FaHeart style={{color: colore, marginTop : '100%'}} />*/}
         </div>
         }
 

@@ -34,20 +34,16 @@
     font-weight: bold;
 }
 
-.Icon{
-    width:6%;
-    cursor: pointer;
-}
 
 .Tag{
-    width: 10%;
     float: left;
-    font: message-box;
-    margin-right: 5px;
-    border: 1.2px solid slategray;
-    background-color: papayawhip;
+    margin-bottom: 10px;
 }
 
 .TagConteiner{
     margin-left: 25px;
+}
+
+.Action{
+    border: 3px solid;
 }
