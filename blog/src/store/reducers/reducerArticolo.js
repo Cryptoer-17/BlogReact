@@ -4,7 +4,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     articoli: [],
     loading:false,
-    esitoCaricamento:""
+    esitoCaricamento:"",
+    articolo:null
 }
 
 
@@ -27,6 +28,9 @@ const setArticoli = (state,action) =>{
     return updateObject(state , {articoli : action.articoli})
 };
 
+const setArticolo = (state, action) =>{
+        return updateObject(state , {articolo : action.articolo})
+}
 
 
 const reducer = (state = initialState, action) =>  {
@@ -35,10 +39,7 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
         case actionTypes.SET_ARTICOLI : return setArticoli(state,action);
-    /*    return{
-            ...state,
-            articoli : action.articoli
-        }*/
+        case actionTypes.SET_ARTICOLO : return setArticolo(state,action);
         default: return state;
     }
 }
