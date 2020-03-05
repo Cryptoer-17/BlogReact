@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import classes from './Anteprimaarticolo.module.css';
 import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../Autore/Autore';
-import * as actionArticolo from '../../store/actions/index';
-import {connect} from 'react-redux';
+import ActionBar from '../ActionBar/ActionBar';
+
+
 
 class AnteprimaArticle extends Component{
    
@@ -55,6 +55,8 @@ class AnteprimaArticle extends Component{
             <p>{descrizione}</p>
             </div></NavLink>
            
+        {/* <ActionBar className = {classes.Actions}/>*/}   
+
 
          <FaHeart className={classes.Icon} style={{color : colore}} onClick={clickHeart} />
           
@@ -76,3 +78,5 @@ class AnteprimaArticle extends Component{
 
 
 export default AnteprimaArticle;
+
+//         <FaHeart className={classes.Icon} style={{color : colore}} onClick={this.props.clickHeart} />

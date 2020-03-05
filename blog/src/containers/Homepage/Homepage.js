@@ -4,7 +4,7 @@ import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArtic
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import updateObject from '../../utility/updateObject';
+import ActionBar from '../../Components/ActionBar/ActionBar';
 
 class Homepage extends Component{
 
@@ -76,6 +76,8 @@ return(
       </div>
 
       <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
+
+  
 </div>
 
 );
