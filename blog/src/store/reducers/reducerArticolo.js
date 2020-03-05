@@ -5,7 +5,7 @@ const initialState = {
     articoli: [],
     loading:false,
     esitoCaricamento:"",
-    cerca: "",
+    cerca: null,
     risultatiRicerca:[]
 }
 

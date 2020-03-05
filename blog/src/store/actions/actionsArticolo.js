@@ -68,7 +68,7 @@ export const postArticolo = (articolo) => {
 export const startRicerca = (cerca) =>{
     return{
         type: actionTypes.START_RICERCA,
-        cerca:cerca
+        cerca:cerca.trim()
     };
 
 }

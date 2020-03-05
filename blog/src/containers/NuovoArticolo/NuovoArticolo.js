@@ -108,12 +108,12 @@ deleteTagHandler = (tag) =>{
 
   publishArticleHandler = () => {
     const articolo = {
-        titolo: this.state.form.titolo.value,
-        sottotitolo: this.state.form.sottotitolo.value,
+        titolo: this.state.form.titolo.value.trim(),
+        sottotitolo: this.state.form.sottotitolo.value.trim(),
         autore: this.state.autore,
         testo: this.state.form.testo.value,
-        descrizione: this.state.form.descrizione.value,
-        categoria: this.state.form.categoria.value,
+        descrizione: this.state.form.descrizione.value.trim(),
+        categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
         img: this.state.img
     }

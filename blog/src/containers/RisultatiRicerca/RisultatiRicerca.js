@@ -5,6 +5,7 @@ import * as actions from '../../store/actions/index';
 import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 
 
+
 class RisultatiRicerca extends Component{
 
     state = {
@@ -12,9 +13,17 @@ class RisultatiRicerca extends Component{
         classeCat :null,
         classeTag : null,
     }
-
+    
 componentDidMount(){
-this.displayCategoryResultsHandler();
+    document.getElementById("filtroCategoria").click();
+    this.setState({cerca:this.props.cerca})
+}
+componentDidUpdate(prevState){
+    if(prevState.cerca !== this.props.cerca){
+        this.setState({cerca:this.props.cerca})
+        document.getElementById("filtroCategoria").click();
+    }
+
 }
 
 
@@ -27,11 +36,16 @@ this.displayCategoryResultsHandler();
  displayTagResultsHandler = () =>{
 
      this.setState({classeTag: classes.OpzioneSelezionata,classeCat: null}); 
-     this.props.onRicercaArticoli( "tag");
+        this.props.onRicercaArticoli( "tag");
  }
  
 
     render(){
+
+        const {classeCat, classeTag} = this.state;
+        const {risultati, cerca} = this.props;
+     
+
        
         return(
             <div className = {classes.RisultatiRicerca}>
@@ -42,16 +56,16 @@ this.displayCategoryResultsHandler();
 
               <div className = {classes.OpzioniRicerca}>
                 Filtra per <br/>
-                <p className = {this.state.classeCat}  onClick = {this.displayCategoryResultsHandler}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {this.displayTagResultsHandler}>Tag</p>
+                <p  id = "filtroCategoria" className = {classeCat}  onClick = {this.displayCategoryResultsHandler}>Categoria</p> | <p  id = "filtroTag" className = {classeTag} onClick = {this.displayTagResultsHandler}>Tag</p>
                 <hr  className = {classes.Divisore} />
               </div>
 
                <div>
                 <ul className = {classes.ContainerRisultati}>
 
-                {this.props.risultati ? 
+                {risultati ? 
                 
-                this.props.risultati.map( art =>
+                    risultati.map( art =>
 
                     <AnteprimaArticolo 
                     id={art.key} 
@@ -63,14 +77,10 @@ this.displayCategoryResultsHandler();
                     sottotitolo = {art.articolo.sottotitolo}
                     testo = {art.articolo.testo}
                     titolo = {art.articolo.titolo}
-                    key={art.key}/>
-                              
-                )
+                    key={art.key}/>          
+                  )
 
                
-                
-                
-                
                 
                 : null }
              
@@ -86,7 +96,8 @@ this.displayCategoryResultsHandler();
 
 const mapStateToProps = state =>{
     return{
-    risultati: state.articolo.risultatiRicerca
+    risultati: state.articolo.risultatiRicerca,
+    cerca: state.articolo.cerca
     };
 };
 
