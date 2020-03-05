@@ -43,9 +43,11 @@
     width: 10%;
     float: left;
     font: message-box;
-    border: 0.5px solid slategray;
+    margin-right: 5px;
+    border: 1.2px solid slategray;
+    background-color: papayawhip;
 }
 
 .TagConteiner{
-    margin-left: 20px;
+    margin-left: 25px;
 }
