@@ -5,15 +5,25 @@ import * as actions from '../../store/actions/index';
 import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 
 
+
 class RisultatiRicerca extends Component{
 
     state = {
+        cerca:"",
         classeCat :null,
         classeTag : null,
     }
-
+    
 componentDidMount(){
     document.getElementById("filtroCategoria").click();
+    this.setState({cerca:this.props.cerca})
+}
+componentDidUpdate(prevState){
+    if(prevState.cerca !== this.props.cerca){
+        this.setState({cerca:this.props.cerca})
+        document.getElementById("filtroCategoria").click();
+    }
+
 }
 
 
@@ -33,8 +43,8 @@ componentDidMount(){
     render(){
 
         const {classeCat, classeTag} = this.state;
-        const {risultati, onRicercaArticoli} = this.props;
-
+        const {risultati, cerca} = this.props;
+     
 
        
         return(
@@ -68,7 +78,7 @@ componentDidMount(){
                     testo = {art.articolo.testo}
                     titolo = {art.articolo.titolo}
                     key={art.key}/>          
-                )
+                  )
 
                
                 
@@ -86,7 +96,8 @@ componentDidMount(){
 
 const mapStateToProps = state =>{
     return{
-    risultati: state.articolo.risultatiRicerca
+    risultati: state.articolo.risultatiRicerca,
+    cerca: state.articolo.cerca
     };
 };
 

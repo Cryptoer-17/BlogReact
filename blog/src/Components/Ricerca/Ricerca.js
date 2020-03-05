@@ -9,16 +9,14 @@ const Ricerca = (props) =>{
     const [cerca, setCerca] = useState("");
 
     const clickHandler = () =>{
-        if(cerca !== "")
+        if(cerca !== ""){
          props.onStartRicerca(cerca);
-         setTimeout( document.getElementById("filtroCategoria").click(), 200);
-        
-
+        }
     }
 
     return(
         <div className ={classes.Ricerca}>
-            <input type="text" placeholder=" Cerca..." onChange={(event) => setCerca(event.target.value) } />
+            <input type="text" placeholder=" Cerca..." onChange={(event) => setCerca(event.target.value) } onKeyPress={ event => { if(event.key === 'Enter') clickHandler() }}/>
             <NavLink onClick = { clickHandler } to="/ricerca" exact className={classes.CercaButton} ><i className="material-icons">search</i></NavLink>
         </div>
     );
