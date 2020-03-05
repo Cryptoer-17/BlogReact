@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 
 class AnteprimaArticle extends Component{
     state={
-      //  articolo : null,
         loading : false,
     }
 
@@ -29,12 +28,7 @@ class AnteprimaArticle extends Component{
             testo : this.props.testo,
             titolo : this.props.titolo
         } 
-
-        this.setState({
-            articolo : anteprima
-        })
-    
-
+           
         const id= this.props.id;
         
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)

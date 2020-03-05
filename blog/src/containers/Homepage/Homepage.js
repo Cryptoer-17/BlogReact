@@ -3,9 +3,31 @@ import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
-
+import axios from 'axios';
 
 class Homepage extends Component{
+
+
+   clickHeartHandler(){
+       
+      const anteprima = {
+          autore : this.props.autore,
+          categoria : this.props.categoria,
+          descrizione : this.props.descrizione,
+          img : this.props.img,
+          like: !this.props.like,
+          sottotitolo : this.props.sottotitolo,
+          testo : this.props.testo,
+          titolo : this.props.titolo
+      } 
+         
+      const id= this.props.id;
+      
+      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+
+  }
 
 
 
@@ -23,16 +45,17 @@ render(){
 
  const articolo = newarticolo.map((art,index) =>{
    return (<Anteprimaarticolo 
-      id={art.key} 
-      autore={art.articolo.autore}
-      categoria = {art.articolo.categoria}
-      descrizione = {art.articolo.descrizione}
-      img = {art.articolo.img}
-      like = {art.articolo.like}
-      sottotitolo = {art.articolo.sottotitolo}
-      testo = {art.articolo.testo}
-      titolo = {art.articolo.titolo}
-      key={art.key}/>);
+      id={newarticolo[index].key} 
+      autore={newarticolo[index].articolo.autore}
+      categoria = {newarticolo[index].articolo.categoria}
+      descrizione = {newarticolo[index].articolo.descrizione}
+      img = {newarticolo[index].articolo.img}
+      like = {newarticolo[index].articolo.like}
+      sottotitolo = {newarticolo[index].articolo.sottotitolo}
+      testo = {newarticolo[index].articolo.testo}
+      titolo = {newarticolo[index].articolo.titolo}
+      clickHeart = {() => this.clickHeartHandler()}
+      key={newarticolo[index].key}/>);
    })
   
   
