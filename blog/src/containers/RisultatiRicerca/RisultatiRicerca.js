@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import classes from './RisultatiRicerca.module.css';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class RisultatiRicerca extends Component{
 
@@ -24,16 +26,13 @@ class RisultatiRicerca extends Component{
         ],
         classeCat :null,
         classeTag : null,
-        risultatiCat : [],
-        risultatiTag: []
     }
 
 componentDidMount(){
 
-
 }
 
-
+/*
 searchArticlesHandler = (cerca) =>{
     let risultatiCat = [];
     risultatiCat= this.state.articoli.filter(art => art.categoria === cerca);
@@ -51,17 +50,19 @@ searchArticlesHandler = (cerca) =>{
 this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
 
 }
-
+*/
 
 
  displayCategoryResultsHandler = () =>{
 
     this.setState({classeCat: classes.OpzioneSelezionata,classeTag: null});
+    this.props.onRicercaArticoli("categoria");
  }
 
  displayTagResultsHandler = () =>{
 
      this.setState({classeTag: classes.OpzioneSelezionata,classeCat: null}); 
+     this.props.onRicercaArticoli( "tag");
  }
  
 
@@ -76,15 +77,14 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
 
               <div className = {classes.OpzioniRicerca}>
                 Filtra per <br/>
-                <p className = {this.state.classeCat}  onClick = {() =>this.displayCategoryResultsHandler()}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {() =>this.displayTagResultsHandler()}>Tag</p>
+                <p className = {this.state.classeCat}  onClick = {this.displayCategoryResultsHandler}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {this.displayTagResultsHandler}>Tag</p>
                 <hr  className = {classes.Divisore} />
               </div>
 
                <div >
                 <ul className = {classes.ContainerRisultati}>
 
-                {this.state.classeCat && this.state.cerca ? this.state.risultatiCat : null }
-                {this.state.classeTag && this.state.cerca ? this.state.risultatiTag : null }
+                {this.props.risultati ? this.props.risultati : null }
              
                 </ul>
                </div>
@@ -94,4 +94,20 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
      }
     
 }
-export default RisultatiRicerca;
+
+
+const mapStateToProps = state =>{
+    return{
+    risultati: state.articolo.risultatiRicerca
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+    onRicercaArticoli: (filtro) => dispatch(actions.ricercaArticoli(filtro))
+    };
+  };
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(RisultatiRicerca);

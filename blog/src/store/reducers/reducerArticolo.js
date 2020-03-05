@@ -5,7 +5,9 @@ const initialState = {
     articoli: [],
     loading:false,
     esitoCaricamento:"",
-    articolo:null
+    articolo:null,
+    cerca: "",
+    risultatiRicerca:[]
 }
 
 
@@ -33,13 +35,47 @@ const setArticolo = (state, action) =>{
 }
 
 
+const startRicerca = (state,action) => {
+    return updateObject( state, { cerca: action.cerca} );
+}
+
+
+const ricercaArticoli = (state,action) =>{
+let articoli = [];
+
+    if(action.filtro === "tag"){
+        articoli= state.articoli.filter(art =>  art.tags.indexOf(state.cerca)>= 0);
+    }
+
+    if(action.filtro === "categoria"){
+        articoli= state.articoli.filter(art => art.categoria === state.cerca);
+    }
+
+    if (articoli.length === 0){
+        articoli = "Nessun risultato.";
+    }
+
+    return updateObject( state, { risultatiRicerca: articoli} );
+
+}
+
+
+
+
+
+
 const reducer = (state = initialState, action) =>  {
     switch(action.type){
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
         case actionTypes.SET_ARTICOLI : return setArticoli(state,action);
-        case actionTypes.SET_ARTICOLO : return setArticolo(state,action);
+        case actionTypes.RICERCA_ARTICOLI : return ricercaArticoli(state,action);
+        case actionTypes.START_RICERCA : return startRicerca(state,action);
+    /*    return{
+            ...state,
+            articoli : action.articoli
+        }*/
         default: return state;
     }
 }

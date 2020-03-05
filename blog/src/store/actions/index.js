@@ -1,6 +1,8 @@
 export {
     postArticolo,
     initArticoli,
-    initArticolo
+    initArticolo,
+    startRicerca,
+    ricercaArticoli
 }from './actionsArticolo';
 
