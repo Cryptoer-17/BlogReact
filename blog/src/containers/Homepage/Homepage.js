@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
-import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
@@ -37,17 +37,17 @@ class Homepage extends Component{
 
 render(){
 
-   let articoli = <Spinner/>; 
+
+  let articoliVisualizzati = <Spinner/>; 
 
    
+  const {articoli} = this.props;
   
-  
-  const newarticolo = [ ...this.props.arti];
+ 
 
 
- const articolo = newarticolo.map((art) =>{
-    console.log(art)
-   return (<Anteprimaarticolo 
+    articoliVisualizzati = articoli.map((art) =>{
+   return (<AnteprimaArticolo 
       id={art.key} 
       autore={art.articolo.autore}
       categoria = {art.articolo.categoria}
@@ -71,7 +71,7 @@ return(
 
 
       <div className={classes.ContainerArticoli} >
-      {this.props.arti ? articolo : null}
+      {articoli ? articoliVisualizzati : null}
       </div>
 
       <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
@@ -90,7 +90,7 @@ return(
 const mapStateToProps = state =>{
   
    return{
-      arti : state.articolo.articoli
+      articoli : state.articolo.articoli
    }
 }
 

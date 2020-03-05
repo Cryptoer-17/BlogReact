@@ -78,8 +78,6 @@ componentDidUpdate(prevState){
                     key={art.key}/>          
                   )
 
-               
-                
                 : cerca !== null ? "Nessun risultato." : null }
              
                 </ul>
