@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import classes from './Ricerca.module.css';
-import {NavLink} from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
@@ -11,6 +11,7 @@ const Ricerca = (props) =>{
     const clickHandler = () =>{
         if(cerca !== ""){
          props.onStartRicerca(cerca);
+         props.history.push("/ricerca");
         }
     }
 
@@ -31,7 +32,7 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(null,mapDispatchToProps)(Ricerca);
+export default connect(null,mapDispatchToProps)(withRouter(Ricerca));
 
 
 
