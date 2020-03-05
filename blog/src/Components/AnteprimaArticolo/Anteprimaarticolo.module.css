@@ -6,6 +6,7 @@
     border: 1px solid #d3d3d3;
     margin-bottom: 10px;
     height: 175px;
+    display:block;
 }
 
 
@@ -29,9 +30,9 @@
 }
 
 .Testo{
-    font-size: medium;
+    font-size: 15px;
     font-family: auto;
-    height: 105px;
+    height: 50px;
     width: 40%;
     margin-top: 1%;
     word-wrap: break-word;
@@ -82,6 +83,11 @@
     cursor: pointer;
 }
 
+
+.Actions{
+
+    margin:auto;
+}
 
 /* media quesry scroll text
 

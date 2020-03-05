@@ -1,0 +1,41 @@
+
+.ActionBar{
+    height:10%;
+    width:99%;
+    background-color: white;
+    display: flex;
+    padding:3px;
+    border:1px solid black;
+    vertical-align: middle;
+    font-size:110%;
+    position: relative;
+    bottom:0;
+}
+
+
+.Like{
+    cursor: pointer;
+    float:left;
+    margin-left: 20px;
+}
+
+.Comments{
+    cursor: pointer;
+    float:left;
+    margin-left: 25px; 
+}
+
+.More{
+    cursor: pointer;
+    float:right;
+}
+
+.MoreDiv{
+    float:right;
+    width:40%;
+    margin:auto;
+}
+.Actions{
+    float:left;
+    width:50%;
+}
