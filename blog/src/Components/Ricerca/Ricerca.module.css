@@ -13,12 +13,12 @@
       outline:none;
       padding:2px;
       margin-right:0;
-      border-bottom: 0.5px solid whitesmoke;
+      border-bottom: 0.5px solid #F0E7E7;
   }
 
   .Ricerca input[type = text]:focus{
  
-    border-bottom: 0.5px solid #cacaca;
+    border-bottom: 0.5px solid #D2CACA;
 }
 
 
@@ -46,5 +46,5 @@
 
 
   .CercaButton:hover{
-     color: rgb(73, 68, 68);
+     color: #787373;
   }

@@ -10,7 +10,6 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import Dante from 'Dante2';
 
 
-
 class NuovoArticolo extends Component{
 
 state = {

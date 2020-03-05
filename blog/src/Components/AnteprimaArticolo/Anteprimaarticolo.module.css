@@ -3,7 +3,7 @@
     margin:auto;
     background-color: white;
     padding:5px;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #D2CACA;
     margin-bottom: 10px;
     height: 25%;
     display:block;
@@ -45,7 +45,7 @@
     margin-top: 0;
     margin-left: 0;
     margin-bottom: 10px;
-    color:grey;
+    color:#969090;
 }
 
 
@@ -64,7 +64,7 @@
     margin-left: 1px;
     width: 40%;
     height:20px;
-    border-bottom: 0.5px solid grey;
+    border-bottom: 0.3px solid #B4ADAD;
     margin-bottom:10px;
     font-weight: bold;
 }

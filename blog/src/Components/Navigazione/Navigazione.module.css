@@ -14,7 +14,7 @@
 .BarraNavigazione a{
     margin-right:10px;
     text-decoration: none;   
-    color:black;
+    color:#1E1D1D;
 }
 
 .BarraNavigazione i{
@@ -23,7 +23,7 @@
 
 .BarraNavigazione a:hover, .LoginButton:hover{
     font-weight: bold;
-    color: rgb(77, 72, 72);
+    color: #787373;
 }
 
 .Link{
@@ -55,7 +55,7 @@
 }
 
  .LinkAttivo i{
-   color: #5d5d79; 
+   color: #787373; 
 }
 
 .Ricerca{

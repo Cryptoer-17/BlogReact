@@ -14,13 +14,13 @@ overflow-y: auto;
 }
 
 .Titolo{
-    color: rgba(0, 0, 0, 0.84);
+    color: #3C3A3A;
     font-size:50px;
 }
 
 
 .TornaSuButton{
-    background: dimgray;
+    background: #969090;
     cursor: pointer;
     position: relative;
     bottom:5px;
@@ -38,5 +38,5 @@ overflow-y: auto;
     margin-bottom:10px;
 }
 .TornaSuButton i {
-    font-size:25px;
+    font-size:20px;
 }

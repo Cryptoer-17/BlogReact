@@ -16,7 +16,7 @@
     padding:5px;
     border:none;
     background-color: transparent;
-    border-bottom: 0.5px solid  rgba(0,0,0,.84);
+    border-bottom: 0.5px solid  #969090;
 }
 
 
@@ -27,7 +27,7 @@
     padding:10px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid #B4ADAD;
     margin-top: 10px;
     margin-bottom:30px;
     font-size:20px;
@@ -37,18 +37,14 @@
 }
 
 .Input:focus{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #3C3A3A;
 }
 
 .PubblicaButton:hover, .CaricaImgButton:hover{
-    background-color: lightgray; 
+    background-color: #D2CACA; 
 }
 
 
-.PubblicaButton:disabled{
-    cursor:not-allowed;
-    background-color: lightgray; 
-}
 
 
 .InputTags {
@@ -69,7 +65,7 @@
     padding:5px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid #B4ADAD;
     display:block;
     font-family: inherit;
     cursor:pointer;
@@ -97,7 +93,7 @@
     height:20%;
     margin: 10px 5px 10px 5px;
     box-shadow: 1px 2px rgb(177, 164, 164);
-    border: 1px solid  rgb(22, 22, 22);
+    border: 1px solid  #3C3A3A;
     border-radius: 4px;
 }
 
@@ -113,7 +109,7 @@
    height:800px;
    outline:none;
    border-radius: 2px;
-   border: 0.5px solid grey;
+   border: 0.5px solid #969090;
    background-color: white;
    overflow-y: auto;
    font-family: inherit;
