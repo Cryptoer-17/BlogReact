@@ -14,7 +14,7 @@
 
 
 .Img{
-    border: 2px solid orange;
+    border: 2px solid black;
     width: 90%;
 }
 
@@ -37,4 +37,15 @@
 .Icon{
     width:6%;
     cursor: pointer;
+}
+
+.Tag{
+    width: 10%;
+    float: left;
+    font: message-box;
+    border: 0.5px solid slategray;
+}
+
+.TagConteiner{
+    margin-left: 20px;
 }
