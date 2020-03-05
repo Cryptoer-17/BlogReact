@@ -36,12 +36,8 @@
 
 
 .Tag{
-    width: 10%;
     float: left;
-    font: message-box;
-    margin-right: 5px;
-    border: 1.2px solid slategray;
-    background-color: papayawhip;
+    margin-bottom: 10px;
 }
 
 .TagConteiner{
