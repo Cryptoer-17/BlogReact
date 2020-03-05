@@ -4,7 +4,7 @@ import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArtic
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
-
+import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
 
 class Homepage extends Component{
 
@@ -73,9 +73,8 @@ return(
       <div className={classes.ContainerArticoli} >
       {articoli ? articoliVisualizzati : null}
       </div>
-
-      <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
-
+      
+   <ScrollTopButton/>
   
 </div>
 

@@ -1,0 +1,21 @@
+.TornaSuButton{
+    background: #969090;
+    cursor: pointer;
+    position: relative;
+    bottom:5px;
+    width:50px;
+    height:35px;
+    border:none;
+    padding:1px;
+    outline: none;
+    text-align: center;
+    font-size-adjust: inherit;
+    margin:auto;
+    border-radius: 2px;
+    display:grid;
+    font-family: inherit;
+    margin-bottom:10px;
+}
+.TornaSuButton i {
+    font-size:20px;
+}
