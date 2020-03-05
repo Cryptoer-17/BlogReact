@@ -52,7 +52,6 @@ let articoli = [];
         articoli= state.articoli.filter(art => art.articolo.categoria === state.cerca);
     }
 
-   
     return updateObject( state, { risultatiRicerca: articoli} );
 
 }

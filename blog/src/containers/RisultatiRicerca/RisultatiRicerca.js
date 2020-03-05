@@ -9,7 +9,7 @@ import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArtic
 class RisultatiRicerca extends Component{
 
     state = {
-        cerca:"",
+        cerca:null,
         classeCat :null,
         classeTag : null,
     }
@@ -42,7 +42,7 @@ componentDidUpdate(prevState){
 
     render(){
 
-        const {classeCat, classeTag} = this.state;
+        const {classeCat, classeTag,cerca} = this.state;
         const {risultati} = this.props;
      
 
@@ -50,10 +50,8 @@ componentDidUpdate(prevState){
         return(
             <div className = {classes.RisultatiRicerca}>
               <div>  
-               {/* <input  autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""  onKeyPress={ event => { if(event.key === 'Enter'){ this.searchArticlesHandler(this.state.cerca)} } } onChange={( event ) => {this.setState( { cerca: event.target.value } );
-                 setTimeout(() => {this.searchArticlesHandler(this.state.cerca)}, 500);  } }  /> */}
+         
               </div>
-
               <div className = {classes.OpzioniRicerca}>
                 Filtra per <br/>
                 <p  id = "filtroCategoria" className = {classeCat}  onClick = {this.displayCategoryResultsHandler}>Categoria</p> | <p  id = "filtroTag" className = {classeTag} onClick = {this.displayTagResultsHandler}>Tag</p>
@@ -63,7 +61,7 @@ componentDidUpdate(prevState){
                <div>
                 <ul className = {classes.ContainerRisultati}>
 
-                {risultati ? 
+                {risultati.length > 0  ? 
                 
                     risultati.map( art =>
 
@@ -82,7 +80,7 @@ componentDidUpdate(prevState){
 
                
                 
-                : null }
+                : cerca !== null ? "Nessun risultato." : null }
              
                 </ul>
                </div>
