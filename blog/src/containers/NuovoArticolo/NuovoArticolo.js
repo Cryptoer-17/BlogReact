@@ -120,6 +120,7 @@ deleteTagHandler = (tag) =>{
     this.props.onPostArticolo(articolo);
     this.showModal();
     if(!this.props.loading)
+    setTimeout(() => this.props.onInitArticoli() , 1000)  
     setTimeout(() => this.props.history.push("/") , 2000)  
 
 }
@@ -167,12 +168,6 @@ return(
 <h2>Nuovo articolo</h2>
 
  
-
-
-
-
-
-
 
 {formData.map(el =>
         <Input 
@@ -248,7 +243,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-    onPostArticolo: (articolo) => dispatch(actions.postArticolo(articolo))
+    onPostArticolo: (articolo) => dispatch(actions.postArticolo(articolo)),
+    onInitArticoli: () => dispatch(actions.initArticoli())
     };
   };
 

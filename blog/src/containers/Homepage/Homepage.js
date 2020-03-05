@@ -46,6 +46,7 @@ render(){
 
 
  const articolo = newarticolo.map((art) =>{
+    console.log(art)
    return (<Anteprimaarticolo 
       id={art.key} 
       autore={art.articolo.autore}

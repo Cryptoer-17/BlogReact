@@ -7,7 +7,7 @@ import ActionBar from '../ActionBar/ActionBar';
 
 
 
-class AnteprimaArticle extends Component{
+class AnteprimaArticolo extends Component{
    
     render(){
 
@@ -73,6 +73,5 @@ class AnteprimaArticle extends Component{
 } 
 
 
-export default AnteprimaArticle;
+export default AnteprimaArticolo;
 
-//         <FaHeart className={classes.Icon} style={{color : colore}} onClick={this.props.clickHeart} />
