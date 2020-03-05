@@ -9,45 +9,12 @@ import * as actionArticolo from '../../store/actions/index';
 import {connect} from 'react-redux';
 
 class AnteprimaArticle extends Component{
-    state={
-        loading : false,
-    }
-
-    
-
-    
-    clickHeartHandler(){
-       
-        const anteprima = {
-            autore : this.props.autore,
-            categoria : this.props.categoria,
-            descrizione : this.props.descrizione,
-            img : this.props.img,
-            like: !this.props.like,
-            sottotitolo : this.props.sottotitolo,
-            testo : this.props.testo,
-            titolo : this.props.titolo
-        } 
-           
-        const id= this.props.id;
-        
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-
-    }
-
-
+   
     render(){
-
-        
-
 
     let colore = 'black';  
     let variabile ; 
 
-   
-    
    
         console.log(this.props.titolo);
 
@@ -82,15 +49,11 @@ class AnteprimaArticle extends Component{
             </div></NavLink>
            
 
-         <FaHeart className={classes.Icon} style={{color : colore}} onClick={() => this.clickHeartHandler()} />
+         <FaHeart className={classes.Icon} style={{color : colore}} onClick={this.props.clickHeart} />
           
         </div>
     
-
-    
-    if(this.state.loading){
-        variabile= <Spinner />;
-    }
+  
 
     return(
         <div>
