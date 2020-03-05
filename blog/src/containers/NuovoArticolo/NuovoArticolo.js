@@ -154,10 +154,14 @@ checkValidityOfInput = (event, id) =>{
 
 render(){
 
+    const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
+    const {loading, esito} = this.props;
+ 
+
    
     const formData = [];
-    for(let key in this.state.form){
-        formData.push( {id: key , obj: this.state.form[key] });
+    for(let key in  form){
+        formData.push( {id: key , obj:  form[key] });
     };
     
     
@@ -189,14 +193,14 @@ return(
     </div>
 
 
-<input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
+<input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
     onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
 
 
 <div className = {classes.InputTags}>
-    {this.state.tagsList}
-    {this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
+    { tagsList}
+    { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
 </div>
 
 <br/>
@@ -206,20 +210,20 @@ return(
     <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
     <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
-    {this.state.anteprimaImg ? this.state.anteprimaImg : null}
+    { anteprimaImg ?  anteprimaImg : null}
 </div>
 
 <hr/>
-{this.state.esitoCaricamento}
+
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true } >Pubblica</button>           
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = {  isFormValid ? false : true } > Pubblica </button>           
  
 
- <Modal  show = {this.state.show}  modalClosed = {  this.hideModal } >
-         {this.props.loading ? 
+ <Modal  show = {show}  modalClosed = {  this.hideModal } >
+         {loading ? 
          <Spinner/>
-        : this.props.esito }
+        : esito }
     </Modal>
   
 
