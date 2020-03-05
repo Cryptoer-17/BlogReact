@@ -18,7 +18,7 @@ class Articolo extends Component{
         .then(response =>{
           this.setState({articolo : response.data})
           this.setState({loading:false})
-           // console.log(this.state.articolo.titolo);
+
         })
         .catch(error => {
        
