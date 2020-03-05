@@ -4,6 +4,8 @@ import axios from 'axios';
 import { FaHeart } from "react-icons/fa";
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../../Components/Autore/Autore';
+import ActionBar from '../ActionBar/ActionBar';
+
 
 class Articolo extends Component{
     state={
@@ -92,7 +94,7 @@ class Articolo extends Component{
                <p>{this.state.articolo.titolo}</p>
             
             <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} -</p>  <Autore name={this.state.articolo.autore}/>
+            <p>{this.state.articolo.sottotitolo} </p><Autore name={this.state.articolo.autore}/>
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />
@@ -102,11 +104,9 @@ class Articolo extends Component{
             </div>
             <div className={classes.TagConteiner}>
                {tags} 
-            </div>
-               
-            <div className={classes.Icon}>
-                <FaHeart style={{color: colore, marginTop : '100%'}} onClick={() => this.clickHeartHandler()}/>
-            </div>
+            </div>          
+                <ActionBar className={classes.Action} color={colore} onClick={() => this.clickHeartHandler()}/>
+                {/** <FaHeart style={{color: colore, marginTop : '100%'}} />*/}
         </div>
         }
 
