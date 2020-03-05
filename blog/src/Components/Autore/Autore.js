@@ -2,7 +2,8 @@ import React from 'react';
 import classes from './Autore.module.css';
 
 const Autore = (props) =>{
-    return(
+    return( 
+
         <div className ={classes.Autore}>
         
       {props.img ? props.img :   <i className="material-icons" >account_circle</i>}

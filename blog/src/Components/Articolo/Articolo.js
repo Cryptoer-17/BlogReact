@@ -3,6 +3,7 @@ import classes from './Articolo.module.css';
 import axios from 'axios';
 import { FaHeart } from "react-icons/fa";
 import Spinner from '../UI/Spinner/Spinner';
+import Autore from '../../Components/Autore/Autore';
 
 class Articolo extends Component{
     state={
@@ -59,27 +60,11 @@ class Articolo extends Component{
 
 
     render(){
-       
-        
-        
-
-      /*  if(this.state.articolo.tags !== null){
-            const newtags = [ ...this.state.articolo.tags];
-             tags = newtags.map((tag,index) =>{
-                return (
-                    <div className={classes.Tag} key={index}>
-                        {tag}
-                    </div>
-                );
-                })
-            }*/
-
-
-        
-
-
+         
         let variabile; 
         let colore = 'black';
+    
+
         let tags;
         if(this.state.articolo!==null){
 
@@ -106,7 +91,7 @@ class Articolo extends Component{
                <p>{this.state.articolo.titolo}</p>
             
             <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} - {this.state.articolo.autore}</p>
+            <p>{this.state.articolo.sottotitolo} -</p>  <Autore name={this.state.articolo.autore}/>
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={this.state.articolo.img} alt="" />

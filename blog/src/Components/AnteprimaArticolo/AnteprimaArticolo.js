@@ -12,10 +12,16 @@ class AnteprimaArticle extends Component{
    
     render(){
 
+
+    
     let colore = 'black';  
     let variabile ; 
+    const {autore} = this.props; 
+    const {titolo} = this.props;
+    const {sottotitolo} =this.props;
+    const {img} = this.props;
+    const {descrizione} = this.props;
 
-   
         console.log(this.props.titolo);
 
         if(this.props.like){
@@ -29,23 +35,23 @@ class AnteprimaArticle extends Component{
 
         variabile =  <div className={classes.Anteprimaarticolo}>
            
-           <div className={classes.Autore}> <Autore name = {this.props.autore}  /> </div>
+           <div className={classes.Autore}> <Autore name ={autore}  /> </div>
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
                 color : 'black'
             }}>
             <div className={classes.Titolo}>
-            <p>{this.props.titolo}</p>
+            <p>{titolo}</p>
             </div>
             <div className={classes.Sottotitolo}>
        
-            <p>{this.props.sottotitolo} </p> 
+            <p>{sottotitolo} </p> 
             </div>
             <div className={classes.Imgdiv}>
-                <img className={classes.Img} src={this.props.img} alt="" />
+                <img className={classes.Img} src={img} alt="" />
             </div>
             <div className={classes.Testo}>
-            <p>{this.props.descrizione}</p>
+            <p>{descrizione}</p>
             </div></NavLink>
            
             <ActionBar className = {classes.Actions}/>
