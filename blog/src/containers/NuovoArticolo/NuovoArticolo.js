@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-import Dante from 'Dante2';
+import Editor from 'Dante2';
 
 
 class NuovoArticolo extends Component{
@@ -59,9 +59,11 @@ state = {
             type: "text",
             value:"",
             touched:false,
-            valid:true,
+            valid:false,
+            validation:{
+                required:true},
             config:{
-            placeholder: "Categoria"}
+            placeholder: "Categoria *"}
         },
     },
     tagInput:"",
@@ -182,7 +184,7 @@ return(
         ) }
 
 <div  className = {classes.editor}>
-    <Dante body_placeholder ={'Scrivi qualcosa'}  /> 
+    <Editor body_placeholder ={'Scrivi qualcosa'}  /> 
 
     </div>
 

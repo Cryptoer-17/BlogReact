@@ -26,6 +26,7 @@ const Navigazione = () =>{
 
     return(
         <nav className ={classes.BarraNavigazione}>
+           <p className = {classes.Titolo}>Blog</p> 
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>
