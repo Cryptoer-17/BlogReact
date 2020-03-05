@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
-import axios from '../../utility/axios';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-import * as actionArticoli from '../../store/actions/index';
 import {connect} from 'react-redux';
 
 
@@ -15,35 +13,26 @@ class Homepage extends Component{
 
 render(){
 
-   let variabile; 
+   let articoli = <Spinner/>; 
 
    
   
   
-  const newarticolo = {
-      ...this.props.arti
-     
-  };
+  const newarticolo = [ ...this.props.arti];
 
 
-
-console.log(this.props.arti.map(a => a.articolo))
-   
- const articolo = Object.keys(newarticolo)
-   .map((index) =>{
-   console.log(newarticolo[index].key);
+ const articolo = newarticolo.map((art,index) =>{
    return (<Anteprimaarticolo 
-      id={newarticolo[index].key} 
-      autore={newarticolo[index].articolo.autore}
-      categoria = {newarticolo[index].articolo.categoria}
-      descrizione = {newarticolo[index].articolo.descrizione}
-      img = {newarticolo[index].articolo.img}
-      like = {newarticolo[index].articolo.like}
-      sottotitolo = {newarticolo[index].articolo.sottotitolo}
-      testo = {newarticolo[index].articolo.testo}
-      titolo = {newarticolo[index].articolo.titolo}
-
-      key={newarticolo[index].key}/>);
+      id={art.key} 
+      autore={art.articolo.autore}
+      categoria = {art.articolo.categoria}
+      descrizione = {art.articolo.descrizione}
+      img = {art.articolo.img}
+      like = {art.articolo.like}
+      sottotitolo = {art.articolo.sottotitolo}
+      testo = {art.articolo.testo}
+      titolo = {art.articolo.titolo}
+      key={art.key}/>);
    })
   
   

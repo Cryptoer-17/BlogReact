@@ -16,10 +16,6 @@ class AnteprimaArticle extends Component{
 
     
 
-    componentDidMount(){
-
-    }
-
     
     clickHeartHandler(){
        
