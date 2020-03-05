@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
 import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
-import axios from '../../utility/axios';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-import * as actionArticoli from '../../store/actions/index';
 import {connect} from 'react-redux';
 
 
@@ -27,7 +25,6 @@ render(){
 
 
 
-console.log(this.props.arti.map(a => a.articolo))
    
  const articolo = Object.keys(newarticolo)
    .map((igKey) =>{
