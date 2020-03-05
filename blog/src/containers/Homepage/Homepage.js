@@ -21,12 +21,10 @@ class Homepage extends Component{
           testo : art.articolo.testo,
           titolo : art.articolo.titolo
       } 
-      console.log(art.id)
       const id = art.key;
       
       axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
       .then(response => {
-         console.log(response)
          this.props.mount();
       })
       .catch(error => console.log(error));

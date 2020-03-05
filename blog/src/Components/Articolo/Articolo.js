@@ -24,7 +24,7 @@ class Articolo extends Component{
 
           this.setState({articolo : response.data})
           this.setState({loading:false})
-        console.log(this.state.articolo);
+ 
         })
         .catch(error => {
        
@@ -50,10 +50,9 @@ class Articolo extends Component{
         this.setState({
             articolo : anteprima
         })
-        console.log(anteprima);
-        
+         
         const id= this.props.match.params.id;
-        console.log(this.props.match.params.id);
+
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
         .then(response => console.log(response))
         .catch(error => console.log(error));
