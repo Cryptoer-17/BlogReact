@@ -7,29 +7,12 @@ class RisultatiRicerca extends Component{
 
     state = {
         cerca:"",
-        articoli:[
-        {
-            titolo: "art1",
-            categoria: 'test',
-            tags:['prova','react']
-        },
-        {
-            titolo: "art2",
-            categoria: 'test',
-            tags:['ciao','react']
-        },
-        {
-            titolo: "art3",
-            categoria: 'prova',
-            tags:['ciao','react']
-        }
-        ],
         classeCat :null,
         classeTag : null,
     }
 
 componentDidMount(){
-
+this.displayCategoryResultsHandler();
 }
 
 /*
@@ -81,7 +64,7 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
                 <hr  className = {classes.Divisore} />
               </div>
 
-               <div >
+               <div>
                 <ul className = {classes.ContainerRisultati}>
 
                 {this.props.risultati ? this.props.risultati : null }

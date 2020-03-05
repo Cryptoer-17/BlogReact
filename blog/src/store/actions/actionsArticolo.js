@@ -18,7 +18,7 @@ export const initArticoli = () =>{
         axios.get('/articoli.json')
         .then(response =>{   
           for(let key in response.data){
-            temparray.push(key);
+            temparray.push({articolo: response.data[key], key: key })
             
         };   
         
