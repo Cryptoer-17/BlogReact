@@ -102,3 +102,20 @@
 }
 
 
+.editor{
+
+   margin:auto;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   padding:10px;
+   resize:none;
+   width:100%;
+   height:800px;
+   outline:none;
+   border-radius: 2px;
+   border: 0.5px solid grey;
+   background-color: white;
+   overflow-y: auto;
+   font-family: inherit;
+   font-size: 15px;
+}

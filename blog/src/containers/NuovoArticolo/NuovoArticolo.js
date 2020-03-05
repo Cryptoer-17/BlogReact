@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-
+import Dante from 'Dante2';
 
 
 
@@ -167,6 +167,13 @@ return(
 <h2>Nuovo articolo</h2>
 
  
+
+
+
+
+
+
+
 {formData.map(el =>
         <Input 
         value = {el.obj.value}
@@ -179,6 +186,11 @@ return(
         shouldValidate = {el.obj.validation}
         />
         ) }
+
+<div  className = {classes.editor}>
+    <Dante body_placeholder ={'Scrivi qualcosa'}  /> 
+
+    </div>
 
 
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
@@ -207,7 +219,6 @@ return(
 
   <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true } >Pubblica</button>           
  
-
 
  <Modal  show = {this.state.show}  modalClosed = {  this.hideModal } >
          {this.props.loading ? 
