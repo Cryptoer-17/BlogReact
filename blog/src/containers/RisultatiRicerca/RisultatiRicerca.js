@@ -43,7 +43,7 @@ componentDidUpdate(prevState){
     render(){
 
         const {classeCat, classeTag} = this.state;
-        const {risultati, cerca} = this.props;
+        const {risultati} = this.props;
      
 
        

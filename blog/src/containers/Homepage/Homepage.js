@@ -4,7 +4,7 @@ import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArtic
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import ActionBar from '../../Components/ActionBar/ActionBar';
+
 
 class Homepage extends Component{
 
@@ -47,7 +47,7 @@ render(){
   const newarticolo = [ ...this.props.arti];
 
 
- const articolo = newarticolo.map((art,index) =>{
+ const articolo = newarticolo.map((art) =>{
    return (<Anteprimaarticolo 
       id={art.key} 
       autore={art.articolo.autore}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Articolo.module.css';
 import axios from 'axios';
-import { FaHeart } from "react-icons/fa";
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../../Components/Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
