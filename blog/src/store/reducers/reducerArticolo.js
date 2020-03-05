@@ -41,17 +41,18 @@ const ricercaArticoli = (state,action) =>{
 let articoli = [];
 
     if(action.filtro === "tag"){
-        articoli= state.articoli.filter(art =>  art.tags.indexOf(state.cerca)>= 0);
+        articoli= state.articoli.filter(art => {return  art.articolo.tags ?
+             art.articolo.tags.indexOf(state.cerca) >= 0
+             : null
+            }
+        );
     }
 
     if(action.filtro === "categoria"){
-        articoli= state.articoli.filter(art => art.categoria === state.cerca);
+        articoli= state.articoli.filter(art => art.articolo.categoria === state.cerca);
     }
 
-    if (articoli.length === 0){
-        articoli = "Nessun risultato.";
-    }
-
+   
     return updateObject( state, { risultatiRicerca: articoli} );
 
 }
@@ -69,10 +70,6 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.SET_ARTICOLI : return setArticoli(state,action);
         case actionTypes.RICERCA_ARTICOLI : return ricercaArticoli(state,action);
         case actionTypes.START_RICERCA : return startRicerca(state,action);
-    /*    return{
-            ...state,
-            articoli : action.articoli
-        }*/
         default: return state;
     }
 }

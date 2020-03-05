@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import classes from './RisultatiRicerca.module.css';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+
 
 class RisultatiRicerca extends Component{
 
@@ -14,26 +16,6 @@ class RisultatiRicerca extends Component{
 componentDidMount(){
 this.displayCategoryResultsHandler();
 }
-
-/*
-searchArticlesHandler = (cerca) =>{
-    let risultatiCat = [];
-    risultatiCat= this.state.articoli.filter(art => art.categoria === cerca);
-    risultatiCat = risultatiCat.map(r => <li key = {r.titolo}> {r.titolo} </li>);
-    if (risultatiCat.length === 0){
-        risultatiCat = "Nessun risultato.";
-    }
-
-    let risultatiTag = [];
-    risultatiTag = this.state.articoli.filter(art =>  art.tags.indexOf(cerca)>= 0);
-    risultatiTag = risultatiTag.map(r => <li key = {r.titolo}> {r.titolo} </li>);
-    if (risultatiTag.length === 0){
-        risultatiTag = "Nessun risultato.";
-    }
-this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
-
-}
-*/
 
 
  displayCategoryResultsHandler = () =>{
@@ -67,7 +49,30 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
                <div>
                 <ul className = {classes.ContainerRisultati}>
 
-                {this.props.risultati ? this.props.risultati : null }
+                {this.props.risultati ? 
+                
+                this.props.risultati.map( art =>
+
+                    <AnteprimaArticolo 
+                    id={art.key} 
+                    autore={art.articolo.autore}
+                    categoria = {art.articolo.categoria}
+                    descrizione = {art.articolo.descrizione}
+                    img = {art.articolo.img}
+                    like = {art.articolo.like}
+                    sottotitolo = {art.articolo.sottotitolo}
+                    testo = {art.articolo.testo}
+                    titolo = {art.articolo.titolo}
+                    key={art.key}/>
+                              
+                )
+
+               
+                
+                
+                
+                
+                : null }
              
                 </ul>
                </div>
