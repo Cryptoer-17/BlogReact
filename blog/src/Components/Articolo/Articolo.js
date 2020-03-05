@@ -16,9 +16,13 @@ class Articolo extends Component{
         this.setState({loading : true})
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
         .then(response =>{
+            if (typeof response.data.tags === 'undefined'){
+                response.data.tags = [];
+            }
+
           this.setState({articolo : response.data})
           this.setState({loading:false})
-
+        console.log(this.state.articolo);
         })
         .catch(error => {
        
@@ -56,9 +60,19 @@ class Articolo extends Component{
 
     render(){
        
+        
+        
 
-       
-
+      /*  if(this.state.articolo.tags !== null){
+            const newtags = [ ...this.state.articolo.tags];
+             tags = newtags.map((tag,index) =>{
+                return (
+                    <div className={classes.Tag} key={index}>
+                        {tag}
+                    </div>
+                );
+                })
+            }*/
 
 
         
@@ -66,19 +80,23 @@ class Articolo extends Component{
 
         let variabile; 
         let colore = 'black';
-
+        let tags;
         if(this.state.articolo!==null){
 
-        const newtags = [ ...this.state.articolo.tags];
-        const tags = newtags.map((tag,index) =>{
-            return (
-                <div className={classes.Tag} key={index}>
-                    {tag}
-                </div>
-            );
-            })
-
-
+        
+            if(this.state.articolo.tags.length){
+                const newtags = [ ...this.state.articolo.tags];
+                tags = newtags.map((tag,index) =>{
+                   return (
+                       <div className={classes.Tag} key={index}>
+                           {tag}
+                       </div>
+                   );
+                   })
+            }
+    
+               
+       
 
             if(this.state.articolo.like){
                 colore = 'red';
@@ -97,7 +115,7 @@ class Articolo extends Component{
             <p>{this.state.articolo.testo}</p>
             </div>
             <div className={classes.TagConteiner}>
-                {tags}
+               {tags} 
             </div>
                
             <div className={classes.Icon}>
