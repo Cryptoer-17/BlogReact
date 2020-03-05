@@ -27,9 +27,20 @@ render(){
 
    
  const articolo = Object.keys(newarticolo)
-   .map((igKey) =>{
-  
-   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
+   .map((index) =>{
+   console.log(newarticolo[index].key);
+   return (<Anteprimaarticolo 
+      id={newarticolo[index].key} 
+      autore={newarticolo[index].articolo.autore}
+      categoria = {newarticolo[index].articolo.categoria}
+      descrizione = {newarticolo[index].articolo.descrizione}
+      img = {newarticolo[index].articolo.img}
+      like = {newarticolo[index].articolo.like}
+      sottotitolo = {newarticolo[index].articolo.sottotitolo}
+      testo = {newarticolo[index].articolo.testo}
+      titolo = {newarticolo[index].articolo.titolo}
+
+      key={newarticolo[index].key}/>);
    })
   
   
