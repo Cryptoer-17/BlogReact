@@ -47,12 +47,12 @@ render(){
  
    let errorMessage = null;
    
-   if(typeof this.props.error === 'undefined'){
+   // if(typeof this.props.error === 'undefined'){
    
-     errorMessage = <div>
-        <h2>errore nel caricamento dati</h2>
-     </div>
-   }
+   //   errorMessage = <div>
+   //      <h2>errore nel caricamento dati</h2>
+   //   </div>
+   // }
 
  
   

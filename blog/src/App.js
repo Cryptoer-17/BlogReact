@@ -19,11 +19,7 @@ componentDidMount(){
 
   render(){
    
-    
-    let errorMessage;
-            if(typeof this.props.error === 'undefined'){
-              errorMessage = 'errore';
-            }
+   
   
     
   return (
@@ -32,7 +28,7 @@ componentDidMount(){
          <Navigazione/>
           <Switch>
            
-            <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} mount={() => this.componentDidMount()}/>)} /> 
+            <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
             <Route path="/articolo/:id" component ={Articolo} />
