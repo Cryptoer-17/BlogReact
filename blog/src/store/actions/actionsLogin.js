@@ -103,7 +103,6 @@ export const googleAuthSuccess = (user) =>{
         type:actionTypes.GOOGLE_AUTH_SUCCESS,
         user:user
         };
-    
 }
 
 

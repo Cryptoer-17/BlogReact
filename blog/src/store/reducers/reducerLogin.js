@@ -5,7 +5,8 @@ const initialState = {
     token: null,
     userId: null,
     error:null,
-    loading:null
+    loading:null,
+    user:null
 }
 
 const loginStart = (state) =>{
@@ -43,6 +44,16 @@ const signUpSuccess = (state,action) =>{
     
 }
 
+
+export const googleAuthFail= (state,action) =>{
+    console.log(action.error)
+}
+
+export const googleAuthSuccess = (state,action) =>{
+    return updateObject( state, { user:action.user } );
+}
+
+
 const reducer = (state = initialState,action) => {
 
     switch(action.type){
@@ -53,6 +64,8 @@ const reducer = (state = initialState,action) => {
         case actionTypes.SIGN_UP_START: return signUpStart(state,action);  
         case actionTypes.SIGN_UP_SUCCESS: return signUpSuccess(state,action);  
         case actionTypes.SIGN_UP_FAIL: return signUpFail(state,action);  
+        case actionTypes.GOOGLE_AUTH_SUCCESS: return googleAuthSuccess(state,action);  
+        case actionTypes.GOOGLE_AUTH_FAIL: return googleAuthFail(state,action);  
         default: return state;
 
     }
