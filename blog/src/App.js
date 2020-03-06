@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';

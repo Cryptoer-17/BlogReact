@@ -36,7 +36,6 @@ export const initArticoli = () =>{
           dispatch(setArticoliSuccess(temparray));
         })
         .catch(err => { 
-            console.log("entrato");
             dispatch(setArticoliFail(err.response.data.error));      
         });
     };

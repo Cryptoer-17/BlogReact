@@ -47,9 +47,8 @@ render(){
    let errorMessage = null;
    if(typeof this.props.errore === 'undefined'){
    
-     errorMessage = <div>
-        <h2>errore nel caricamento dati</h2>
-     </div>
+     errorMessage =  <h3>Errore nel caricamento dati.</h3>;
+ 
    }
 
  
@@ -80,7 +79,7 @@ return(
 
 
       {spinner}
-      {errorMessage}
+      {errorMessage ? errorMessage : null}
       <div className={classes.ContainerArticoli} >
          {
          articoli ?
