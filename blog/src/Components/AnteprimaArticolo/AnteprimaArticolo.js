@@ -14,16 +14,10 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore} = this.props; 
-    const {titolo} = this.props;
-    const {sottotitolo} =this.props;
-    const {img} = this.props;
-    const {descrizione} = this.props;
-    const {clickHeart} = this.props;
+    const {autore, titolo, sottotitolo, img,descrizione,clickHeart} = this.props; 
 
 
         if(this.props.like){
-        
             colore = 'red';
         }
 
@@ -54,8 +48,6 @@ class AnteprimaArticolo extends Component{
            
          <ActionBar className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
-
-
         </div>
     
   
@@ -65,13 +57,8 @@ class AnteprimaArticolo extends Component{
             {variabile}
         </div>
     );
-
-
-    }
-
-
+}
 } 
-
 
 export default AnteprimaArticolo;
 
