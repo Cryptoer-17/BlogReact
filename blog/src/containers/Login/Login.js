@@ -102,7 +102,7 @@ for (let key in newForm) {
 
 submitHandler = (event) =>{
     event.preventDefault();
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value);
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, this.state.isSignup);
 }
 
 
@@ -113,55 +113,57 @@ const {loginForm, isFormValid} = this.state;
 const formData = [];
 
 
-
-
-for(let key in this.state.loginForm){
-    formData.push( {id: key , obj: loginForm[key] });
-};
-
-
-let form = formData.map(el =>
-    <Input 
-    show = {this.props.show}
-    value = {el.obj.value}
-    key = {el.id}
-    type = {el.obj.type}
-    config = {el.obj.config}
-    touched = { el.obj.touched}
-    valid = { el.obj.valid}
-    changed = {(e) => this.checkValidityOfInput(e, el.id)}
-    shouldValidate = {el.obj.validation}
-    />
-    )
-
-    if(this.props.loading){
-        form = <Spinner />
-    }
-
-return(
-
-<Modal show = {show}  modalClosed = {  hideModal }>
-<div className = {classes.Login}>
-<h3>Login</h3>
-
-<form onSubmit={this.submitHandler}>
+if(!this.props.isAuthenticated){
+    for(let key in this.state.loginForm){
+        formData.push( {id: key , obj: loginForm[key] });
+    };
     
-  {form}  
-<div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.handlerClick}  disabled = { !isFormValid} > Accedi</button>
-    <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); }}> Accedi con Google</button>
-</div>
- <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
-
-
     
-</form>
+    let form = formData.map(el =>
+        <Input 
+        show = {this.props.show}
+        value = {el.obj.value}
+        key = {el.id}
+        type = {el.obj.type}
+        config = {el.obj.config}
+        touched = { el.obj.touched}
+        valid = { el.obj.valid}
+        changed = {(e) => this.checkValidityOfInput(e, el.id)}
+        shouldValidate = {el.obj.validation}
+        />
+        )
+    
+        if(this.props.loading){
+            form = <Spinner />
+        }
+    
+    return(
+    
+    <Modal show = {show}  modalClosed = {  hideModal }>
+    <div className = {classes.Login}>
+    <h3>Login</h3>
+    
+    <form onSubmit={this.submitHandler}>
+        
+      {form}  
+    <div className = {classes.ButtonContainer}>
+        <button className = {classes.AccediButton} onClick = {this.handlerClick}  disabled = { !isFormValid} > Accedi</button>
+        <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); }}> Accedi con Google</button>
+    </div>
+     <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
+    
+    
+        
+    </form>
+    
+    </div>
+    
+    </Modal>
+    
+    );
+}else return null;
 
-</div>
 
-</Modal>
-
-);
 }
 }
 
