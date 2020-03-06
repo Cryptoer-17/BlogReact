@@ -112,9 +112,13 @@ const {loginForm, isFormValid} = this.state;
 
 const formData = [];
 
+
+
+
 for(let key in this.state.loginForm){
     formData.push( {id: key , obj: loginForm[key] });
 };
+
 
 let form = formData.map(el =>
     <Input 
