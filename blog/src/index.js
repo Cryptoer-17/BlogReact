@@ -9,6 +9,7 @@ import {createStore, applyMiddleware,compose, combineReducers} from 'redux';
 import reducerArticolo from './store/reducers/reducerArticolo';
 import reducerLogin from './store/reducers/reducerLogin';
 
+
 const composeEnhancers = process.env.NODE_ENV === 'development' ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :null|| compose;
 
 const rootReducer = combineReducers(
@@ -19,6 +20,7 @@ const rootReducer = combineReducers(
 );
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
+
 const app = (
     <Provider store = {store}>
     <App/>
@@ -28,3 +30,4 @@ const app = (
 ReactDOM.render(app, document.getElementById('root'));
 
 serviceWorker.unregister();
+

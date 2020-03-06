@@ -8,6 +8,7 @@ export {
 export {
 login,
 logout,
-signUp
+signUp,
+googleAuth
 }from './actionsLogin';
 

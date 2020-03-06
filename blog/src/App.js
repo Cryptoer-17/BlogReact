@@ -31,7 +31,6 @@ componentDidMount(){
             <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
-            <Route path="/login" render={() =>(<Login show={true} />)} />
             <Route path="/articolo/:id" component ={Articolo} />
            </Switch>
          </BrowserRouter>

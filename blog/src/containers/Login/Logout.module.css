@@ -1,0 +1,29 @@
+.Logout{
+    width:50%;
+    margin:auto;
+    display:grid;
+}
+
+.LogoutButton{
+    width:100px;
+    height:50px;
+    outline:none;
+    padding:5px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #B4ADAD;
+    font-size:17px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor:pointer;
+    margin:auto;
+}
+
+.UserImg{
+    height:100px;
+    width:100px;
+    border:1px solid #B4ADAD;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom:30px;
+}

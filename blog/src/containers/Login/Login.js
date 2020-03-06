@@ -98,10 +98,13 @@ submitHandler = (event) =>{
 
 
 render(){
+const {show, onGoogleAuth, user, hideModal} = this.props;
+const {loginForm, isFormValid} = this.state;
+
 const formData = [];
 
 for(let key in this.state.loginForm){
-    formData.push( {id: key , obj: this.state.loginForm[key] });
+    formData.push( {id: key , obj: loginForm[key] });
 };
 
 const form = formData.map(el =>
@@ -120,7 +123,7 @@ const form = formData.map(el =>
 
 return(
 
-<Modal show = {this.props.show}  modalClosed = {  this.props.hideModal }>
+<Modal show = {show}  modalClosed = {  hideModal }>
 <div className = {classes.Login}>
 <h3>Login</h3>
 
@@ -128,10 +131,10 @@ return(
     
   {form}  
 <div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !this.state.isFormValid} > Accedi</button>
-    <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
+    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !isFormValid} > Accedi</button>
+    <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); }}> Accedi con Google</button>
 </div>
- <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !this.state.isFormValid}> Registrati</button> 
+ <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
 
 
     
@@ -141,19 +144,25 @@ return(
 
 </Modal>
 
-
 );
-
-
+}
 }
 
-}
-
-
-const mapDispatchToProps = dispatch =>{
+const mapStateToProps = state =>{
     return{
-        onLogin : (email,password) => dispatch(actions.login(email,password))
+  user: state.login.user
     };
 };
 
-export default connect(null,mapDispatchToProps)(Login);
+const mapDispatchToProps = dispatch => {
+    return{
+    onGoogleAuth: () => dispatch(actions.googleAuth()),
+    onLogin : (email,password) => dispatch(actions.login(email,password))
+    };
+  };
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
+
+
