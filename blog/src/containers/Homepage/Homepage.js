@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
-import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import ActionBar from '../../Components/ActionBar/ActionBar';
+import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
 
 class Homepage extends Component{
 
@@ -21,12 +21,10 @@ class Homepage extends Component{
           testo : art.articolo.testo,
           titolo : art.articolo.titolo
       } 
-      console.log(art.id)
       const id = art.key;
       
       axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
       .then(response => {
-         console.log(response)
          this.props.mount();
       })
       .catch(error => console.log(error));
@@ -39,8 +37,8 @@ class Homepage extends Component{
 
 render(){
 
-   let {spinner} = this.props;
-
+   let {spinner, articoli} = this.props;
+   
 
    if(spinner){
      spinner = <Spinner />
@@ -56,27 +54,22 @@ render(){
      </div>
    }
 
-   if(typeof this.props.error === 'null'){
-      errorMessage = null;
-   }
+ 
   
-  
-  const newarticolo = [ ...this.props.arti];
-
-
- const articolo = newarticolo.map((art,index) =>{
-   return (<Anteprimaarticolo 
-      id={art.key} 
-      autore={art.articolo.autore}
-      categoria = {art.articolo.categoria}
-      descrizione = {art.articolo.descrizione}
-      img = {art.articolo.img}
-      like = {art.articolo.like}
-      sottotitolo = {art.articolo.sottotitolo}
-      testo = {art.articolo.testo}
-      titolo = {art.articolo.titolo}
-      clickHeart = {() => this.clickHeartHandler(art)}
-      key={art.key}/>);
+   let articoliVisualizzati;
+    articoliVisualizzati = articoli.map((art) =>{
+      return (<AnteprimaArticolo 
+         id={art.key} 
+         autore={art.articolo.autore}
+         categoria = {art.articolo.categoria}
+         descrizione = {art.articolo.descrizione}
+         img = {art.articolo.img}
+         like = {art.articolo.like}
+         sottotitolo = {art.articolo.sottotitolo}
+         testo = {art.articolo.testo}
+         titolo = {art.articolo.titolo}
+         clickHeart = {() => this.clickHeartHandler(art)}
+         key={art.key}/>);
    })
   
   
@@ -91,11 +84,14 @@ return(
       {spinner}
       {errorMessage}
       <div className={classes.ContainerArticoli} >
-      {this.props.arti ? articolo : null}
+         {
+         articoli ?
+         articoliVisualizzati 
+         : null
+         }
       </div>
 
-      <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
-
+   <ScrollTopButton/>
   
 </div>
 
@@ -110,7 +106,7 @@ return(
 const mapStateToProps = state =>{
   
    return{
-      arti : state.articolo.articoli
+      articoli : state.articolo.articoli
    }
 }
 

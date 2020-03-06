@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import classes from './Anteprimaarticolo.module.css';
-import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../Autore/Autore';
@@ -8,7 +7,7 @@ import ActionBar from '../ActionBar/ActionBar';
 
 
 
-class AnteprimaArticle extends Component{
+class AnteprimaArticolo extends Component{
    
     render(){
 
@@ -22,8 +21,6 @@ class AnteprimaArticle extends Component{
     const {descrizione} = this.props;
     const {clickHeart} = this.props;
 
-
-        console.log(this.props.titolo);
 
         if(this.props.like){
         
@@ -58,8 +55,7 @@ class AnteprimaArticle extends Component{
          <ActionBar className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
 
-       {/*<FaHeart className={classes.Icon} style={{color : colore}} onClick={clickHeart} />
-          */ }  
+
         </div>
     
   
@@ -77,6 +73,5 @@ class AnteprimaArticle extends Component{
 } 
 
 
-export default AnteprimaArticle;
+export default AnteprimaArticolo;
 
-//         <FaHeart className={classes.Icon} style={{color : colore}} onClick={this.props.clickHeart} />

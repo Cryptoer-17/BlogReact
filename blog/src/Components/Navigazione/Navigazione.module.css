@@ -14,7 +14,7 @@
 .BarraNavigazione a{
     margin-right:10px;
     text-decoration: none;   
-    color:black;
+    color:#1E1D1D;
 }
 
 .BarraNavigazione i{
@@ -23,11 +23,11 @@
 
 .BarraNavigazione a:hover, .LoginButton:hover{
     font-weight: bold;
-    color: rgb(77, 72, 72);
+    color: #787373;
 }
 
 .Link{
-    margin-top:1px;
+    margin-top:2px;
     float:left;
     font-size:20px;
     outline: none;
@@ -35,7 +35,7 @@
 }
 
 .LoginButton{
-    margin-top:1px;
+    margin-top:2px;
     position:fixed;
     right:10px;
     float:right;
@@ -55,10 +55,22 @@
 }
 
  .LinkAttivo i{
-   color: #5d5d79; 
+   color: #787373; 
 }
 
 .Ricerca{
     margin-top:3px;
     float:right;
+}
+
+.Titolo{
+    font-weight: bold;
+    font-size: 26px;
+    float:left;
+    margin:auto;
+    margin-left: 10px;
+    margin-right:5px;
+    vertical-align: middle;
+    color:#3C3A3A;
+    cursor: pointer;
 }
