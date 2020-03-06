@@ -27,7 +27,6 @@
     font-weight: normal;
     text-align: justify;
     width: 90%;
-    margin-left: 5%;
 }
 
 .Titolo{
@@ -44,3 +43,28 @@
     margin-left: 25px;
 }
 
+
+@media (max-width: 500px) {
+    .Articolo{
+        width:80%;
+        margin:auto;
+        background-color: white;
+        display: flex;
+        flex-flow: column;
+        padding:5px;
+        border: 1px solid #D2CACA;
+        margin-top:50px;
+    }
+
+    .Testo{
+        font-size: medium;
+        font-family: auto;
+        height: 50%;
+        word-break: break-word;
+        font-weight: normal;
+        text-align: justify;
+        width: 90%;
+        margin-left: 0px;
+    }
+
+}
