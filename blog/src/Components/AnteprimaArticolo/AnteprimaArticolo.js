@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Anteprimaarticolo.module.css';
 import {NavLink} from 'react-router-dom';
-import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
 
