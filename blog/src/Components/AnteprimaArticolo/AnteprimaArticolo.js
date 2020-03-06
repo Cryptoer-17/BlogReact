@@ -23,9 +23,9 @@ class AnteprimaArticolo extends Component{
             {this.props.titolo}
         </div>
 
-        variabile =  <div className={classes.Anteprimaarticolo}>
+        variabile =  <div className={classes.AnteprimaArticolo}>
            
-<Info autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+<Info className = {classes.Info} autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
 
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',

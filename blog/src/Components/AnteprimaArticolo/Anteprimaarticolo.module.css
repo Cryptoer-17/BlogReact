@@ -1,4 +1,4 @@
-.Anteprimaarticolo{
+.AnteprimaArticolo{
     width:60%;
     margin:auto;
     background-color: white;
@@ -42,8 +42,6 @@
 }
 
 
-
-
 .Titolo {
     text-align: center;
     height:30px;
@@ -71,8 +69,35 @@
     margin:auto;
 }
 
-/* media quesry scroll text
 
- min-width:1000 aggiustare dimenstioni immagine e tutto il resto
 
-*/
+
+@media (max-width: 500px) {
+    .AnteprimaArticolo {
+        width: 300px;
+        left: calc(50% - 200px);
+    }
+    .Titolo , .Sottotitolo{
+        width:100%;
+        text-align: center;
+    }
+  
+    .Testo{
+    position: relative;
+    bottom:5px;
+    display: grid;
+    width: 100%;
+    }
+    .Imgdiv, .Actions{
+        width: 100%;
+    }
+    .Img{
+        float:none;
+        margin:auto;
+    }
+  .Info{
+      width: 100%;
+     margin:auto;
+  }
+    
+}
