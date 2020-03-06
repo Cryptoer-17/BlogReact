@@ -9,21 +9,26 @@ import Articolo from './Components/Articolo/Articolo';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 
-
 class App extends Component {
 
 componentDidMount(){
+  
+
   this.props.onInitArticoli();
 }
 
   render(){
+   
+   
+  
     
   return (
     <div className="App">
          <BrowserRouter>
          <Navigazione/>
           <Switch>
-            <Route path="/" exact render={() =>(<Homepage mount={() => this.componentDidMount()}/>)} /> 
+           
+            <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
             <Route path="/articolo/:id" component ={Articolo} />
@@ -35,10 +40,19 @@ componentDidMount(){
 
 }
 
+const mapStateToProps = state =>{
+  console.log(state.articolo.error);
+  return{
+      loading: state.articolo.loading,
+      error : state.articolo.error
+  };
+};
+
+
 const mapDispatchToProps = dispatch =>{
   return{
      onInitArticoli: () => dispatch(actions.initArticoli())
   }
 }
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

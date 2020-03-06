@@ -37,11 +37,26 @@ class Homepage extends Component{
 
 render(){
 
-  let articoliVisualizzati = <Spinner/>; 
+   let {spinner, articoli} = this.props;
+   
 
-  const {articoli} = this.props;
-  
+   if(spinner){
+     spinner = <Spinner />
+   }
+   
  
+   let errorMessage = null;
+   
+   // if(typeof this.props.error === 'undefined'){
+   
+   //   errorMessage = <div>
+   //      <h2>errore nel caricamento dati</h2>
+   //   </div>
+   // }
+
+ 
+  
+   let articoliVisualizzati;
     articoliVisualizzati = articoli.map((art) =>{
       return (<AnteprimaArticolo 
          id={art.key} 
@@ -65,6 +80,9 @@ return(
 
       <h1 className={classes.Titolo}>Blog</h1>
 
+
+      {spinner}
+      {errorMessage}
       <div className={classes.ContainerArticoli} >
          {
          articoli ?

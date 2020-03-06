@@ -6,7 +6,8 @@ const initialState = {
     loading:false,
     esitoCaricamento:"",
     cerca: null,
-    risultatiRicerca:[]
+    risultatiRicerca:[],
+    error : null
 }
 
 
@@ -24,6 +25,20 @@ const postArticoloSuccess = ( state, action ) => {
      arrayArt.push(action.articolo);
     return updateObject( state, { loading: false, articoli: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
+
+
+const SetArticoliStart = (state, action) =>{
+    return updateObject(state , {error:null, loading : true})
+
+}
+
+const setArticoliSuccess = (state, action ) =>{
+    return updateObject(state , {articoli : action.articoli, error:null, loading : false})
+}
+
+const setArticoliFail = (state , action) =>{
+    return updateObject( state, {error : action.error, loading: false})
+}
 
 const setArticoli = (state,action) =>{
     return updateObject(state , {articoli : action.articoli})
@@ -66,7 +81,9 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
-        case actionTypes.SET_ARTICOLI : return setArticoli(state,action);
+        case actionTypes.SET_ARTICOLI_SUCCESS : return setArticoliSuccess(state,action);
+        case actionTypes.SET_ARTICOLI_START : return SetArticoliStart(state,action);
+        case actionTypes.SET_ARTICOLI_FAIL : return setArticoliFail(state, action);
         case actionTypes.RICERCA_ARTICOLI : return ricercaArticoli(state,action);
         case actionTypes.START_RICERCA : return startRicerca(state,action);
         default: return state;
