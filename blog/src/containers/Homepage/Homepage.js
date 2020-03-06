@@ -39,9 +39,26 @@ class Homepage extends Component{
 
 render(){
 
-   let articoli = <Spinner/>; 
+   let {spinner} = this.props;
 
+
+   if(spinner){
+     spinner = <Spinner />
+   }
    
+ 
+   let errorMessage = null;
+   
+   if(typeof this.props.error === 'undefined'){
+   
+     errorMessage = <div>
+        <h2>errore nel caricamento dati</h2>
+     </div>
+   }
+
+   if(typeof this.props.error === 'null'){
+      errorMessage = null;
+   }
   
   
   const newarticolo = [ ...this.props.arti];
@@ -71,6 +88,8 @@ return(
       <h1 className={classes.Titolo}>Blog</h1>
 
 
+      {spinner}
+      {errorMessage}
       <div className={classes.ContainerArticoli} >
       {this.props.arti ? articolo : null}
       </div>

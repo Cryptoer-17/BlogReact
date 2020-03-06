@@ -2,28 +2,59 @@ import axios from '../../utility/axios';
 import * as actionTypes from './actionTypes';
 
 
-export const setArticoli = (articoli) =>{
+export const setArticoliSuccess = (articoli) =>{
     return{
-        type: actionTypes.SET_ARTICOLI,
+        type: actionTypes.SET_ARTICOLI_SUCCESS,
         articoli: articoli
     }
 } 
+
+export const setArticoliStart = () =>{
+    return {
+        type : actionTypes.SET_ARTICOLI_START
+    };
+}
+
+export const setArticoliFail = (error) =>{
+    
+    return{
+        type : actionTypes.SET_ARTICOLI_FAIL,
+        error : error
+    }
+}
 
 
 export const initArticoli = () =>{
     return dispatch =>{
         const temparray = [];
+        dispatch(setArticoliStart());
         axios.get('/articoli.json')
         .then(response =>{   
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
         };         
-          dispatch(setArticoli(temparray));
+          dispatch(setArticoliSuccess(temparray));
         })
-        .catch(error => {       
+        .catch(err => { 
+            dispatch(setArticoliFail(err.response.data.error));      
         });
     };
 };
+
+
+
+export const likeStart = (arti) =>{
+    return{
+        type : actionTypes.LIKE_START,
+
+    }
+} 
+
+export const likeArticolo = (articolo) =>{
+    return dispatch =>{
+
+    }
+}
 
 
 
@@ -68,7 +99,7 @@ export const postArticolo = (articolo) => {
 export const startRicerca = (cerca) =>{
     return{
         type: actionTypes.START_RICERCA,
-        cerca:cerca.trim()
+        cerca:cerca
     };
 
 }
