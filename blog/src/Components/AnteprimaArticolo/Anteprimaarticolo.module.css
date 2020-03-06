@@ -16,7 +16,6 @@
     padding:0px;
     border:none;
     outline: none;
-   
 }
 
 .Img{
@@ -32,12 +31,13 @@
 .Testo{
     font-size: 15px;
     font-family: auto;
-    height: 20%;
+    height: 30%;
     width: 50%;
     margin-top: 1%;
     word-wrap: break-word;
     text-align: justify;
     margin-left: 5px;
+    margin-bottom: 2px;
 }
 
 .Autore{
@@ -50,11 +50,10 @@
 
 
 
-.Titolo{
+.Titolo {
     margin-top:2px;
     text-align: left;
     font-size:24px;
-    margin-bottom: 2px;
     font-weight: bold;
     height:5%;
     width: 50%;
@@ -70,15 +69,19 @@
     font-weight: bold;
 }
 
+
+.Titolo p{
+    margin-bottom:2px; 
+}
 .Sottotitolo p {
     margin-right: 2px;
     margin-left: 2px;
+    margin-top:0px;
 }
 
 
 
 .Actions{
-
     margin:auto;
 }
 
