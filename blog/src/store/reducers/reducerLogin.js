@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import updateObject from '../../utility/updateObject';
+import { auth } from '../../utility/firebase';
 
 const initialState = {
     token: null,
@@ -24,7 +25,14 @@ const loginSuccess = (state,action) =>{
 }
 
 const logout = (state,action) =>{
-    
+    if(localStorage.getItem("user")){
+    localStorage.removeItem("user");
+    auth.signOut();
+    }
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    return updateObject( state, initialState );
+
 }
 
 
@@ -50,6 +58,7 @@ export const googleAuthFail= (state,action) =>{
 }
 
 export const googleAuthSuccess = (state,action) =>{
+    localStorage.setItem("user", action.user);
     return updateObject( state, { user:action.user } );
 }
 

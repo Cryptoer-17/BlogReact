@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import firebase, { auth, provider } from '../../utility/firebase';
+import { auth, provider } from '../../utility/firebase';
 
 //login
 export const loginStart = () =>{

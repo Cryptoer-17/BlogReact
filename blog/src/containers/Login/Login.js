@@ -100,7 +100,7 @@ for(let key in this.state.loginForm){
     formData.push( {id: key , obj: loginForm[key] });
 };
 
-
+console.log(user)
 
 return(
 
@@ -129,7 +129,7 @@ return(
 
 <div className = {classes.ButtonContainer}>
     <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !isFormValid} > Accedi</button>
-    <button className = {classes.AccediGoogleButton} onClick = {onGoogleAuth}> Accedi con Google</button>
+    <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal() }}> Accedi con Google</button>
 </div>
  <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
 
