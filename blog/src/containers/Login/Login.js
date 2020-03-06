@@ -3,7 +3,8 @@ import classes from './Login.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
 import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
-
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class Login extends Component{
 
@@ -90,17 +91,20 @@ for (let key in newForm) {
 
 
 render(){
+const {show, onGoogleAuth, user, hideModal} = this.props;
+const {loginForm, isFormValid} = this.state;
+
 const formData = [];
 
 for(let key in this.state.loginForm){
-    formData.push( {id: key , obj: this.state.loginForm[key] });
+    formData.push( {id: key , obj: loginForm[key] });
 };
 
 
 
 return(
 
-<Modal show = {this.props.show}  modalClosed = {  this.props.hideModal }>
+<Modal show = {show}  modalClosed = {  hideModal }>
 <div className = {classes.Login}>
 <h3>Login</h3>
 
@@ -108,7 +112,7 @@ return(
     
     {formData.map(el =>
         <Input 
-        show = {this.props.show}
+        show = {show}
         value = {el.obj.value}
         key = {el.id}
         type = {el.obj.type}
@@ -124,20 +128,33 @@ return(
 </form>
 
 <div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !this.state.isFormValid} > Accedi</button>
-    <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
+    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !isFormValid} > Accedi</button>
+    <button className = {classes.AccediGoogleButton} onClick = {onGoogleAuth}> Accedi con Google</button>
 </div>
- <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !this.state.isFormValid}> Registrati</button> 
+ <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
 
 </div>
 
 </Modal>
 
-
 );
-
-
+}
 }
 
-}
-export default Login;
+const mapStateToProps = state =>{
+    return{
+  user: state.login.user
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+    onGoogleAuth: () => dispatch(actions.googleAuth())
+    };
+  };
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
+
+
