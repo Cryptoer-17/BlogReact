@@ -16,16 +16,17 @@
     padding:0px;
     border:none;
     outline: none;
+    margin-bottom:20px;
 }
 
 .Img{
  border:none;
  outline: none;
  float:right;
- width: 80%;
+ width: 90%;
  max-width:250px;
- height:80%;
- margin-top: -30%;
+ height:90%;
+ margin:auto;
 }
 
 .Testo{
@@ -40,42 +41,27 @@
     margin-bottom: 2px;
 }
 
-.Autore{
-    float:left;
-    margin-top: 0;
-    margin-left: 0;
-    margin-bottom: 10px;
-    color:#969090;
-}
 
 
 
 .Titolo {
-    margin-top:2px;
-    text-align: left;
-    font-size:24px;
-    font-weight: bold;
-    height:5%;
+    text-align: center;
+    height:30px;
     width: 50%;
+    margin-bottom:8px;
 }
 
 .Sottotitolo{
-    text-align: center;
-    margin-left: 1px;
+    text-align: left;
     width: 40%;
-    height:2%;
+    height:25px;
     border-bottom: 0.3px solid #B4ADAD;
     margin-bottom:5px;
-    font-weight: bold;
 }
 
 
-.Titolo p{
-    margin-bottom:2px; 
-}
-.Sottotitolo p {
-    margin-right: 2px;
-    margin-left: 2px;
+.Sottotitolo h4 {
+    margin-left: 5px;
     margin-top:0px;
 }
 

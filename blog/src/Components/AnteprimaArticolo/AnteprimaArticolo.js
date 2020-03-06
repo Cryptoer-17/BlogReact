@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import classes from './Anteprimaarticolo.module.css';
+import classes from './AnteprimaArticolo.module.css';
 import {NavLink} from 'react-router-dom';
-import Autore from '../Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
 import Info from '../InfoArticolo/InfoArticolo';
 
@@ -26,19 +25,18 @@ class AnteprimaArticolo extends Component{
 
         variabile =  <div className={classes.Anteprimaarticolo}>
            
-<Info autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min" />
+<Info autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
 
-           <div className={classes.Autore}> <Autore name ={autore}  /> </div>
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
                 color : 'black'
             }}>
             <div className={classes.Titolo}>
-            <p>{titolo}</p>
+            <h1>{titolo}</h1>
             </div>
             <div className={classes.Sottotitolo}>
        
-            <p>{sottotitolo} </p> 
+            <h4>{sottotitolo} </h4> 
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={img} alt="" />

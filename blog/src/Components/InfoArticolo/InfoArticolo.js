@@ -10,7 +10,7 @@ const InfoArticolo = (props) =>{
         <div className ={classes.Info}>
             <Autore name = {props.autore} />
             <p className = {classes.Categoria}>{props.categoria}</p>
-            <p className = {classes.DateTime}>{props.data} | <FaRegClock className = {classes.Icon}/> {props.tempoLettura} </p>
+            <p className = {classes.DateTime}>{props.data} | <FaRegClock className = {classes.Icon}/> {props.tempoLettura} read</p>
         </div>
     );
 }
