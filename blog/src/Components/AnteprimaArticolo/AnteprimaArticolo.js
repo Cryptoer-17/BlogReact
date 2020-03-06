@@ -3,7 +3,7 @@ import classes from './Anteprimaarticolo.module.css';
 import {NavLink} from 'react-router-dom';
 import Autore from '../Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
-
+import Info from '../InfoArticolo/InfoArticolo';
 
 
 class AnteprimaArticolo extends Component{
@@ -13,7 +13,7 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo, img,descrizione,clickHeart} = this.props; 
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart} = this.props; 
 
 
         if(this.props.like){
@@ -26,6 +26,8 @@ class AnteprimaArticolo extends Component{
 
         variabile =  <div className={classes.Anteprimaarticolo}>
            
+<Info autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min" />
+
            <div className={classes.Autore}> <Autore name ={autore}  /> </div>
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
