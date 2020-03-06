@@ -43,20 +43,6 @@ export const initArticoli = () =>{
 
 
 
-export const likeStart = (arti) =>{
-    return{
-        type : actionTypes.LIKE_START,
-
-    }
-} 
-
-export const likeArticolo = (articolo) =>{
-    return dispatch =>{
-
-    }
-}
-
-
 
 export const postArticoloSuccess = (articolo) =>{
     return{
