@@ -48,3 +48,15 @@
   .CercaButton:hover{
      color: #787373;
   }
+
+  @media (max-width: 500px) {
+   
+.Ricerca{
+    width:180px;
+    float:left;
+    margin:auto;
+    margin-left: 10px;
+    }
+   
+
+   }
