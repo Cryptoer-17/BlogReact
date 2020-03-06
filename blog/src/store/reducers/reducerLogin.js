@@ -11,17 +11,22 @@ const initialState = {
 }
 
 const loginStart = (state) =>{
-    return updateObject( state, { loading:true } );
+    return updateObject( state, {error: null,  loading : true} );
 }
 
 
-const loginFail= (state) =>{
-    return updateObject( state, { loading:false } );
+const loginFail= (state, action) =>{
+    return updateObject( state, { error : action.error, loading:false } );
     
 }
 
 const loginSuccess = (state,action) =>{
-    
+    return updateObject (state , {
+        token : action.idToken,
+        userId: action.userId,
+        error : null,
+        loading : false
+    } );
 }
 
 const logout = (state,action) =>{

@@ -26,28 +26,73 @@ export const loginSuccess = (token,userId) =>{
         };  
 }
 
+export const checkLoginTimeout = (expirtationTime) =>{
+    return dispatch =>{
+        setTimeout(() =>{
+            dispatch(logout());
+        }, expirtationTime * 1000);
+    };
 
-export const login = (email, password) =>{
-    return dispatch => {
+}
+
+export const login = (email, password, isSignup) =>{
+    return dispatch =>{
         dispatch(loginStart());
-        //login
-     /*   .then(res =>{ 
-            dispatch(loginSuccess())
-          })
-        .catch(error => { 
-            dispatch(loginFail(error));
-        });*/
-    }  
+        const authData ={
+          email : email,
+          password : password,
+          returnSecureToken:true 
+        }
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        if(!isSignup){
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        }
+        axios.post(url, authData)
+        .then(response =>{
+            console.log(response);
+            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+            localStorage.setItem('token', response.data.idToken);
+            localStorage.setItem('expirationDate', expirationDate);
+            localStorage.setItem('userId', response.data.localId);
+            dispatch(loginSuccess(response.data.idToken, response.data.localId));
+            dispatch(checkLoginTimeout(response.data.expiresIn))
+        })
+        .catch( err =>{
+            dispatch(loginFail(err.response.data.error));
+        });
+    }; 
 }
 
 
 export const logout = () =>{
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('userId');
     return{
         type: actionTypes.LOGOUT
     };
     
 }
 
+
+export const loginCheckState = () =>{
+    return dispatch =>{
+        const token = localStorage.getItem('token');
+        if(!token){
+            dispatch(logout());
+        }else{
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            if(expirationDate <= new Date()){
+                dispatch(logout());
+            }else{
+                const userId = localStorage.getItem('userId');
+                dispatch(loginSuccess(token, userId));
+                dispatch(checkLoginTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+            }
+            
+        }
+    }
+};
 
 //registrazione
 

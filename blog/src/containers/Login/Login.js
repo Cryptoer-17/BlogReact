@@ -5,6 +5,7 @@ import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
+import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Login extends Component{
 
@@ -37,7 +38,8 @@ loginForm: {
         }
     }
 },
-isFormValid : false
+isFormValid : false,
+isSignup: true
 }
 
 loginWithPassword = () =>{
@@ -72,9 +74,16 @@ this.props.hideModal();
 
 
 
+submitHandler = (event) =>{
+    event.preventDefault();
+    this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value, this.state.isSignup);
+}
 
-  
-
+switchAuthModeHandler = () =>{
+    this.setState(prevState =>{
+        return {isSignup : !prevState.isSignup};
+    })
+}
 
 checkValidityOfInput = (event, id) =>{
 
@@ -121,6 +130,10 @@ const form = formData.map(el =>
     />
     )
 
+    if(this.props.loading){
+        form = <Spinner />
+    }
+
 return(
 
 <Modal show = {show}  modalClosed = {  hideModal }>
@@ -131,7 +144,7 @@ return(
     
   {form}  
 <div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !isFormValid} > Accedi</button>
+    <button className = {classes.AccediButton} onClick = {this.handlerClick}  disabled = { !isFormValid} > Accedi</button>
     <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); }}> Accedi con Google</button>
 </div>
  <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
@@ -150,7 +163,10 @@ return(
 
 const mapStateToProps = state =>{
     return{
-  user: state.login.user
+  user: state.login.user,
+  loading: state.login.loading,
+        error : state.login.error,
+        isAuthenticated : state.login.token !== null
     };
 };
 
