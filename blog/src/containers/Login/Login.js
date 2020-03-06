@@ -100,7 +100,6 @@ for(let key in this.state.loginForm){
     formData.push( {id: key , obj: loginForm[key] });
 };
 
-console.log(user)
 
 return(
 

@@ -25,10 +25,7 @@ const loginSuccess = (state,action) =>{
 }
 
 const logout = (state,action) =>{
-    if(localStorage.getItem("user")){
-    localStorage.removeItem("user");
-    auth.signOut();
-    }
+    auth.signOut(); 
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     return updateObject( state, initialState );
@@ -54,12 +51,12 @@ const signUpSuccess = (state,action) =>{
 
 
 export const googleAuthFail= (state,action) =>{
-    console.log(action.error)
+    console.log(action.error);
 }
 
 export const googleAuthSuccess = (state,action) =>{
-    localStorage.setItem("user", action.user);
-    return updateObject( state, { user:action.user } );
+    localStorage.setItem("userId", JSON.stringify(action.user));
+    return updateObject( state, { user:action.user, userId: action.user.uid } );
 }
 
 
