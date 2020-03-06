@@ -3,8 +3,7 @@
     transition: all 0.3s ease-in-out;
     position: fixed;
     z-index: 300;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 2px #ccc;
+    border: 1px solid #F0E7E7;
     background-color: white;
     padding: 10px;
     text-align: center;

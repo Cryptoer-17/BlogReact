@@ -3,9 +3,10 @@
     margin:auto;
     background-color: white;
     padding:5px;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #D2CACA;
     margin-bottom: 10px;
-    height: 175px;
+    height: 25%;
+    display:block;
 }
 
 
@@ -15,7 +16,6 @@
     padding:0px;
     border:none;
     outline: none;
-   
 }
 
 .Img{
@@ -29,14 +29,15 @@
 }
 
 .Testo{
-    font-size: medium;
+    font-size: 15px;
     font-family: auto;
-    height: 105px;
-    width: 40%;
+    height: 30%;
+    width: 50%;
     margin-top: 1%;
     word-wrap: break-word;
     text-align: justify;
     margin-left: 5px;
+    margin-bottom: 2px;
 }
 
 .Autore{
@@ -44,43 +45,45 @@
     margin-top: 0;
     margin-left: 0;
     margin-bottom: 10px;
-    color:grey;
+    color:#969090;
 }
 
 
 
-.Titolo{
-    text-align: center;
+.Titolo {
+    margin-top:2px;
+    text-align: left;
     font-size:24px;
-    margin-bottom: 0px;
     font-weight: bold;
-    height:20px;
-    width: 30%;
+    height:5%;
+    width: 50%;
 }
 
 .Sottotitolo{
     text-align: center;
     margin-left: 1px;
     width: 40%;
-    height:20px;
-    border-bottom: 0.5px solid grey;
-    margin-bottom:10px;
+    height:2%;
+    border-bottom: 0.3px solid #B4ADAD;
+    margin-bottom:5px;
     font-weight: bold;
 }
 
+
+.Titolo p{
+    margin-bottom:2px; 
+}
 .Sottotitolo p {
     margin-right: 2px;
     margin-left: 2px;
+    margin-top:0px;
 }
 
 
-.Icon{
-    float:left;
-    bottom:0;
-    margin-top:-58px;
-    margin-left:1px;
-}
 
+.Actions{
+    margin:auto;
+}
 
 /* media quesry scroll text
 
