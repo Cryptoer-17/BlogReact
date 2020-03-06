@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-
+import firebase, { auth, provider } from '../../utility/firebase';
 
 //login
 export const loginStart = () =>{
@@ -23,8 +23,7 @@ export const loginSuccess = (token,userId) =>{
         type:actionTypes.LOGIN_SUCCESS,
           idToken: token,
           userId: userId
-        };
-    
+        };  
 }
 
 
@@ -42,8 +41,6 @@ export const login = (email, password) =>{
 }
 
 
-
-
 export const logout = () =>{
     return{
         type: actionTypes.LOGOUT
@@ -53,7 +50,6 @@ export const logout = () =>{
 
 
 //registrazione
-
 
 
 export const signUpStart = () =>{
@@ -92,3 +88,32 @@ export const signUp = (email, password) =>{
 
 }
 
+
+//google
+
+export const googleAuthFail= (error) =>{
+    return{
+        type:actionTypes.GOOGLE_AUTH_FAIL,
+        error:error
+    };
+}
+
+export const googleAuthSuccess = (user) =>{
+    return{
+        type:actionTypes.GOOGLE_AUTH_SUCCESS,
+        user:user
+        };
+    
+}
+
+
+export const googleAuth = () =>{
+    return dispatch => {auth.signInWithPopup(provider)
+         .then(res =>{ 
+             dispatch(googleAuthSuccess(res.user))
+           })
+         .catch(error => { 
+             dispatch(signUpFail(error));
+         });
+     }
+}
