@@ -41,7 +41,6 @@ componentDidMount(){
 }
 
 const mapStateToProps = state =>{
-  console.log(state.articolo.error);
   return{
       loading: state.articolo.loading,
       error : state.articolo.error
