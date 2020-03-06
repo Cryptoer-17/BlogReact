@@ -25,8 +25,19 @@ const logout = (state,action) =>{
     
 }
 
-const signUp = (state,action) =>{
 
+const signUpStart = (state,action) =>{
+
+}
+
+
+const signUpFail= (state,action) =>{
+   
+}
+
+const signUpSuccess = (state,action) =>{
+   
+    
 }
 
 const reducer = (state = initialState,action) => {
@@ -36,7 +47,9 @@ const reducer = (state = initialState,action) => {
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);   
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);  
         case actionTypes.LOGOUT: return logout(state,action);  
-        case actionTypes.SIGN_UP: return signUp(state,action);  
+        case actionTypes.SIGN_UP_START: return signUpStart(state,action);  
+        case actionTypes.SIGN_UP_SUCCESS: return signUpSuccess(state,action);  
+        case actionTypes.SIGN_UP_FAIL: return signUpFail(state,action);  
         default: return state;
 
     }

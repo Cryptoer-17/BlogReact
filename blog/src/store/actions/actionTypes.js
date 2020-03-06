@@ -8,4 +8,11 @@ export const SET_ARTICOLI_FAIL = 'SET_ARTICOLI_FAIL';
 export const INIT_ARTICOLI = 'INIT_ARTICOLI';
 export const RICERCA_ARTICOLI = 'RICERCA_ARTICOLI'
 export const START_RICERCA = 'START_RICERCA';
-export const LIKE_START = 'LIKE_START';
+
+export const LOGIN_START= 'LOGIN_START';
+export const LOGIN_SUCCESS= 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT= 'LOGOUT';
+export const SIGN_UP_START= 'SIGN_UP_START';
+export const SIGN_UP_SUCCESS= 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';

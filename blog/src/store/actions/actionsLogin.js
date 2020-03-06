@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
+
+//login
 export const loginStart = () =>{
 
     return{
@@ -27,7 +29,7 @@ export const loginSuccess = (token,userId) =>{
 
 
 export const login = (email, password) =>{
-    return dispatch => {
+   /* return dispatch => {
         dispatch(loginStart());
         //login
         .then(res =>{ 
@@ -36,7 +38,7 @@ export const login = (email, password) =>{
         .catch(error => { 
             dispatch(loginFail(error));
         });
-    }
+    }  */
 }
 
 
@@ -50,10 +52,43 @@ export const logout = () =>{
 }
 
 
-export const signUp = () =>{
+//registrazione
+
+
+
+export const signUpStart = () =>{
+
     return{
-        type: actionTypes.SIGN_UP
+        type:actionTypes.SIGN_UP_START
     };
+}
+
+
+export const signUpFail= (error) =>{
+    return{
+        type:actionTypes.SIGN_UP_FAIL,
+        error:error
+    };
+}
+
+export const signUpSuccess = () =>{
+    return{
+        type:actionTypes.SIGN_UP_SUCCESS
+        };
+    
+}
+
+export const signUp = (email, password) =>{
+   /*  return dispatch => {
+       dispatch(signUpStart());
+        
+        .then(res =>{ 
+            dispatch(signUpSuccess())
+          })
+        .catch(error => { 
+            dispatch(signUpFail(error));
+        });
+    }*/
 
 }
 
