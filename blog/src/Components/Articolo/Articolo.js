@@ -61,17 +61,17 @@ class Articolo extends Component{
 
 
     render(){
-         
-        let variabile; 
-        let colore = 'black';
-    
+        const {articolo,loading} = this.state;
 
+        let articoloVisualizzato; 
+        let colore = 'black';
         let tags;
-        if(this.state.articolo!==null){
+
+        if(articolo!==null){
 
         
-            if(this.state.articolo.tags.length){
-                const newtags = [ ...this.state.articolo.tags];
+            if(articolo.tags.length){
+                const newtags = [ ...articolo.tags];
                 tags = newtags.map((tag,index) =>{
                    return (
                        <div className={classes.Tag} key={index}>
@@ -84,43 +84,43 @@ class Articolo extends Component{
                
        
 
-            if(this.state.articolo.like){
+            if(articolo.like){
                 colore = 'red';
             }
 
-            variabile =  <div className={classes.Titolo}>
-               <h1>{this.state.articolo.titolo}</h1>
-               <div>
-                <h5>{this.state.articolo.categoria}</h5>
-            </div>
+            articoloVisualizzato = 
+            <div className={classes.Articolo}>
+                <div className={classes.Titolo}>
+               <h1>{articolo.titolo}</h1>
+               </div>
+                <h5>{articolo.categoria}</h5>
             <div className={classes.Sottotitolo}>
-            <p>{this.state.articolo.sottotitolo} </p>
+            <p>{articolo.sottotitolo} </p>
             </div>
             <div>
-            <Autore name={this.state.articolo.autore} />
+            <Autore name={articolo.autore} />
             </div>
 
             <div className={classes.Imgdiv}>
-                <img className={classes.Img} src={this.state.articolo.img} alt="" />
+        { articolo.img ? <img className={classes.Img} src={articolo.img} alt="" /> : null}
             </div>
             <div className={classes.Testo}>
-            <p>{this.state.articolo.testo}</p>
+            <p>{articolo.testo}</p>
             </div>
-            <div className={classes.TagConteiner}>
+            <div className={classes.TagContainer}>
                {tags} 
             </div>          
                 <ActionBar className={classes.Action} color={colore} onClick={() => this.clickHeartHandler()}/>
-                {/** <FaHeart style={{color: colore, marginTop : '100%'}} />*/}
         </div>
         }
 
-        if(this.state.loading){
-            variabile= <Spinner />;
+        if(loading){
+            articoloVisualizzato = <Spinner />;
         }
 
         return (
-            <div className={classes.Articolo}>
-            {variabile}
+            <div >
+            {articoloVisualizzato}
             </div>
             
             );

@@ -1,0 +1,49 @@
+.Info{
+margin-top:0;
+margin:auto;
+width:100%;
+background-color: white;
+color:#969090;
+height:20%;
+display:flex;
+vertical-align: middle;
+font-size:14px;
+}
+
+.Categoria{
+    margin:auto;
+    vertical-align: middle;
+}
+
+.DateTime {
+    margin-top:0px;
+    font-size:13px;
+    float:right;
+    margin:auto;
+    vertical-align: middle;
+}
+
+.DateTime p {
+    margin-top: 0;
+}
+
+.Icon{
+    font-size:11px;
+    vertical-align: middle;
+}
+
+
+@media (max-width: 500px) {
+  .Info{
+      width: 100%;
+      font-size:13px;
+      display: inline-flex;
+  }
+  .DateTime{
+    font-size:11px;
+    float:right;
+  }
+    .Icon{
+        font-size: 10px;
+    }
+}

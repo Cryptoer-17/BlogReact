@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Login.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
-import axios from 'axios';
 import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
 
@@ -16,7 +15,8 @@ loginForm: {
         valid:false,
         touched:false,
       config:
-      {  placeholder: "Email"},
+        { 
+         placeholder: "Email"},
         validation: {
         isEmail:true,
         required:true

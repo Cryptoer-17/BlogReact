@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import classes from './Anteprimaarticolo.module.css';
+import classes from './AnteprimaArticolo.module.css';
 import {NavLink} from 'react-router-dom';
-import Spinner from '../UI/Spinner/Spinner';
-import Autore from '../Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
-
+import Info from '../InfoArticolo/InfoArticolo';
 
 
 class AnteprimaArticolo extends Component{
@@ -14,7 +12,7 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo, img,descrizione,clickHeart} = this.props; 
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart} = this.props; 
 
 
         if(this.props.like){
@@ -25,19 +23,20 @@ class AnteprimaArticolo extends Component{
             {this.props.titolo}
         </div>
 
-        variabile =  <div className={classes.Anteprimaarticolo}>
+        variabile =  <div className={classes.AnteprimaArticolo}>
            
-           <div className={classes.Autore}> <Autore name ={autore}  /> </div>
+<Info className = {classes.Info} autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
                 color : 'black'
             }}>
             <div className={classes.Titolo}>
-            <p>{titolo}</p>
+            <h1>{titolo}</h1>
             </div>
             <div className={classes.Sottotitolo}>
        
-            <p>{sottotitolo} </p> 
+            <h4>{sottotitolo} </h4> 
             </div>
             <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={img} alt="" />

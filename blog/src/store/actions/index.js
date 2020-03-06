@@ -5,3 +5,9 @@ export {
     ricercaArticoli
 }from './actionsArticolo';
 
+export {
+login,
+logout,
+signUp
+}from './actionsLogin';
+
