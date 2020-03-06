@@ -34,7 +34,7 @@ componentDidMount(){
             <Route path="/articolo/:id" component ={Articolo} />
            </Switch>
          </BrowserRouter>
-         {console.log("ok")}
+        
     </div>
   );
   }
