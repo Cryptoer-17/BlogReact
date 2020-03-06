@@ -45,16 +45,6 @@ state = {
                 placeholder: "Scrivi qualcosa...  *"
                 }
         },
-        descrizione: { 
-            type: "text",
-            value:"",
-            touched:false,
-            valid:true,
-            config:{
-            placeholder: "Breve descrizione dell'articolo"
-             }
-        },
-
         categoria: { 
             type: "text",
             value:"",
@@ -64,6 +54,15 @@ state = {
                 required:true},
             config:{
             placeholder: "Categoria *"}
+        },
+        descrizione: { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:true,
+            config:{
+            placeholder: "Breve descrizione dell'articolo"
+             }
         },
     },
     tagInput:"",
