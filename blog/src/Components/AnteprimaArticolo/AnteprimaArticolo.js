@@ -1,113 +1,64 @@
 import React, {Component} from 'react';
 import classes from './Anteprimaarticolo.module.css';
-import { FaHeart } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../Autore/Autore';
+import ActionBar from '../ActionBar/ActionBar';
 
 
-class anteprimaArticle extends Component{
-    state={
-        articolo : null,
-        loading : false,
-    }
 
-    
-
-    componentDidMount(){
-
-        const id= this.props.id;
-        this.setState({loading : true})
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
-        .then(response =>{
-          this.setState({articolo : response.data})
-          this.setState({loading:false})
-           // console.log(this.state.articolo.titolo);
-        })
-        .catch(error => {
-       
-            this.setState({loading:false})
-        });
-    }
-
-    
-    clickHeartHandler(){
-       
-        const anteprima = {
-            autore : this.state.articolo.autore,
-            categoria : this.state.articolo.categoria,
-            descrizione : this.state.articolo.descrizione,
-            img : this.state.articolo.img,
-            like: !this.state.articolo.like,
-            sottotitolo : this.state.articolo.sottotitolo,
-            testo : this.state.articolo.testo,
-            titolo : this.state.articolo.titolo
-        } 
-
-        this.setState({
-            articolo : anteprima
-        })
-    
-
-        const id= this.props.id;
-        
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-
-    }
+class AnteprimaArticolo extends Component{
+   
     render(){
 
-        
-
-
+    
     let colore = 'black';  
     let variabile ; 
+    const {autore} = this.props; 
+    const {titolo} = this.props;
+    const {sottotitolo} =this.props;
+    const {img} = this.props;
+    const {descrizione} = this.props;
+    const {clickHeart} = this.props;
 
 
-    if(this.state.articolo!==null){
-
-        
-        if(this.state.articolo.like){
+        if(this.props.like){
         
             colore = 'red';
         }
 
+        variabile = <div>
+            {this.props.titolo}
+        </div>
 
-        variabile = 
-        
-       <div className={classes.Anteprimaarticolo}>
+        variabile =  <div className={classes.Anteprimaarticolo}>
            
-           <div className={classes.Autore}> <Autore name = {this.state.articolo.autore}  /> </div>
+           <div className={classes.Autore}> <Autore name ={autore}  /> </div>
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
                 color : 'black'
             }}>
             <div className={classes.Titolo}>
-            <p>{this.state.articolo.titolo}</p>
+            <p>{titolo}</p>
             </div>
             <div className={classes.Sottotitolo}>
        
-            <p>{this.state.articolo.sottotitolo} </p> 
+            <p>{sottotitolo} </p> 
             </div>
             <div className={classes.Imgdiv}>
-                <img className={classes.Img} src={this.state.articolo.img} alt="" />
+                <img className={classes.Img} src={img} alt="" />
             </div>
             <div className={classes.Testo}>
-            <p>{this.state.articolo.descrizione}</p>
+            <p>{descrizione}</p>
             </div></NavLink>
            
+         <ActionBar className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
-         <FaHeart className={classes.Icon} style={{color : colore}} onClick={() => this.clickHeartHandler()} />
-          
+
+
         </div>
-    }
-
-
-    if(this.state.loading){
-        variabile= <Spinner />;
-    }
+    
+  
 
     return(
         <div>
@@ -122,4 +73,5 @@ class anteprimaArticle extends Component{
 } 
 
 
-export default anteprimaArticle;
+export default AnteprimaArticolo;
+

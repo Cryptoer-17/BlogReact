@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import classes from './NuovoArticolo.module.css';
 import Tag from '../../Components/Tag/Tag';
-import axios from '../../utility/axios';
 import Input from '../../Components/UI/Input/Input';
 import checkValidity from '../../utility/validation';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
+import Modal from '../../Components/UI/Modal/Modal';
+import Spinner from '../../Components/UI/Spinner/Spinner';
+import Editor from 'Dante2';
 
 
 class NuovoArticolo extends Component{
@@ -41,6 +45,16 @@ state = {
                 placeholder: "Scrivi qualcosa...  *"
                 }
         },
+        categoria: { 
+            type: "text",
+            value:"",
+            touched:false,
+            valid:false,
+            validation:{
+                required:true},
+            config:{
+            placeholder: "Categoria *"}
+        },
         descrizione: { 
             type: "text",
             value:"",
@@ -50,15 +64,6 @@ state = {
             placeholder: "Breve descrizione dell'articolo"
              }
         },
-
-        categoria: { 
-            type: "text",
-            value:"",
-            touched:false,
-            valid:true,
-            config:{
-            placeholder: "Categoria"}
-        },
     },
     tagInput:"",
     autore: "Moni",
@@ -66,8 +71,8 @@ state = {
     tagsList:[],
     img : null,
     anteprimaImg:null,
-    esitoCaricamento:"",
-    isFormValid : false
+    isFormValid : false,
+    show:false
 }
 
 
@@ -97,34 +102,40 @@ deleteTagHandler = (tag) =>{
         reader.onloadend = () => {
         this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
         }
-
       };
   
   
 
   publishArticleHandler = () => {
     const articolo = {
-        titolo: this.state.form.titolo.value,
-        sottotitolo: this.state.form.sottotitolo.value,
+        titolo: this.state.form.titolo.value.trim(),
+        sottotitolo: this.state.form.sottotitolo.value.trim(),
         autore: this.state.autore,
         testo: this.state.form.testo.value,
-        descrizione: this.state.form.descrizione.value,
-        categoria: this.state.form.categoria.value,
+        descrizione: this.state.form.descrizione.value.trim(),
+        categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
         img: this.state.img
     }
-
-    axios.post('/articoli.json', articolo )
-    .then( res => { this.setState({esitoCaricamento: "L'articolo è stato pubblicato con successo."});
-    setTimeout(() => this.props.history.push("/") , 1000) 
-} )
-    .catch( err => {
-        this.setState({esitoCaricamento: "Errore. Caricamento non eseguito."})
-    } );
+    this.props.onPostArticolo(articolo);
+    this.showModal();
+    if(!this.props.loading)
+    setTimeout(() => this.props.onInitArticoli() , 1000)  
+    setTimeout(() => this.props.history.push("/") , 2000)  
 
 }
 
 
+ showModal = () =>{
+    this.setState( {show:true} );
+}
+
+ hideModal = () =>{
+    this.setState( {show:false} );
+        }
+
+     
+    
 
 checkValidityOfInput = (event, id) =>{
 
@@ -142,9 +153,14 @@ checkValidityOfInput = (event, id) =>{
 
 render(){
 
+    const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
+    const {loading, esito} = this.props;
+ 
+
+   
     const formData = [];
-    for(let key in this.state.form){
-        formData.push( {id: key , obj: this.state.form[key] });
+    for(let key in  form){
+        formData.push( {id: key , obj:  form[key] });
     };
     
     
@@ -156,6 +172,7 @@ return(
 <h2>Nuovo articolo</h2>
 
  
+
 {formData.map(el =>
         <Input 
         value = {el.obj.value}
@@ -169,15 +186,20 @@ return(
         />
         ) }
 
+<div  className = {classes.editor}>
+    <Editor body_placeholder ={'Scrivi qualcosa'}  /> 
 
-<input className = {classes.Input}  type = "text" placeholder = "#tag" value = {this.state.tagInput}
+    </div>
+
+
+<input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
     onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
 
 
 <div className = {classes.InputTags}>
-    {this.state.tagsList}
-    {this.state.tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
+    { tagsList}
+    { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
 </div>
 
 <br/>
@@ -187,15 +209,22 @@ return(
     <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
     <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
-    {this.state.anteprimaImg ? this.state.anteprimaImg : null}
+    { anteprimaImg ?  anteprimaImg : null}
 </div>
 
 <hr/>
-{this.state.esitoCaricamento}
+
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = { this.state.isFormValid ? false : true }   >Pubblica</button>           
+  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = {  isFormValid ? false : true } > Pubblica </button>           
  
+
+ <Modal  show = {show}  modalClosed = {  this.hideModal } >
+         {loading ? 
+         <Spinner/>
+        : esito }
+    </Modal>
+  
 
 
 
@@ -207,20 +236,22 @@ return(
 }
 
 }
-export default NuovoArticolo;
-
-/*
-
-<input autoFocus className = {classes.InputTitolo}  type = "text" placeholder = "Titolo * " onChange={( event ) => this.setState( { titolo: event.target.value } )}    /> 
-<input className = {classes.Input} type = "text" placeholder = "Sottotitolo" onChange={( event ) => this.setState( { sottotitolo: event.target.value } )}  />
 
 
-<input className = {classes.InputDescrizione}  type = "text" placeholder = "Breve descrizione dell'articolo"  onChange={( event ) => this.setState( { descrizione: event.target.value } )}  />
-<input className = {classes.Input}  type = "text" placeholder = "Categoria"  onChange={( event ) => this.setState( { categoria: event.target.value } )}  />
+const mapStateToProps = state =>{
+    return{
+   loading: state.articolo.loading,
+   esito: state.articolo.esitoCaricamento
+    };
+};
 
-<br/>
+const mapDispatchToProps = dispatch => {
+    return{
+    onPostArticolo: (articolo) => dispatch(actions.postArticolo(articolo)),
+    onInitArticoli: () => dispatch(actions.initArticoli())
+    };
+  };
 
 
+export default connect(mapStateToProps,mapDispatchToProps)(NuovoArticolo);
 
-
-*/

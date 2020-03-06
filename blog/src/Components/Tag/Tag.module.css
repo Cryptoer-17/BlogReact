@@ -1,23 +1,24 @@
 .Tag{
     width:auto;
     max-width: 150px;
-    height:26px;
-    font-size:85%;
-    border:1px solid #cbbeb5;
-    background-color:#cbbeb5 ;
-    vertical-align: middle;
+    height:25px;
+    font-size:80%;
+    background-color:#B4ADAD ;
     font-family: sans-serif;
-    padding:2px;
-    border-radius: 4px;
-    color:#354147;
-    box-shadow: 3px 5px 12px 0px rgba(138,138,136,1);
+    padding:4px;
+    border-radius: 10px;
+    color:#1E1D1D;
+    box-shadow: 3px 5px 10px 0px rgba(138,138,136,1);
     margin: 2px 2px 2px 2px;
     overflow: hidden;
     text-overflow: ellipsis; 
     display:inline-block;
+    text-align: center;
+    cursor: default;
 }
 
 .Tag i{
+    display:flex;
     position: relative;
     top:1px;
     font-size:90%;
@@ -28,4 +29,11 @@
 
 .Tag i:hover{
     color:black;
+}
+
+.Content{
+    width:50%;
+    padding:2px;
+    vertical-align: middle;
+    text-overflow: ellipsis; 
 }

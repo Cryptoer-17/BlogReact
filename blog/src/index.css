@@ -3,16 +3,19 @@ body {
   font-family: 'Ubuntu';
   text-align: center;
   height:100%;
-  background-color:#d1d1d1 ;
-  background-image: linear-gradient(#f0ecec , #d1d1d1);
-  background-repeat: no-repeat;
+  background-color: #F0E7E7 ;
+  color: #1E1D1D;
+
 }
 
+hr{
+  border:0.5px solid #787373;
+}
 
 button:disabled{
   cursor:not-allowed;
-  background-color: lightgray; 
+  background-color: #D2CACA; 
 }
 
 
-::selection { background-color:rgb(199, 189, 188); }
+::selection { background-color:#D2CACA; }

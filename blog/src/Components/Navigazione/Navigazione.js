@@ -6,6 +6,9 @@ import Ricerca from '../Ricerca/Ricerca';
 import { fadeIn} from 'react-animations'
 import styled, { keyframes } from 'styled-components';
 
+const AnimatedModal = styled.div`
+animation: 0.3s ${keyframes`${fadeIn}`} `;
+
 const Navigazione = () =>{
 
     const [show,setShow] = useState(false);
@@ -18,13 +21,12 @@ const Navigazione = () =>{
            setShow(false);
             }
     
-            const AnimatedModal = styled.div`
-            animation: 0.2s ${keyframes`${fadeIn}`} `;
-        
+           
 
 
     return(
         <nav className ={classes.BarraNavigazione}>
+          <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>

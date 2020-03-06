@@ -1,16 +1,18 @@
 .RisultatiRicerca{
-margin-top: 50px;
+margin-top: 100px;
 margin:auto;
 height:100%;
 }
 
 
 .OpzioniRicerca{
+   margin-top: 50px;
    width:100%;
+   height:30px;
 }
 
 .OpzioniRicerca p{
-    color:black;
+    color:#1E1D1D;
     margin-left: 20px;
     margin-right: 20px;
     font-size: 18px;
@@ -18,28 +20,17 @@ height:100%;
     display:inline-flex;
 }
 
-.InputRicerca{
-    margin:auto;
-    margin-top:60px;
-    margin-bottom:20px;
-    background-color: transparent;
-    outline: none;
-    width:50%;
-    padding:5px;
-    border:none;
-    border-bottom: 1px solid  rgba(0,0,0,.84);
-    font-size: 25px;
-}
+
 .ContainerRisultati{
     width:80%;
     margin:auto;
     margin-bottom:10px;
-    margin-top:10px;
+    margin-top:100px;
     list-style: none;
 }
 
 .Divisore{
-    border: 0.5px solid grey;
+    border: 0.5px solid #787373;
     width:80%;
 }
 

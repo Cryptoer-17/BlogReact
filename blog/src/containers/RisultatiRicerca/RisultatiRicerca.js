@@ -1,90 +1,84 @@
 import React, {Component} from 'react';
 import classes from './RisultatiRicerca.module.css';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+
+
 
 class RisultatiRicerca extends Component{
 
     state = {
-        cerca:"",
-        articoli:[
-        {
-            titolo: "art1",
-            categoria: 'test',
-            tags:['prova','react']
-        },
-        {
-            titolo: "art2",
-            categoria: 'test',
-            tags:['ciao','react']
-        },
-        {
-            titolo: "art3",
-            categoria: 'prova',
-            tags:['ciao','react']
-        }
-        ],
+        cerca:null,
         classeCat :null,
         classeTag : null,
-        risultatiCat : [],
-        risultatiTag: []
     }
-
+    
 componentDidMount(){
-
-
+    document.getElementById("filtroCategoria").click();
+    this.setState({cerca:this.props.cerca})
 }
-
-
-searchArticlesHandler = (cerca) =>{
-    let risultatiCat = [];
-    risultatiCat= this.state.articoli.filter(art => art.categoria === cerca);
-    risultatiCat = risultatiCat.map(r => <li key = {r.titolo}> {r.titolo} </li>);
-    if (risultatiCat.length === 0){
-        risultatiCat = "Nessun risultato.";
+componentDidUpdate(prevState){
+    if(prevState.cerca !== this.props.cerca){
+        this.setState({cerca:this.props.cerca})
+        document.getElementById("filtroCategoria").click();
     }
 
-    let risultatiTag = [];
-    risultatiTag = this.state.articoli.filter(art =>  art.tags.indexOf(cerca)>= 0);
-    risultatiTag = risultatiTag.map(r => <li key = {r.titolo}> {r.titolo} </li>);
-    if (risultatiTag.length === 0){
-        risultatiTag = "Nessun risultato.";
-    }
-this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
-
 }
-
 
 
  displayCategoryResultsHandler = () =>{
 
     this.setState({classeCat: classes.OpzioneSelezionata,classeTag: null});
+    this.props.onRicercaArticoli("categoria");
  }
 
  displayTagResultsHandler = () =>{
 
      this.setState({classeTag: classes.OpzioneSelezionata,classeCat: null}); 
+        this.props.onRicercaArticoli( "tag");
  }
  
 
     render(){
+
+        const {classeCat, classeTag,cerca} = this.state;
+        const {risultati} = this.props;
+     
+
        
         return(
             <div className = {classes.RisultatiRicerca}>
               <div>  
-                <input  autoFocus className = {classes.InputRicerca} type = "text" placeholder = ""  onKeyPress={ event => { if(event.key === 'Enter'){ this.searchArticlesHandler(this.state.cerca)} } } onChange={( event ) => {this.setState( { cerca: event.target.value } );
-                 setTimeout(() => {this.searchArticlesHandler(this.state.cerca)}, 500);  } }  />
+         
               </div>
-
               <div className = {classes.OpzioniRicerca}>
                 Filtra per <br/>
-                <p className = {this.state.classeCat}  onClick = {() =>this.displayCategoryResultsHandler()}>Categoria</p> | <p  className = {this.state.classeTag} onClick = {() =>this.displayTagResultsHandler()}>Tag</p>
+                <p  id = "filtroCategoria" className = {classeCat}  onClick = {this.displayCategoryResultsHandler}>Categoria</p> | <p  id = "filtroTag" className = {classeTag} onClick = {this.displayTagResultsHandler}>Tag</p>
                 <hr  className = {classes.Divisore} />
               </div>
 
-               <div >
+               <div>
                 <ul className = {classes.ContainerRisultati}>
 
-                {this.state.classeCat && this.state.cerca ? this.state.risultatiCat : null }
-                {this.state.classeTag && this.state.cerca ? this.state.risultatiTag : null }
+                {risultati.length > 0  ? 
+                
+                    risultati.map( art =>
+
+                    <AnteprimaArticolo 
+                    id={art.key} 
+                    autore={art.articolo.autore}
+                    categoria = {art.articolo.categoria}
+                    descrizione = {art.articolo.descrizione}
+                    img = {art.articolo.img}
+                    like = {art.articolo.like}
+                    sottotitolo = {art.articolo.sottotitolo}
+                    testo = {art.articolo.testo}
+                    titolo = {art.articolo.titolo}
+                    key={art.key}/>          
+                  )
+
+                : cerca !== null ? "Nessun risultato." : null }
              
                 </ul>
                </div>
@@ -94,4 +88,21 @@ this.setState({risultatiCat:risultatiCat, risultatiTag: risultatiTag});
      }
     
 }
-export default RisultatiRicerca;
+
+
+const mapStateToProps = state =>{
+    return{
+    risultati: state.articolo.risultatiRicerca,
+    cerca: state.articolo.cerca
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+    onRicercaArticoli: (filtro) => dispatch(actions.ricercaArticoli(filtro))
+    };
+  };
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(RisultatiRicerca);

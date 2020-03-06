@@ -1,55 +1,77 @@
 import React, {Component} from 'react';
 import classes from './Homepage.module.css';
-import Anteprimaarticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
-import axios from '../../utility/axios';
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import Spinner from '../../Components/UI/Spinner/Spinner';
+import {connect} from 'react-redux';
+import axios from 'axios';
+import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
 
 class Homepage extends Component{
 
-state = {
-   articoli:[],
-   loading : false
-}
 
-componentDidMount(){
-   this.setState({loading : true})
-   axios.get('/articoli.json')
-   .then(response =>{
-    
-     for(let key in response.data){
-        this.state.articoli.push(key);
-   };
- 
-      this.setState({loading:false})
-   })
-   .catch(error => {
 
-       this.setState({loading:false})
-   });
-}
+   clickHeartHandler(art){
+      const anteprima = {
+          autore : art.articolo.autore,
+          categoria : art.articolo.categoria,
+          descrizione : art.articolo.descrizione,
+          img : art.articolo.img,
+          like: !art.articolo.like,
+          sottotitolo : art.articolo.sottotitolo,
+          testo : art.articolo.testo,
+          titolo : art.articolo.titolo
+      } 
+      const id = art.key;
+      
+      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
+      .then(response => {
+         this.props.mount();
+      })
+      .catch(error => console.log(error));
+
+  }
+
+
 
 
 
 render(){
 
-   let variabile ; 
-
-   if(this.state.loading){
-      variabile= <Spinner />;
-  }
-  
-  
-  const newarticolo = {
-      ...this.state.articoli
-  };
-
+   let {spinner, articoli} = this.props;
    
- const articolo = Object.keys(newarticolo)
-   .map((igKey) =>{
-  
-   return (<Anteprimaarticolo id={newarticolo[igKey]} key={igKey}/>);
-   })
-  
+
+   if(spinner){
+     spinner = <Spinner />
+   }
+   
+ 
+   let errorMessage = null;
+   
+   // if(typeof this.props.error === 'undefined'){
+   
+   //   errorMessage = <div>
+   //      <h2>errore nel caricamento dati</h2>
+   //   </div>
+   // }
+
+ 
+  
+   let articoliVisualizzati;
+    articoliVisualizzati = articoli.map((art) =>{
+      return (<AnteprimaArticolo 
+         id={art.key} 
+         autore={art.articolo.autore}
+         categoria = {art.articolo.categoria}
+         descrizione = {art.articolo.descrizione}
+         img = {art.articolo.img}
+         like = {art.articolo.like}
+         sottotitolo = {art.articolo.sottotitolo}
+         testo = {art.articolo.testo}
+         titolo = {art.articolo.titolo}
+         clickHeart = {() => this.clickHeartHandler(art)}
+         key={art.key}/>);
+   })
+  
   
 
 return(
@@ -59,11 +81,18 @@ return(
       <h1 className={classes.Titolo}>Blog</h1>
 
 
+      {spinner}
+      {errorMessage}
       <div className={classes.ContainerArticoli} >
-      {this.state.articoli ? articolo : null}
+         {
+         articoli ?
+         articoliVisualizzati 
+         : null
+         }
       </div>
 
-      <button title = "Torna in cima" className = {classes.TornaSuButton}  onClick = {() => document.documentElement.scrollTop = 0}><i className="material-icons">arrow_upward</i> </button>
+   <ScrollTopButton/>
+  
 </div>
 
 );
@@ -72,4 +101,15 @@ return(
 }
 
 }
-export default Homepage;
+
+
+const mapStateToProps = state =>{
+  
+   return{
+      articoli : state.articolo.articoli
+   }
+}
+
+
+
+export default connect(mapStateToProps)(Homepage);

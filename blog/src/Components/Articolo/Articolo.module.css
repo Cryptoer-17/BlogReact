@@ -7,13 +7,14 @@
     flex-flow: column;
     height: 10%;
     padding:5px;
-    border: 1px solid lightgrey;
+    border: 1px solid #D2CACA;
     margin-bottom: 10px;
+    margin-top:50px;
 }
 
 
 .Img{
-    border: 2px solid orange;
+    border: 2px solid #3C3A3A;
     width: 90%;
 }
 
@@ -33,6 +34,16 @@
     font-weight: bold;
 }
 
-.Icon{
-    width:6%;
+
+.Tag{
+    float: left;
+    margin-bottom: 10px;
+}
+
+.TagConteiner{
+    margin-left: 25px;
+}
+
+.Action{
+    border: 3px solid;
 }
