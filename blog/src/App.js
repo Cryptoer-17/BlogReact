@@ -7,6 +7,7 @@ import Navigazione from './Components/Navigazione/Navigazione';
 import Articolo from './Components/Articolo/Articolo';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
+import Login from './containers/Login/Login'; 
 
 class App extends Component {
 
@@ -26,10 +27,11 @@ componentDidMount(){
          <BrowserRouter>
          <Navigazione/>
           <Switch>
-           
+           {/**show=true */}
             <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> 
             <Route path="/pubblica" exact  component={NuovoArticolo} /> 
             <Route path="/ricerca"  component = {RisultatiRicerca} /> 
+            <Route path="/login" render={() =>(<Login show={true} />)} />
             <Route path="/articolo/:id" component ={Articolo} />
            </Switch>
          </BrowserRouter>

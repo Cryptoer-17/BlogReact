@@ -3,7 +3,8 @@ import classes from './Login.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
 import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
-
+import * as actions from '../../store/actions/index';
+import {connect } from 'react-redux';
 
 class Login extends Component{
 
@@ -39,9 +40,6 @@ loginForm: {
 isFormValid : false
 }
 
-
-
-
 loginWithPassword = () =>{
     /*
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
@@ -73,6 +71,11 @@ this.props.hideModal();
 }
 
 
+
+
+  
+
+
 checkValidityOfInput = (event, id) =>{
 
 let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
@@ -88,6 +91,11 @@ for (let key in newForm) {
 
 }
 
+submitHandler = (event) =>{
+    event.preventDefault();
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value);
+}
+
 
 render(){
 const formData = [];
@@ -96,7 +104,19 @@ for(let key in this.state.loginForm){
     formData.push( {id: key , obj: this.state.loginForm[key] });
 };
 
-
+const form = formData.map(el =>
+    <Input 
+    show = {this.props.show}
+    value = {el.obj.value}
+    key = {el.id}
+    type = {el.obj.type}
+    config = {el.obj.config}
+    touched = { el.obj.touched}
+    valid = { el.obj.valid}
+    changed = {(e) => this.checkValidityOfInput(e, el.id)}
+    shouldValidate = {el.obj.validation}
+    />
+    )
 
 return(
 
@@ -104,30 +124,18 @@ return(
 <div className = {classes.Login}>
 <h3>Login</h3>
 
-<form>
+<form onSubmit={this.submitHandler}>
     
-    {formData.map(el =>
-        <Input 
-        show = {this.props.show}
-        value = {el.obj.value}
-        key = {el.id}
-        type = {el.obj.type}
-        config = {el.obj.config}
-        touched = { el.obj.touched}
-        valid = { el.obj.valid}
-        changed = {(e) => this.checkValidityOfInput(e, el.id)}
-        shouldValidate = {el.obj.validation}
-        />
-        ) }
-
-    
-</form>
-
+  {form}  
 <div className = {classes.ButtonContainer}>
     <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !this.state.isFormValid} > Accedi</button>
     <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
  <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !this.state.isFormValid}> Registrati</button> 
+
+
+    
+</form>
 
 </div>
 
@@ -140,4 +148,12 @@ return(
 }
 
 }
-export default Login;
+
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onLogin : (email,password) => dispatch(actions.login(email,password))
+    };
+};
+
+export default connect(null,mapDispatchToProps)(Login);

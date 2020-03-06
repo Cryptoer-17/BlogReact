@@ -30,9 +30,11 @@ const Navigazione = () =>{
             <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>
-            <button className = {classes.LoginButton} onClick ={ showModal} > <i className="material-icons">account_circle</i>   </button>
+            <NavLink to="/login" className={classes.LoginButton}><i className="material-icons">account_circle</i></NavLink>
 
-           {show ?  <AnimatedModal><Login show = {show} hideModal = {hideModal} /> </AnimatedModal>   : null}
+   {/* <button className = {classes.LoginButton} onClick ={ showModal} >    </button>
+
+           {show ?  <AnimatedModal><Login show = {show} hideModal = {hideModal} /> </AnimatedModal>   : null}* */}        
              
         </nav>
     );

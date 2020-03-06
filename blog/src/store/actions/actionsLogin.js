@@ -29,16 +29,16 @@ export const loginSuccess = (token,userId) =>{
 
 
 export const login = (email, password) =>{
-   /* return dispatch => {
+    return dispatch => {
         dispatch(loginStart());
         //login
-        .then(res =>{ 
+     /*   .then(res =>{ 
             dispatch(loginSuccess())
           })
         .catch(error => { 
             dispatch(loginFail(error));
-        });
-    }  */
+        });*/
+    }  
 }
 
 
