@@ -38,3 +38,18 @@ height:100%;
     text-decoration: underline;
     font-weight: bold;
 }
+
+
+@media (max-width: 500px) {
+    .RisultatiRicerca{
+        margin:auto;
+    }
+    .ContainerRisultati{
+        width:70%;
+        float:none;
+    }
+    .Risultati{
+        margin:auto;
+        width:100%;
+    }
+   }

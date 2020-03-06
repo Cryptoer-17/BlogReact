@@ -76,6 +76,8 @@
     .AnteprimaArticolo {
         width: 300px;
         left: calc(50% - 200px);
+        margin:auto;
+        margin-bottom: 10px;
     }
     .Titolo , .Sottotitolo{
         width:100%;
