@@ -25,6 +25,10 @@ const logout = (state,action) =>{
     
 }
 
+const signUp = (state,action) =>{
+
+}
+
 const reducer = (state = initialState,action) => {
 
     switch(action.type){
@@ -32,6 +36,7 @@ const reducer = (state = initialState,action) => {
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);   
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);  
         case actionTypes.LOGOUT: return logout(state,action);  
+        case actionTypes.SIGN_UP: return signUp(state,action);  
         default: return state;
 
     }
