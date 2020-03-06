@@ -8,12 +8,13 @@ const initialState = {
     loading:null
 }
 
-const loginStart = (state,action) =>{
-
+const loginStart = (state) =>{
+    return updateObject( state, { loading:true } );
 }
 
 
-const loginFail= (state,action) =>{
+const loginFail= (state) =>{
+    return updateObject( state, { loading:false } );
     
 }
 
@@ -26,12 +27,14 @@ const logout = (state,action) =>{
 }
 
 
-const signUpStart = (state,action) =>{
+const signUpStart = (state) =>{
+    return updateObject( state, { loading:true } );
 
 }
 
 
-const signUpFail= (state,action) =>{
+const signUpFail= (state) =>{
+    return updateObject( state, { loading:false } );
    
 }
 
