@@ -116,7 +116,7 @@ for(let key in this.state.loginForm){
     formData.push( {id: key , obj: loginForm[key] });
 };
 
-const form = formData.map(el =>
+let form = formData.map(el =>
     <Input 
     show = {this.props.show}
     value = {el.obj.value}
