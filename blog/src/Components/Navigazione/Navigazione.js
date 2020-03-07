@@ -8,6 +8,7 @@ import { fadeIn} from 'react-animations'
 import styled, { keyframes } from 'styled-components';
 import {connect } from 'react-redux';
 import Spinner from '../UI/Spinner/Spinner';
+import Modal from '../UI/Modal/Modal';
 
 const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;
@@ -33,13 +34,17 @@ const Navigazione = (props) =>{
         setGoogle(false);
     }
 
+    let error= null;
+
+    
+
+
     let form =  (<nav className ={classes.BarraNavigazione}>
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
       <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
       <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
       <Ricerca className = {classes.Ricerca}/>
       <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-     {console.log(localStorage.getItem("userId"))}
      {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
        
   </nav>);
@@ -48,15 +53,24 @@ const Navigazione = (props) =>{
         form = <Spinner />
     }
 
+    if(props.error){
+        error =(<Modal show={true}>{props.error.message}</Modal>);
+    }
 
-    return form;
+    return(
+        <div>
+            {form}
+            {error}
+        </div>
+    );
 }
 
 
 const mapStateToProps = state =>{
-    console.log(state.login.loading);
+    console.log(state.login.error);
     return{
-        loading: state.login.loading
+        loading: state.login.loading,
+        error : state.login.error
     };
 };
 

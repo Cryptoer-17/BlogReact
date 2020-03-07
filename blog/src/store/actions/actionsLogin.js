@@ -59,7 +59,7 @@ export const login = (email, password, isSignup) =>{
             dispatch(checkLoginTimeout(response.data.expiresIn))
         })
         .catch( err =>{
-            console.log("entrato");
+            console.log(err.response.data.error);
             dispatch(loginFail(err.response.data.error));
         });
     }; 
