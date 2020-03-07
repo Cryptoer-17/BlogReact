@@ -12,12 +12,7 @@ if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
 console.log("entrato");
 
-
-
-
-return(
-
-<Modal show = {show}  modalClosed = {  hideModal }>
+let form = <Modal show = {show}  modalClosed = {  hideModal }>
 <div className = {classes.Logout}>
 <h3>Logout</h3>
 
@@ -29,32 +24,39 @@ return(
 
 </div>
 
+</Modal>;
 
-</Modal>
 
-);
+return form;
 }else {
-  return(
-    <Modal show = {show}  modalClosed = {  hideModal }>
-<div className = {classes.Logout}>
-<h3>Logout</h3>
 
-{/*<p> {user.displayName} </p>*/}
+  let form =   <Modal show = {show}  modalClosed = {  hideModal }>
+  <div className = {classes.Logout}>
+  <h3>Logout</h3>
+  
+  {/*<p> {user.displayName} </p>*/}
+  
+  {/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
+  
+  <button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
+  
+  </div>
+  
+  
+  </Modal>
 
-{/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
-
-<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
-
-</div>
-
-
-</Modal>
-  );
+  return form;
 
 }
 }
 
-
+const mapStateToProps = state =>{
+  return{
+    user: state.login.user,
+          error : state.login.error,
+          loading: state.login.loading
+      };
+}
 
 const mapDispatchToProps = dispatch => {
     return{
@@ -64,6 +66,6 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(null,mapDispatchToProps)(Logout);
+export default connect(mapStateToProps,mapDispatchToProps)(Logout);
 
 

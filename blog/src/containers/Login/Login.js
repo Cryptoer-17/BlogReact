@@ -5,7 +5,6 @@ import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
-import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Login extends Component{
 
@@ -107,14 +106,15 @@ submitHandlerTwo = (event) =>{
     event.preventDefault();
     
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, this.state.isSignup);
-    this.props.hideModal();
     this.props.hideGoogle();
+    this.props.hideModal();
+    
 }
 
 
 render(){
     
-const {show, onGoogleAuth, user, hideModal, showGoogle} = this.props;
+const {show, onGoogleAuth, user, hideModal, showGoogle, loading} = this.props;
 const {loginForm, isFormValid} = this.state;
 
 const formData = [];
@@ -140,9 +140,7 @@ const formData = [];
         />
         )
     
-        if(this.props.loading){
-            form = <Spinner />
-        }
+        
     
     return(
     
@@ -177,7 +175,6 @@ const formData = [];
 const mapStateToProps = state =>{
     return{
   user: state.login.user,
-  loading: state.login.loading,
         error : state.login.error,
         isAuthenticated : state.login.token !== null
     };
