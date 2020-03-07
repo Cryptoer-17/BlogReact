@@ -25,7 +25,7 @@ return(
 
 <img src = {user.photoURL}   className = {classes.UserImg} alt = "" />
 
-<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal() } }  > Esci</button>
+<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
 
 </div>
 
@@ -33,7 +33,25 @@ return(
 </Modal>
 
 );
-}else return null;
+}else {
+  return(
+    <Modal show = {show}  modalClosed = {  hideModal }>
+<div className = {classes.Logout}>
+<h3>Logout</h3>
+
+{/*<p> {user.displayName} </p>*/}
+
+{/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
+
+<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
+
+</div>
+
+
+</Modal>
+  );
+
+}
 }
 
 

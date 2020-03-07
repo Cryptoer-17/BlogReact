@@ -29,7 +29,9 @@ const Navigazione = (props) =>{
     }
 
     const hideGoogle = () =>{
+        console.log("entrato");
         setGoogle(false);
+        console.log(google);
     }
 
     

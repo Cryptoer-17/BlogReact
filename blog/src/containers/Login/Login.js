@@ -108,6 +108,7 @@ submitHandlerTwo = (event) =>{
     
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, this.state.isSignup);
     this.props.hideModal();
+    this.props.hideGoogle();
 }
 
 
