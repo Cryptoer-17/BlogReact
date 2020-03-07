@@ -76,7 +76,9 @@ this.props.hideModal();
 
 submitHandler = (event) =>{
     event.preventDefault();
+    
     this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value, this.state.isSignup);
+    
 }
 
 switchAuthModeHandler = () =>{
@@ -100,20 +102,24 @@ for (let key in newForm) {
 
 }
 
-submitHandler = (event) =>{
+submitHandlerTwo = (event) =>{
+    
     event.preventDefault();
+    
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, this.state.isSignup);
+    this.props.hideModal();
 }
 
 
 render(){
+    console.log(this.props.show);
 const {show, onGoogleAuth, user, hideModal} = this.props;
 const {loginForm, isFormValid} = this.state;
 
 const formData = [];
 
 
-if(!this.props.isAuthenticated){
+
     for(let key in this.state.loginForm){
         formData.push( {id: key , obj: loginForm[key] });
     };
@@ -143,11 +149,11 @@ if(!this.props.isAuthenticated){
     <div className = {classes.Login}>
     <h3>Login</h3>
     
-    <form onSubmit={this.submitHandler}>
+    <form>
         
       {form}  
     <div className = {classes.ButtonContainer}>
-        <button className = {classes.AccediButton} onClick = {this.handlerClick}  disabled = { !isFormValid} > Accedi</button>
+        <button className = {classes.AccediButton} onClick = { this.submitHandlerTwo}  disabled = { !isFormValid} > Accedi</button>
         <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); }}> Accedi con Google</button>
     </div>
      <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
@@ -161,7 +167,7 @@ if(!this.props.isAuthenticated){
     </Modal>
     
     );
-}else return null;
+
 
 
 }

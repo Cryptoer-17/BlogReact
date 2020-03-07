@@ -10,7 +10,6 @@ const user = JSON.parse(localStorage.getItem("userId"));
 
 const {show, onLogout, hideModal} = props;
 
-
 return(
 
 <Modal show = {show}  modalClosed = {  hideModal }>

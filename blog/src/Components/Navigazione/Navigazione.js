@@ -30,7 +30,7 @@ const Navigazione = (props) =>{
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>
             <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-
+            {console.log(show)}
            {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} hideModal = {hideModal} /> : <Logout show = {show} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
              
         </nav>
