@@ -6,7 +6,8 @@ import Logout from '../../containers/Login/Logout';
 import Ricerca from '../Ricerca/Ricerca';
 import { fadeIn} from 'react-animations'
 import styled, { keyframes } from 'styled-components';
-
+import {connect } from 'react-redux';
+import Spinner from '../UI/Spinner/Spinner';
 
 const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;
@@ -32,23 +33,33 @@ const Navigazione = (props) =>{
         setGoogle(false);
     }
 
-    
-    return(
-        <nav className ={classes.BarraNavigazione}>
-          <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
-            <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
-            <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
-            <Ricerca className = {classes.Ricerca}/>
-            <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-           {console.log(localStorage.getItem("userId"))}
-           {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
-             
-        </nav>
-    );
+    let form =  (<nav className ={classes.BarraNavigazione}>
+    <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
+      <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
+      <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
+      <Ricerca className = {classes.Ricerca}/>
+      <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
+     {console.log(localStorage.getItem("userId"))}
+     {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
+       
+  </nav>);
+
+    if(props.loading){
+        form = <Spinner />
+    }
+
+
+    return form;
 }
 
 
+const mapStateToProps = state =>{
+    console.log(state.login.loading);
+    return{
+        loading: state.login.loading
+    };
+};
 
-export default Navigazione;
+export default connect(mapStateToProps)(Navigazione);
 
 

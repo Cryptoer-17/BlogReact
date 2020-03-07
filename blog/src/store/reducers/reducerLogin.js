@@ -54,14 +54,19 @@ const signUpSuccess = (state,action) =>{
     
 }
 
+export const googleAuthStart= (state,action) =>{
+    return updateObject( state, { loading:true } );
+}
+
 
 export const googleAuthFail= (state,action) =>{
     console.log(action.error);
+    return updateObject( state, { loading:false } );
 }
 
 export const googleAuthSuccess = (state,action) =>{
     localStorage.setItem("userId", JSON.stringify(action.user));
-    return updateObject( state, { user:action.user, userId: action.user.uid } );
+    return updateObject( state, { user:action.user, userId: action.user.uid, loading:false } );
 }
 
 
@@ -75,6 +80,7 @@ const reducer = (state = initialState,action) => {
         case actionTypes.SIGN_UP_START: return signUpStart(state,action);  
         case actionTypes.SIGN_UP_SUCCESS: return signUpSuccess(state,action);  
         case actionTypes.SIGN_UP_FAIL: return signUpFail(state,action);  
+        case actionTypes.GOOGLE_AUTH_START: return googleAuthStart(state,action);
         case actionTypes.GOOGLE_AUTH_SUCCESS: return googleAuthSuccess(state,action);  
         case actionTypes.GOOGLE_AUTH_FAIL: return googleAuthFail(state,action);  
         default: return state;

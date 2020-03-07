@@ -136,6 +136,12 @@ export const signUp = (email, password) =>{
 
 //google
 
+export const googleAuthStart= () =>{
+    return{
+        type:actionTypes.GOOGLE_AUTH_START
+    };
+}
+
 export const googleAuthFail= (error) =>{
     return{
         type:actionTypes.GOOGLE_AUTH_FAIL,
@@ -152,7 +158,9 @@ export const googleAuthSuccess = (user) =>{
 
 
 export const googleAuth = () =>{
-    return dispatch => {auth.signInWithPopup(provider)
+    return dispatch => {
+        dispatch(googleAuthStart());
+        auth.signInWithPopup(provider)
          .then(res =>{ 
              dispatch(googleAuthSuccess(res.user))
            })

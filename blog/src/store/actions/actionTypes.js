@@ -16,5 +16,6 @@ export const LOGOUT= 'LOGOUT';
 export const SIGN_UP_START= 'SIGN_UP_START';
 export const SIGN_UP_SUCCESS= 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
+export const GOOGLE_AUTH_START = 'GOOGLE_AUTH_START';
 export const GOOGLE_AUTH_SUCCESS= 'GOOGLE_AUTH_SUCCESS';
 export const GOOGLE_AUTH_FAIL = 'GOOGLE_AUTH_FAIL';
