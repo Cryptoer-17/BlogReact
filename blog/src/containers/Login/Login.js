@@ -38,7 +38,7 @@ loginForm: {
     }
 },
 isFormValid : false,
-isSignup: true
+isSignup: false
 }
 
 loginWithPassword = () =>{
@@ -183,7 +183,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch => {
     return{
     onGoogleAuth: () => dispatch(actions.googleAuth()),
-    onLogin : (email,password) => dispatch(actions.login(email,password))
+    onLogin : (email,password,isSignup) => dispatch(actions.login(email,password,isSignup))
     };
   };
 

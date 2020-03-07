@@ -43,6 +43,7 @@ export const login = (email, password, isSignup) =>{
           password : password,
           returnSecureToken:true 
         }
+        console.log(isSignup);
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
         if(!isSignup){
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
