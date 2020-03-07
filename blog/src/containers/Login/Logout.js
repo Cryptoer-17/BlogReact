@@ -6,9 +6,14 @@ import * as actions from '../../store/actions/index';
 
 const Logout = ( props) =>{
 
+const {show, onLogout, hideModal,google} = props;
+console.log(google);
+if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
+console.log("entrato");
 
-const {show, onLogout, hideModal} = props;
+
+
 
 return(
 
@@ -18,7 +23,7 @@ return(
 
 <p> {user.displayName} </p>
 
-<img src = {user.photoURL}  className = {classes.UserImg} alt = "" /> 
+<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />
 
 <button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal() } }  > Esci</button>
 
@@ -28,7 +33,7 @@ return(
 </Modal>
 
 );
-
+}else return null;
 }
 
 

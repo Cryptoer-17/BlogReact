@@ -15,6 +15,7 @@ const Navigazione = (props) =>{
     const {user, userId} = props;
 
     const [show,setShow] = useState(false);
+    const [google, setGoogle] = useState(false);
 
     const showModal = () =>{
         setShow(true);
@@ -22,6 +23,15 @@ const Navigazione = (props) =>{
 
     const hideModal = () =>{
            setShow(false);}
+
+    const showGoogle =() =>{
+        setGoogle(true);
+    }
+
+    const hideGoogle = () =>{
+        setGoogle(false);
+    }
+
     
     return(
         <nav className ={classes.BarraNavigazione}>
@@ -30,8 +40,8 @@ const Navigazione = (props) =>{
             <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
             <Ricerca className = {classes.Ricerca}/>
             <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-           
-           {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} hideModal = {hideModal} /> : <Logout show = {show} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
+           {console.log(localStorage.getItem("userId"))}
+           {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
              
         </nav>
     );
