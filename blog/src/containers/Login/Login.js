@@ -112,7 +112,7 @@ submitHandlerTwo = (event) =>{
 
 
 render(){
-    console.log(this.props.show);
+    
 const {show, onGoogleAuth, user, hideModal} = this.props;
 const {loginForm, isFormValid} = this.state;
 
