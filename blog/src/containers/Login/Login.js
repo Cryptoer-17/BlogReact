@@ -38,7 +38,7 @@ loginForm: {
     }
 },
 isFormValid : false,
-isSignup: false
+isSignup: true
 }
 
 loginWithPassword = () =>{
@@ -101,14 +101,18 @@ for (let key in newForm) {
 
 }
 
-submitHandlerTwo = (event) =>{
-    
-    event.preventDefault();
-    
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, this.state.isSignup);
+submitHandlerSignIn = (event) =>{   
+    event.preventDefault();  
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false);
     this.props.hideGoogle();
     this.props.hideModal();
-    
+}
+
+submitHandlerSignUp = (event) =>{   
+    event.preventDefault();  
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true);
+    this.props.hideGoogle();
+    this.props.hideModal();
 }
 
 
@@ -152,10 +156,10 @@ const formData = [];
         
       {form}  
     <div className = {classes.ButtonContainer}>
-        <button className = {classes.AccediButton} onClick = { this.submitHandlerTwo}  disabled = { !isFormValid} > Accedi</button>
+        <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
         <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle();}}> Accedi con Google</button>
     </div>
-     <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !isFormValid}> Registrati</button> 
+     <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
     
     
         
