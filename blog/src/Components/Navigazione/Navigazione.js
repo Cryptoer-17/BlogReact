@@ -45,7 +45,7 @@ const Navigazione = (props) =>{
       <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
       <Ricerca className = {classes.Ricerca}/>
       <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-     {show ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
+     {(show && props.error===null) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
        
   </nav>);
 
@@ -54,7 +54,8 @@ const Navigazione = (props) =>{
     }
 
     if(props.error){
-        error =(<Modal show={true}>{props.error.message}</Modal>);
+        
+        error =(<Modal show={!show} modalClosed={hideModal}>{props.error.message} </Modal>);
     }
 
     return(

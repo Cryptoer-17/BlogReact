@@ -60,7 +60,10 @@ export const login = (email, password, isSignup) =>{
         })
         .catch( err =>{
             console.log(err.response.data.error);
-            dispatch(loginFail(err.response.data.error));
+            dispatch(loginFail(err.response.data.error)); 
+            setTimeout(() =>{
+            dispatch(logout());
+            },  3000);
         });
     }; 
 }
