@@ -130,11 +130,14 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value)
     }
     this.props.onPostArticolo(articolo);
-    this.showModal();
+    setTimeout(() => this.props.onInitArticoli() , 300) 
+    setTimeout(() =>   this.showModal() , 500)    
+
     if(!this.props.loading)
-    setTimeout(() => this.props.onInitArticoli() , 1000)  
     setTimeout(() => this.props.history.push("/") , 2000)  
 
+    
+  
 }
 
 
@@ -232,13 +235,11 @@ return(
  
 
  <Modal  show = {show}  modalClosed = {  this.hideModal } >
-         {loading ? 
-         <Spinner/>
-        : esito }
+         {!loading ? 
+        esito
+        :  <Spinner/>}
     </Modal>
   
-
-
 
 </div>
 

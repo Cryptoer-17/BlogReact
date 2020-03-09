@@ -8,8 +8,7 @@ import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton'
 
 class Homepage extends Component{
 
-
-
+ 
    clickHeartHandler(art){
       const anteprima = {
           autore : art.articolo.autore,
@@ -108,7 +107,6 @@ const mapStateToProps = state =>{
       articoli : state.articolo.articoli
    }
 }
-
 
 
 export default connect(mapStateToProps)(Homepage);
