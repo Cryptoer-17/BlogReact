@@ -103,22 +103,31 @@ for (let key in newForm) {
 
 submitHandlerSignIn = (event) =>{   
     event.preventDefault();  
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false);
+    const errore="Problemi di accesso, controlla che i dati inseriti siano corretti";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false,errore);
     this.props.hideGoogle();
     this.props.hideModal();
+    this.props.showMessage();
+    this.props.messageLogin();
+
 }
 
 submitHandlerSignUp = (event) =>{   
     event.preventDefault();  
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true);
+    const errore = "Problemi di registrazione, controlla che la mail inserita non sia già esistente";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
     this.props.hideGoogle();
     this.props.hideModal();
+
+    this.props.showMessage();
+    this.props.messageRegister();
+
 }
 
 
 render(){
     
-const {show, onGoogleAuth, user, hideModal, showGoogle, loading} = this.props;
+const {show, onGoogleAuth, user, hideModal, showGoogle, loading, showMessage, messageLogin} = this.props;
 const {loginForm, isFormValid} = this.state;
 
 const formData = [];
@@ -157,7 +166,7 @@ const formData = [];
       {form}  
     <div className = {classes.ButtonContainer}>
         <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
-        <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle();}}> Accedi con Google</button>
+        <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle(); showMessage(); messageLogin();}}> Accedi con Google</button>
     </div>
      <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
     
@@ -187,7 +196,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch => {
     return{
     onGoogleAuth: () => dispatch(actions.googleAuth()),
-    onLogin : (email,password,isSignup) => dispatch(actions.login(email,password,isSignup))
+    onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore))
     };
   };
 

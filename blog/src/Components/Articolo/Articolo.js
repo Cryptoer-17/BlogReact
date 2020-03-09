@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classes from './Articolo.module.css';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
-import Autore from '../../Components/Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
 import Tag from '../Tag/Tag';
 import Info from '../InfoArticolo/InfoArticolo';
@@ -92,18 +91,17 @@ class Articolo extends Component{
             }
 
             articoloVisualizzato = 
-            // <Info className = {classes.Info} autore = {articolo.autore} categoria = {articolo.categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
 
             <div className={classes.Articolo}>
+                <Info className = {classes.Info} autore = {articolo.autore} categoria = {articolo.categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+
                 <div className={classes.Titolo}>
                <h1>{articolo.titolo}</h1>
                </div>
-                <h5>{articolo.categoria}</h5>
             <div className={classes.Sottotitolo}>
             <p>{articolo.sottotitolo} </p>
             </div>
             <div>
-            <Autore name={articolo.autore} />
             </div>
 
             <div className={classes.Imgdiv}>
