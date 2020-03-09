@@ -99,45 +99,6 @@ export const loginCheckState = () =>{
     }
 };
 
-//registrazione
-
-
-export const signUpStart = () =>{
-
-    return{
-        type:actionTypes.SIGN_UP_START
-    };
-}
-
-
-export const signUpFail= (error) =>{
-    return{
-        type:actionTypes.SIGN_UP_FAIL,
-        error:error
-    };
-}
-
-export const signUpSuccess = () =>{
-    return{
-        type:actionTypes.SIGN_UP_SUCCESS
-        };
-    
-}
-
-export const signUp = (email, password) =>{
-   /*  return dispatch => {
-       dispatch(signUpStart());
-        
-        .then(res =>{ 
-            dispatch(signUpSuccess())
-          })
-        .catch(error => { 
-            dispatch(signUpFail(error));
-        });
-    }*/
-
-}
-
 
 //google
 
@@ -154,10 +115,11 @@ export const googleAuthFail= (error) =>{
     };
 }
 
-export const googleAuthSuccess = (user) =>{
+export const googleAuthSuccess = (user, token) =>{
     return{
         type:actionTypes.GOOGLE_AUTH_SUCCESS,
-        user:user
+        user:user,
+        token:token
         };
 }
 
@@ -167,10 +129,10 @@ export const googleAuth = () =>{
         dispatch(googleAuthStart());
         auth.signInWithPopup(provider)
          .then(res =>{ 
-             dispatch(googleAuthSuccess(res.user))
+             dispatch(googleAuthSuccess(res.user, res.credential.accessToken))
            })
          .catch(error => { 
-             dispatch(signUpFail(error));
+             dispatch(googleAuthFail(error));
          });
      }
 }
