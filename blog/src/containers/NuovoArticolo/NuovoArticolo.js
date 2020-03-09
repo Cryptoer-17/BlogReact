@@ -76,6 +76,16 @@ state = {
 }
 
 
+countWordsHandler = () =>{
+  let minuti = 0;
+  let parole = this.state.form.testo.value.trim().split(' ').length;
+    for(let i = 0; i < parole; i++){
+        if(i%100 === 0 && i>1)
+        minuti++;
+    }
+return minuti;
+}
+
 addTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
@@ -116,7 +126,8 @@ deleteTagHandler = (tag) =>{
         categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
         img: this.state.img,
-        data: new Date().toLocaleDateString()
+        data: new Date().toLocaleDateString(),
+        minuti: this.countWordsHandler()
     }
     this.props.onPostArticolo(articolo);
     this.showModal();
@@ -153,7 +164,8 @@ checkValidityOfInput = (event, id) =>{
 
 
 render(){
-
+console.log(this.countWordsHandler())
+  
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
     const {loading, esito} = this.props;
  
@@ -187,11 +199,13 @@ return(
         />
         ) }
 
+{ /* 
 <div  className = {classes.editor}>
     <Editor body_placeholder ={'Scrivi qualcosa'}  /> 
 
     </div>
 
+*/}
 
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
