@@ -7,7 +7,8 @@ const initialState = {
     userId: null,
     error:null,
     loading:false,
-    user:null
+    user:null,
+    loginRedirectPath: '/' 
 }
 
 const loginStart = (state) =>{
@@ -39,6 +40,10 @@ const logout = (state,action) =>{
 
 }
 
+const setLoginRedirectPath = (state, action) =>{
+    return updateObject(state , {loginRedirectPath : action.path})
+
+}
 
 export const googleAuthStart= (state,action) =>{
     return updateObject( state, { loading:true } );
@@ -65,6 +70,8 @@ const reducer = (state = initialState,action) => {
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);   
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);  
         case actionTypes.LOGOUT: return logout(state,action);   
+        case actionTypes.SET_LOGIN_REDIRECT_PATH : return setLoginRedirectPath(state,action);
+
         case actionTypes.GOOGLE_AUTH_START: return googleAuthStart(state,action);
         case actionTypes.GOOGLE_AUTH_SUCCESS: return googleAuthSuccess(state,action);  
         case actionTypes.GOOGLE_AUTH_FAIL: return googleAuthFail(state,action);  

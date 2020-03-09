@@ -9,6 +9,7 @@ import styled, { keyframes } from 'styled-components';
 import {connect } from 'react-redux';
 import Spinner from '../UI/Spinner/Spinner';
 import Modal from '../UI/Modal/Modal';
+import {Redirect } from 'react-router-dom';
 
 const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;
@@ -84,7 +85,8 @@ const Navigazione = (props) =>{
         error =(<Modal show={!show} modalClosed={showModal} >{props.error} </Modal>);
     }
     else if(props.error === null && props.userId!==null && showmsg){
-        messageSuccess = ( <Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>);
+        messageSuccess = ( <Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>   
+        );
     }
 
     return(
@@ -98,11 +100,14 @@ const Navigazione = (props) =>{
 
 
 const mapStateToProps = state =>{
+    
     return{
         loading: state.login.loading,
         error : state.login.error,
         tokenId: state.login.token,
-        userId : state.login.userId
+        userId : state.login.userId,
+        loginRedirectPath: state.login.loginRedirectPath
+
     };
 };
 
