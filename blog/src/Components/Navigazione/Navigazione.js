@@ -65,7 +65,7 @@ const Navigazione = (props) =>{
       <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
       <Ricerca className = {classes.Ricerca}/>
       <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-     {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage} messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
+     {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
        
   </nav>);
 
@@ -76,8 +76,8 @@ const Navigazione = (props) =>{
     if(props.error){
         error =(<Modal show={!show} modalClosed={hideModal}>{props.error.message} </Modal>);
     }
-    else if(props.error === null && props.tokenId!==null && showmsg){
-        console.log(showmsg);
+    else if(props.error === null && props.userId!==null && showmsg){
+        console.log("entrato");
         messageSuccess = ( <Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>);
     }
 
@@ -92,11 +92,12 @@ const Navigazione = (props) =>{
 
 
 const mapStateToProps = state =>{
-    console.log(state.login.error);
+    console.log(state.login.user);
     return{
         loading: state.login.loading,
         error : state.login.error,
-        tokenId: state.login.token
+        tokenId: state.login.token,
+        userId : state.login.userId
     };
 };
 

@@ -125,7 +125,7 @@ submitHandlerSignUp = (event) =>{
 
 render(){
     
-const {show, onGoogleAuth, user, hideModal, showGoogle, loading} = this.props;
+const {show, onGoogleAuth, user, hideModal, showGoogle, loading, showMessage, messageLogin} = this.props;
 const {loginForm, isFormValid} = this.state;
 
 const formData = [];
@@ -164,7 +164,7 @@ const formData = [];
       {form}  
     <div className = {classes.ButtonContainer}>
         <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
-        <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle();}}> Accedi con Google</button>
+        <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle(); showMessage(); messageLogin();}}> Accedi con Google</button>
     </div>
      <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
     
