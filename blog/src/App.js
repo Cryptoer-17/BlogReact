@@ -7,7 +7,7 @@ import Navigazione from './Components/Navigazione/Navigazione';
 import Articolo from './Components/Articolo/Articolo';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
-import Login from './containers/Login/Login'; 
+import MainPage from './Components/MainPage/MainPage'; 
 
 class App extends Component {
 
@@ -28,11 +28,10 @@ componentDidMount(){
          <BrowserRouter>
          <Navigazione/>
           <Switch>
-           {/**show=true */}
-            <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> 
-            <Route path="/pubblica" exact  component={NuovoArticolo} /> 
-            <Route path="/ricerca"  component = {RisultatiRicerca} /> 
-            <Route path="/articolo/:id" component ={Articolo} />
+           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={MainPage} /> }
+           {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={NuovoArticolo} /> : null }
+          { localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : }
+            {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={Articolo} /> : null}
            </Switch>
          </BrowserRouter>
         
@@ -46,8 +45,7 @@ const mapStateToProps = state =>{
 
   return{
       loading: state.articolo.loading,
-      error : state.articolo.error,
-      token : state.login.token
+      error : state.articolo.error
   };
 };
 
