@@ -30,7 +30,7 @@ componentDidMount(){
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={MainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={NuovoArticolo} /> : null }
-          { localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : }
+          { localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={Articolo} /> : null}
            </Switch>
          </BrowserRouter>

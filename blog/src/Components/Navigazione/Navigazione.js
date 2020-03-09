@@ -63,12 +63,10 @@ const Navigazione = (props) =>{
 
     let form =  (<nav className ={classes.BarraNavigazione}>
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
-      <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink>
-      <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
-      <Ricerca className = {classes.Ricerca}/>
-      {console.log(show)}
-      {console.log(props.error)}
-      {console.log(showmsg)}
+    {localStorage.getItem("userId") ? <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
+    {localStorage.getItem("userId") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : null   }  
+    {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }
+
       <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
      {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
        
@@ -79,8 +77,7 @@ const Navigazione = (props) =>{
     }
 
     if(props.error){
-        console.log("entrato");
-
+       
         error =(<Modal show={!show} modalClosed={showModal} >{props.error} </Modal>);
     }
     else if(props.error === null && props.userId!==null && showmsg){
