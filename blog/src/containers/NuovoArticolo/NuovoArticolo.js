@@ -115,7 +115,8 @@ deleteTagHandler = (tag) =>{
         descrizione: this.state.form.descrizione.value.trim(),
         categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
-        img: this.state.img
+        img: this.state.img,
+        data: new Date().toLocaleDateString()
     }
     this.props.onPostArticolo(articolo);
     this.showModal();

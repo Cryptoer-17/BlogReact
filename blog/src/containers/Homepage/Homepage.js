@@ -65,6 +65,7 @@ render(){
          sottotitolo = {art.articolo.sottotitolo}
          testo = {art.articolo.testo}
          titolo = {art.articolo.titolo}
+         data = {art.articolo.data}
          clickHeart = {() => this.clickHeartHandler(art)}
          key={art.key}/>);
    })

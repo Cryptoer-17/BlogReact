@@ -12,7 +12,7 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart} = this.props; 
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data} = this.props; 
 
 
         if(this.props.like){
@@ -25,7 +25,7 @@ class AnteprimaArticolo extends Component{
 
         variabile =  <div className={classes.AnteprimaArticolo}>
            
-<Info className = {classes.Info} autore = {autore} categoria = {categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+<Info className = {classes.Info} autore = {autore} categoria = {categoria} data = {data} tempoLettura = "2 min. " />
 
            <NavLink to={"/articolo/" + this.props.id} style={{
                 textDecoration : 'none',
