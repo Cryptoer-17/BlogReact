@@ -35,7 +35,7 @@ export const checkLoginTimeout = (expirtationTime) =>{
 
 }
 
-export const login = (email, password, isSignup) =>{
+export const login = (email, password, isSignup,errore) =>{
     return dispatch =>{
         dispatch(loginStart());
         const authData ={
@@ -59,8 +59,8 @@ export const login = (email, password, isSignup) =>{
             dispatch(checkLoginTimeout(response.data.expiresIn))
         })
         .catch( err =>{
-            console.log(err.response.data.error);
-            dispatch(loginFail(err.response.data.error)); 
+            console.log(errore);
+            dispatch(loginFail(errore)); 
             setTimeout(() =>{
             dispatch(logout());
             },  3000);

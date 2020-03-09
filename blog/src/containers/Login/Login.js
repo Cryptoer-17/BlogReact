@@ -103,7 +103,8 @@ for (let key in newForm) {
 
 submitHandlerSignIn = (event) =>{   
     event.preventDefault();  
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false);
+    const errore="Problemi di accesso, controlla che i dati inseriti siano corretti";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false,errore);
     this.props.hideGoogle();
     this.props.hideModal();
     this.props.showMessage();
@@ -113,7 +114,8 @@ submitHandlerSignIn = (event) =>{
 
 submitHandlerSignUp = (event) =>{   
     event.preventDefault();  
-    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true);
+    const errore = "Problemi di registrazione, controlla che la mail inserita non sia già esistente";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
     this.props.hideGoogle();
     this.props.hideModal();
 
@@ -194,7 +196,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch => {
     return{
     onGoogleAuth: () => dispatch(actions.googleAuth()),
-    onLogin : (email,password,isSignup) => dispatch(actions.login(email,password,isSignup))
+    onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore))
     };
   };
 
