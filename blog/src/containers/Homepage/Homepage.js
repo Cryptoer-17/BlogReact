@@ -18,11 +18,14 @@ class Homepage extends Component{
           like: !art.articolo.like,
           sottotitolo : art.articolo.sottotitolo,
           testo : art.articolo.testo,
-          titolo : art.articolo.titolo
+          titolo : art.articolo.titolo,
+          minuti:art.articolo.minuti,
+          data:art.articolo.data
       } 
       const id = art.key;
       
-      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
+   
+      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
       .then(response => {
          this.props.mount();
       })
