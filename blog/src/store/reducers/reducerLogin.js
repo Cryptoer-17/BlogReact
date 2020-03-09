@@ -31,11 +31,14 @@ const loginSuccess = (state,action) =>{
 }
 
 const logout = (state,action) =>{
+    
     auth.signOut(); 
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("expirationDate");
+    window.location.reload();
+ 
     return updateObject( state, initialState );
 
 }
