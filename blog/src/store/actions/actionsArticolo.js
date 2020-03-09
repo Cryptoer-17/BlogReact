@@ -28,7 +28,8 @@ export const initArticoli = () =>{
     return dispatch =>{
         const temparray = [];
         dispatch(setArticoliStart());
-        axios.get('/articoli.json')
+        const token = localStorage.getItem('token');
+        axios.get('/articoli.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
