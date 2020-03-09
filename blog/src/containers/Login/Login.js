@@ -106,6 +106,9 @@ submitHandlerSignIn = (event) =>{
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false);
     this.props.hideGoogle();
     this.props.hideModal();
+    this.props.showMessage();
+    this.props.messageLogin();
+
 }
 
 submitHandlerSignUp = (event) =>{   
@@ -113,6 +116,10 @@ submitHandlerSignUp = (event) =>{
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true);
     this.props.hideGoogle();
     this.props.hideModal();
+
+    this.props.showMessage();
+    this.props.messageRegister();
+
 }
 
 

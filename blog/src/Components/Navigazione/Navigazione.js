@@ -17,7 +17,18 @@ const Navigazione = (props) =>{
     const {user, userId} = props;
 
     const [show,setShow] = useState(false);
+    const [showmsg, setShowMsg] = useState(false);
     const [google, setGoogle] = useState(false);
+    const [message, setMessage] = useState("");
+
+
+    const showMessage = () =>{
+        setShowMsg(true);
+    }
+
+    const hideMessage = () =>{
+        setShowMsg(false);
+    }
 
     const showModal = () =>{
         setShow(true);
@@ -34,9 +45,18 @@ const Navigazione = (props) =>{
         setGoogle(false);
     }
 
-    let error= null;
+    const messageLogin=() =>{
+        setMessage("Login effettuato correttamente");
+    }
 
-    
+    const messageRegister= () =>{
+        setMessage("Registrazione effettuata correttamente");
+    }
+
+
+
+    let error= null;
+    let messageSuccess = null;
 
 
     let form =  (<nav className ={classes.BarraNavigazione}>
@@ -45,7 +65,7 @@ const Navigazione = (props) =>{
       <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> 
       <Ricerca className = {classes.Ricerca}/>
       <button className = {classes.LoginButton} onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-     {(show && props.error===null) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} /> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
+     {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage} messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}
        
   </nav>);
 
@@ -54,13 +74,17 @@ const Navigazione = (props) =>{
     }
 
     if(props.error){
-        
         error =(<Modal show={!show} modalClosed={hideModal}>{props.error.message} </Modal>);
+    }
+    else if(props.error === null && props.tokenId!==null && showmsg){
+        console.log(showmsg);
+        messageSuccess = ( <Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>);
     }
 
     return(
         <div>
             {form}
+            {messageSuccess}
             {error}
         </div>
     );
@@ -71,7 +95,8 @@ const mapStateToProps = state =>{
     console.log(state.login.error);
     return{
         loading: state.login.loading,
-        error : state.login.error
+        error : state.login.error,
+        tokenId: state.login.token
     };
 };
 
