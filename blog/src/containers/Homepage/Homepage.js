@@ -66,6 +66,7 @@ render(){
          testo = {art.articolo.testo}
          titolo = {art.articolo.titolo}
          data = {art.articolo.data}
+         minuti = {art.articolo.minuti}
          clickHeart = {() => this.clickHeartHandler(art)}
          key={art.key}/>);
    })

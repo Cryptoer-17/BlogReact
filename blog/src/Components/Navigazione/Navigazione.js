@@ -68,7 +68,6 @@ const Navigazione = (props) =>{
 
 
 const mapStateToProps = state =>{
-    console.log(state.login.error);
     return{
         loading: state.login.loading,
         error : state.login.error

@@ -76,9 +76,9 @@ state = {
 }
 
 
-countWordsHandler = () =>{
+countWordsHandler = (testo) =>{
   let minuti = 0;
-  let parole = this.state.form.testo.value.trim().split(' ').length;
+  let parole = testo.trim().split(' ').length;
     for(let i = 0; i < parole; i++){
         if(i%100 === 0 && i>1)
         minuti++;
@@ -127,7 +127,7 @@ deleteTagHandler = (tag) =>{
         tags: this.state.tags,
         img: this.state.img,
         data: new Date().toLocaleDateString(),
-        minuti: this.countWordsHandler()
+        minuti: this.countWordsHandler(this.state.form.testo.value)
     }
     this.props.onPostArticolo(articolo);
     this.showModal();
@@ -164,13 +164,10 @@ checkValidityOfInput = (event, id) =>{
 
 
 render(){
-console.log(this.countWordsHandler())
-  
+
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
     const {loading, esito} = this.props;
  
-
-   
     const formData = [];
     for(let key in  form){
         formData.push( {id: key , obj:  form[key] });
