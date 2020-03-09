@@ -76,6 +76,16 @@ state = {
 }
 
 
+countWordsHandler = (testo) =>{
+  let minuti = 0;
+  let parole = testo.trim().split(' ').length;
+    for(let i = 0; i < parole; i++){
+        if(i%100 === 0 && i>1)
+        minuti++;
+    }
+return minuti;
+}
+
 addTagHandler = (tag) =>{
     let tagsList = [...this.state.tagsList];
     let tags = this.state.tags;
@@ -115,14 +125,19 @@ deleteTagHandler = (tag) =>{
         descrizione: this.state.form.descrizione.value.trim(),
         categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
-        img: this.state.img
+        img: this.state.img,
+        data: new Date().toLocaleDateString(),
+        minuti: this.countWordsHandler(this.state.form.testo.value)
     }
     this.props.onPostArticolo(articolo);
-    this.showModal();
+    setTimeout(() => this.props.onInitArticoli() , 300) 
+    setTimeout(() =>   this.showModal() , 500)    
+
     if(!this.props.loading)
-    setTimeout(() => this.props.onInitArticoli() , 1000)  
     setTimeout(() => this.props.history.push("/") , 2000)  
 
+    
+  
 }
 
 
@@ -156,8 +171,6 @@ render(){
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
     const {loading, esito} = this.props;
  
-
-   
     const formData = [];
     for(let key in  form){
         formData.push( {id: key , obj:  form[key] });
@@ -186,11 +199,13 @@ return(
         />
         ) }
 
+{ /* 
 <div  className = {classes.editor}>
     <Editor body_placeholder ={'Scrivi qualcosa'}  /> 
 
     </div>
 
+*/}
 
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
@@ -220,13 +235,11 @@ return(
  
 
  <Modal  show = {show}  modalClosed = {  this.hideModal } >
-         {loading ? 
-         <Spinner/>
-        : esito }
+         {!loading ? 
+        esito
+        :  <Spinner/>}
     </Modal>
   
-
-
 
 </div>
 

@@ -44,21 +44,21 @@
 
 .Titolo {
     text-align: center;
-    height:30px;
-    width: 40%;
+    height:5%;
+    width: 50%;
     margin-bottom:8px;
 }
 
 .Sottotitolo{
     text-align: left;
-    width: 50%;
-    height:25px;
+    width: 60%;
+    height:5%;
     border-bottom: 0.3px solid #B4ADAD;
     margin-bottom:5px;
 }
 
 
-.Sottotitolo h4 {
+.Sottotitolo h5{
     margin-left: 5px;
     margin-top:0px;
 }

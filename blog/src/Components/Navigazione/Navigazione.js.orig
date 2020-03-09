@@ -98,6 +98,10 @@ const Navigazione = (props) =>{
 
 
 const mapStateToProps = state =>{
+<<<<<<< HEAD
+=======
+    console.log(state.login.user);
+>>>>>>> 09ceb302a82af58840fa425dcd13d56805908bb2
     return{
         loading: state.login.loading,
         error : state.login.error,
