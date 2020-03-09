@@ -18,8 +18,9 @@ class Articolo extends Component{
     componentDidMount(){
         const id= this.props.match.params.id;
         this.setState({loading : true})
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json')
+        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"))
         .then(response =>{
+            console.log(response)
             if (typeof response.data.tags === 'undefined'){
                 response.data.tags = [];
             }
@@ -46,7 +47,9 @@ class Articolo extends Component{
             like: !this.state.articolo.like,
             sottotitolo : this.state.articolo.sottotitolo,
             testo : this.state.articolo.testo,
-            titolo : this.state.articolo.titolo
+            titolo : this.state.articolo.titolo,
+            minuti:this.state.articolo.minuti,
+            data:this.state.articolo.data
         } 
 
         this.setState({
@@ -55,7 +58,7 @@ class Articolo extends Component{
          
         const id= this.props.match.params.id;
 
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json',anteprima)
+        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
         .then(response => console.log(response))
         .catch(error => console.log(error));
 
@@ -93,7 +96,7 @@ class Articolo extends Component{
             articoloVisualizzato = 
 
             <div className={classes.Articolo}>
-                <Info className = {classes.Info} autore = {articolo.autore} categoria = {articolo.categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+                <Info className = {classes.Info} autore = {articolo.autore} categoria = {articolo.categoria} data = {articolo.data} tempoLettura = {articolo.minuti} />
 
                 <div className={classes.Titolo}>
                <h1>{articolo.titolo}</h1>
