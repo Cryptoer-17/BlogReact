@@ -33,7 +33,7 @@ const SetArticoliStart = (state, action) =>{
 }
 
 const setArticoliSuccess = (state, action ) =>{
-    return updateObject(state , {articoli : action.articoli, error:null, loading : false})
+    return updateObject(state , {articoli : action.articoli.reverse(), error:null, loading : false})
 }
 
 const setArticoliFail = (state , action) =>{
@@ -62,7 +62,7 @@ let articoli = [];
     if(action.filtro === "categoria"){
         articoli= state.articoli.filter(art => art.articolo.categoria === state.cerca);
     }
-
+  
     return updateObject( state, { risultatiRicerca: articoli} );
 
 }
