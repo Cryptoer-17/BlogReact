@@ -76,6 +76,8 @@ componentDidUpdate(prevState){
                     sottotitolo = {art.articolo.sottotitolo}
                     testo = {art.articolo.testo}
                     titolo = {art.articolo.titolo}
+                    data = {art.articolo.data}
+                    minuti = {art.articolo.minuti}
                     key={art.key}/>          
                   )
 
