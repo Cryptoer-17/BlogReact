@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
 import NuovoArticolo from './containers/NuovoArticolo/NuovoArticolo';
@@ -30,8 +30,9 @@ componentDidMount(){
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={MainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={NuovoArticolo} /> : null }
-          { localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
+          {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={Articolo} /> : null}
+            <Redirect to= "/" />
            </Switch>
          </BrowserRouter>
         
