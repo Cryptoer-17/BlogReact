@@ -5,6 +5,8 @@ import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
+import { withRouter } from "react-router";
+
 
 class Login extends Component{
 
@@ -109,6 +111,10 @@ submitHandlerSignIn = (event) =>{
     this.props.hideModal();
     this.props.showMessage();
     this.props.messageLogin();
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500); 
+
 
 }
 
@@ -190,18 +196,21 @@ const mapStateToProps = state =>{
   user: state.login.user,
         error : state.login.error,
         isAuthenticated : state.login.token !== null
+
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return{
     onGoogleAuth: () => dispatch(actions.googleAuth()),
-    onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore))
+    onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
+    onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
+
     };
   };
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
 
 

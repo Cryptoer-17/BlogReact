@@ -8,6 +8,7 @@ export {
 export {
 login,
 logout,
-googleAuth
+googleAuth,
+setLoginRedirectPath
 }from './actionsLogin';
 
