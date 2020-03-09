@@ -14,6 +14,7 @@ class App extends Component {
 componentDidMount(){
   
 
+
   this.props.onInitArticoli();
 }
 
@@ -42,9 +43,11 @@ componentDidMount(){
 }
 
 const mapStateToProps = state =>{
+
   return{
       loading: state.articolo.loading,
-      error : state.articolo.error
+      error : state.articolo.error,
+      token : state.login.token
   };
 };
 
