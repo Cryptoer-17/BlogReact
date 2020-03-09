@@ -33,26 +33,12 @@ const logout = (state,action) =>{
     auth.signOut(); 
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("expirationDate");
     return updateObject( state, initialState );
 
 }
 
-
-const signUpStart = (state) =>{
-    return updateObject( state, { loading:true } );
-
-}
-
-
-const signUpFail= (state) =>{
-    return updateObject( state, { loading:false } );
-   
-}
-
-const signUpSuccess = (state,action) =>{
-   
-    
-}
 
 export const googleAuthStart= (state,action) =>{
     return updateObject( state, { loading:true } );
@@ -65,8 +51,10 @@ export const googleAuthFail= (state,action) =>{
 }
 
 export const googleAuthSuccess = (state,action) =>{
-    localStorage.setItem("userId", JSON.stringify(action.user));
-    return updateObject( state, { user:action.user, userId: action.user.uid, loading:false } );
+    localStorage.setItem("user", JSON.stringify(action.user));
+    localStorage.setItem("userId", action.user.uid );
+    localStorage.setItem("token", action.token );
+    return updateObject( state, { user:action.user, userId: action.user.uid, token : action.token, loading:false } );
 }
 
 
@@ -76,10 +64,7 @@ const reducer = (state = initialState,action) => {
         case actionTypes.LOGIN_START: return loginStart(state,action);
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);   
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);  
-        case actionTypes.LOGOUT: return logout(state,action);  
-        case actionTypes.SIGN_UP_START: return signUpStart(state,action);  
-        case actionTypes.SIGN_UP_SUCCESS: return signUpSuccess(state,action);  
-        case actionTypes.SIGN_UP_FAIL: return signUpFail(state,action);  
+        case actionTypes.LOGOUT: return logout(state,action);   
         case actionTypes.GOOGLE_AUTH_START: return googleAuthStart(state,action);
         case actionTypes.GOOGLE_AUTH_SUCCESS: return googleAuthSuccess(state,action);  
         case actionTypes.GOOGLE_AUTH_FAIL: return googleAuthFail(state,action);  

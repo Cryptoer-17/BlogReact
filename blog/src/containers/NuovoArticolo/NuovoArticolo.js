@@ -127,7 +127,8 @@ deleteTagHandler = (tag) =>{
         tags: this.state.tags,
         img: this.state.img,
         data: new Date().toLocaleDateString(),
-        minuti: this.countWordsHandler(this.state.form.testo.value)
+        minuti: this.countWordsHandler(this.state.form.testo.value),
+        userId: localStorage.getItem("userId")
     }
     this.props.onPostArticolo(articolo);
     setTimeout(() => this.props.onInitArticoli() , 300) 
