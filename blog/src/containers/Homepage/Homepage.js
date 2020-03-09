@@ -37,7 +37,7 @@ class Homepage extends Component{
 
 render(){
 
-   let {spinner, articoli} = this.props;
+   let {spinner, articoli, errore} = this.props;
    
 
    if(spinner){
@@ -45,7 +45,7 @@ render(){
    }
    
    let errorMessage = null;
-   if(typeof this.props.errore === 'undefined'){
+   if(typeof errore === 'undefined'){
    
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
  

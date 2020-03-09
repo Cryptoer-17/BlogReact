@@ -20,7 +20,7 @@ class AnteprimaArticolo extends Component{
         }
 
         variabile = <div>
-            {this.props.titolo}
+            {titolo}
         </div>
 
         variabile =  <div className={classes.AnteprimaArticolo}>

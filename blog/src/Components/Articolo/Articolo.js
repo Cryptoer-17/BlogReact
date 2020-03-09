@@ -5,6 +5,9 @@ import Spinner from '../UI/Spinner/Spinner';
 import Autore from '../../Components/Autore/Autore';
 import ActionBar from '../ActionBar/ActionBar';
 import Tag from '../Tag/Tag';
+import Info from '../InfoArticolo/InfoArticolo';
+
+
 
 class Articolo extends Component{
     state={
@@ -89,6 +92,8 @@ class Articolo extends Component{
             }
 
             articoloVisualizzato = 
+            // <Info className = {classes.Info} autore = {articolo.autore} categoria = {articolo.categoria} data = {new Date().toLocaleDateString()} tempoLettura = "2 min. " />
+
             <div className={classes.Articolo}>
                 <div className={classes.Titolo}>
                <h1>{articolo.titolo}</h1>
