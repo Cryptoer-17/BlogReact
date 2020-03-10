@@ -52,7 +52,7 @@
 .Sottotitolo{
     text-align: left;
     width: 60%;
-    height:5%;
+    height:1%;
     border-bottom: 0.3px solid #B4ADAD;
     margin-bottom:5px;
 }
@@ -61,6 +61,7 @@
 .Sottotitolo h5{
     margin-left: 5px;
     margin-top:0px;
+    margin-bottom: 3px;
 }
 
 
