@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Profilo.module.css';
+import {connect } from 'react-redux';
+
 
 class Profilo extends Component{
 render(){
@@ -21,4 +23,13 @@ render(){
 
 }
 
-export default Profilo;
+
+const mapStateToProps = state =>{
+    console.log(state.articolo.articoli);
+    return{
+       articoli : state.articolo.articoli
+    }
+ }
+ 
+
+export default connect(mapStateToProps)(Profilo);

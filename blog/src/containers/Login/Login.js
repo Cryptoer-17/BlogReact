@@ -127,6 +127,9 @@ submitHandlerSignUp = (event) =>{
 
     this.props.showMessage();
     this.props.messageRegister();
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500); 
 
 }
 
