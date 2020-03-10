@@ -133,7 +133,7 @@ submitHandlerSignUp = (event) =>{
 
 render(){
     
-const {show, onGoogleAuth, user, hideModal, showGoogle, loading, showMessage, messageLogin} = this.props;
+const {show, hideModal} = this.props;
 const {loginForm, isFormValid} = this.state;
 
 const formData = [];

@@ -1,0 +1,11 @@
+.Profilo{
+    padding-top: 20px;
+}
+
+.Email{
+    display: flex;
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    font-family: inherit;
+}
