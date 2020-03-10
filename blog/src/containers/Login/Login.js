@@ -39,48 +39,27 @@ loginForm: {
         }
     }
 },
+signUpForm: {
+    username:{
+        type:"text",
+        value:"",
+        valid:false,
+        touched:false,
+      config:
+        { 
+         placeholder: "Username"},
+        validation: {
+        required:true,
+        minLength:4
+        }
+    }
+},
 isFormValid : false,
-isSignup: true
+isSignup: true,
+showUsername:false,
+isUsernameValid:false
 }
 
-loginWithPassword = () =>{
-    /*
-    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
-    const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
-    axios.post(url,data ).then( response => {
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        localStorage.setItem('token',response.data.idToken);
-        localStorage.setItem('userId',response.data.localId);
-        localStorage.setItem('expirationDate', expirationDate);
-}).catch(err => console.log(err));
-
-*/
-
-this.props.hideModal();
-}
-
-signUpWithPassword = () =>{
-    /*
-    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
-    const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
-    axios.post(url,data ).then( response => {
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        localStorage.setItem('token',response.data.idToken);
-        localStorage.setItem('userId',response.data.localId);
-        localStorage.setItem('expirationDate', expirationDate);
-}).catch(err => console.log(err));
-*/
-this.props.hideModal();
-}
-
-
-
-submitHandler = (event) =>{
-    event.preventDefault();
-    
-    this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value, this.state.isSignup);
-    
-}
 
 switchAuthModeHandler = () =>{
     this.setState(prevState =>{
@@ -88,55 +67,64 @@ switchAuthModeHandler = () =>{
     })
 }
 
+setUsernameShow = () =>{
+    this.setState({showUsername:true})
+}
+
+setUsernameHide= () =>{
+    this.setState({showUsername:false})
+}
+
 checkValidityOfInput = (event, id) =>{
-
-let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
-
-let newForm = {...this.state.loginForm,  [id]: {...newObj}}
-
-let formIsValid = true;
-
-for (let key in newForm) {
-    formIsValid = newForm[key].valid && formIsValid;
+    let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
+    let newForm = {...this.state.loginForm,  [id]: {...newObj}}
+    let formIsValid = true;
+    for (let key in newForm) {
+        formIsValid = newForm[key].valid && formIsValid;
+    }
+        this.setState({isFormValid:formIsValid, loginForm: newForm})
 }
-    this.setState({isFormValid:formIsValid, loginForm: newForm})
 
-}
+checkValidityOfUsername= (event) =>{
+    let newObj = { ...this.state.signUpForm.username, value: event.target.value, valid:checkValidity(event.target.value, this.state.signUpForm.username.validation), touched:true };
+    let newForm = {...this.state.signUpForm,  username: {...newObj}}
+    let formIsValid = newObj.valid;
+    this.setState({isUsernameValid:formIsValid, signUpForm: newForm})
+    }
+
 
 submitHandlerSignIn = (event) =>{   
     event.preventDefault();  
     const errore="Problemi di accesso, controlla che i dati inseriti siano corretti";
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false,errore);
-    this.props.hideGoogle();
+    //this.props.hideGoogle();
     this.props.hideModal();
-    this.props.showMessage();
+ this.props.showMessage();
     this.props.messageLogin();
-    setTimeout(() => {
+      /* setTimeout(() => {
         window.location.reload();
-    }, 1500); 
-
-
+    }, 1500); */
 }
 
 submitHandlerSignUp = (event) =>{   
     event.preventDefault();  
     const errore = "Problemi di registrazione, controlla che la mail inserita non sia già esistente";
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
-    this.props.hideGoogle();
+   // this.props.hideGoogle();
     this.props.hideModal();
+    this.setUsernameShow();
     this.props.showMessage();
     this.props.messageRegister();
     setTimeout(() => {
         window.location.reload();
     }, 1500); 
-
 }
 
 
 render(){
     
 const {show, hideModal} = this.props;
-const {loginForm, isFormValid} = this.state;
+const {loginForm, isFormValid, signUpForm, showUsername} = this.state;
 
 const formData = [];
 
@@ -164,29 +152,40 @@ const formData = [];
         
     
     return(
-    
+    <div>
     <Modal show = {show}  modalClosed = {  hideModal }>
     <div className = {classes.Login}>
-    <h3>Login</h3>
-    
-    <form>
-        
+    <h3>Login</h3>  
+    <form>       
       {form}  
     <div className = {classes.ButtonContainer}>
         <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
       {/* <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle(); showMessage(); messageLogin();}}> Accedi con Google</button> */}  
     </div>
      <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
-    
-    
         
     </form>
-    
     </div>
-    
     </Modal>
-    
+
+        <Modal show = {showUsername} modalClosed = {this.setUsernameHide}>
+            <Input 
+                    value = {signUpForm.username.value}
+                    type = {signUpForm.username.type}
+                    config = {signUpForm.usernameconfig}
+                    touched = { signUpForm.username.touched}
+                    valid = { signUpForm.username.valid}
+                    changed = {(e) => this.checkValidityOfUsername(e)}
+                    shouldValidate = {signUpForm.username.validation}
+                    />
+
+         </Modal>
+
+</div>
+
+
     );
+
 
 
 
