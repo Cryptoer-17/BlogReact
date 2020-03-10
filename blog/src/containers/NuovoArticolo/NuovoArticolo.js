@@ -131,8 +131,8 @@ deleteTagHandler = (tag) =>{
         userId: localStorage.getItem("userId")
     }
     this.props.onPostArticolo(articolo);
-    setTimeout(() => this.props.onInitArticoli() , 300) 
-    setTimeout(() =>   this.showModal() , 500)    
+    setTimeout(() => this.props.onInitArticoli() , 600) 
+    setTimeout(() =>   this.showModal() , 800)    
 
     if(!this.props.loading)
     setTimeout(() => this.props.history.push("/") , 2000)  
