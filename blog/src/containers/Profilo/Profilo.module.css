@@ -47,3 +47,20 @@
     text-rendering: unset;
    
 }
+
+.CaricaImgButton{
+    margin:auto;
+     font-size:16px;
+     margin-top:10px;
+     margin-bottom:10px;
+     width:150px;
+     outline:none;
+     padding:5px;
+     background-color: white;
+     border-radius: 8px;
+     border: 1px solid #B4ADAD;
+     display:block;
+     font-family: inherit;
+     cursor:pointer;
+ }
+ 
