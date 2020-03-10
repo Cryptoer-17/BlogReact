@@ -147,7 +147,7 @@ const formData = [];
     
     let form = formData.map(el =>
         <Input 
-        show = {this.props.show}
+        show = {show}
         value = {el.obj.value}
         key = {el.id}
         type = {el.obj.type}

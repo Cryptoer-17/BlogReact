@@ -41,7 +41,7 @@
 
 
 .LoginButton{
-   
+    cursor: pointer;
     border:none;
     background-color: transparent;
     float: left;
@@ -69,6 +69,7 @@
     margin-top: 8px;
     font-family: inherit;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .Titolo{

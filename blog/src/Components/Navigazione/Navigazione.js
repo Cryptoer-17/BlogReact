@@ -9,7 +9,7 @@ import styled, { keyframes } from 'styled-components';
 import {connect } from 'react-redux';
 import Spinner from '../UI/Spinner/Spinner';
 import Modal from '../UI/Modal/Modal';
-import {Redirect } from 'react-router-dom';
+
 
 const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;

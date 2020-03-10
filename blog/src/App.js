@@ -15,7 +15,7 @@ class App extends Component {
 componentDidMount(){
   
 
-
+if(localStorage.getItem("userId"))
   this.props.onInitArticoli();
 }
 
