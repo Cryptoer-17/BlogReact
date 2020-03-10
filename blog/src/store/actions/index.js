@@ -2,7 +2,8 @@ export {
     postArticolo,
     initArticoli,
     startRicerca,
-    ricercaArticoli
+    ricercaArticoli,
+    updateArticolo
 }from './actionsArticolo';
 
 export {
