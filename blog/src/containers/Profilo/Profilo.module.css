@@ -2,10 +2,48 @@
     padding-top: 20px;
 }
 
-.Email{
-    display: flex;
+.DatiPersonali{
     background-color: white;
     border: 1px solid #D2CACA;
     text-align: justify;
     margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
+}
+
+.ModificaDati{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 220px;
+}
+
+.ButtonEmail{
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid;
+    float: right;
+    cursor: pointer;
+}
+
+.Input{
+    margin-right: 30px;
+}
+
+
+.InputImg{
+    display:block;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding:12px;
+    width:50%;
+    outline:none;
+    border-radius: 2px;
+    font-size:14px;
+    font-family: inherit;
+    text-rendering: unset;
+   
 }
