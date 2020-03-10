@@ -69,7 +69,7 @@ const Navigazione = (props) =>{
     <button className = {classes.LoginButton}  onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
      {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}  
     {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }
-
+    <button className = {classes.LoginNew}  onClick ={ showModal} > LOGIN  </button> 
       
        
   </nav>);

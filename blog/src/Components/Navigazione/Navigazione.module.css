@@ -12,11 +12,15 @@
     z-index:80;
     opacity:0.95;
 }
+
 .BarraNavigazione a{
     margin-right:10px;
     text-decoration: none;   
     color:#1E1D1D;
 }
+
+
+
 
 .BarraNavigazione i{
     font-size: 28px;
@@ -34,6 +38,8 @@
     outline: none;
     margin-left: 10px;
 }
+
+
 
 .LoginButton{
    
@@ -55,6 +61,16 @@
     float:right;
 }
 
+
+
+.LoginNew{
+    background-color: transparent;
+    border: none;
+    float: right;
+    margin-top: 8px;
+    font-family: inherit;
+}
+
 .Titolo{
     font-weight: bold;
     font-size: 26px;
@@ -66,3 +82,30 @@
     color:#3C3A3A;
     cursor: pointer;
 }
+
+@media (max-width: 500px) {
+   
+    .Link{
+        margin-top:2px;
+        float:left;
+        font-size:20px;
+        outline: none;
+        margin-left: 0px;
+        }
+    .BarraNavigazione a{
+        text-decoration: none;   
+        color:#1E1D1D;
+        margin-right: 0px;
+        }
+    
+    .LoginNew{
+        background-color: transparent;
+        border: none;
+        float: right;
+        margin-top: 8px;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    }
+
