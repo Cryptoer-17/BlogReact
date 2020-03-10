@@ -47,12 +47,8 @@ render(){
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
    }
-<<<<<<< HEAD
    localStorage.setItem("username","us");
  
-=======
-
->>>>>>> feature_authentication
   
    let articoliVisualizzati;
     articoliVisualizzati = articoli.map((art) =>{
@@ -79,11 +75,6 @@ return(
    <div className={classes.Homepage}>
 
       <h1 className={classes.Titolo}>Blog</h1>
-<<<<<<< HEAD
-
-   
-=======
->>>>>>> feature_authentication
       {spinner}
       {errorMessage ? errorMessage : null}
       <div className={classes.ContainerArticoli} >
