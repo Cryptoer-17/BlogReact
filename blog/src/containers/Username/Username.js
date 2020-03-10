@@ -6,7 +6,7 @@ import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
 import { withRouter } from "react-router";
-
+import { FaThumbsUp, FaThumbsDown} from "react-icons/fa";
 
 class Username extends Component{
 
@@ -61,7 +61,7 @@ const {username, isFormValid, signUpForm} = this.state;
 
         <Modal show = {show} modalClosed = {modalClosed}>
            <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
-           <p>Puoi usare lettere, </p>
+          
             <Input 
                     value = {username.value}
                     type = {username.type}
@@ -72,6 +72,22 @@ const {username, isFormValid, signUpForm} = this.state;
                     shouldValidate = {username.validation}
                     />
 
+        <div className = {classes.Rules}>
+        <ul>
+         <FaThumbsUp/>
+        <li>Lettere</li>
+        <li>Numeri</li>
+        <li>Underscore (_)</li>
+        </ul>
+        <ul>
+       <FaThumbsDown/>
+        <li>Spazi</li>
+        <li>Altri caratteri speciali ( ?, $, !,*, ecc..)</li>
+        <li>Meno di 4 caratteri</li>
+        <li>Più di 15 caratteri</li>
+        </ul>
+        </div>
+       <button>Annulla</button> <button>Conferma</button>
          </Modal>
 
 
