@@ -53,7 +53,7 @@ submitHandlerSignIn = (event) =>{
 render(){
     
 const {show, modalClosed} = this.props;
-const {username, isFormValid, signUpForm} = this.state;
+const {username, isFormValid} = this.state;
 
   
     
@@ -89,8 +89,6 @@ const {username, isFormValid, signUpForm} = this.state;
         </div>
        <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton}>Conferma</button>
          </Modal>
-
-
 
     );
 

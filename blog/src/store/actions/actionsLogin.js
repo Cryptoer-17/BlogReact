@@ -109,6 +109,12 @@ export const loginCheckState = () =>{
 };
 
 
+export const setUsername = (username) =>{
+
+}
+
+
+
 //google
 
 export const googleAuthStart= () =>{
