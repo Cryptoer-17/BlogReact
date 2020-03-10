@@ -33,17 +33,19 @@ class AnteprimaArticolo extends Component{
             }}>
             <div className={classes.Titolo}>
             <h1>{titolo}</h1>
-            </div>
-            <div className={classes.Sottotitolo}>
-       
+            </div>{ sottotitolo ?   <div className={classes.Sottotitolo}>
             <h5>{sottotitolo} </h5> 
-            </div>
-            <div className={classes.Imgdiv}>
+            </div> : null } 
+          
+          {img ? <div className={classes.Imgdiv}>
                 <img className={classes.Img} src={img} alt="" />
-            </div>
-            <div className={classes.Testo}>
-            <p>{descrizione}</p>
-            </div></NavLink>
+            </div> : null}  
+
+          {descrizione ?
+          <div className={classes.Testo}>
+          <p>{descrizione}</p>
+          </div>
+          : null}  </NavLink>
            
          <ActionBar className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 

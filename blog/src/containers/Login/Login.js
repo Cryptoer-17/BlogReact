@@ -99,11 +99,11 @@ submitHandlerSignIn = (event) =>{
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false,errore);
     //this.props.hideGoogle();
     this.props.hideModal();
- this.props.showMessage();
+     this.props.showMessage();
     this.props.messageLogin();
-      /* setTimeout(() => {
+      setTimeout(() => {
         window.location.reload();
-    }, 1500); */
+    }, 1500); 
 }
 
 submitHandlerSignUp = (event) =>{   
@@ -113,7 +113,7 @@ submitHandlerSignUp = (event) =>{
    // this.props.hideGoogle();
     this.props.hideModal();
     this.setUsernameShow();
-    this.props.showMessage();
+   this.props.showMessage();
     this.props.messageRegister();
     setTimeout(() => {
         window.location.reload();
