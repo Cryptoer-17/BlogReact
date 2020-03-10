@@ -1,0 +1,9 @@
+.Rules{
+    display:flex;
+    font-size: 14px;
+}
+.Rules ul{
+list-style: none;
+text-align: left;
+list-style: circle;
+}

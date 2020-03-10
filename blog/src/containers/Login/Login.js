@@ -6,7 +6,7 @@ import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
 import { withRouter } from "react-router";
-
+import Username from '../Username/Username'
 
 class Login extends Component{
 
@@ -39,25 +39,8 @@ loginForm: {
         }
     }
 },
-signUpForm: {
-    username:{
-        type:"text",
-        value:"",
-        valid:false,
-        touched:false,
-      config:
-        { 
-         placeholder: "Username"},
-        validation: {
-        required:true,
-        minLength:4
-        }
-    }
-},
 isFormValid : false,
-isSignup: true,
-showUsername:false,
-isUsernameValid:false
+isSignup: true
 }
 
 
@@ -67,13 +50,6 @@ switchAuthModeHandler = () =>{
     })
 }
 
-setUsernameShow = () =>{
-    this.setState({showUsername:true})
-}
-
-setUsernameHide= () =>{
-    this.setState({showUsername:false})
-}
 
 checkValidityOfInput = (event, id) =>{
     let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
@@ -112,7 +88,6 @@ submitHandlerSignUp = (event) =>{
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
    // this.props.hideGoogle();
     this.props.hideModal();
-    this.setUsernameShow();
    this.props.showMessage();
     this.props.messageRegister();
     setTimeout(() => {
@@ -124,7 +99,7 @@ submitHandlerSignUp = (event) =>{
 render(){
     
 const {show, hideModal} = this.props;
-const {loginForm, isFormValid, signUpForm, showUsername} = this.state;
+const {loginForm, isFormValid} = this.state;
 
 const formData = [];
 
@@ -167,19 +142,6 @@ const formData = [];
     </form>
     </div>
     </Modal>
-
-        <Modal show = {showUsername} modalClosed = {this.setUsernameHide}>
-            <Input 
-                    value = {signUpForm.username.value}
-                    type = {signUpForm.username.type}
-                    config = {signUpForm.usernameconfig}
-                    touched = { signUpForm.username.touched}
-                    valid = { signUpForm.username.valid}
-                    changed = {(e) => this.checkValidityOfUsername(e)}
-                    shouldValidate = {signUpForm.username.validation}
-                    />
-
-         </Modal>
 
 </div>
 
