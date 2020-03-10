@@ -3,7 +3,8 @@ export {
     initArticoli,
     startRicerca,
     ricercaArticoli,
-    updateArticolo
+    updateArticolo,
+    deleteArticolo
 }from './actionsArticolo';
 
 export {
