@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Profilo.module.css';
 import {connect } from 'react-redux';
-
+import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 
 class Profilo extends Component{
 
@@ -20,12 +20,20 @@ render(){
     articoliVisualizzati = personal_article.map((art) =>{
         if(art.articolo.userId===localStorage.getItem('userId')){
             return (
-                <div key={art.key}>
-                {console.log("entrato")}
-            {art.articolo.autore}
-            {art.articolo.categoria}
-            {art.articolo.minuti}
-        </div>
+                <AnteprimaArticolo 
+                id={art.key} 
+                autore={art.articolo.autore}
+                categoria = {art.articolo.categoria}
+                descrizione = {art.articolo.descrizione}
+                img = {art.articolo.img}
+                like = {art.articolo.like}
+                sottotitolo = {art.articolo.sottotitolo}
+                testo = {art.articolo.testo}
+                titolo = {art.articolo.titolo}
+                data = {art.articolo.data}
+                minuti = {art.articolo.minuti}
+                clickHeart = {() => this.clickHeartHandler(art)}
+                key={art.key}/>
             );
         } else return null;
       
