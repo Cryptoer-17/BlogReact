@@ -9,7 +9,8 @@ import firebase from 'firebase';
 
 class Profilo extends Component{
     state={
-        nome:""
+        nome:"",
+        anteprimaImg:null,
     }
 
 componentDidMount(){
@@ -26,8 +27,19 @@ handlerRequest(){
    console.log("modifica dati");
 }
 
+
+convertFile = (e)=>  { 
+    let reader = new FileReader();
+    reader.readAsDataURL(e);
+    reader.onloadend = () => {
+    this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+    }
+  };
+
+
 render(){
 
+    let {anteprimaImg} = this.state;
     let email;
     email = localStorage.getItem('email');
 
@@ -78,6 +90,12 @@ render(){
                  Sesso: <label>M</label><input type="radio" name="male" value="M"/>
                         <label>F</label><input type="radio" name="male" value="F"/>
                 </p>
+                <div className = {classes.InputImg}>
+                <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+
+                <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
+                { anteprimaImg ?  anteprimaImg : null}
+            </div>
             </form>
             </div>
 

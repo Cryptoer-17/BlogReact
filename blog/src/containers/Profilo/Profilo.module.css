@@ -31,3 +31,19 @@
 .Input{
     margin-right: 30px;
 }
+
+
+.InputImg{
+    display:block;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding:12px;
+    width:50%;
+    outline:none;
+    border-radius: 2px;
+    font-size:14px;
+    font-family: inherit;
+    text-rendering: unset;
+   
+}
