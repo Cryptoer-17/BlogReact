@@ -124,9 +124,11 @@ submitHandlerSignUp = (event) =>{
     this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
     this.props.hideGoogle();
     this.props.hideModal();
-
     this.props.showMessage();
     this.props.messageRegister();
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500); 
 
 }
 
