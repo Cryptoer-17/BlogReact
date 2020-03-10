@@ -2,11 +2,28 @@ import React, {Component} from 'react';
 import classes from './Profilo.module.css';
 import {connect } from 'react-redux';
 import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
+import { MdEmail } from 'react-icons/md';
+import axios from 'axios';
+import { auth, provider } from '../../utility/firebase';
+import firebase from 'firebase';
 
 class Profilo extends Component{
+    state={
+        nome:""
+    }
 
 componentDidMount(){
 
+}
+
+HandlerChange(event){
+    console.log(event.target.value);
+    this.setState({nome: event.target.value})
+}
+
+handlerRequest(){
+
+   console.log("modifica dati");
 }
 
 render(){
@@ -44,9 +61,26 @@ render(){
             <div>
             <h1>Profilo Persona</h1>
             </div>
-            <div className={classes.Email}>
-              <p>Email :</p><p> {email}</p> 
+            <div className={classes.DatiPersonali}>  
+                <h3>DATI PERSONALI</h3> 
+                <div>
+                Email : {email}
+                <button className={classes.ButtonEmail} onClick={this.handlerRequest}><MdEmail style={{verticalAlign: 'middle'}}/> Modifica Dati</button>     
+                </div>     
             </div>
+            <div className={classes.ModificaDati}>
+            <h3>MODIFICA I TUOI DATI</h3>
+            <form>
+                <p>Nome:<input type="text"  className={classes.Input} placeholder="nome" onChange={(event) => this.HandlerChange(event)} value={this.state.nome}></input>
+                Cognome:<input type="text" placeholder="cognome" className={classes.Input}></input>
+                Data Nascita<input type="date" placeholder="data nascita" className={classes.Input}></input></p>
+                <p>
+                 Sesso: <label>M</label><input type="radio" name="male" value="M"/>
+                        <label>F</label><input type="radio" name="male" value="F"/>
+                </p>
+            </form>
+            </div>
+
             {articoliVisualizzati}
         </div>
     );
