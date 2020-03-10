@@ -75,6 +75,13 @@ const updateArticoloSuccess = (state,action) =>{
    return updateObject( state, { loading: false, articoli: arrayArt} );
 }
 
+const deleteArticoloSuccess = (state,action) =>{
+    let arrayArt = [...state.articoli];
+    let idArt = state.articoli.findIndex(i=>i.key  === action.articolo.key);
+    arrayArt.splice(idArt, 1);
+   return updateObject( state, { loading: false, articoli: arrayArt} );
+}
+
 
 
 
@@ -84,6 +91,7 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
         case actionTypes.UPDATE_ARTICOLO_SUCCESS: return updateArticoloSuccess( state, action);
+        case actionTypes.DELETE_ARTICOLO_SUCCESS: return deleteArticoloSuccess( state, action);
         case actionTypes.SET_ARTICOLI_SUCCESS : return setArticoliSuccess(state,action);
         case actionTypes.SET_ARTICOLI_START : return SetArticoliStart(state,action);
         case actionTypes.SET_ARTICOLI_FAIL : return setArticoliFail(state, action);

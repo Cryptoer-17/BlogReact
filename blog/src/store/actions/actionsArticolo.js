@@ -103,7 +103,6 @@ export const updateArticoloSuccess = (articolo) =>{
         type: actionTypes.UPDATE_ARTICOLO_SUCCESS,
         articolo:articolo
     };
-
 }
 
 export const updateArticolo = (articolo) =>{
@@ -112,6 +111,28 @@ export const updateArticolo = (articolo) =>{
         axios.put('/articoli.json?auth='+localStorage.getItem("token"), articolo)
         .then(res =>{ 
             dispatch(updateArticoloSuccess(articolo))
+          })
+        .catch(error => { 
+            dispatch(postArticoloFail(error));
+        });
+    }
+}
+
+
+export const deleteArticoloSuccess = (articolo) =>{
+    return{
+        type: actionTypes.DELETE_ARTICOLO_SUCCESS,
+        articolo:articolo
+    };
+}
+
+
+export const deleteArticolo = (articolo) =>{
+    return dispatch => {
+        dispatch(postArticoloStart());
+        axios.delete('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        .then(res =>{ 
+            dispatch(deleteArticoloSuccess(articolo))
           })
         .catch(error => { 
             dispatch(postArticoloFail(error));
