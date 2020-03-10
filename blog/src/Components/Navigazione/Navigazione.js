@@ -9,7 +9,7 @@ import styled, { keyframes } from 'styled-components';
 import {connect } from 'react-redux';
 import Spinner from '../UI/Spinner/Spinner';
 import Modal from '../UI/Modal/Modal';
-
+import Username from '../../containers/Username/Username';
 
 const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;
@@ -21,7 +21,7 @@ const Navigazione = (props) =>{
     const [showmsg, setShowMsg] = useState(false);
     const [google, setGoogle] = useState(false);
     const [message, setMessage] = useState("");
-
+    const [showUsername,setShowUsername] = useState(false);
 
     const showMessage = () =>{
         setShowMsg(true);
@@ -56,7 +56,13 @@ const Navigazione = (props) =>{
         setMessage("Registrazione effettuata correttamente");
     }
 
+const showUsernameModal = () => {
+    setShowUsername(true);
 
+}
+const hideUsernameModal = () =>{
+    setShowUsername(false);
+}
 
     let error= null;
     let messageSuccess = null;
@@ -65,7 +71,7 @@ const Navigazione = (props) =>{
     <nav className ={classes.BarraNavigazione}>
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
     {localStorage.getItem("userId") ? <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
-    {localStorage.getItem("userId") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : null   }
+    {localStorage.getItem("userId") && localStorage.getItem("username") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : <button className = {classes.Link}><i className="material-icons"  onClick = {showUsernameModal}>add_box</i> </button>  }
     {localStorage.getItem("userId") ? <NavLink to="/profilo" className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">account_circle</i></NavLink> : null } 
      {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ?  <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> :  <Logout show = {show} google={google} hideModal = {hideModal}  />} </AnimatedModal>   : null}  
     {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }
@@ -79,7 +85,6 @@ const Navigazione = (props) =>{
     }
 
     if(props.error){
-       
         error =(<Modal show={!show} modalClosed={showModal} >{props.error} </Modal>);
     }
     else if(props.error === null && props.userId!==null && showmsg){
@@ -92,6 +97,8 @@ const Navigazione = (props) =>{
             {form}
             {messageSuccess}
             {error}
+            
+            <Username show ={showUsername} modalClosed ={hideUsernameModal}/>
         </div>
     );
 }

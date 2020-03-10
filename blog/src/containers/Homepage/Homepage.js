@@ -6,10 +6,10 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
 
+
 class Homepage extends Component{
 
- 
-   clickHeartHandler(art){
+clickHeartHandler(art){
       const anteprima = {
           autore : art.articolo.autore,
           categoria : art.articolo.categoria,
@@ -23,37 +23,31 @@ class Homepage extends Component{
           data:art.articolo.data
       } 
       const id = art.key;
-      
-   
       axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
       .then(response => {
          this.props.mount();
       })
       .catch(error => console.log(error));
-
-  }
-
-
+}
 
 
 
 render(){
 
-   let {spinner, articoli, errore} = this.props;
-   
 
+
+  let {spinner, articoli, errore} = this.props;
+
+   
    if(spinner){
      spinner = <Spinner />
    }
    
    let errorMessage = null;
    if(typeof errore === 'undefined'){
-   
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
- 
    }
 
- 
   
    let articoliVisualizzati;
     articoliVisualizzati = articoli.map((art) =>{
@@ -72,16 +66,14 @@ render(){
          clickHeart = {() => this.clickHeartHandler(art)}
          key={art.key}/>);
    })
-  
-  
+   
+
 
 return(
 
    <div className={classes.Homepage}>
 
       <h1 className={classes.Titolo}>Blog</h1>
-
-
       {spinner}
       {errorMessage ? errorMessage : null}
       <div className={classes.ContainerArticoli} >
@@ -93,7 +85,8 @@ return(
       </div>
 
    <ScrollTopButton/>
-  
+
+
 </div>
 
 );
