@@ -52,7 +52,7 @@ render(){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
  
    }
-
+   localStorage.setItem("username","us");
  
   
    let articoliVisualizzati;
@@ -81,7 +81,7 @@ return(
 
       <h1 className={classes.Titolo}>Blog</h1>
 
-
+   
       {spinner}
       {errorMessage ? errorMessage : null}
       <div className={classes.ContainerArticoli} >
