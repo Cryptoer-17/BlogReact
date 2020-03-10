@@ -61,16 +61,14 @@ const Navigazione = (props) =>{
     let error= null;
     let messageSuccess = null;
 
-
     let form =  (<nav className ={classes.BarraNavigazione}>
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
     {localStorage.getItem("userId") ? <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
     {localStorage.getItem("userId") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : null   }
     <button className = {classes.LoginButton}  onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
-     {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ? <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> : <Logout show = {show} google={google} hideModal = {hideModal}  /> } </AnimatedModal>   : null}  
+     {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ?  <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> :  <Logout show = {show} google={google} hideModal = {hideModal}  />} </AnimatedModal>   : null}  
     {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }
-    <button className = {classes.LoginNew}  onClick ={ showModal} > LOGIN  </button> 
-      
+    <button className = {classes.LoginNew}  onClick ={ showModal} >{localStorage.getItem("userId") ? "LOGOUT" : "LOGIN"}  </button> 
        
   </nav>);
 
