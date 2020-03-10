@@ -66,7 +66,7 @@ const Navigazione = (props) =>{
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
     {localStorage.getItem("userId") ? <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
     {localStorage.getItem("userId") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : null   }
-    <button className = {classes.LoginButton}  onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> 
+    {localStorage.getItem("userId") ?  <button className = {classes.LoginButton}  onClick ={ showModal} >  <i className="material-icons">account_circle</i>   </button> : null }
      {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ?  <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> :  <Logout show = {show} google={google} hideModal = {hideModal}  />} </AnimatedModal>   : null}  
     {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }
     <button id = "loginButton" className = {classes.LoginNew}  onClick ={ showModal} >{localStorage.getItem("userId") ? 'LOGOUT' : 'LOGIN'}  </button> 
