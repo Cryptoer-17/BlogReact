@@ -17,7 +17,7 @@
     text-align: justify;
     margin-bottom: 10px;
     width: 100%;
-    height: 220px;
+    height: 420px;
 }
 
 .ButtonEmail{
@@ -34,33 +34,20 @@
 
 
 .InputImg{
-    display:block;
-    margin:auto;
-    margin-top: 10px;
-    margin-bottom: 12px;
-    padding:12px;
+    display:inline-flex;
     width:50%;
-    outline:none;
-    border-radius: 2px;
-    font-size:14px;
-    font-family: inherit;
-    text-rendering: unset;
-   
 }
 
 .CaricaImgButton{
     margin:auto;
      font-size:16px;
-     margin-top:10px;
-     margin-bottom:10px;
      width:150px;
-     outline:none;
      padding:5px;
      background-color: white;
      border-radius: 8px;
      border: 1px solid #B4ADAD;
-     display:block;
      font-family: inherit;
      cursor:pointer;
+     margin-left: 0px;
  }
  

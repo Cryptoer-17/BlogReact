@@ -34,7 +34,7 @@ convertFile = (e)=>  {
     reader.readAsDataURL(e);
     reader.onloadend = () => {
   
-    this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+    this.setState({img: reader.result, anteprimaImg: <img className={classes.InputImg} src = {reader.result} alt = "" />})
     }
   };
 
@@ -93,9 +93,9 @@ render(){
                         <label>F</label><input type="radio" name="male" value="F"/>
                 </p>
                 <div className = {classes.InputImg}>
-                <input  id = "inputFile2" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+                <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
-                <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile2").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
+                <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
                
                 { anteprimaImg ?  anteprimaImg : null}
             </div>
