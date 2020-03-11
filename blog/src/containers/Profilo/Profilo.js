@@ -85,7 +85,7 @@ render(){
 
         { anteprimaImg ?  anteprimaImg : null}</div>
        
-
+        <button className={classes.ButtonSend} style={{marginTop: '59px'}}>Invia dati</button>
     </div>);
 
 
@@ -130,7 +130,7 @@ render(){
                 </div>
                 <div>
                 Altri dati coming soon
-                <button className={classes.ButtonEmail} onClick={() =>this.handlerModificaDati()}><MdEmail style={{verticalAlign: 'middle'}}/> Modifica Dati</button>
+                <button className={classes.ButtonSend} style={{marginTop:'-6px'}} onClick={() =>this.handlerModificaDati()}><MdEmail style={{verticalAlign: 'middle'}}/> Modifica Dati</button>
                 </div>  
                     
                    
