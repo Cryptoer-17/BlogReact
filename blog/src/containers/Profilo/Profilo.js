@@ -78,8 +78,8 @@ render(){
                                             <label>F</label><input type="radio" name="male" value="F"/></div>
         <div className={classes.DivForm}>Numero Telefono: <input type="text" id="telefono" className={classes.InputForm} placeholder="numero di telefono"></input></div>
         <div className={classes.DivForm}>Nazionalità:<select id="nazionalita" className={classes.InputForm}>
-                <option value="Italia">Italia</option>
-                <option value="Grecia" selected="selected">Grecia</option>
+                <option value="Italia" >Italia</option>
+                <option value="Grecia">Grecia</option>
                 <option value="Spagna">Spagna</option>
                 <option value="Inghilterra">Inghilterra</option>
             </select></div>
