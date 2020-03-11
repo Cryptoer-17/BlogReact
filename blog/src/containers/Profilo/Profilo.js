@@ -69,7 +69,7 @@ render(){
    
         <div className={classes.DivForm}>Nome:<input type="text"  className={classes.InputForm} placeholder="nome" onChange={(event) => this.HandlerChange(event)} value={this.state.nome}></input></div>
         <div className={classes.DivForm}>Cognome:<input type="text" className={classes.InputForm} placeholder="cognome" ></input></div>
-        <div className={classes.DivForm}>Data Nascita:<input type="date" className={classes.InputForm} placeholder="data nascita" ></input></div>
+        <div className={classes.DivForm}>Data Nascita:<input type="date" className={classes.InputForm} style={{marginTop: '-3px'}} placeholder="data nascita" ></input></div>
         <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio"  name="male" value="M"/>
                                             <label>F</label><input type="radio" name="male" value="F"/></div>
         <div className={classes.DivForm}>Numero Telefono: <input type="text" className={classes.InputForm} placeholder="numero di telefono"></input></div>
