@@ -11,6 +11,16 @@
     height: 100px;
 }
 
+
+.Informazioni{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
+}
+
 .ModificaDati{
     background-color: white;
     border: 1px solid #D2CACA;
@@ -18,6 +28,13 @@
     margin-bottom: 10px;
     width: 100%;
     height: 420px;
+}
+
+.BtnPresentazione{
+background-color: transparent;
+border: none;
+color: blue;
+cursor: pointer;
 }
 
 .ButtonEmail{

@@ -11,6 +11,7 @@ class Profilo extends Component{
     state={
         nome:"",
         anteprimaImg:null,
+        presentazione:null
     }
 
 componentDidMount(){
@@ -20,6 +21,11 @@ componentDidMount(){
 HandlerChange(event){
     console.log(event.target.value);
     this.setState({nome: event.target.value})
+}
+
+handlerClickPresentazione(){
+    console.log("entrato");
+    this.setState({presentazione : false})
 }
 
 handlerRequest(){
@@ -41,11 +47,18 @@ convertFile = (e)=>  {
 
 render(){
 
-    let {anteprimaImg} = this.state;
+    let {anteprimaImg,presentazione} = this.state;
     let email;
     email = localStorage.getItem('email');
 
     const personal_article = [...this.props.articoli]
+
+    let presentazioneVisualizzata ;
+    let btnInviaInfo=null;
+    {presentazione===null? 
+        presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
+        : presentazione===false && ((presentazioneVisualizzata = <input type="text"></input>) && (btnInviaInfo = <button className={classes.ButtonEmail} >Invia breve presentazione</button>))
+    } 
 
     let articoliVisualizzati;
     articoliVisualizzati = personal_article.map((art) =>{
@@ -74,6 +87,11 @@ render(){
         <div className={classes.Profilo}>
             <div>
             <h1>Profilo Persona</h1>
+            </div>
+            <div className={classes.Informazioni}>
+                <h3>INFORMAZIONI</h3>
+                {presentazioneVisualizzata}
+                {btnInviaInfo}
             </div>
             <div className={classes.DatiPersonali}>  
                 <h3>DATI PERSONALI</h3> 
