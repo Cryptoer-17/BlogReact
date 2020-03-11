@@ -72,7 +72,15 @@ render(){
         Data Nascita<input type="date" placeholder="data nascita" className={classes.Input}></input></p>
         <p>
          Sesso: <label>M</label><input type="radio" name="male" value="M"/>
-                <label>F</label><input type="radio" name="male" value="F"/>
+                <label>F</label><input type="radio" name="male" className={classes.Input} value="F"/>
+        Numero Telefono: <input type="text" className={classes.Input} placeholder="numero di telefono"></input>
+        {/*https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript */}
+        Nazionalità:<select id="ddlViewBy">
+                <option value="1">Italia</option>
+                <option value="2" selected="selected">Grecia</option>
+                <option value="3">Spagna</option>
+                <option value="3">Inghilterra</option>
+            </select>
         </p>
         <div className = {classes.InputImg}>
         <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
