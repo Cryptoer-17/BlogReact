@@ -26,7 +26,6 @@
     text-align: justify;
     margin-bottom: 10px;
     width: 100%;
-    height: 420px;
 }
 
 .BtnPresentazione{
@@ -53,6 +52,10 @@ cursor: pointer;
     width: 350px;
     display: inline-flex;
     margin-bottom: 30px;
+}
+
+.InputImg{
+    width: 50%;
 }
 
 .InputForm{
