@@ -52,6 +52,11 @@ cursor: pointer;
 .DivForm{
     width: 350px;
     display: inline-flex;
+    margin-bottom: 30px;
+}
+
+.InputForm{
+    width: 120px;
 }
 
 .CaricaImgButton{

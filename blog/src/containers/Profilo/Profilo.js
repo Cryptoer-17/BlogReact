@@ -67,13 +67,13 @@ render(){
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
    
-        <div className={classes.DivForm}>Nome:<input type="text"  style={{width:'120px'}} placeholder="nome" onChange={(event) => this.HandlerChange(event)} value={this.state.nome}></input></div>
-        <div className={classes.DivForm}>Cognome:<input type="text" style={{width:'120px'}} placeholder="cognome" ></input></div>
-        <div className={classes.DivForm}>Data Nascita:<input type="date" style={{width:'120px'}} placeholder="data nascita" ></input></div>
+        <div className={classes.DivForm}>Nome:<input type="text"  className={classes.InputForm} placeholder="nome" onChange={(event) => this.HandlerChange(event)} value={this.state.nome}></input></div>
+        <div className={classes.DivForm}>Cognome:<input type="text" className={classes.InputForm} placeholder="cognome" ></input></div>
+        <div className={classes.DivForm}>Data Nascita:<input type="date" className={classes.InputForm} placeholder="data nascita" ></input></div>
         <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio"  name="male" value="M"/>
                                             <label>F</label><input type="radio" name="male" value="F"/></div>
-        <div className={classes.DivForm}>Numero Telefono: <input type="text" style={{width:'120px'}} placeholder="numero di telefono"></input></div>
-        <div className={classes.DivForm}>Nazionalità:<select id="ddlViewBy" style={{width:'120px'}}>
+        <div className={classes.DivForm}>Numero Telefono: <input type="text" className={classes.InputForm} placeholder="numero di telefono"></input></div>
+        <div className={classes.DivForm}>Nazionalità:<select id="ddlViewBy" className={classes.InputForm}>
                 <option value="1">Italia</option>
                 <option value="2" selected="selected">Grecia</option>
                 <option value="3">Spagna</option>
