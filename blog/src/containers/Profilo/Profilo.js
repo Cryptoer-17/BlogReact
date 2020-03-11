@@ -121,10 +121,15 @@ render(){
            
             <div className={classes.DatiPersonali}>  
                 <h3>DATI PERSONALI</h3> 
-                <div>
+                <div style={{marginBottom:'10px'}}>
                 Email : {email}
-                <button className={classes.ButtonEmail} onClick={() =>this.handlerModificaDati()}><MdEmail style={{verticalAlign: 'middle'}}/> Modifica Dati</button>     
-                </div>     
+                </div>
+                <div>
+                Altri dati coming soon
+                <button className={classes.ButtonEmail} onClick={() =>this.handlerModificaDati()}><MdEmail style={{verticalAlign: 'middle'}}/> Modifica Dati</button>
+                </div>  
+                    
+                   
             </div>
             {(modificaDati) ? pageModificaDati : null}           
 
