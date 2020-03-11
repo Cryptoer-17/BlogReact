@@ -8,7 +8,6 @@ import * as actions from '../../store/actions/index';
 
 class Profilo extends Component{
     state={
-        nome:"",
         anteprimaImg:null,
         presentazione:null,
         modificaDati:null
@@ -27,8 +26,13 @@ handlerClickPresentazione(){
     this.setState({presentazione : false})
 }
 
-sendHandlerClick(){
-    console.log("entrato");
+sendHandlerClick(nome,cognome,data,sesso,telefono,nazionalita){
+    console.log(nome);
+    console.log(cognome);
+    console.log(data);
+    console.log(sesso);
+    console.log(telefono);
+    console.log(nazionalita);
 }
 
 handlerModificaDati(){
@@ -62,29 +66,38 @@ render(){
         : presentazione===false && ((presentazioneVisualizzata = <input type="text"></input>) && (btnInviaInfo = <button className={classes.ButtonEmail} >Invia breve presentazione</button>))
     } 
 
-
+    let nome;
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
    
-        <div className={classes.DivForm}>Nome:<input type="text"  className={classes.InputForm} placeholder="nome" onChange={(event) => this.HandlerChange(event)} value={this.state.nome}></input></div>
-        <div className={classes.DivForm}>Cognome:<input type="text" className={classes.InputForm} placeholder="cognome" ></input></div>
-        <div className={classes.DivForm}>Data Nascita:<input type="date" className={classes.InputForm} style={{marginTop: '-3px'}} placeholder="data nascita" ></input></div>
-        <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio"  name="male" value="M"/>
+        <div className={classes.DivForm}>Nome:<input type="text" id="nome" className={classes.InputForm} placeholder="nome" ></input></div>
+        <div className={classes.DivForm}>Cognome:<input type="text" id="cognome" className={classes.InputForm} placeholder="cognome" ></input></div>
+        <div className={classes.DivForm}>Data Nascita:<input type="date" id="date" className={classes.InputForm} style={{marginTop: '-3px'}} placeholder="data nascita" ></input></div>
+        <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio" id="radio" name="male" value="M" />
                                             <label>F</label><input type="radio" name="male" value="F"/></div>
-        <div className={classes.DivForm}>Numero Telefono: <input type="text" className={classes.InputForm} placeholder="numero di telefono"></input></div>
-        <div className={classes.DivForm}>Nazionalità:<select id="ddlViewBy" className={classes.InputForm}>
-                <option value="1">Italia</option>
-                <option value="2" selected="selected">Grecia</option>
-                <option value="3">Spagna</option>
-                <option value="3">Inghilterra</option>
+        <div className={classes.DivForm}>Numero Telefono: <input type="text" id="telefono" className={classes.InputForm} placeholder="numero di telefono"></input></div>
+        <div className={classes.DivForm}>Nazionalità:<select id="nazionalita" className={classes.InputForm}>
+                <option value="Italia">Italia</option>
+                <option value="Grecia" selected="selected">Grecia</option>
+                <option value="Spagna">Spagna</option>
+                <option value="Inghilterra">Inghilterra</option>
             </select></div>
         <div className={classes.DivForm} > <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
         <button className = {classes.CaricaImgButton}  onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
-
+        
         { anteprimaImg ?  anteprimaImg : null}</div>
-       
-        <button className={classes.ButtonSend} onClick={() => this.sendHandlerClick()} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
+        
+        <button 
+        className={classes.ButtonSend} 
+        onClick={() => this.sendHandlerClick(document.getElementById("nome").value,
+                                             document.getElementById("cognome").value,
+                                            document.getElementById("date").value,
+                                            document.getElementById("radio").value,
+                                            document.getElementById("telefono").value,
+                                            document.getElementById("nazionalita").value
+                                            )} 
+        style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
