@@ -6,7 +6,6 @@ import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
 import { withRouter } from "react-router";
-import Username from '../Username/Username'
 
 class Login extends Component{
 

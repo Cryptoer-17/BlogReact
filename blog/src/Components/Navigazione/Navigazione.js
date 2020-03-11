@@ -15,7 +15,6 @@ const AnimatedModal = styled.div`
 animation: 0.3s ${keyframes`${fadeIn}`} `;
 
 const Navigazione = (props) =>{
-    const {user, userId} = props;
 
     const [show,setShow] = useState(false);
     const [showmsg, setShowMsg] = useState(false);

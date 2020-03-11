@@ -4,9 +4,7 @@ import {connect } from 'react-redux';
 import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import { MdEmail } from 'react-icons/md';
 import { IoIosSend } from 'react-icons/io';
-import axios from 'axios';
-import { auth, provider } from '../../utility/firebase';
-import firebase from 'firebase';
+import * as actions from '../../store/actions/index';
 
 class Profilo extends Component{
     state={
@@ -26,20 +24,20 @@ HandlerChange(event){
 }
 
 handlerClickPresentazione(){
-    console.log("entrato");
     this.setState({presentazione : false})
 }
 
-handlerModificaDati(){
+sendHandlerClick(){
+    console.log("entrato");
+}
 
-   console.log("modifica dati");
+handlerModificaDati(){
     this.setState({modificaDati: !this.state.modificaDati})
 
 }
 
 
 convertFile = (e)=>  { 
-    console.log("entrato");
     let reader = new FileReader();
     reader.readAsDataURL(e);
     reader.onloadend = () => {
@@ -86,7 +84,7 @@ render(){
 
         { anteprimaImg ?  anteprimaImg : null}</div>
        
-        <button className={classes.ButtonSend} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
+        <button className={classes.ButtonSend} onClick={() => this.sendHandlerClick()} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
@@ -147,13 +145,20 @@ render(){
 
 
 const mapStateToProps = state =>{
-    console.log(state.articolo.articoli);
     return{
        articoli : state.articolo.articoli
     }
  }
  
  
+ const mapDispatchToProps = dispatch => {
+    return{
+    // onGoogleAuth: () => dispatch(actions.googleAuth()),
+    // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
+    // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
+        onSendData: () => dispatch(actions.sendData())
+    };
+  };
 
 
 export default connect(mapStateToProps)(Profilo);
