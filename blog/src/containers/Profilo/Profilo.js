@@ -10,7 +10,8 @@ class Profilo extends Component{
     state={
         anteprimaImg:null,
         presentazione:null,
-        modificaDati:null
+        modificaDati:null,
+        img:null
     }
 
 componentDidMount(){
@@ -95,7 +96,7 @@ render(){
                                             document.getElementById("date").value,
                                             document.getElementById("radio").value,
                                             document.getElementById("telefono").value,
-                                            document.getElementById("nazionalita").value
+                                            document.getElementById("nazionalita").value,
                                             )} 
         style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
