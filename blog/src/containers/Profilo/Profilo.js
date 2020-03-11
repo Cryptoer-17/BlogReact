@@ -3,6 +3,7 @@ import classes from './Profilo.module.css';
 import {connect } from 'react-redux';
 import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArticolo';
 import { MdEmail } from 'react-icons/md';
+import { IoIosSend } from 'react-icons/io';
 import axios from 'axios';
 import { auth, provider } from '../../utility/firebase';
 import firebase from 'firebase';
@@ -85,7 +86,7 @@ render(){
 
         { anteprimaImg ?  anteprimaImg : null}</div>
        
-        <button className={classes.ButtonSend} style={{marginTop: '59px'}}>Invia dati</button>
+        <button className={classes.ButtonSend} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
