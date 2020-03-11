@@ -46,14 +46,10 @@ cursor: pointer;
 }
 
 .Input{
-    margin-right: 30px;
+    margin-right: 150px;
 }
 
 
-.InputImg{
-    display:inline-flex;
-    width:50%;
-}
 
 .CaricaImgButton{
     margin:auto;
