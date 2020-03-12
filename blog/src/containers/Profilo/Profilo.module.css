@@ -49,14 +49,15 @@ cursor: pointer;
     margin-right: 150px;
 }
 
-.DivForm{
-    width: 350px;
+.DivFoto{
+    width: 36%;
     display: inline-flex;
     margin-bottom: 30px;
 }
 
 .InputImg{
     width: 50%;
+    margin-right: -140px;
 }
 
 .InputForm{
@@ -65,14 +66,13 @@ cursor: pointer;
 
 .CaricaImgButton{
     margin:auto;
+    width: 130px;
      font-size:16px;
-     width:150px;
      padding:5px;
      background-color: white;
      border-radius: 8px;
      border: 1px solid #B4ADAD;
      font-family: inherit;
      cursor:pointer;
-     margin-left: 0px;
  }
  
