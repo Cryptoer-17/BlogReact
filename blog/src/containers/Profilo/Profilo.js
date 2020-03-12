@@ -6,6 +6,7 @@ import { MdEmail } from 'react-icons/md';
 import { IoIosSend } from 'react-icons/io';
 import * as actions from '../../store/actions/index';
 import Input from '../../Components/UI/Input/Input';
+import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Profilo extends Component{
     state={
@@ -136,6 +137,7 @@ convertFile = (e)=>  {
 render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
+    let {loading} = this.props;
     let email;
     email = localStorage.getItem('email');
 
@@ -213,6 +215,10 @@ render(){
       
    })
 
+   if(loading){
+       pageModificaDati= <Spinner/>
+   }
+
     return(
         <div className={classes.Profilo}>
             <div>
@@ -247,8 +253,10 @@ render(){
 
 
 const mapStateToProps = state =>{
+    console.log(state.profilo.loading);
     return{
-       articoli : state.articolo.articoli
+       articoli : state.articolo.articoli,
+       loading: state.profilo.loading
     }
  }
  

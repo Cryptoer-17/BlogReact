@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../utility/axios';
 
 
 
@@ -31,8 +31,7 @@ export const sendDataFail = (error) =>{
      console.log(dati);
    return dispatch => {
     dispatch(sendDataStart());
-    const token = localStorage.getItem("token");
-    axios.post('/persona.json?auth=' + token, dati)
+    axios.post('/persona.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
