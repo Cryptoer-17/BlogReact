@@ -16,7 +16,7 @@ const rootReducer = combineReducers(
     {
         articolo : reducerArticolo,
         login: reducerLogin,
-        profilo:reducerProfilo
+        profilo: reducerProfilo
     }
 );
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

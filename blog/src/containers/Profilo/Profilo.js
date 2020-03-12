@@ -5,13 +5,70 @@ import AnteprimaArticolo from '../../Components/AnteprimaArticolo/AnteprimaArtic
 import { MdEmail } from 'react-icons/md';
 import { IoIosSend } from 'react-icons/io';
 import * as actions from '../../store/actions/index';
+import Input from '../../Components/UI/Input/Input';
 
 class Profilo extends Component{
     state={
         anteprimaImg:null,
         presentazione:null,
         modificaDati:null,
-        img:null
+        img:null,
+        orderForm:{
+                nome:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'Tuo nome'
+                    },
+                    value: ''
+                },
+                cognome:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'Tuo cognome'
+                    },
+                    value: ''
+                },
+                dataNascita: {
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'date'
+                    },
+                    value: ''
+                },
+                sesso: {
+                    elementType:'radio',
+                    elementConfig:{
+                        type: 'radio',
+                        options:[
+                            {value:'f', displayValue:'F'},
+                            {value:'m', displayValue:'M'}
+                        ]
+                    },
+                    value: ''
+                },
+                numeroTelefono:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'Tuo numero  telefono'
+                    },
+                    value: ''
+                },
+                nazionalita:{
+                    elementType:'select',
+                    elementConfig:{
+                       options: [
+                           {value:'italia', displayValue:'Italia'},
+                           {value:'grecia', displayValue:'Grecia'},
+                           {value: 'spagna', displayValue:'Spagna'},
+                           {value: 'inghilterra', displayValue:'Inghilterra'}
+                        ]
+                    },
+                    value: ''
+                },
+            }
     }
 
 componentDidMount(){
@@ -66,6 +123,35 @@ render(){
         presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
         : presentazione===false && ((presentazioneVisualizzata = <input type="text"></input>) && (btnInviaInfo = <button className={classes.ButtonEmail} >Invia breve presentazione</button>))
     } 
+
+
+
+
+    const formElemetsArray = [];
+    for(let key in this.state.orderForm){
+        console.log(key);
+        formElemetsArray.push({
+            id: key,
+             config: this.state.orderForm[key],
+
+        })
+    }
+
+    let form = (
+        <form>
+            {formElemetsArray.map(formElement =>(
+                
+                <Input 
+                        key={formElement.id}
+                        type={formElement.config.elementType} 
+                        config={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        radio={true}/>
+            ))}
+        </form>
+    );
+
+
 
     let nome;
     let pageModificaDati =  (<div className={classes.ModificaDati}>
@@ -149,7 +235,7 @@ render(){
                    
             </div>
             {(modificaDati) ? pageModificaDati : null}           
-
+            {form}
             {articoliVisualizzati}
         </div>
     );
