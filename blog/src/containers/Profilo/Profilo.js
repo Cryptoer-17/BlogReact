@@ -25,10 +25,7 @@ class Profilo extends Component{
                         placeholder: 'Tuo nome'
                     },
                     value: '',
-                    validation:{
-                        required:true,
-                    },
-                    valid: false,
+                    valid: true,
                     touched: false
                 },
                 cognome:{
@@ -38,10 +35,7 @@ class Profilo extends Component{
                         placeholder: 'Tuo cognome'
                     },
                     value: '',
-                    validation:{
-                        required:true,
-                    },
-                    valid: false,
+                    valid: true,
                     touched: false
                 },
                 dataNascita: {
@@ -66,7 +60,7 @@ class Profilo extends Component{
                         ]
                     },
                     value: '',
-                    valid: false,
+                    valid: true,
                     touched: false
 
                 },
@@ -78,9 +72,10 @@ class Profilo extends Component{
                     },
                     value: '',
                     validation:{
-                        required:true,
+                        minLength:11,
+                        maxLength:11
                     },
-                    valid: false,
+                    valid: true,
                     touched: false
                 },
                 nazionalita:{
@@ -119,8 +114,8 @@ orderHandler= ()=>{
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
     }
     const profile={
-        nome: formData.nome.trim(),
-        cognome:formData.cognome.trim(),
+        nome: formData.nome,
+        cognome:formData.cognome,
         dataNascita:formData.dataNascita.trim(),
         sesso: formData.sesso.trim(),
         numeroTelefono:formData.numeroTelefono.trim(),
