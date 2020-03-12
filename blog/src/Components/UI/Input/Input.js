@@ -33,7 +33,16 @@ switch(props.type){
             ))}
         </select>
 break;
-case "radio": inputElement = console.log("entrato");
+case "radio": inputElement =<div className={inputClasses.join(' ')} style={{textAlign:'start'}}>
+  <div style={{display:'inline-flex',marginRight:'10px'}}>Sesso:</div>
+  {props.config.options.map(option =>{
+  return (
+  <div style={{display:'inline-flex'}}>
+  {option.displayValue}:<input type={props.type} value={option.value}></input>
+  </div>);
+  })}
+</div>
+
 break;
 
 
