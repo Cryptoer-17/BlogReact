@@ -98,8 +98,19 @@ handlerModificaDati(){
 
 }
 
-inputChangedHandler = (event)=>{
-console.log(event.target.value);
+inputChangedHandler = (event, inputIdentifier)=>{
+const updatedOrderForm = {
+    ...this.state.orderForm
+}
+  const updateFormElement= {
+    ...updatedOrderForm[inputIdentifier]
+}
+
+updateFormElement.value = event.target.value;
+updatedOrderForm[inputIdentifier] = updateFormElement;
+this.setState({orderForm: updatedOrderForm})
+
+
 }
 
 convertFile = (e)=>  { 
@@ -149,7 +160,7 @@ render(){
                         type={formElement.config.elementType} 
                         config={formElement.config.elementConfig}
                         value={formElement.config.value}
-                        changed={this.inputChangedHandler}/>
+                        changed={(event) => this.inputChangedHandler(event,formElement.id)}/>
             ))}
         </form>
     );
@@ -159,19 +170,7 @@ render(){
     let nome;
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
-   
-        <div className={classes.DivForm}>Nome:<input type="text" id="nome" className={classes.InputForm} placeholder="nome" ></input></div>
-        <div className={classes.DivForm}>Cognome:<input type="text" id="cognome" className={classes.InputForm} placeholder="cognome" ></input></div>
-        <div className={classes.DivForm}>Data Nascita:<input type="date" id="date" className={classes.InputForm} style={{marginTop: '-3px'}} placeholder="data nascita" ></input></div>
-        <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio" id="radio" name="sex" value="M" />
-                                            <label>F</label><input type="radio" name="sex" value="F"/></div>
-        <div className={classes.DivForm}>Numero Telefono: <input type="text" id="telefono" className={classes.InputForm} placeholder="numero di telefono"></input></div>
-        <div className={classes.DivForm}>Nazionalità:<select id="nazionalita" className={classes.InputForm}>
-                <option value="Italia" >Italia</option>
-                <option value="Grecia">Grecia</option>
-                <option value="Spagna">Spagna</option>
-                <option value="Inghilterra">Inghilterra</option>
-            </select></div>
+        {form}
         <div className={classes.DivForm} > <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
         <button className = {classes.CaricaImgButton}  onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
@@ -238,7 +237,7 @@ render(){
                    
             </div>
             {(modificaDati) ? pageModificaDati : null}           
-            {form}
+            
             {articoliVisualizzati}
         </div>
     );
