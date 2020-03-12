@@ -16,6 +16,7 @@ class Profilo extends Component{
         presentazione:null,
         modificaDati:null,
         img:null,
+        formIsValid: false,
         profileForm:{
                 nome:{
                     elementType:'input',
@@ -26,7 +27,9 @@ class Profilo extends Component{
                     value: '',
                     validation:{
                         required:true,
-                    }
+                    },
+                    valid: false,
+                    touched: false
                 },
                 cognome:{
                     elementType:'input',
@@ -37,14 +40,21 @@ class Profilo extends Component{
                     value: '',
                     validation:{
                         required:true,
-                    }
+                    },
+                    valid: false,
+                    touched: false
                 },
                 dataNascita: {
                     elementType:'input',
                     elementConfig:{
                         type: 'date'
                     },
+                    validation:{
+                        isDate:true
+                    },
                     value: '',
+                    valid:false,
+                    touched: false
                 },
                 sesso: {
                     elementType:'radio',
@@ -56,6 +66,9 @@ class Profilo extends Component{
                         ]
                     },
                     value: '',
+                    valid: false,
+                    touched: false
+
                 },
                 numeroTelefono:{
                     elementType:'input',
@@ -63,7 +76,12 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo numero  telefono'
                     },
-                    value: ''
+                    value: '',
+                    validation:{
+                        required:true,
+                    },
+                    valid: false,
+                    touched: false
                 },
                 nazionalita:{
                     elementType:'select',
@@ -75,7 +93,9 @@ class Profilo extends Component{
                            {value: 'inghilterra', displayValue:'Inghilterra'}
                         ]
                     },
-                    value: '',
+                    value: 'italia',
+                    valid: true
+
                 },
             }
     }
@@ -99,14 +119,14 @@ orderHandler= ()=>{
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
     }
     const profile={
-        nome: formData.nome,
-        cognome:formData.cognome,
-        dataNascita:formData.dataNascita,
-        sesso: formData.sesso,
-        numeroTelefono:formData.numeroTelefono,
-        nazionalità:formData.nazionalita,
-        img:this.state.img,
-        userId:localStorage.getItem('userId')
+        nome: formData.nome.trim(),
+        cognome:formData.cognome.trim(),
+        dataNascita:formData.dataNascita.trim(),
+        sesso: formData.sesso.trim(),
+        numeroTelefono:formData.numeroTelefono.trim(),
+        nazionalità:formData.nazionalita.trim(),
+        img:this.state.img.trim(),
+        userId:localStorage.getItem('userId').trim()
     }
     
     this.props.onSendData(profile);
@@ -120,17 +140,26 @@ handlerModificaDati(){
 }
 
 inputChangedHandler = (event, inputIdentifier)=>{
+
+
 const updatedprofileForm = {
     ...this.state.profileForm
 }
-  const updateFormElement= {
+  const updatedFormElement= {
     ...updatedprofileForm[inputIdentifier]
 }
 
-updateFormElement.value = event.target.value;
-updatedprofileForm[inputIdentifier] = updateFormElement;
-this.setState({profileForm: updatedprofileForm})
+updatedFormElement.value = event.target.value;
 
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedprofileForm[inputIdentifier] = updatedFormElement;
+        console.log(updatedprofileForm[inputIdentifier]);
+        let formIsValid = true;
+        for (let inputIdentifier in updatedprofileForm) {
+            formIsValid = updatedprofileForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({profileForm: updatedprofileForm, formIsValid: formIsValid});
 
 }
 
@@ -148,7 +177,7 @@ convertFile = (e)=>  {
 
   checkValidityOfInput = (event, id) =>{
 
-    let newObj = { ...this.state.form[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.form[id].validation), touched:true };
+    let newObj = { ...this.state.profileForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.profileForm[id].validation), touched:true };
     let newForm = {...this.state.form,  [id]: {...newObj}}
     let formIsValid = true;
     for (let key in newForm) {
@@ -194,7 +223,11 @@ render(){
                         type={formElement.config.elementType} 
                         config={formElement.config.elementConfig}
                         value={formElement.config.value}
-                        changed={(event) => this.inputChangedHandler(event,formElement.id)}/>
+                        changed={(event) => this.inputChangedHandler(event,formElement.id)}
+                        touched = { formElement.config.touched}
+                       shouldValidate={formElement.config.validation}
+                       valid = {formElement.config.valid}
+                       /> 
             ))}
         </form>
     );
@@ -211,8 +244,7 @@ render(){
         
         { anteprimaImg ?  anteprimaImg : null}</div>
         <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style={{width:'0px'}}/* style = {{display:'none', visibility:'hidden',zIndex:'-200'}}*//>
-        <button 
-        className={classes.ButtonSend} onClick={this.orderHandler} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
+        <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
