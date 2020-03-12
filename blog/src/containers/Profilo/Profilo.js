@@ -13,7 +13,7 @@ class Profilo extends Component{
         presentazione:null,
         modificaDati:null,
         img:null,
-        orderForm:{
+        profileForm:{
                 nome:{
                     elementType:'input',
                     elementConfig:{
@@ -76,7 +76,6 @@ componentDidMount(){
 }
 
 HandlerChange(event){
-    console.log(event.target.value);
     this.setState({nome: event.target.value})
 }
 
@@ -84,13 +83,24 @@ handlerClickPresentazione(){
     this.setState({presentazione : false})
 }
 
-sendHandlerClick(nome,cognome,data,sesso,telefono,nazionalita){
-    console.log(nome);
-    console.log(cognome);
-    console.log(data);
-    console.log(sesso);
-    console.log(telefono);
-    console.log(nazionalita);
+
+orderHandler= ()=>{
+    const formData = {};
+    for(let formElementIdentifier in this.state.profileForm){
+        formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
+    }
+    const profile={
+        nome: formData.nome,
+        cognome:formData.cognome,
+        dataNascita:formData.dataNascita,
+        sesso: formData.sesso,
+        numeroTelefono:formData.numeroTelefono,
+        nazionalità:formData.nazionalita
+    }
+    
+    this.props.onSendData(profile);
+
+    //props action send data
 }
 
 handlerModificaDati(){
@@ -99,16 +109,16 @@ handlerModificaDati(){
 }
 
 inputChangedHandler = (event, inputIdentifier)=>{
-const updatedOrderForm = {
-    ...this.state.orderForm
+const updatedprofileForm = {
+    ...this.state.profileForm
 }
   const updateFormElement= {
-    ...updatedOrderForm[inputIdentifier]
+    ...updatedprofileForm[inputIdentifier]
 }
 
 updateFormElement.value = event.target.value;
-updatedOrderForm[inputIdentifier] = updateFormElement;
-this.setState({orderForm: updatedOrderForm})
+updatedprofileForm[inputIdentifier] = updateFormElement;
+this.setState({profileForm: updatedprofileForm})
 
 
 }
@@ -142,11 +152,10 @@ render(){
 
 
     const formElemetsArray = [];
-    for(let key in this.state.orderForm){
-        console.log(key);
+    for(let key in this.state.profileForm){
         formElemetsArray.push({
             id: key,
-             config: this.state.orderForm[key],
+             config: this.state.profileForm[key],
 
         })
     }
@@ -154,7 +163,6 @@ render(){
     let form = (
         <form>
             {formElemetsArray.map(formElement =>(
-                console.log(formElement.id),
                 <Input 
                         key={formElement.id}
                         type={formElement.config.elementType} 
@@ -178,15 +186,7 @@ render(){
         { anteprimaImg ?  anteprimaImg : null}</div>
         
         <button 
-        className={classes.ButtonSend} 
-        onClick={() => this.sendHandlerClick(document.getElementById("nome").value,
-                                             document.getElementById("cognome").value,
-                                            document.getElementById("date").value,
-                                            document.getElementById("radio").value,
-                                            document.getElementById("telefono").value,
-                                            document.getElementById("nazionalita").value,
-                                            )} 
-        style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
+        className={classes.ButtonSend} onClick={this.orderHandler} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
@@ -258,9 +258,9 @@ const mapStateToProps = state =>{
     // onGoogleAuth: () => dispatch(actions.googleAuth()),
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
-        onSendData: () => dispatch(actions.sendData())
+        onSendData: (data) => dispatch(actions.sendData(data))
     };
   };
 
 
-export default connect(mapStateToProps)(Profilo);
+export default connect(mapStateToProps,mapDispatchToProps)(Profilo);

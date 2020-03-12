@@ -15,6 +15,7 @@ const initialState = {
 
 
 const sendDataStart = ( state ) => {
+    console.log("entrato");
     return updateObject( state, { loading:true } );
 };
 

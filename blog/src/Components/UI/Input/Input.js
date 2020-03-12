@@ -25,7 +25,6 @@ switch(props.type){
   case "textarea": inputElement = <textarea value = { props.value}  {...props.config} onChange = {props.changed} className =  {textareaClasses.join(' ')} /> ;
   break;
   case "select" : inputElement = <select className={inputClasses.join(' ')} value={props.value} onChange={props.changed}>
-                  {console.log(props.type)}
                  {props.config.options.map(option => (
                 <option key={option.value} value={option.value}>
                     {option.displayValue}

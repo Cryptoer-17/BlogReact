@@ -28,9 +28,11 @@ export const sendDataFail = (error) =>{
 
 
  export const sendData = (dati) =>{
+     console.log(dati);
    return dispatch => {
     dispatch(sendDataStart());
-    axios.post('/persona.json?auth='+localStorage.getItem("token"), dati)
+    const token = localStorage.getItem("token");
+    axios.post('/persona.json?auth=' + token, dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
