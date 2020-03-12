@@ -117,6 +117,8 @@ deleteTagHandler = (tag) =>{
   
 
   publishArticleHandler = () => {
+
+
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
         sottotitolo: this.state.form.sottotitolo.value.trim(),

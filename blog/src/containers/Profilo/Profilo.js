@@ -7,6 +7,8 @@ import { IoIosSend } from 'react-icons/io';
 import * as actions from '../../store/actions/index';
 import Input from '../../Components/UI/Input/Input';
 import Spinner from '../../Components/UI/Spinner/Spinner';
+import checkValidity from '../../utility/validation';
+
 
 class Profilo extends Component{
     state={
@@ -21,7 +23,10 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value: ''
+                    value: '',
+                    validation:{
+                        required:true,
+                    }
                 },
                 cognome:{
                     elementType:'input',
@@ -29,14 +34,17 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo cognome'
                     },
-                    value: ''
+                    value: '',
+                    validation:{
+                        required:true,
+                    }
                 },
                 dataNascita: {
                     elementType:'input',
                     elementConfig:{
                         type: 'date'
                     },
-                    value: ''
+                    value: '',
                 },
                 sesso: {
                     elementType:'radio',
@@ -47,7 +55,7 @@ class Profilo extends Component{
                             {value:'m', displayValue:'M'}
                         ]
                     },
-                    value: ''
+                    value: '',
                 },
                 numeroTelefono:{
                     elementType:'input',
@@ -67,7 +75,7 @@ class Profilo extends Component{
                            {value: 'inghilterra', displayValue:'Inghilterra'}
                         ]
                     },
-                    value: ''
+                    value: '',
                 },
             }
     }
@@ -96,7 +104,9 @@ orderHandler= ()=>{
         dataNascita:formData.dataNascita,
         sesso: formData.sesso,
         numeroTelefono:formData.numeroTelefono,
-        nazionalità:formData.nazionalita
+        nazionalità:formData.nazionalita,
+        img:this.state.img,
+        userId:localStorage.getItem('userId')
     }
     
     this.props.onSendData(profile);
@@ -130,8 +140,22 @@ convertFile = (e)=>  {
     reader.onloadend = () => {
   
     this.setState({img: reader.result, anteprimaImg: <img className={classes.InputImg} src = {reader.result} alt = "" />})
+    console.log(this.state.img);
     }
   };
+
+
+
+  checkValidityOfInput = (event, id) =>{
+
+    let newObj = { ...this.state.form[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.form[id].validation), touched:true };
+    let newForm = {...this.state.form,  [id]: {...newObj}}
+    let formIsValid = true;
+    for (let key in newForm) {
+        formIsValid = newForm[key].valid && formIsValid;
+    }
+        this.setState({isFormValid:formIsValid, form: newForm})
+    }
 
 
 render(){
@@ -253,7 +277,6 @@ render(){
 
 
 const mapStateToProps = state =>{
-    console.log(state.profilo.loading);
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading
