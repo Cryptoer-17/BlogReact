@@ -2,13 +2,25 @@ import React, {Component} from 'react';
 import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
-import NuovoArticolo from './containers/NuovoArticolo/NuovoArticolo';
 import Navigazione from './Components/Navigazione/Navigazione';
-import Articolo from './Components/Articolo/Articolo';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import MainPage from './Components/MainPage/MainPage'; 
-import Profilo from './containers/Profilo/Profilo';
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
+
+
+const asyncNuovoArticolo = asyncComponent(() =>{
+  return import('./containers/NuovoArticolo/NuovoArticolo');
+});
+
+const asyncProfilo = asyncComponent(() =>{
+  return import('./containers/Profilo/Profilo');
+});
+
+const asyncArticolo = asyncComponent(() =>{
+  return import('./Components/Articolo/Articolo');
+});
+
 
 class App extends Component {
 
@@ -30,10 +42,10 @@ if(localStorage.getItem("userId"))
          <Navigazione/>
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={MainPage} /> }
-           {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={NuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  component={Profilo} /> : null }
+           {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
+           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  component={asyncProfilo} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
-            {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={Articolo} /> : null}
+            {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>

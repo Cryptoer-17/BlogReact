@@ -7,6 +7,7 @@ import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
 import { withRouter } from "react-router";
 import { FaThumbsUp, FaThumbsDown} from "react-icons/fa";
+import updateObject from '../../utility/updateObject';
 
 class Username extends Component{
 
@@ -34,7 +35,7 @@ isFormValid : false
 
 
 checkValidityOfUsername= (event) =>{
-    let newObj = { ...this.state.username, value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true };
+    let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     let formIsValid = newObj.valid;
     this.setState({isUsernameValid:formIsValid, username:newObj})
     }

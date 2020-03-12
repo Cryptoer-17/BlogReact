@@ -8,7 +8,7 @@ import * as actions from '../../store/actions/index';
 import Input from '../../Components/UI/Input/Input';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import checkValidity from '../../utility/validation';
-
+import updateObject from '../../utility/updateObject';
 
 class Profilo extends Component{
     state={
@@ -140,9 +140,11 @@ inputChangedHandler = (event, inputIdentifier)=>{
 const updatedprofileForm = {
     ...this.state.profileForm
 }
+
   const updatedFormElement= {
     ...updatedprofileForm[inputIdentifier]
 }
+
 
 updatedFormElement.value = event.target.value;
 
@@ -171,9 +173,8 @@ convertFile = (e)=>  {
 
 
   checkValidityOfInput = (event, id) =>{
-
-    let newObj = { ...this.state.profileForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.profileForm[id].validation), touched:true };
-    let newForm = {...this.state.form,  [id]: {...newObj}}
+    let newObj = updateObject(this.state.profileForm[id], {value: event.target.value, valid:checkValidity(event.target.value, this.state.profileForm[id].validation), touched:true });
+    let newForm= updateObject(this.state.form, {[id]: {...newObj}})
     let formIsValid = true;
     for (let key in newForm) {
         formIsValid = newForm[key].valid && formIsValid;
