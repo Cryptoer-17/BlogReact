@@ -98,6 +98,9 @@ handlerModificaDati(){
 
 }
 
+inputChangedHandler = (event)=>{
+console.log(event.target.value);
+}
 
 convertFile = (e)=>  { 
     let reader = new FileReader();
@@ -140,13 +143,13 @@ render(){
     let form = (
         <form>
             {formElemetsArray.map(formElement =>(
-                
+                console.log(formElement.id),
                 <Input 
                         key={formElement.id}
                         type={formElement.config.elementType} 
                         config={formElement.config.elementConfig}
                         value={formElement.config.value}
-                        radio={true}/>
+                        changed={this.inputChangedHandler}/>
             ))}
         </form>
     );
@@ -160,8 +163,8 @@ render(){
         <div className={classes.DivForm}>Nome:<input type="text" id="nome" className={classes.InputForm} placeholder="nome" ></input></div>
         <div className={classes.DivForm}>Cognome:<input type="text" id="cognome" className={classes.InputForm} placeholder="cognome" ></input></div>
         <div className={classes.DivForm}>Data Nascita:<input type="date" id="date" className={classes.InputForm} style={{marginTop: '-3px'}} placeholder="data nascita" ></input></div>
-        <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio" id="radio" name="male" value="M" />
-                                            <label>F</label><input type="radio" name="male" value="F"/></div>
+        <div className={classes.DivForm}>Sesso: <label>M</label><input type="radio" id="radio" name="sex" value="M" />
+                                            <label>F</label><input type="radio" name="sex" value="F"/></div>
         <div className={classes.DivForm}>Numero Telefono: <input type="text" id="telefono" className={classes.InputForm} placeholder="numero di telefono"></input></div>
         <div className={classes.DivForm}>Nazionalità:<select id="nazionalita" className={classes.InputForm}>
                 <option value="Italia" >Italia</option>
