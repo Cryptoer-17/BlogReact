@@ -26,7 +26,6 @@
     } 
 
     if (rules.isDate) {
-        console.log(value);
         const pattern =/^\d{4}[./-]\d{2}[./-]\d{2}$/;
         isValid = pattern.test(value) && isValid
     } 
