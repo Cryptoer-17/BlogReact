@@ -54,7 +54,7 @@ submitHandlerSignIn = (event) =>{
 render(){
     
 const {show, modalClosed} = this.props;
-const {username, isFormValid, signUpForm} = this.state;
+const {username, isFormValid} = this.state;
 
   
     
@@ -88,10 +88,8 @@ const {username, isFormValid, signUpForm} = this.state;
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button>Annulla</button> <button>Conferma</button>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton}>Conferma</button>
          </Modal>
-
-
 
     );
 
