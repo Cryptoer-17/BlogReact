@@ -4,7 +4,7 @@ import updateObject from '../../utility/updateObject';
 
 const initialState = {
     dati: [],
-    loading:false,
+    loading:null,
     esitoCaricamento:"",
     error : null
 }
@@ -26,7 +26,7 @@ const sendDataFail = ( state) => {
 const sendDataSuccess = ( state, action ) => {
      let arrayArt = [...state.dati];
      arrayArt.push(action.dati);
-    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
+    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "I dati sono stati modificati con successo." } );
 };
 
 

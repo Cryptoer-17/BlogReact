@@ -9,6 +9,7 @@ import Input from '../../Components/UI/Input/Input';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import checkValidity from '../../utility/validation';
 import updateObject from '../../utility/updateObject';
+import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
     state={
@@ -17,6 +18,7 @@ class Profilo extends Component{
         modificaDati:null,
         img:null,
         formIsValid: false,
+        show:false,
         profileForm:{
                 nome:{
                     elementType:'input',
@@ -99,16 +101,22 @@ componentDidMount(){
 
 }
 
-HandlerChange(event){
-    this.setState({nome: event.target.value})
-}
+
 
 handlerClickPresentazione(){
     this.setState({presentazione : false})
 }
 
+hideModal = () =>{
+    this.setState({show:false})
+}
+
+showModal = () =>{
+    this.setState({show:true})
+}
 
 orderHandler= ()=>{
+    this.showModal();
     const formData = {};
     for(let formElementIdentifier in this.state.profileForm){
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
@@ -120,7 +128,7 @@ orderHandler= ()=>{
         sesso: formData.sesso.trim(),
         numeroTelefono:formData.numeroTelefono.trim(),
         nazionalità:formData.nazionalita.trim(),
-        img:this.state.img.trim(),
+        img:this.state.img,
         userId:localStorage.getItem('userId').trim()
     }
     
@@ -151,7 +159,6 @@ updatedFormElement.value = event.target.value;
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedprofileForm[inputIdentifier] = updatedFormElement;
-        console.log(updatedprofileForm[inputIdentifier]);
         let formIsValid = true;
         for (let inputIdentifier in updatedprofileForm) {
             formIsValid = updatedprofileForm[inputIdentifier].valid && formIsValid;
@@ -159,6 +166,8 @@ updatedFormElement.value = event.target.value;
         this.setState({profileForm: updatedprofileForm, formIsValid: formIsValid});
 
 }
+
+
 
 convertFile = (e)=>  { 
     let reader = new FileReader();
@@ -187,6 +196,7 @@ render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading} = this.props;
+    let pageIntera;
     let email;
     email = localStorage.getItem('email');
 
@@ -230,7 +240,6 @@ render(){
 
 
 
-    let nome;
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
         {form}
@@ -271,8 +280,16 @@ render(){
        pageModificaDati= <Spinner/>
    }
 
+   let modal=null;
+   if(loading===false){
+       modal=(<Modal show={this.state.show} modalClosed={this.hideModal}>
+           {this.props.esitoCaricamento}
+       </Modal>);
+   }
+
     return(
         <div className={classes.Profilo}>
+             {!loading ? modal : null}
             <div>
             <h1>Profilo Persona</h1>
             </div>
@@ -307,7 +324,8 @@ render(){
 const mapStateToProps = state =>{
     return{
        articoli : state.articolo.articoli,
-       loading: state.profilo.loading
+       loading: state.profilo.loading,
+       esito: state.profilo.esitoCaricamento
     }
  }
  
