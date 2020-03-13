@@ -109,9 +109,6 @@ export const loginCheckState = () =>{
 };
 
 
-export const setUsername = (username) =>{
-
-}
 
 
 

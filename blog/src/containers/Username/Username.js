@@ -53,7 +53,7 @@ submitHandlerSignIn = (event) =>{
 
 render(){
     
-const {show, modalClosed} = this.props;
+const {show, modalClosed, onSetUsername} = this.props;
 const {username, isFormValid} = this.state;
 
   
@@ -88,7 +88,7 @@ const {username, isFormValid} = this.state;
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton}>Conferma</button>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} onClick = {() => {return (onSetUsername(username.value), modalClosed() )}  }>Conferma</button>
          </Modal>
 
     );
@@ -107,7 +107,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-
+    
+        onSetUsername: (username) => dispatch(actions.setUsername(username)),
 
     };
   };

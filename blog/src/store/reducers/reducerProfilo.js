@@ -25,9 +25,13 @@ const sendDataFail = ( state) => {
 };
 
 const sendDataSuccess = ( state, action ) => {
-     let arrayArt = [...state.dati];
-     arrayArt.push(action.dati);
-    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "I dati sono stati modificati con successo." } );
+     let arrayDati = [...state.dati];
+     let id = state.dati.findIndex(i=>i.key  === action.profilo.userId);
+     if(id > 0)
+     arrayDati.splice(id, 1);
+
+     arrayDati.push(action.dati);
+    return updateObject( state, { loading: false, dati: arrayDati, esitoCaricamento: "I dati sono stati modificati con successo." } );
 };
 
 
@@ -43,6 +47,7 @@ const getProfiloSuccess = (state, action ) =>{
 const getProfiloFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false});
 }
+
 
 
 const reducer = (state = initialState, action) =>  {
