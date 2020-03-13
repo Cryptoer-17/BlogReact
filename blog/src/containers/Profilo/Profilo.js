@@ -26,7 +26,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value: '',
+                    value:'',
                     valid: true,
                     touched: false
                 },
@@ -96,10 +96,11 @@ class Profilo extends Component{
                 },
             }
     }
+    
 
 componentDidMount(){
     let userId= localStorage.getItem("userId");
-this.props.onGetProfilo(userId);
+ this.props.onGetProfilo(userId);
 
 }
 
@@ -177,7 +178,6 @@ convertFile = (e)=>  {
     reader.onloadend = () => {
   
     this.setState({img: reader.result, anteprimaImg: <img className={classes.InputImg} src = {reader.result} alt = "" />})
-    console.log(this.state.img);
     }
   };
 
@@ -199,10 +199,11 @@ render(){
     
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
-    let {loading} = this.props;
+    let {loading,profilo} = this.props;
     let pageIntera;
     let email;
     email = localStorage.getItem('email');
+
 
     const personal_article = [...this.props.articoli]
 
@@ -326,7 +327,6 @@ render(){
 
 
 const mapStateToProps = state =>{
-    console.log(state.profilo.profilo);
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,

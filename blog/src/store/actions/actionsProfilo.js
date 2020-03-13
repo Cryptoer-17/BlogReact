@@ -28,14 +28,22 @@ export const getProfiloFail = (error) =>{
 export const getProfili = (userId) =>{
     
     return dispatch =>{
-        const temparray = [];
+        let temparray = [];
         dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
             if(response.data[key].userId === localStorage.getItem("userId"))
-            temparray.push({profilo: response.data[key], key: key })
+            temparray ={
+                nome: response.data[key].nome,
+                cognome:response.data[key].cognome,
+                dataNascita: response.data[key].dataNascita,
+                sesso:response.data[key].sesso,
+                numeroTelefono:response.data.numeroTelefono,
+                nazionalità: response.data[key].nazionalità,
+                img:response.data[key].img
+            }
         };         
           dispatch(getProfiloSuccess(temparray));
         })
