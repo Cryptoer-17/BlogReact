@@ -116,7 +116,7 @@ deleteTagHandler = (tag) =>{
   
   
 
-  publishArticleHandler = () => {
+  publishArticleHandler = async () => {
 
 
     const articolo = {
@@ -132,15 +132,11 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId")
     }
-    this.props.onPostArticolo(articolo);
-    setTimeout(() => this.props.onInitArticoli() , 600) 
-    setTimeout(() =>   this.showModal() , 800)    
-
-    if(!this.props.loading)
+    await this.props.onPostArticolo(articolo);
+     this.props.onInitArticoli();  
+    this.showModal();
     setTimeout(() => this.props.history.push("/") , 2000)  
 
-    
-  
 }
 
 
@@ -172,7 +168,7 @@ checkValidityOfInput = (event, id) =>{
 render(){
 
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
-    const {loading, esito} = this.props;
+    const {loading, esito, onInitArticoli} = this.props;
  
     const formData = [];
     for(let key in  form){
@@ -234,7 +230,7 @@ return(
 
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = {  isFormValid ? false : true } > Pubblica </button>           
+  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}> Pubblica </button>           
  
 
  <Modal  show = {show}  modalClosed = {  this.hideModal } >

@@ -47,7 +47,7 @@ render(){
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
    }
-   localStorage.setItem("username","us");
+   //localStorage.setItem("username","us");
  
   
    let articoliVisualizzati;
