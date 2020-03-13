@@ -98,7 +98,8 @@ class Profilo extends Component{
     }
 
 componentDidMount(){
-this.props.onGetProfili();
+    let userId= localStorage.getItem("userId");
+this.props.onGetProfilo(userId);
 
 }
 
@@ -195,13 +196,7 @@ convertFile = (e)=>  {
 
 render(){
 
-    if(this.props.profili!==null){
-        let pageProfilo;
-        this.props.profili.map((profilo) =>{
-            console.log(profilo.profili.userId);
-        })
-    }
-
+    
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading} = this.props;
@@ -331,11 +326,12 @@ render(){
 
 
 const mapStateToProps = state =>{
+    console.log(state.profilo.profilo);
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
        esito: state.profilo.esitoCaricamento,
-       profili: state.profilo.profili
+       profilo: state.profilo.profilo
     }
  }
  
@@ -346,7 +342,7 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-        onGetProfili:() => dispatch(actions.getProfili()) 
+        onGetProfilo:(userId) => dispatch(actions.getProfili(userId)) 
     };
   };
 

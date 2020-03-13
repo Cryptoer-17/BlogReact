@@ -2,44 +2,47 @@ import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
 
-export const getProfiliSuccess = (profili)=>{
+export const getProfiloSuccess = (profilo)=>{
     return{
-        type: actionTypes.GET_PROFILI_SUCCESS,
-        profili: profili
+        type: actionTypes.GET_PROFILO_SUCCESS,
+        profilo: profilo
     }
 } 
 
 
-export const getProfiliStart = () =>{
+export const getProfiloStart = () =>{
     return {
-        type : actionTypes.GET_PROFILI_START
+        type : actionTypes.GET_PROFILO_START
     };
 }
 
-export const getProfiliFail = (error) =>{
+export const getProfiloFail = (error) =>{
     
     return{
-        type : actionTypes.GET_PROFILI_FAIL,
+        type : actionTypes.GET_PROFILO_FAIL,
         error : error
     }
 }
 
 
-export const getProfili = () =>{
+export const getProfili = (userId) =>{
+    
     return dispatch =>{
         const temparray = [];
-        dispatch(getProfiliStart());
+        dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
-            temparray.push({profili: response.data[key], key: key })
+            if(response.data[key].userId === localStorage.getItem("userId"))
+            temparray.push({profilo: response.data[key], key: key })
         };         
-          dispatch(getProfiliSuccess(temparray));
+          dispatch(getProfiloSuccess(temparray));
         })
         .catch(err => { 
-            dispatch(getProfiliFail(err.response.data.error));      
+            dispatch(getProfiloFail(err.response.data.error));      
         });
+       
     };
 };
 
