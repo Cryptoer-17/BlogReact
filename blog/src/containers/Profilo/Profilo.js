@@ -283,7 +283,7 @@ render(){
    let modal=null;
    if(loading===false){
        modal=(<Modal show={this.state.show} modalClosed={this.hideModal}>
-           {this.props.esitoCaricamento}
+           {this.props.esito}
        </Modal>);
    }
 
