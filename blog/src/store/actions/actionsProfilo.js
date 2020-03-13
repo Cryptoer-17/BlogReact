@@ -2,6 +2,46 @@ import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
 
+export const getProfiliSuccess = (profili)=>{
+    return{
+        type: actionTypes.GET_PROFILI_SUCCESS,
+        profili: profili
+    }
+} 
+
+
+export const getProfiliStart = () =>{
+    return {
+        type : actionTypes.GET_PROFILI_START
+    };
+}
+
+export const getProfiliFail = (error) =>{
+    
+    return{
+        type : actionTypes.GET_PROFILI_FAIL,
+        error : error
+    }
+}
+
+
+export const getProfili = () =>{
+    return dispatch =>{
+        const temparray = [];
+        dispatch(getProfiliStart());
+        const token = localStorage.getItem('token');
+        axios.get('/profili.json?auth=' +token)
+        .then(response =>{   
+          for(let key in response.data){
+            temparray.push({profili: response.data[key], key: key })
+        };         
+          dispatch(getProfiliSuccess(temparray));
+        })
+        .catch(err => { 
+            dispatch(getProfiliFail(err.response.data.error));      
+        });
+    };
+};
 
 
 
@@ -28,10 +68,9 @@ export const sendDataFail = (error) =>{
 
 
  export const sendData = (dati) =>{
-     console.log(dati);
    return dispatch => {
     dispatch(sendDataStart());
-    axios.post('/persona.json?auth=' + localStorage.getItem("token"), dati)
+    axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
@@ -40,3 +79,4 @@ export const sendDataFail = (error) =>{
     });
     }
 };
+

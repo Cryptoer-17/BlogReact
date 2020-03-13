@@ -16,5 +16,6 @@ setLoginRedirectPath
 }from './actionsLogin';
 
 export{
-sendData
+sendData,
+getProfili
 }from './actionsProfilo';

@@ -98,7 +98,8 @@ class Profilo extends Component{
     }
 
 componentDidMount(){
-
+    console.log(this.props.profili);
+this.props.onGetProfili();
 }
 
 
@@ -322,10 +323,12 @@ render(){
 
 
 const mapStateToProps = state =>{
+    console.log(state.profilo.profili);
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
-       esito: state.profilo.esitoCaricamento
+       esito: state.profilo.esitoCaricamento,
+       profili: state.profilo.profili
     }
  }
  
@@ -335,7 +338,8 @@ const mapStateToProps = state =>{
     // onGoogleAuth: () => dispatch(actions.googleAuth()),
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
-        onSendData: (data) => dispatch(actions.sendData(data))
+        onSendData: (data) => dispatch(actions.sendData(data)),
+        onGetProfili:() => dispatch(actions.getProfili()) 
     };
   };
 
