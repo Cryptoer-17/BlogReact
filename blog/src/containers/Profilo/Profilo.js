@@ -26,7 +26,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value:'',
+                    value:this.props.profilo.nome,
                     valid: true,
                     touched: false
                 },
@@ -185,12 +185,12 @@ convertFile = (e)=>  {
 
   checkValidityOfInput = (event, id) =>{
     let newObj = updateObject(this.state.profileForm[id], {value: event.target.value, valid:checkValidity(event.target.value, this.state.profileForm[id].validation), touched:true });
-    let newForm= updateObject(this.state.form, {[id]: {...newObj}})
+    let newForm= updateObject(this.state.profileForm, {[id]: {...newObj}})
     let formIsValid = true;
     for (let key in newForm) {
         formIsValid = newForm[key].valid && formIsValid;
     }
-        this.setState({isFormValid:formIsValid, form: newForm})
+        this.setState({isFormValid:formIsValid, profileForm: newForm})
     }
 
 
