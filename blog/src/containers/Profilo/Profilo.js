@@ -13,7 +13,7 @@ import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
     state={
-        anteprimaImg:null,
+        anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:null,
         modificaDati:null,
         img:null,
