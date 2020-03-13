@@ -15,3 +15,7 @@ googleAuth,
 setLoginRedirectPath
 }from './actionsLogin';
 
+export{
+sendData,
+getProfili
+}from './actionsProfilo';

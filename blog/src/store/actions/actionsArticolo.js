@@ -69,6 +69,7 @@ export const postArticoloStart = () =>{
 export const postArticolo = (articolo) => {
     return dispatch => {
         dispatch(postArticoloStart());
+        console.log(articolo);
         axios.post('/articoli.json?auth='+localStorage.getItem("token"), articolo)
         .then(res =>{ 
             dispatch(postArticoloSuccess(articolo))

@@ -6,7 +6,7 @@ import Input from '../../Components/UI/Input/Input';
 import * as actions from '../../store/actions/index';
 import {connect } from 'react-redux';
 import { withRouter } from "react-router";
-import Username from '../Username/Username'
+import updateObject  from '../../utility/updateObject';
 
 class Login extends Component{
 
@@ -52,8 +52,9 @@ switchAuthModeHandler = () =>{
 
 
 checkValidityOfInput = (event, id) =>{
-    let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
-    let newForm = {...this.state.loginForm,  [id]: {...newObj}}
+
+    let newObj = updateObject(this.state.loginForm[id], {value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true});
+    let newForm = updateObject(this.state.loginForm, {[id]: {...newObj}});
     let formIsValid = true;
     for (let key in newForm) {
         formIsValid = newForm[key].valid && formIsValid;
@@ -62,8 +63,8 @@ checkValidityOfInput = (event, id) =>{
 }
 
 checkValidityOfUsername= (event) =>{
-    let newObj = { ...this.state.signUpForm.username, value: event.target.value, valid:checkValidity(event.target.value, this.state.signUpForm.username.validation), touched:true };
-    let newForm = {...this.state.signUpForm,  username: {...newObj}}
+    let newObj = updateObject(this.state.signUpForm.username, {value: event.target.value, valid:checkValidity(event.target.value, this.state.signUpForm.username.validation), touched:true});
+    let newForm = updateObject(this.state.signUpForm, {username: {...newObj}} );
     let formIsValid = newObj.valid;
     this.setState({isUsernameValid:formIsValid, signUpForm: newForm})
     }
