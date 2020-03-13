@@ -98,8 +98,8 @@ class Profilo extends Component{
     }
 
 componentDidMount(){
-    console.log(this.props.profili);
 this.props.onGetProfili();
+
 }
 
 
@@ -194,6 +194,14 @@ convertFile = (e)=>  {
 
 
 render(){
+
+    if(this.props.profili!==null){
+        let pageProfilo;
+        this.props.profili.map((profilo) =>{
+            console.log(profilo.profili.userId);
+        })
+    }
+
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading} = this.props;
@@ -323,7 +331,6 @@ render(){
 
 
 const mapStateToProps = state =>{
-    console.log(state.profilo.profili);
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
