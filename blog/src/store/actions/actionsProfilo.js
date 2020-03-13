@@ -40,7 +40,7 @@ export const getProfili = (userId) =>{
                 cognome:response.data[key].cognome,
                 dataNascita: response.data[key].dataNascita,
                 sesso:response.data[key].sesso,
-                numeroTelefono:response.data.numeroTelefono,
+                numeroTelefono:response.data[key].numeroTelefono,
                 nazionalità: response.data[key].nazionalità,
                 img:response.data[key].img
             }

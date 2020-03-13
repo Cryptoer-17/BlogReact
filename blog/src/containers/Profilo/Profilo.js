@@ -26,7 +26,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value:this.props.profilo.nome,
+                    value:''+this.props.profilo.nome+'',
                     valid: true,
                     touched: false
                 },
@@ -36,7 +36,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo cognome'
                     },
-                    value: '',
+                    value: ''+this.props.profilo.cognome+'',
                     valid: true,
                     touched: false
                 },
@@ -48,7 +48,7 @@ class Profilo extends Component{
                     validation:{
                         isDate:true
                     },
-                    value: '',
+                    value: ''+this.props.profilo.dataNascita+'',
                     valid:false,
                     touched: false
                 },
@@ -61,7 +61,7 @@ class Profilo extends Component{
                             {value:'m', displayValue:'M'}
                         ]
                     },
-                    value: '',
+                    value: ''+this.props.profilo.sesso+'',
                     valid: true,
                     touched: false
 
@@ -72,7 +72,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo numero  telefono'
                     },
-                    value: '',
+                    value: ''+this.props.profilo.numeroTelefono+'',
                     validation:{
                         minLength:11,
                         maxLength:11
@@ -90,7 +90,7 @@ class Profilo extends Component{
                            {value: 'inghilterra', displayValue:'Inghilterra'}
                         ]
                     },
-                    value: 'italia',
+                    value: ''+this.props.profilo.nazionalità+'',
                     valid: true
 
                 },
@@ -98,11 +98,8 @@ class Profilo extends Component{
     }
     
 
-componentDidMount(){
-    let userId= localStorage.getItem("userId");
- this.props.onGetProfilo(userId);
 
-}
+
 
 
 
@@ -195,8 +192,6 @@ convertFile = (e)=>  {
 
 
 render(){
-
-    
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
@@ -330,8 +325,7 @@ const mapStateToProps = state =>{
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
-       esito: state.profilo.esitoCaricamento,
-       profilo: state.profilo.profilo
+       esito: state.profilo.esitoCaricamento
     }
  }
  
@@ -342,7 +336,7 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-        onGetProfilo:(userId) => dispatch(actions.getProfili(userId)) 
+       
     };
   };
 
