@@ -70,7 +70,7 @@ const hideUsernameModal = () =>{
     <nav className ={classes.BarraNavigazione}>
     <NavLink to = "/" exact> <p className = {classes.Titolo}>Blog</p> </NavLink>
     {localStorage.getItem("userId") ? <NavLink to="/"  exact className = {classes.Link} activeClassName = {classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
-    {localStorage.getItem("userId") && localStorage.getItem("username") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : <button className = {classes.Link}><i className="material-icons"  onClick = {showUsernameModal}>add_box</i> </button>  }
+    {localStorage.getItem("userId") && localStorage.getItem("username") ?  <NavLink to="/pubblica" className = {classes.Link}  activeClassName = {classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> :  localStorage.getItem("userId") ?  <button className = {classes.Link}><i className="material-icons"  onClick = {showUsernameModal}>add_box</i> </button>  : null }
     {localStorage.getItem("userId") ? <NavLink to="/profilo" className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">account_circle</i></NavLink> : null } 
      {(show && props.error===null && showmsg===false) ?  <AnimatedModal> { !localStorage.getItem("userId") ?  <Login show = {show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal = {hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage}  messageRegister={messageRegister}/> :  <Logout show = {show} google={google} hideModal = {hideModal}  />} </AnimatedModal>   : null}  
     {localStorage.getItem("userId") ?   <Ricerca className = {classes.Ricerca}/> : null }

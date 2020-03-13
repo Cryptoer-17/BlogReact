@@ -33,6 +33,8 @@ const loginSuccess = (state,action) =>{
 const logout = (state,action) =>{
     
     auth.signOut(); 
+    localStorage.removeItem("email");
+    localStorage.removeItem("username");
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     localStorage.removeItem("user");

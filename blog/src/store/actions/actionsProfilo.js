@@ -42,7 +42,8 @@ export const getProfili = (userId) =>{
                 sesso:response.data[key].sesso,
                 numeroTelefono:response.data[key].numeroTelefono,
                 nazionalità: response.data[key].nazionalità,
-                img:response.data[key].img
+                img:response.data[key].img,
+                username: response.data[key].username
             }
         };         
           dispatch(getProfiloSuccess(temparray));
