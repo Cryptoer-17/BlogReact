@@ -17,7 +17,7 @@ class Profilo extends Component{
         presentazione:null,
         modificaDati:null,
         img:null,
-        formIsValid: false,
+        formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show:false,
         profileForm:{
                 nome:{
@@ -195,6 +195,7 @@ render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
+
     let pageIntera;
     let email;
     email = localStorage.getItem('email');
