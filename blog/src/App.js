@@ -38,7 +38,15 @@ if(userId){
 }
 
   render(){
-   
+   let tempProfilo ={
+      nome: (this.props.profilo.nome===undefined ? '' : this.props.profilo.nome),
+      cognome : (this.props.profilo.cognome===undefined ? '' : this.props.profilo.cognome),
+      dataNascita:  this.props.profilo.dataNascita,
+      sesso:this.props.profilo.sesso,
+      numeroTelefono:(this.props.profilo.numeroTelefono===undefined ? '' : this.props.profilo.numeroTelefono),
+      nazionalità: this.props.profilo.nazionalità,
+      img:this.props.profilo.img
+     }
    
   
     
@@ -49,7 +57,7 @@ if(userId){
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(<AsyncProfilo profilo={this.props.profilo}/>)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(<AsyncProfilo profilo={tempProfilo}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
