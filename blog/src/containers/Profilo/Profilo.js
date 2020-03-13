@@ -13,11 +13,11 @@ import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
     state={
-        anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
+        anteprimaImg:null,
         presentazione:null,
         modificaDati:null,
         img:null,
-        formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
+        formIsValid: false,
         show:false,
         profileForm:{
                 nome:{
@@ -26,7 +26,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value:''+this.props.profilo.nome+'',
+                    value:'',
                     valid: true,
                     touched: false
                 },
@@ -36,7 +36,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo cognome'
                     },
-                    value: ''+this.props.profilo.cognome+'',
+                    value: '',
                     valid: true,
                     touched: false
                 },
@@ -48,7 +48,7 @@ class Profilo extends Component{
                     validation:{
                         isDate:true
                     },
-                    value: ''+this.props.profilo.dataNascita+'',
+                    value: '',
                     valid:false,
                     touched: false
                 },
@@ -61,7 +61,7 @@ class Profilo extends Component{
                             {value:'m', displayValue:'M'}
                         ]
                     },
-                    value: ''+this.props.profilo.sesso+'',
+                    value: '',
                     valid: true,
                     touched: false
 
@@ -72,7 +72,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo numero  telefono'
                     },
-                    value: ''+this.props.profilo.numeroTelefono+'',
+                    value: '',
                     validation:{
                         minLength:11,
                         maxLength:11
@@ -90,7 +90,7 @@ class Profilo extends Component{
                            {value: 'inghilterra', displayValue:'Inghilterra'}
                         ]
                     },
-                    value: ''+this.props.profilo.nazionalità+'',
+                    value: '',
                     valid: true
 
                 },
@@ -195,7 +195,9 @@ render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
+    console.log(profilo);
 
+    
     let pageIntera;
     let email;
     email = localStorage.getItem('email');

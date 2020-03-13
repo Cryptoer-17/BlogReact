@@ -38,7 +38,17 @@ if(userId){
 }
 
   render(){
-   let tempProfilo ={
+    let tempProfilo = this.props.profili.map((profilo) =>{
+      if(profilo.profili.userId=== localStorage.getItem("userId")){
+          return(<AsyncProfilo  
+            profilo={profilo.profili}
+            key={profilo.key}
+            />
+          );
+      }
+    })
+
+  /* let tempProfilo ={
       nome: (this.props.profilo.nome===undefined ? '' : this.props.profilo.nome),
       cognome : (this.props.profilo.cognome===undefined ? '' : this.props.profilo.cognome),
       dataNascita:  this.props.profilo.dataNascita,
@@ -46,8 +56,8 @@ if(userId){
       numeroTelefono:(this.props.profilo.numeroTelefono===undefined ? '' : this.props.profilo.numeroTelefono),
       nazionalità: this.props.profilo.nazionalità,
       img:this.props.profilo.img
-     }
-   
+     }*/
+   console.log(tempProfilo);
   
     
   return (
@@ -57,7 +67,7 @@ if(userId){
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(<AsyncProfilo profilo={tempProfilo}/>)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(tempProfilo)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
@@ -71,11 +81,11 @@ if(userId){
 }
 
 const mapStateToProps = state =>{
-
+console.log(state.profilo.profili);
   return{
       loading: state.articolo.loading,
       error : state.articolo.error,
-      profilo: state.profilo.profilo
+      profili: state.profilo.profili
   };
 };
 

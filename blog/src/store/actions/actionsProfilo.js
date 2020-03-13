@@ -2,53 +2,44 @@ import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
 
-export const getProfiloSuccess = (profilo)=>{
+export const getProfiliSuccess = (profili)=>{
     return{
-        type: actionTypes.GET_PROFILO_SUCCESS,
-        profilo: profilo
+        type: actionTypes.GET_PROFILI_SUCCESS,
+        profili: profili
     }
 } 
 
 
-export const getProfiloStart = () =>{
+export const getProfiliStart = () =>{
     return {
-        type : actionTypes.GET_PROFILO_START
+        type : actionTypes.GET_PROFILI_START
     };
 }
 
-export const getProfiloFail = (error) =>{
+export const getProfiliFail = (error) =>{
     
     return{
-        type : actionTypes.GET_PROFILO_FAIL,
+        type : actionTypes.GET_PROFILI_FAIL,
         error : error
     }
 }
 
 
-export const getProfili = (userId) =>{
+export const getProfili = () =>{
     
     return dispatch =>{
         let temparray = [];
-        dispatch(getProfiloStart());
+        dispatch(getProfiliStart());
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
-          for(let key in response.data){
-            if(response.data[key].userId === localStorage.getItem("userId"))
-            temparray ={
-                nome: response.data[key].nome,
-                cognome:response.data[key].cognome,
-                dataNascita: response.data[key].dataNascita,
-                sesso:response.data[key].sesso,
-                numeroTelefono:response.data[key].numeroTelefono,
-                nazionalità: response.data[key].nazionalità,
-                img:response.data[key].img
-            }
-        };         
-          dispatch(getProfiloSuccess(temparray));
+            for(let key in response.data){
+                temparray.push({profili: response.data[key], key: key })
+            };     
+          dispatch(getProfiliSuccess(temparray));
         })
         .catch(err => { 
-            dispatch(getProfiloFail(err.response.data.error));      
+            dispatch(getProfiliFail(err.response.data.error));      
         });
        
     };
