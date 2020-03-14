@@ -17,7 +17,7 @@ class Profilo extends Component{
         presentazione:null,
         modificaDati:null,
         img:null,
-        formIsValid: false,
+        formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show:false,
         profileForm:{
                 nome:{

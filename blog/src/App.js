@@ -62,7 +62,7 @@ if(userId){
         let tempArray={
           nome:  '',
           cognome: '' ,
-          dataNascita: '',
+          dataNascita: undefined,
           sesso:'',
           numeroTelefono:'' ,
           nazionalità:'',
