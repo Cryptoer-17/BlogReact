@@ -131,8 +131,13 @@ orderHandler= ()=>{
         img:this.state.img,
         userId:localStorage.getItem('userId').trim()
     }
-    
-    this.props.onSendData(profile);
+    let updateObject = this.props.profili.map((profilo) =>{
+        if(profilo.profili.userId===profile.userId){
+            return profile;
+        }
+        else return profilo.profili;
+    })
+    this.props.onSendData(updateObject);
 
     //props action send data
 }
@@ -326,7 +331,8 @@ const mapStateToProps = state =>{
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
-       esito: state.profilo.esitoCaricamento
+       esito: state.profilo.esitoCaricamento,
+       profili:state.profilo.profili
     }
  }
  

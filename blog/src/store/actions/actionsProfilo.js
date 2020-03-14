@@ -72,7 +72,7 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-    axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
+    axios.put('/profili.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
