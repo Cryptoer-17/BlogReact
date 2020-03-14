@@ -38,13 +38,37 @@ if(userId){
 }
 
   render(){
-    let tempProfilo = this.props.profili.map((profilo) =>{
+    const rowLength= this.props.profili.length;
+    console.log(rowLength);
+    let c = 0;
+    let tempProfilo = this.props.profili.map((profilo,i) =>{
       if(profilo.profili.userId=== localStorage.getItem("userId")){
+        c=c+1;
+        let tempArray={
+          nome: (profilo.profili.nome === undefined ? '' : profilo.profili.nome),
+          cognome:(profilo.profili.cognome===undefined? '' : profilo.profili.cognome),
+          dataNascita: profilo.profili.dataNascita,
+          sesso:profilo.profili.sesso,
+          numeroTelefono:(profilo.profili.numeroTelefono===undefined ? '' : profilo.profili.numeroTelefono),
+          nazionalità:profilo.profili.nazionalità,
+          img: profilo.profili.img
+        }
           return(<AsyncProfilo  
-            profilo={profilo.profili}
+            profilo={tempArray}
             key={profilo.key}
             />
           );
+      }else if(rowLength === i+1 && c==0){
+        let tempArray={
+          nome:  '',
+          cognome: '' ,
+          dataNascita: '',
+          sesso:'',
+          numeroTelefono:'' ,
+          nazionalità:'',
+          img: ''
+        }
+        return(<AsyncProfilo  profilo={tempArray} key={i}/>);
       }
     })
 
@@ -57,7 +81,6 @@ if(userId){
       nazionalità: this.props.profilo.nazionalità,
       img:this.props.profilo.img
      }*/
-   console.log(tempProfilo);
   
     
   return (
@@ -81,7 +104,6 @@ if(userId){
 }
 
 const mapStateToProps = state =>{
-console.log(state.profilo.profili);
   return{
       loading: state.articolo.loading,
       error : state.articolo.error,

@@ -13,7 +13,7 @@ import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
     state={
-        anteprimaImg:null,
+        anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:null,
         modificaDati:null,
         img:null,
@@ -26,7 +26,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo nome'
                     },
-                    value:'',
+                    value:''+this.props.profilo.nome+'',
                     valid: true,
                     touched: false
                 },
@@ -36,7 +36,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo cognome'
                     },
-                    value: '',
+                    value: ''+this.props.profilo.cognome+'',
                     valid: true,
                     touched: false
                 },
@@ -48,7 +48,7 @@ class Profilo extends Component{
                     validation:{
                         isDate:true
                     },
-                    value: '',
+                    value: ''+this.props.profilo.dataNascita+'',
                     valid:false,
                     touched: false
                 },
@@ -61,7 +61,7 @@ class Profilo extends Component{
                             {value:'m', displayValue:'M'}
                         ]
                     },
-                    value: '',
+                    value: ''+this.props.profilo.sesso+'',
                     valid: true,
                     touched: false
 
@@ -72,7 +72,7 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'Tuo numero  telefono'
                     },
-                    value: '',
+                    value: ''+this.props.profilo.numeroTelefono+'',
                     validation:{
                         minLength:11,
                         maxLength:11
@@ -90,7 +90,7 @@ class Profilo extends Component{
                            {value: 'inghilterra', displayValue:'Inghilterra'}
                         ]
                     },
-                    value: '',
+                    value: ''+this.props.profilo.nazionalità+'',
                     valid: true
 
                 },
@@ -195,9 +195,7 @@ render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
-    console.log(profilo);
 
-    
     let pageIntera;
     let email;
     email = localStorage.getItem('email');
