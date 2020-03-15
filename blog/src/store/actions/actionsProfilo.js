@@ -72,13 +72,14 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-    axios.put('/profili.json?auth=' + localStorage.getItem("token"), dati)
+    console.log(dati);
+   /* axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
     .catch(error => { 
         dispatch(sendDataFail(error));
-    });
+    });*/
     }
 };
 

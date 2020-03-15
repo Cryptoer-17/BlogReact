@@ -38,12 +38,19 @@ if(userId){
 }
 
   render(){
+    //console.log(this.profili.profili);
+
+    
+
+
+
     const rowLength= this.props.profili.length;
-    console.log(rowLength);
+    let key = null;
     let c = 0;
     let tempProfilo = this.props.profili.map((profilo,i) =>{
       if(profilo.profili.userId=== localStorage.getItem("userId")){
         c=c+1;
+        key = profilo.key;
         let tempArray={
           nome: (profilo.profili.nome === undefined ? '' : profilo.profili.nome),
           cognome:(profilo.profili.cognome===undefined? '' : profilo.profili.cognome),
@@ -82,7 +89,7 @@ if(userId){
       img:this.props.profilo.img
      }*/
   
-   /*  let tempProfilo={
+     /*let tempProfilo={
        nome: '',
        cognome: '',
        dataNascita: undefined,
@@ -94,11 +101,11 @@ if(userId){
   return (
     <div className="App">
          <BrowserRouter>
-         <Navigazione/>
+         <Navigazione idProfilo={key}/>
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(tempProfilo /*<AsyncProfilo profilo={tempProfilo}/>*/)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/"+key : "")} exact  render={() =>(tempProfilo /*<AsyncProfilo profilo={tempProfilo}/>*/)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />

@@ -131,6 +131,9 @@ orderHandler= ()=>{
         img:this.state.img,
         userId:localStorage.getItem('userId').trim()
     }
+
+    console.log(this.props.profili);
+
     let updateObject = this.props.profili.map((profilo) =>{
         if(profilo.profili.userId===profile.userId){
             return profile;
