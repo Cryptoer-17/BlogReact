@@ -4,7 +4,7 @@ import updateObject from '../../utility/updateObject';
 
 const initialState = {
     dati: [],
-    loading:null,
+    loading:false,
     esitoCaricamento:"",
     error : null,
     profilo:[]
@@ -41,7 +41,7 @@ const getProfiloStart = (state, action) =>{
 }
 
 const getProfiloSuccess = (state, action ) =>{
-    localStorage.setItem("username", action.profilo.username)
+ 
     return updateObject(state , {profilo : action.profilo, error:null, loading : false});
 }
 

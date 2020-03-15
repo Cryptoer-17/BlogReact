@@ -45,8 +45,10 @@ export const getProfili = (userId) =>{
                 img:response.data[key].img,
                 username: response.data[key].username
             }
+            if(response.data[key].username)
+            localStorage.setItem("username",response.data[key].username)
         };         
-          dispatch(getProfiloSuccess(temparray));
+          dispatch(getProfiloSuccess(temparray) );
         })
         .catch(err => { 
             dispatch(getProfiloFail(err.response.data.error));      
