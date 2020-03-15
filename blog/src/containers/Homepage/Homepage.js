@@ -39,9 +39,6 @@ render(){
   let {spinner, articoli, errore} = this.props;
 
    
-   if(spinner){
-     spinner = <Spinner />
-   }
    
    let errorMessage = null;
    if(typeof errore === 'undefined'){
@@ -51,6 +48,10 @@ render(){
  
   
    let articoliVisualizzati;
+   
+   if(spinner){
+     articoliVisualizzati = <Spinner />
+    }else{
     articoliVisualizzati = articoli.map((art) =>{
       return (<AnteprimaArticolo 
          id={art.key} 
@@ -67,7 +68,7 @@ render(){
          clickHeart = {() => this.clickHeartHandler(art)}
          key={art.key}/>);
    })
-   
+}
 
 
 return(

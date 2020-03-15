@@ -66,7 +66,6 @@ state = {
         },
     },
     tagInput:"",
-    autore: "Moni",
     tags : [],
     tagsList:[],
     img : null,
@@ -122,7 +121,7 @@ deleteTagHandler = (tag) =>{
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
         sottotitolo: this.state.form.sottotitolo.value.trim(),
-        autore: this.state.autore,
+        autore: localStorage.getItem("username"),
         testo: this.state.form.testo.value,
         descrizione: this.state.form.descrizione.value.trim(),
         categoria: this.state.form.categoria.value.trim(),
@@ -133,9 +132,10 @@ deleteTagHandler = (tag) =>{
         userId: localStorage.getItem("userId")
     }
     await this.props.onPostArticolo(articolo);
-     this.props.onInitArticoli();  
+    
+    await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
     this.showModal();
-    setTimeout(() => this.props.history.push("/") , 2000)  
+    setTimeout(() => this.props.history.push("/") , 3000)  
 
 }
 
