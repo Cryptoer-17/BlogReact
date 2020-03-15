@@ -32,12 +32,10 @@ isFormValid : false
 
 
 
-
-
 checkValidityOfUsername= (event) =>{
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     let formIsValid = newObj.valid;
-    this.setState({isUsernameValid:formIsValid, username:newObj})
+    this.setState({isFormValid:formIsValid, username:newObj})
     }
 
 
@@ -88,7 +86,7 @@ const {username, isFormValid} = this.state;
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} onClick = {() => {return (onSetUsername(username.value), modalClosed() )}  }>Conferma</button>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid} onClick = {() => {return (onSetUsername(username.value), modalClosed() )}  }>Conferma</button>
          </Modal>
 
     );
