@@ -39,9 +39,10 @@ if(userId){
 
   render(){
     //console.log(this.profili.profili);
-       
+      let key; 
       let tempArray;
        if(this.props.profilo.length){
+          key=this.props.profilo[0].key;
           console.log(this.props.profilo[0]);
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
@@ -51,6 +52,16 @@ if(userId){
           numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
           nazionalità:this.props.profilo[0].profilo.nazionalità,
           img: this.props.profilo[0].profilo.img
+        }
+      }else{
+        tempArray={
+          nome: '',
+          cognome:'',
+          dataNascita: '',
+          sesso:'',
+          numeroTelefono:'',
+          nazionalità:'',
+          img: null
         }
       } 
 
@@ -76,11 +87,11 @@ if(userId){
   return (
     <div className="App">
          <BrowserRouter>
-         <Navigazione idProfilo={this.props.profilo.key}/>
+         <Navigazione idProfilo={key}/>
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (this.props.profilo.key ? "/"+this.props.profilo.key : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray}/>)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/"+ key : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />

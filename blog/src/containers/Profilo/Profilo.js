@@ -135,7 +135,8 @@ orderHandler= ()=>{
         userId:localStorage.getItem('userId').trim()
     }
 
-    console.log(this.props.profiloReducer);
+    console.log(this.props.key);
+    
    // this.props.onSendData(profile);
 
     //props action send data
