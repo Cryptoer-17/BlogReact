@@ -11,6 +11,20 @@ const initialState = {
 }
 
 
+const updateDataStart = ( state ) => {
+    console.log("entrato");
+    return updateObject( state, { loading:true } );
+};
+
+const updateDataFail = ( state) => {
+    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nell'invio dei dati."} );
+};
+
+const updateDataSuccess = ( state, action ) => {
+     let arrayArt = [...state.dati];
+     arrayArt.push(action.dati);
+    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
+};
 
 
 
@@ -53,6 +67,9 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.GET_PROFILO_SUCCESS : return getProfiloSuccess(state,action);
         case actionTypes.GET_PROFILO_START : return getProfiloStart(state,action);
         case actionTypes.GET_PROFILO_FAIL : return getProfiloFail(state, action);
+        case actionTypes.UPDATE_DATA_SUCCESS : return updateDataSuccess(state,action);
+        case actionTypes.UPDATE_DATA_START : return updateDataStart(state,action);
+        case actionTypes.UPDATE_DATA_FAIL : return updateDataFail(state, action);
         default: return state;
     }
 }
