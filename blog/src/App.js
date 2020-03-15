@@ -32,52 +32,27 @@ componentDidMount(){
 const userId = localStorage.getItem("userId");
 if(userId){
   this.props.onInitArticoli();
-  this.props.onGetProfili();
+  this.props.onGetProfilo();
 
 }
 }
 
   render(){
     //console.log(this.profili.profili);
-
-    
-
-
-
-    const rowLength= this.props.profili.length;
-    let key = null;
-    let c = 0;
-    let tempProfilo = this.props.profili.map((profilo,i) =>{
-      if(profilo.profili.userId=== localStorage.getItem("userId")){
-        c=c+1;
-        key = profilo.key;
-        let tempArray={
-          nome: (profilo.profili.nome === undefined ? '' : profilo.profili.nome),
-          cognome:(profilo.profili.cognome===undefined? '' : profilo.profili.cognome),
-          dataNascita: profilo.profili.dataNascita,
-          sesso:profilo.profili.sesso,
-          numeroTelefono:(profilo.profili.numeroTelefono===undefined ? '' : profilo.profili.numeroTelefono),
-          nazionalità:profilo.profili.nazionalità,
-          img: profilo.profili.img
+       
+      let tempArray;
+       if(this.props.profilo.length){
+          console.log(this.props.profilo[0]);
+          tempArray={
+          nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
+          cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
+          dataNascita: this.props.profilo[0].profilo.dataNascita,
+          sesso:this.props.profilo[0].profilo.sesso,
+          numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
+          nazionalità:this.props.profilo[0].profilo.nazionalità,
+          img: this.props.profilo[0].profilo.img
         }
-          return(<AsyncProfilo  
-            profilo={tempArray}
-            key={profilo.key}
-            />
-          );
-      }else if(rowLength === i+1 && c===0){
-        let tempArray={
-          nome:  '',
-          cognome: '' ,
-          dataNascita: undefined,
-          sesso:'',
-          numeroTelefono:'' ,
-          nazionalità:'',
-          img: ''
-        }
-        return(<AsyncProfilo  profilo={tempArray} key={i}/>);
-      }
-    })
+      } 
 
   /* let tempProfilo ={
       nome: (this.props.profilo.nome===undefined ? '' : this.props.profilo.nome),
@@ -101,11 +76,11 @@ if(userId){
   return (
     <div className="App">
          <BrowserRouter>
-         <Navigazione idProfilo={key}/>
+         <Navigazione idProfilo={this.props.profilo.key}/>
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/"+key : "")} exact  render={() =>(tempProfilo /*<AsyncProfilo profilo={tempProfilo}/>*/)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (this.props.profilo.key ? "/"+this.props.profilo.key : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
@@ -122,7 +97,7 @@ const mapStateToProps = state =>{
   return{
       loading: state.articolo.loading,
       error : state.articolo.error,
-      profili: state.profilo.profili
+      profilo: state.profilo.profilo
   };
 };
 
@@ -130,7 +105,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
   return{
      onInitArticoli: () => dispatch(actions.initArticoli()),
-     onGetProfili:() => dispatch(actions.getProfili()) 
+     onGetProfilo:() => dispatch(actions.getProfilo()) 
   }
 }
 

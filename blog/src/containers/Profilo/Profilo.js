@@ -12,7 +12,10 @@ import updateObject from '../../utility/updateObject';
 import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
+
+
     state={
+        
         anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:null,
         modificaDati:null,
@@ -132,15 +135,8 @@ orderHandler= ()=>{
         userId:localStorage.getItem('userId').trim()
     }
 
-    console.log(this.props.profili);
-
-    let updateObject = this.props.profili.map((profilo) =>{
-        if(profilo.profili.userId===profile.userId){
-            return profile;
-        }
-        else return profilo.profili;
-    })
-    this.props.onSendData(updateObject);
+    console.log(this.props.profiloReducer);
+   // this.props.onSendData(profile);
 
     //props action send data
 }
@@ -335,7 +331,7 @@ const mapStateToProps = state =>{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
        esito: state.profilo.esitoCaricamento,
-       profili:state.profilo.profili
+       profiloReducer:state.profilo.profilo
     }
  }
  

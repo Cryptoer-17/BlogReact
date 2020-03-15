@@ -2,49 +2,48 @@ import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
 
-export const getProfiliSuccess = (profili)=>{
+export const getProfiloSuccess = (profilo)=>{
     return{
-        type: actionTypes.GET_PROFILI_SUCCESS,
-        profili: profili
+        type: actionTypes.GET_PROFILO_SUCCESS,
+        profilo: profilo
     }
 } 
 
 
-export const getProfiliStart = () =>{
+export const getProfiloStart = () =>{
     return {
-        type : actionTypes.GET_PROFILI_START
+        type : actionTypes.GET_PROFILO_START
     };
 }
 
-export const getProfiliFail = (error) =>{
+export const getProfiloFail = (error) =>{
     
     return{
-        type : actionTypes.GET_PROFILI_FAIL,
+        type : actionTypes.GET_PROFILO_FAIL,
         error : error
     }
 }
 
 
-export const getProfili = () =>{
-    
+
+export const getProfilo = () =>{
     return dispatch =>{
-        let temparray = [];
-        dispatch(getProfiliStart());
+        let temparray=[];
+        dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
-            for(let key in response.data){
-                temparray.push({profili: response.data[key], key: key })
-            };     
-          dispatch(getProfiliSuccess(temparray));
+          for(let key in response.data){
+            if(localStorage.getItem("userId") === response.data[key].userId)
+            temparray.push({profilo: response.data[key], key: key })
+        };         
+          dispatch(getProfiloSuccess(temparray));
         })
         .catch(err => { 
-            dispatch(getProfiliFail(err.response.data.error));      
+            dispatch(getProfiloFail(err.response.data.error));      
         });
-       
     };
 };
-
 
 
 export const sendDataSuccess = (dati) =>{
@@ -72,7 +71,6 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-    console.log(dati);
    /* axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
