@@ -135,7 +135,10 @@ orderHandler= ()=>{
         userId:localStorage.getItem('userId').trim()
     }
 
-    console.log(this.props.key);
+    if(this.props.profiloReducer.length){
+        //put
+    }
+else {/*post*/}
     
    // this.props.onSendData(profile);
 

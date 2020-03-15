@@ -42,8 +42,9 @@ if(userId){
       let key; 
       let tempArray;
        if(this.props.profilo.length){
+         
           key=this.props.profilo[0].key;
-          console.log(this.props.profilo[0]);
+          console.log(key);
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
           cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
