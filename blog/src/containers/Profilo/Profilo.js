@@ -135,14 +135,14 @@ orderHandler= ()=>{
         userId:localStorage.getItem('userId').trim()
     }
 
-    if(this.props.profiloReducer.length){
-        //put
-    }
-else {/*post*/}
+if(this.props.profiloReducer.length){
+      this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
+}
+else {
+    this.props.onSendData(profile);
+}
     
-   // this.props.onSendData(profile);
-
-    //props action send data
+  
 }
 
 handlerModificaDati(){
@@ -346,7 +346,7 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-       
+       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
     };
   };
 

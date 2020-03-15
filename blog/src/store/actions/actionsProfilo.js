@@ -71,13 +71,51 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-   /* axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
+    axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
     .catch(error => { 
         dispatch(sendDataFail(error));
-    });*/
+    });
     }
 };
 
+
+
+
+export const updateDataSuccess = (dati) =>{
+    return{
+        type: actionTypes.UPDATE_DATA_SUCCESS,
+        dati: dati
+    }
+} 
+
+export const updateDataStart = () =>{
+    return {
+        type : actionTypes.UPDATE_DATA_START
+    };
+}
+
+export const updateDataFail = (error) =>{
+    
+    return{
+        type : actionTypes.UPDATE_DATA_FAIL,
+        error : error
+    }
+}
+
+
+export const updateData = (dato,idProfilo) =>{
+    return dispatch => {
+        console.log(idProfilo);
+        dispatch(updateDataStart());
+        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
+        .then(res =>{ 
+            dispatch(updateDataSuccess(dato))
+          })
+        .catch(error => { 
+            dispatch(updateDataFail(error));
+        });
+    }
+}

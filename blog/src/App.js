@@ -44,7 +44,6 @@ if(userId){
        if(this.props.profilo.length){
          
           key=this.props.profilo[0].key;
-          console.log(key);
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
           cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
@@ -92,7 +91,7 @@ if(userId){
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/"+ key : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
