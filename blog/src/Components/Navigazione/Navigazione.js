@@ -90,16 +90,9 @@ const hideUsernameModal = () =>{
     }
 
     if(props.error){
-        if(props.error === "Auth token is expired"){
-            error =(
-                <Modal show={!show} modalClosed={()=>document.getElementById("btnLoginLogout").click(), ()=>document.getElementById("btnLoginLogout").click()} >{props.error} </Modal>
-                );
-        } 
-        else{
         error =(
         <Modal show={!show} modalClosed={showModal} >{props.error} </Modal>
         );
-        }
     }
     else if(props.error === null && props.userId!==null && showmsg){
         messageSuccess = ( <Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>   
@@ -124,8 +117,7 @@ const mapStateToProps = state =>{
         error : state.login.error,
         tokenId: state.login.token,
         userId : state.login.userId,
-        loginRedirectPath: state.login.loginRedirectPath,
-        error:state.articolo.error
+        loginRedirectPath: state.login.loginRedirectPath
     };
 };
 

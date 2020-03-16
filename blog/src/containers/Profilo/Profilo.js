@@ -236,7 +236,8 @@ render(){
     let form = (
         <form>
             {formElemetsArray.map(formElement =>(
-                <Input 
+                
+                    <Input 
                         key={formElement.id}
                         type={formElement.config.elementType} 
                         config={formElement.config.elementConfig}
@@ -246,6 +247,7 @@ render(){
                        shouldValidate={formElement.config.validation}
                        valid = {formElement.config.valid}
                        /> 
+            
             ))}
         </form>
     );
@@ -268,6 +270,7 @@ render(){
         let usernamePage = (
             <div>
                 <h3>MODIFICA IL TUO USERNAME</h3>
+                <Input type="text" changed={(event) => this.inputChangedHandler(event)} config={{placeholder: 'Username'}} value=""/>
             </div>
         );
 
@@ -333,7 +336,11 @@ render(){
             {(modificaDati) ? pageModificaDati : null}           
             
             <div className={classes.UsernamePage}>
-                 {usernamePage}
+                <div className={classes.ModificaDati}>
+                    {usernamePage}
+                    <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{marginTop: '-24px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia username</button>
+                </div>
+
             </div>
             
 
