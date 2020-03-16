@@ -331,6 +331,7 @@ render(){
        </Modal>);
    }
 
+   
     return(
         <div className={classes.Profilo}>
              {!loading ? modal : null}
@@ -344,9 +345,19 @@ render(){
             </div>
            
             <div className={classes.DatiPersonali}>  
+            
                 <h3>DATI PERSONALI</h3> 
-                <div style={{marginBottom:'10px'}}>
-                Email : {email}
+                <div style={{marginBottom:'10px',fontSize: '18px',lineHeight:'40px'}}>
+                <hr/>
+                Email : {email}<br/>
+                Username:{this.props.profilo.username !== "" ? this.props.profilo.username :  <b>non ancora inserito</b>}<br/>
+                <hr/>
+                Nome : {this.props.profilo.nome !== "" ? this.props.profilo.nome :  <b>non ancora inserito</b>}<br/>
+                Cognome: {this.props.profilo.cognome !== "" ? this.props.profilo.cognome :  <b>non ancora inserito</b>}<br/>
+                Data di nascita: {this.props.profilo.dataNascita !== "" ? this.props.profilo.dataNascita :  <b>non ancora inserita</b>}<br/>
+                Sesso: {this.props.profilo.sesso !== "" ? this.props.profilo.sesso :  <b>non ancora inserito</b>}<br/>
+                Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono :  <b>non ancora inserito</b>}<br/>
+                Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}
                 </div>
                 <div>
                 Altri dati coming soon
