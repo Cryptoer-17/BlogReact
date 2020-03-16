@@ -156,7 +156,12 @@ if(this.props.profiloReducer.length){
 else {
     this.props.onSendData(profile);
 }
-    
+   
+setTimeout(() =>{
+if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
+    window.location.reload();
+}
+},1500)
   
 }
 
@@ -248,19 +253,30 @@ render(){
     let form = (
         <form>
             {formElemetsArray.map(formElement =>(
-                
-                    <Input 
-                        key={formElement.id}
-                        type={formElement.config.elementType} 
-                        config={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        changed={(event) => this.inputChangedHandler(event,formElement.id)}
-                        touched = { formElement.config.touched}
-                       shouldValidate={formElement.config.validation}
-                       valid = {formElement.config.valid}
-                       /> 
+                    formElement.id !== 'username' ?  <Input 
+                    key={formElement.id}
+                    type={formElement.config.elementType} 
+                    config={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    changed={(event) => this.inputChangedHandler(event,formElement.id)}
+                    touched = { formElement.config.touched}
+                   shouldValidate={formElement.config.validation}
+                   valid = {formElement.config.valid}
+                   /> :<div key={formElement.id}>
+                   <h3>MODIFICA IL TUO USERNAME</h3>    
+                   <Input 
+                   key={formElement.id}
+                   type={formElement.config.elementType} 
+                   config={formElement.config.elementConfig}
+                   value={formElement.config.value}
+                   changed={(event) => this.inputChangedHandler(event,formElement.id)}
+                   touched = { formElement.config.touched}
+                  shouldValidate={formElement.config.validation}
+                  valid = {formElement.config.valid} /></div>
+            )
             
-            ))}
+            
+            )}
         </form>
     );
 
@@ -269,8 +285,8 @@ render(){
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
         {form}
+        <h3>MODIFICA LA TUA FOTO PROFILO</h3>
         <div className={classes.DivFoto} > 
-
         <button className = {classes.CaricaImgButton}  onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
         
         { anteprimaImg ?  anteprimaImg : null}</div>
@@ -279,12 +295,6 @@ render(){
     </div>);
 
 
-        let usernamePage = (
-            <div>
-                <h3>MODIFICA IL TUO USERNAME</h3>
-                <Input type="text" changed={(event) => this.inputChangedHandler(event)} config={{placeholder: 'Username'}} value=""/>
-            </div>
-        );
 
 
     let articoliVisualizzati;
@@ -346,14 +356,7 @@ render(){
                    
             </div>
             {(modificaDati) ? pageModificaDati : null}           
-            
-            <div className={classes.UsernamePage}>
-                <div className={classes.ModificaDati}>
-                    {usernamePage}
-                    <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{marginTop: '-24px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia username</button>
-                </div>
-
-            </div>
+          
             
 
             {articoliVisualizzati}

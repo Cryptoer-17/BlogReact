@@ -9,13 +9,14 @@ const Logout = ( props) =>{
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
 
-// let error;
-// if(props.error === "Auth token is expired"){
-//    error = setTimeout(
-     
-//     document.getElementById("btnLogout").click()
-//    ,1000);
-// }
+let error;
+if(props.error === "Auth token is expired"){
+   error = setTimeout(()=>{
+    if(props.error === "Auth token is expired"){
+      document.getElementById("btnLogout").click()
+    }
+   },100)
+}
 
 if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
@@ -53,6 +54,7 @@ return(
 {/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
 
 <button id="btnLogout" className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
+{error}
 </div>
 
 
