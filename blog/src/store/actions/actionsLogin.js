@@ -57,7 +57,7 @@ export const login = (email, password, isSignup,errore) =>{
             localStorage.setItem('userId', response.data.localId);
             localStorage.setItem('email', response.data.email);
             dispatch(loginSuccess(response.data.idToken, response.data.localId));
-            dispatch(checkLoginTimeout(response.data.expiresIn))
+            // dispatch(checkLoginTimeout(response.data.expiresIn));
         })
         .catch( err =>{
             console.log(errore);
@@ -89,6 +89,7 @@ export const setLoginRedirectPath = (path) =>{
 
 };
 
+/*
 export const loginCheckState = () =>{
     return dispatch =>{
         const token = localStorage.getItem('token');
@@ -106,7 +107,7 @@ export const loginCheckState = () =>{
             
         }
     }
-};
+};*/
 
 
 export const setUsername = (username) =>{

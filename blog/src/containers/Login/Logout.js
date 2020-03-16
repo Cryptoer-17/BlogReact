@@ -11,11 +11,13 @@ console.log(google);
 
 let error;
 if(props.error === "Auth token is expired"){
-   error = setTimeout(()=>{
+   error = (setTimeout(()=>{
     if(props.error === "Auth token is expired"){
       document.getElementById("btnLogout").click()
     }
-   },100)
+   },5000),<Modal  show = {show} hideModal = {hideModal}>
+     E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
+   </Modal>);
 }
 
 if(google){

@@ -71,12 +71,7 @@ render(){
    
    let error;
    if(this.props.error === "Auth token is expired"){
-      
-      error = (<Modal>
-            {this.props.error}
-            </Modal>,
-         document.getElementById("btnLoginLogout").click()
-         )
+      error = document.getElementById("btnLoginLogout").click()   
    }
    
 
