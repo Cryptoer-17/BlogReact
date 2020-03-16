@@ -100,6 +100,17 @@ class Profilo extends Component{
                     valid: true
 
                 },
+                username:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'username'
+                    },
+                    value: ''+this.props.profilo.username+'',
+                    valid: true,
+                    touched: false
+                },
+
             }
     }
     
@@ -135,6 +146,7 @@ orderHandler= ()=>{
         numeroTelefono:formData.numeroTelefono.trim(),
         nazionalità:formData.nazionalita.trim(),
         img:this.state.img,
+        username:formData.username.trim(),
         userId:localStorage.getItem('userId').trim()
     }
 

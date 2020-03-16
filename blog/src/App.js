@@ -56,7 +56,8 @@ if(userId){
           sesso:this.props.profilo[0].profilo.sesso,
           numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
           nazionalità:this.props.profilo[0].profilo.nazionalità,
-          img: this.props.profilo[0].profilo.img
+          img: this.props.profilo[0].profilo.img,
+          username:this.props.profilo[0].profilo.username
         }
       }else{
         tempArray={
@@ -66,7 +67,8 @@ if(userId){
           sesso:'',
           numeroTelefono:'',
           nazionalità:'',
-          img: null
+          img: null,
+          username:''
         }
       } 
 
