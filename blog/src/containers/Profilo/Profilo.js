@@ -347,7 +347,7 @@ render(){
             <div className={classes.DatiPersonali}>  
             
                 <h3>DATI PERSONALI</h3> 
-                <div style={{marginBottom:'10px',fontSize: '18px',lineHeight:'40px'}}>
+                <div style={{marginBottom:'10px',fontSize: '18px',lineHeight:'35px'}}>
                 <hr/>
                 Email : {email}<br/>
                 Username:{this.props.profilo.username !== "" ? this.props.profilo.username :  <b>non ancora inserito</b>}<br/>
