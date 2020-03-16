@@ -5,6 +5,7 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
+import Modal from '../../Components/UI/Modal/Modal';
 
 
 class Homepage extends Component{
@@ -69,7 +70,11 @@ render(){
          key={art.key}/>);
    })
 }
-
+   let error;
+   if(this.props.error === "Auth token is expired"){
+      error = document.getElementById("btnLoginLogout").click()   
+   }
+   
 
 return(
 
@@ -85,6 +90,8 @@ return(
          : null
          }
       </div>
+
+         {error }
 
    <ScrollTopButton/>
 
@@ -102,7 +109,8 @@ return(
 const mapStateToProps = state =>{
   
    return{
-      articoli : state.articolo.articoli
+      articoli : state.articolo.articoli,
+      error:state.articolo.error
    }
 }
 

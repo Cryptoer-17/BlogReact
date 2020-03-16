@@ -25,26 +25,18 @@ export const getProfiloFail = (error) =>{
 }
 
 
-export const getProfili = (userId) =>{
-    
+
+export const getProfilo = () =>{
     return dispatch =>{
-        let temparray = [];
+        let temparray=[];
         dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
-            if(response.data[key].userId === localStorage.getItem("userId"))
-            temparray ={
-                nome: response.data[key].nome,
-                cognome:response.data[key].cognome,
-                dataNascita: response.data[key].dataNascita,
-                sesso:response.data[key].sesso,
-                numeroTelefono:response.data[key].numeroTelefono,
-                nazionalità: response.data[key].nazionalità,
-                img:response.data[key].img,
+            if(localStorage.getItem("userId") === response.data[key].userId)
+            temparray.push({profilo: response.data[key], key: key })
                 username: response.data[key].username
-            }
             if(response.data[key].username)
             localStorage.setItem("username",response.data[key].username)
         };         
@@ -53,7 +45,6 @@ export const getProfili = (userId) =>{
         .catch(err => { 
             dispatch(getProfiloFail(err.response.data.error));      
         });
-       
     };
 };
 
@@ -85,7 +76,6 @@ export const setUsername = (username) =>{
         }     
 
 }
-
 
 export const sendDataSuccess = (dati) =>{
     return{
@@ -122,3 +112,41 @@ export const sendDataFail = (error) =>{
     }
 };
 
+
+
+
+export const updateDataSuccess = (dati) =>{
+    return{
+        type: actionTypes.UPDATE_DATA_SUCCESS,
+        dati: dati
+    }
+} 
+
+export const updateDataStart = () =>{
+    return {
+        type : actionTypes.UPDATE_DATA_START
+    };
+}
+
+export const updateDataFail = (error) =>{
+    
+    return{
+        type : actionTypes.UPDATE_DATA_FAIL,
+        error : error
+    }
+}
+
+
+export const updateData = (dato,idProfilo) =>{
+    return dispatch => {
+        console.log(idProfilo);
+        dispatch(updateDataStart());
+        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
+        .then(res =>{ 
+            dispatch(updateDataSuccess(dato))
+          })
+        .catch(error => { 
+            dispatch(updateDataFail(error));
+        });
+    }
+}

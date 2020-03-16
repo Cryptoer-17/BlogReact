@@ -6,6 +6,7 @@ import Navigazione from './Components/Navigazione/Navigazione';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
+import { FaWindows } from 'react-icons/fa';
 
 
 const asyncNuovoArticolo = asyncComponent(() =>{
@@ -32,13 +33,46 @@ componentDidMount(){
 const userId = localStorage.getItem("userId");
 if(userId){
   this.props.onInitArticoli();
-  this.props.onGetProfilo(userId);
+  this.props.onGetProfilo();
 
 }
 }
 
   render(){
-   let tempProfilo ={
+
+    
+
+
+    //console.log(this.profili.profili);
+      let key; 
+      let tempArray;
+       if(this.props.profilo.length){
+         
+          key=this.props.profilo[0].key;
+          tempArray={
+          nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
+          cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
+          dataNascita: this.props.profilo[0].profilo.dataNascita,
+          sesso:this.props.profilo[0].profilo.sesso,
+          numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
+          nazionalità:this.props.profilo[0].profilo.nazionalità,
+          img: this.props.profilo[0].profilo.img,
+          username:this.props.profilo[0].profilo.username
+        }
+      }else{
+        tempArray={
+          nome: '',
+          cognome:'',
+          dataNascita: '',
+          sesso:'',
+          numeroTelefono:'',
+          nazionalità:'',
+          img: null,
+          username:''
+        }
+      } 
+
+  /* let tempProfilo ={
       nome: (this.props.profilo.nome===undefined ? '' : this.props.profilo.nome),
       cognome : (this.props.profilo.cognome===undefined ? '' : this.props.profilo.cognome),
       dataNascita:  this.props.profilo.dataNascita,
@@ -46,18 +80,25 @@ if(userId){
       numeroTelefono:(this.props.profilo.numeroTelefono===undefined ? '' : this.props.profilo.numeroTelefono),
       nazionalità: this.props.profilo.nazionalità,
       img:this.props.profilo.img
-     }
-   
+     }*/
   
+     /*let tempProfilo={
+       nome: '',
+       cognome: '',
+       dataNascita: undefined,
+       sesso:'',
+       numeroTelefono:'',
+       img:''
+     }*/
     
   return (
     <div className="App">
          <BrowserRouter>
-         <Navigazione/>
+         <Navigazione idProfilo={key}/>
           <Switch>
            {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
-           {localStorage.getItem("userId") ?    <Route path="/profilo" exact  render={() =>(<AsyncProfilo profilo={tempProfilo}/>)} /> : null }
+           {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
             <Redirect to= "/" />
@@ -71,7 +112,6 @@ if(userId){
 }
 
 const mapStateToProps = state =>{
-
   return{
       loading: state.articolo.loading,
       error : state.articolo.error,
@@ -83,7 +123,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
   return{
      onInitArticoli: () => dispatch(actions.initArticoli()),
-     onGetProfilo:(userId) => dispatch(actions.getProfili(userId)) 
+     onGetProfilo:() => dispatch(actions.getProfilo()) 
   }
 }
 

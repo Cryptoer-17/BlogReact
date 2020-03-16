@@ -37,7 +37,7 @@ case "radio": inputElement =<div className={inputClasses.join(' ')} style={{text
   {props.config.options.map(option =>{
   return (
   <div key={option.value} style={{display:'inline-flex'}}>
-  {option.displayValue}:<input type={props.type} name="sex" onChange={props.changed} value={option.value}></input>
+  {option.displayValue}:<input type={props.type} name="sex" onChange={props.changed} value={option.value} checked={option.value === props.value}></input>
   </div>);
   })}
 </div>

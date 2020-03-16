@@ -12,12 +12,15 @@ import updateObject from '../../utility/updateObject';
 import Modal from '../../Components/UI/Modal/Modal';
 
 class Profilo extends Component{
+
+
     state={
+        
         anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:null,
         modificaDati:null,
         img:null,
-        formIsValid: false,
+        formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show:false,
         profileForm:{
                 nome:{
@@ -49,7 +52,7 @@ class Profilo extends Component{
                         isDate:true
                     },
                     value: ''+this.props.profilo.dataNascita+'',
-                    valid:false,
+                    valid:true,
                     touched: false
                 },
                 sesso: {
@@ -85,6 +88,9 @@ class Profilo extends Component{
                     elementConfig:{
                        options: [
                            {value:'italia', displayValue:'Italia'},
+                           {value:'irlanda', displayValue:'Irlanda'},
+                           {value:'svezia', displayValue:'Svezia'},
+                           {value:'finlandia', displayValue:'Finlandia'},
                            {value:'grecia', displayValue:'Grecia'},
                            {value: 'spagna', displayValue:'Spagna'},
                            {value: 'inghilterra', displayValue:'Inghilterra'}
@@ -94,6 +100,17 @@ class Profilo extends Component{
                     valid: true
 
                 },
+                username:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'username'
+                    },
+                    value: ''+this.props.profilo.username+'',
+                    valid: true,
+                    touched: false
+                },
+
             }
     }
     
@@ -129,12 +146,23 @@ orderHandler= ()=>{
         numeroTelefono:formData.numeroTelefono.trim(),
         nazionalità:formData.nazionalita.trim(),
         img:this.state.img,
+        username:formData.username.trim(),
         userId:localStorage.getItem('userId').trim()
     }
-    
-    this.props.onSendData(profile);
 
-    //props action send data
+if(this.props.profiloReducer.length){
+      this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
+}
+else {
+    this.props.onSendData(profile);
+}
+   
+setTimeout(() =>{
+if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
+    window.location.reload();
+}
+},1500)
+  
 }
 
 handlerModificaDati(){
@@ -195,6 +223,7 @@ render(){
 
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
+
     let pageIntera;
     let email;
     email = localStorage.getItem('email');
@@ -224,17 +253,30 @@ render(){
     let form = (
         <form>
             {formElemetsArray.map(formElement =>(
-                <Input 
-                        key={formElement.id}
-                        type={formElement.config.elementType} 
-                        config={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        changed={(event) => this.inputChangedHandler(event,formElement.id)}
-                        touched = { formElement.config.touched}
-                       shouldValidate={formElement.config.validation}
-                       valid = {formElement.config.valid}
-                       /> 
-            ))}
+                    formElement.id !== 'username' ?  <Input 
+                    key={formElement.id}
+                    type={formElement.config.elementType} 
+                    config={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    changed={(event) => this.inputChangedHandler(event,formElement.id)}
+                    touched = { formElement.config.touched}
+                   shouldValidate={formElement.config.validation}
+                   valid = {formElement.config.valid}
+                   /> :<div key={formElement.id}>
+                   <h3>MODIFICA IL TUO USERNAME</h3>    
+                   <Input 
+                   key={formElement.id}
+                   type={formElement.config.elementType} 
+                   config={formElement.config.elementConfig}
+                   value={formElement.config.value}
+                   changed={(event) => this.inputChangedHandler(event,formElement.id)}
+                   touched = { formElement.config.touched}
+                  shouldValidate={formElement.config.validation}
+                  valid = {formElement.config.valid} /></div>
+            )
+            
+            
+            )}
         </form>
     );
 
@@ -243,14 +285,16 @@ render(){
     let pageModificaDati =  (<div className={classes.ModificaDati}>
     <h3>MODIFICA I TUOI DATI</h3>
         {form}
+        <h3>MODIFICA LA TUA FOTO PROFILO</h3>
         <div className={classes.DivFoto} > 
-
         <button className = {classes.CaricaImgButton}  onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica foto profilo</button>
         
         { anteprimaImg ?  anteprimaImg : null}</div>
         <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style={{width:'0px'}}/* style = {{display:'none', visibility:'hidden',zIndex:'-200'}}*//>
         <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
+
+
 
 
     let articoliVisualizzati;
@@ -287,6 +331,7 @@ render(){
        </Modal>);
    }
 
+   
     return(
         <div className={classes.Profilo}>
              {!loading ? modal : null}
@@ -300,9 +345,19 @@ render(){
             </div>
            
             <div className={classes.DatiPersonali}>  
+            
                 <h3>DATI PERSONALI</h3> 
-                <div style={{marginBottom:'10px'}}>
-                Email : {email}
+                <div style={{marginBottom:'10px',fontSize: '18px',lineHeight:'35px'}}>
+                <hr/>
+                Email : {email}<br/>
+                Username:{this.props.profilo.username !== "" ? this.props.profilo.username :  <b>non ancora inserito</b>}<br/>
+                <hr/>
+                Nome : {this.props.profilo.nome !== "" ? this.props.profilo.nome :  <b>non ancora inserito</b>}<br/>
+                Cognome: {this.props.profilo.cognome !== "" ? this.props.profilo.cognome :  <b>non ancora inserito</b>}<br/>
+                Data di nascita: {this.props.profilo.dataNascita !== "" ? this.props.profilo.dataNascita :  <b>non ancora inserita</b>}<br/>
+                Sesso: {this.props.profilo.sesso !== "" ? this.props.profilo.sesso :  <b>non ancora inserito</b>}<br/>
+                Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono :  <b>non ancora inserito</b>}<br/>
+                Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}
                 </div>
                 <div>
                 Altri dati coming soon
@@ -312,7 +367,9 @@ render(){
                    
             </div>
             {(modificaDati) ? pageModificaDati : null}           
+          
             
+
             {articoliVisualizzati}
         </div>
     );
@@ -325,7 +382,8 @@ const mapStateToProps = state =>{
     return{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
-       esito: state.profilo.esitoCaricamento
+       esito: state.profilo.esitoCaricamento,
+       profiloReducer:state.profilo.profilo
     }
  }
  
@@ -336,7 +394,7 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-       
+       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
     };
   };
 

@@ -8,6 +8,18 @@ const Logout = ( props) =>{
 
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
+
+let error;
+if(props.error === "Auth token is expired"){
+   error = (setTimeout(()=>{
+    if(props.error === "Auth token is expired"){
+      document.getElementById("btnLogout").click()
+    }
+   },5000),<Modal  show = {show} hideModal = {hideModal}>
+     E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
+   </Modal>);
+}
+
 if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
 console.log("entrato");
@@ -43,8 +55,8 @@ return(
 
 {/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
 
-<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
-
+<button id="btnLogout" className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
+{error}
 </div>
 
 
@@ -54,16 +66,21 @@ return(
 }
 }
 
-
+const mapStateToProps = state =>{
+  return{
+     error:state.articolo.error
+  }
+}
 
 const mapDispatchToProps = dispatch => {
     return{
+ 
     onLogout: () => dispatch(actions.logout())
     };
   };
 
 
 
-export default connect(null,mapDispatchToProps)(Logout);
+export default connect(mapStateToProps,mapDispatchToProps)(Logout);
 
 
