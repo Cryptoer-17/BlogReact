@@ -8,6 +8,9 @@ const Logout = ( props) =>{
 
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
+
+
+
 if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
 console.log("entrato");
@@ -43,7 +46,7 @@ return(
 
 {/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
 
-<button className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
+<button id="btnLogout" className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
 
 </div>
 
@@ -58,6 +61,7 @@ return(
 
 const mapDispatchToProps = dispatch => {
     return{
+ 
     onLogout: () => dispatch(actions.logout())
     };
   };

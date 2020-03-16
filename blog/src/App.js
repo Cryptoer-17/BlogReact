@@ -6,6 +6,7 @@ import Navigazione from './Components/Navigazione/Navigazione';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
+import { FaWindows } from 'react-icons/fa';
 
 
 const asyncNuovoArticolo = asyncComponent(() =>{
@@ -38,6 +39,10 @@ if(userId){
 }
 
   render(){
+
+    
+
+
     //console.log(this.profili.profili);
       let key; 
       let tempArray;

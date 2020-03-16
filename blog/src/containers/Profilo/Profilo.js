@@ -52,7 +52,7 @@ class Profilo extends Component{
                         isDate:true
                     },
                     value: ''+this.props.profilo.dataNascita+'',
-                    valid:false,
+                    valid:true,
                     touched: false
                 },
                 sesso: {
@@ -88,6 +88,9 @@ class Profilo extends Component{
                     elementConfig:{
                        options: [
                            {value:'italia', displayValue:'Italia'},
+                           {value:'irlanda', displayValue:'Irlanda'},
+                           {value:'svezia', displayValue:'Svezia'},
+                           {value:'finlandia', displayValue:'Finlandia'},
                            {value:'grecia', displayValue:'Grecia'},
                            {value: 'spagna', displayValue:'Spagna'},
                            {value: 'inghilterra', displayValue:'Inghilterra'}
