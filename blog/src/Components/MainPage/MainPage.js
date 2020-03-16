@@ -8,7 +8,7 @@ const MainPage= () =>{
 
         <div className ={classes.MainPage}  >
                <p className ={classes.Testo} >Crea il tuo blog </p>
-                <button className ={classes.Registrazione} onClick = {() => document.getElementById("loginButton").click()}> INIZIA ORA</button>
+                <button className ={classes.Registrazione} onClick = {() => document.getElementById("btnLoginLogout").click()}> INIZIA ORA</button>
                 <div className = {classes.Img}> </div>
         </div>
     );

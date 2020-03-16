@@ -36,7 +36,6 @@ export const getProfilo = () =>{
           for(let key in response.data){
             if(localStorage.getItem("userId") === response.data[key].userId)
             temparray.push({profilo: response.data[key], key: key })
-                username: response.data[key].username
             if(response.data[key].username)
             localStorage.setItem("username",response.data[key].username)
         };         
