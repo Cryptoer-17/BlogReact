@@ -265,6 +265,13 @@ render(){
     </div>);
 
 
+        let usernamePage = (
+            <div>
+                <h3>MODIFICA IL TUO USERNAME</h3>
+            </div>
+        );
+
+
     let articoliVisualizzati;
     articoliVisualizzati = personal_article.map((art) =>{
         if(art.articolo.userId===localStorage.getItem('userId')){
@@ -325,6 +332,11 @@ render(){
             </div>
             {(modificaDati) ? pageModificaDati : null}           
             
+            <div className={classes.UsernamePage}>
+                 {usernamePage}
+            </div>
+            
+
             {articoliVisualizzati}
         </div>
     );
