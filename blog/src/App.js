@@ -57,7 +57,8 @@ if(userId){
           numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
           nazionalità:this.props.profilo[0].profilo.nazionalità,
           img: this.props.profilo[0].profilo.img,
-          username:this.props.profilo[0].profilo.username
+          username:this.props.profilo[0].profilo.username,
+          descrizione:(this.props.profilo[0].profilo.descrizione === undefined ? '' : this.props.profilo[0].profilo.descrizione)
         }
       }else{
         tempArray={
@@ -68,7 +69,8 @@ if(userId){
           numeroTelefono:'',
           nazionalità:'',
           img: null,
-          username:''
+          username:'',
+          descrizione:''
         }
       } 
 

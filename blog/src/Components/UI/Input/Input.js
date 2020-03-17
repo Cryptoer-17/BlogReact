@@ -45,13 +45,13 @@ case "radio": inputElement =<div className={inputClasses.join(' ')} style={{text
 break;
 
 
-  default: inputElement = <input value = { props.value} type = {props.type}  {...props.config} onChange = {props.changed} className =  {inputClasses.join(' ')} /> ;
+  default: inputElement = <input value = { props.value} type = {props.type} style={props.config.placeholder==='breve presentazione di te' ? {marginTop:'-70px', display:'inline',marginLeft:'75px'} : null}  {...props.config} onChange = {props.changed} className =  {inputClasses.join(' ')} /> ;
 }
 
 
 return(
     <div>
-    <label  className = {classes.Label}>{props.label}</label>
+    <label  className = {classes.Label} style={props.config.placeholder==='breve presentazione di te' ? {marginTop:'-64px'} :null}>{props.label}</label>
     {inputElement}
 
     </div>

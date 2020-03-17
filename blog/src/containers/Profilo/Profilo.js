@@ -20,6 +20,7 @@ class Profilo extends Component{
         presentazione:null,
         modificaDati:null,
         img:null,
+        descrizione:''+this.props.profilo.descrizione+'',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show:false,
         profileForm:{
@@ -135,6 +136,10 @@ showModal = () =>{
 orderHandler= ()=>{
     this.showModal();
     const formData = {};
+
+
+
+
     for(let formElementIdentifier in this.state.profileForm){
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
     }
@@ -147,7 +152,8 @@ orderHandler= ()=>{
         nazionalità:formData.nazionalita.trim(),
         img:this.state.img,
         username:formData.username.trim(),
-        userId:localStorage.getItem('userId').trim()
+        userId:localStorage.getItem('userId').trim(),
+        descrizione:this.state.descrizione
     }
 
 if(this.props.profiloReducer.length){
@@ -169,6 +175,10 @@ if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
 handlerModificaDati(){
     this.setState({modificaDati: !this.state.modificaDati})
 
+}
+
+descrizioneChangeHandler = (event) =>{
+    this.setState({descrizione: event.target.value})
 }
 
 inputChangedHandler = (event, inputIdentifier)=>{
@@ -236,7 +246,7 @@ render(){
     let btnInviaInfo=null;
     {presentazione===null? 
         presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
-        : presentazione===false && ((presentazioneVisualizzata = <input type="text"></input>) && (btnInviaInfo = <button className={classes.ButtonEmail} >Invia breve presentazione</button>))
+        : presentazione===false && ((presentazioneVisualizzata = <div><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend} style={{marginTop:'7px'}} ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
     } 
 
 
@@ -339,7 +349,7 @@ render(){
             <div>
             <h1>Profilo Persona</h1>
             </div>
-            <div className={classes.Informazioni}>
+            <div className={classes.Informazioni} style={presentazione===null ? null : {height:'185px'}}>
                 <h3>INFORMAZIONI</h3>
                 {presentazioneVisualizzata}
                 {btnInviaInfo}
