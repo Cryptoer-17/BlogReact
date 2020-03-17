@@ -89,15 +89,4 @@ cursor: pointer;
      cursor:pointer;
  }
  
- q:before {
-    content: open-quote;
-}
-
-q:after {
-    content: close-quote;
-}
-
-q:before, q:after {
-    color: purple;
-}
-         
+ 

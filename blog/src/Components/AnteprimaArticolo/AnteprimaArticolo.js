@@ -24,6 +24,7 @@ class AnteprimaArticolo extends Component{
     const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id} = this.props; 
     const {showDropdown} =this.state;
 
+
         if(this.props.like){
             colore = 'red';
         }
@@ -56,7 +57,7 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar showdropdown={showDropdown} clickMenu={this.clickMenuHandler} className = {classes.Actions} color={colore} onClick={clickHeart}/>   
+         <ActionBar id={id} showdropdown={showDropdown} clickMenu={this.clickMenuHandler} className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
         </div>
     

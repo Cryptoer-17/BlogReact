@@ -3,6 +3,7 @@ import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import Homepage from './containers/Homepage/Homepage';
 import RisultatiRicerca from './containers/RisultatiRicerca/RisultatiRicerca';
 import Navigazione from './Components/Navigazione/Navigazione';
+import Modifica from './Components/Modifica/Modifica';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
@@ -47,9 +48,6 @@ if(userId){
       let key; 
       let tempArray;
        if(this.props.profilo.length){
-         if(this.props.profilo[0].profilo.img === undefined){
-           console.log("ok");
-         }
           key=this.props.profilo[0].key;
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
@@ -70,7 +68,7 @@ if(userId){
           sesso:'',
           numeroTelefono:'',
           nazionalità:'',
-          img: null,
+          img: undefined,
           username:'',
           descrizione:''
         }
@@ -105,6 +103,7 @@ if(userId){
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  component = {Modifica} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>
