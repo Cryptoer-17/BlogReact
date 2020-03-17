@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Tag from '../../Components/Tag/Tag';
 import checkValidity from '../../utility/validation';
 import classes from './Modifica.module.css';
+import Input from '../../Components/UI/Input/Input';
 
 
 class Modifica extends Component{
@@ -173,6 +174,20 @@ checkValidityOfInput = (event, id) =>{
         return (
             <div className={classes.ModificaArticolo}>
                 <h2>Modifica articolo</h2>
+
+                {formData.map(el =>
+                <Input 
+                value = {el.obj.value}
+                key = {el.id}
+                type = {el.obj.type}
+                config = {el.obj.config}
+                touched = { el.obj.touched}
+                valid = { el.obj.valid}
+                changed = {(e) => this.checkValidityOfInput(e, el.id)}
+                shouldValidate = {el.obj.validation}
+                />
+                ) }
+
 
             </div>
         );
