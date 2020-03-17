@@ -371,7 +371,7 @@ render(){
                 Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}<br/>
                 <hr/>
                 <div style={this.props.profilo.img ? {height: '150px'} : null}>
-                Foto profilo: {this.props.profilo.img !== null ?<img style={{width:'15%', marginBottom: '-60px', borderStyle:'outset'}} src = {this.props.profilo.img} alt = ""/> :  <b>Non ancora inserita</b>}
+                Foto profilo: {this.props.profilo.img !== undefined ?<img style={{width:'15%', marginBottom: '-60px', borderStyle:'outset'}} src = {this.props.profilo.img} alt = ""/> :  <b>Non ancora inserita</b>}
                 </div>
                 </div>
                 <div>

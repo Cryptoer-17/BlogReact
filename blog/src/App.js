@@ -47,7 +47,9 @@ if(userId){
       let key; 
       let tempArray;
        if(this.props.profilo.length){
-         
+         if(this.props.profilo[0].profilo.img === undefined){
+           console.log("ok");
+         }
           key=this.props.profilo[0].key;
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
