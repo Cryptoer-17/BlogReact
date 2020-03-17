@@ -158,6 +158,7 @@ else {
 }
    
 setTimeout(() =>{
+    console.log(this.props.esito);
 if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
     window.location.reload();
 }
@@ -291,7 +292,7 @@ render(){
         
         { anteprimaImg ?  anteprimaImg : null}</div>
         <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={ event =>this.convertFile(event.target.files[0]) } style={{width:'0px'}}/* style = {{display:'none', visibility:'hidden',zIndex:'-200'}}*//>
-        <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{marginTop: '59px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
+        <button  className={classes.ButtonSend}  onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{position:'absolute', right:'0px', bottom:'0px'}}><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia dati</button>
     </div>);
 
 
@@ -359,8 +360,8 @@ render(){
                 Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono :  <b>non ancora inserito</b>}<br/>
                 Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}<br/>
                 <hr/>
-                <div style={{height: '150px'}}>
-                Foto del tuo profilo: {this.props.profilo.img !== ""?<img style={{width:'15%', marginBottom: '-60px', borderStyle:'outset'}} src = {this.props.profilo.img} alt = ""/> :  <b>Non ancora inserita</b>}
+                <div style={this.props.profilo.img ? {height: '150px'} : null}>
+                Foto profilo: {this.props.profilo.img !== null ?<img style={{width:'15%', marginBottom: '-60px', borderStyle:'outset'}} src = {this.props.profilo.img} alt = ""/> :  <b>Non ancora inserita</b>}
                 </div>
                 </div>
                 <div>
