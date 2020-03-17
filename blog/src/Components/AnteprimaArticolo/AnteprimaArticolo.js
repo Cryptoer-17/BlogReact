@@ -6,14 +6,23 @@ import Info from '../InfoArticolo/InfoArticolo';
 
 
 class AnteprimaArticolo extends Component{
-   
+    state={
+        showDropdown:false
+     }
+  
+
+     clickMenuHandler = ()=>{
+        this.setState({showDropdown:!this.state.showDropdown})
+        }
+
+
     render(){
 
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,dropDown,clickMenu} = this.props; 
-
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id} = this.props; 
+    const {showDropdown} =this.state;
 
         if(this.props.like){
             colore = 'red';
@@ -47,15 +56,14 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-           {console.log(dropDown)}
-         <ActionBar showdropdown={dropDown} clickMenu={clickMenu} className = {classes.Actions} color={colore} onClick={clickHeart}/>   
+         <ActionBar showdropdown={showDropdown} clickMenu={this.clickMenuHandler} className = {classes.Actions} color={colore} onClick={clickHeart}/>   
 
         </div>
     
   
 
     return(
-        <div>
+        <div onClick={showDropdown?this.clickMenuHandler : null}>
             {variabile}
         </div>
     );

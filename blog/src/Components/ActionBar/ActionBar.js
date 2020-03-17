@@ -17,7 +17,7 @@ const ActionBar = (props) =>{
                 <FaRegCommentDots className={classes.Comments}  />
                 </div>
 
-
+                {console.log(props.showdropdown)}
                  <div className= {classes.MoreDiv} >
                      <FaEllipsisH className={classes.More} onClick={props.clickMenu}/>
                     <div className={classes.DropdownContent}  style={props.showdropdown ? {display:'block'} : null} >

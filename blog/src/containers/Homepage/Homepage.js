@@ -9,10 +9,7 @@ import Modal from '../../Components/UI/Modal/Modal';
 
 
 class Homepage extends Component{
-   state={
-      showDropdown:true
-   }
-
+  
 clickHeartHandler(art){
       const anteprima = {
           autore : art.articolo.autore,
@@ -36,9 +33,7 @@ clickHeartHandler(art){
 
 
 
-clickMenuHandler = ()=>{
-this.setState({showDropdown:!this.state.showDropdown})
-}
+
 
 render(){
 
@@ -73,9 +68,7 @@ render(){
          titolo = {art.articolo.titolo}
          data = {art.articolo.data}
          minuti = {art.articolo.minuti}
-         dropDown={this.state.showDropdown}
-         clickHeart = {() => this.clickHeartHandler(art)}
-         clickMenu= {this.clickMenuHandler}
+         clickHeart = {() => this.clickHeartHandler(art)} 
          key={art.key}/>);
    })
 }
