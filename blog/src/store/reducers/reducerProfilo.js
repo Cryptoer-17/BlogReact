@@ -4,7 +4,7 @@ import updateObject from '../../utility/updateObject';
 
 const initialState = {
     dati: [],
-    loading:null,
+    loading:false,
     esitoCaricamento:"",
     error : null,
     profilo:[]
@@ -39,9 +39,13 @@ const sendDataFail = ( state) => {
 };
 
 const sendDataSuccess = ( state, action ) => {
-     let arrayArt = [...state.dati];
-     arrayArt.push(action.dati);
-    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
+     let arrayDati = [...state.dati];
+     let id = state.dati.findIndex(i=>i.key  === action.profilo.userId);
+     if(id > 0)
+     arrayDati.splice(id, 1);
+
+     arrayDati.push(action.dati);
+    return updateObject( state, { loading: false, dati: arrayDati, esitoCaricamento: "I dati sono stati modificati con successo." } );
 };
 
 
@@ -51,12 +55,14 @@ const getProfiloStart = (state, action) =>{
 }
 
 const getProfiloSuccess = (state, action ) =>{
+ 
     return updateObject(state , {profilo : action.profilo, error:null, loading : false});
 }
 
 const getProfiloFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false});
 }
+
 
 
 const reducer = (state = initialState, action) =>  {

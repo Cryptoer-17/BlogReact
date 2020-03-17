@@ -8,6 +8,7 @@ import {connect } from 'react-redux';
 import { withRouter } from "react-router";
 import { FaThumbsUp, FaThumbsDown} from "react-icons/fa";
 import updateObject from '../../utility/updateObject';
+import Spinner from '../../Components/UI/Spinner/Spinner';
 
 class Username extends Component{
 
@@ -32,36 +33,24 @@ isFormValid : false
 
 
 
-
-
 checkValidityOfUsername= (event) =>{
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     let formIsValid = newObj.valid;
-    this.setState({isUsernameValid:formIsValid, username:newObj})
+    this.setState({isFormValid:formIsValid, username:newObj})
     }
-
-
-submitHandlerSignIn = (event) =>{   
-    event.preventDefault();  
-
-      setTimeout(() => {
-        window.location.reload();
-    }, 1500); 
-}
 
 
 
 render(){
     
-const {show, modalClosed} = this.props;
+const {show, modalClosed, onSetUsername,loading} = this.props;
 const {username, isFormValid} = this.state;
+let contenutoModale = <Spinner/>
 
-  
-    
-    return(
+if(!loading){
 
-        <Modal show = {show} modalClosed = {modalClosed}>
-           <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
+  contenutoModale =  (<div>
+   <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
           
             <Input 
                     value = {username.value}
@@ -88,9 +77,17 @@ const {username, isFormValid} = this.state;
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton}>Conferma</button>
-         </Modal>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid} onClick = {() => {return (onSetUsername(username.value), setTimeout(modalClosed,1000)  )}  }>Conferma</button>
+     </div>);
+ 
 
+}
+    
+    return(
+
+        <Modal show = {show} modalClosed = {modalClosed}>
+           {contenutoModale}
+           </Modal>
     );
 
 
@@ -101,13 +98,15 @@ const {username, isFormValid} = this.state;
 
 const mapStateToProps = state =>{
     return{
-         user: state.login.user
+         user: state.login.user,
+         loadingUsername:state.profilo.loading
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-
+    
+        onSetUsername: (username) => dispatch(actions.setUsername(username)),
 
     };
   };

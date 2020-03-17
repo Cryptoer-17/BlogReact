@@ -71,10 +71,7 @@ export const login = (email, password, isSignup,errore) =>{
 
 
 export const logout = () =>{
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('email');
+
     return{
         type: actionTypes.LOGOUT
     };
@@ -110,9 +107,6 @@ export const loginCheckState = () =>{
 };*/
 
 
-export const setUsername = (username) =>{
-
-}
 
 
 

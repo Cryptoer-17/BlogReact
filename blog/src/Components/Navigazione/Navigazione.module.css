@@ -25,7 +25,7 @@
     font-size: 28px;
 }
 
-.BarraNavigazione a:hover, .LoginButton:hover{
+.BarraNavigazione a:hover, .LoginButton:hover, .Link:hover{
     font-weight: bold;
     color: #787373;
 }
@@ -43,7 +43,13 @@
     vertical-align: middle;
 }
 
-
+.Username{
+    font-size:15px;
+    float:left;
+    vertical-align: middle;
+    margin-left:1px;
+    cursor: default;
+}
 
 .LoginButton{
     cursor: pointer;
@@ -112,6 +118,10 @@
         font-family: inherit;
         font-size: 12px;
         font-weight: bold;
+    }
+
+    .Username, .Titolo{
+        display:none;
     }
     }
 

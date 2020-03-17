@@ -66,7 +66,6 @@ state = {
         },
     },
     tagInput:"",
-    autore: "Moni",
     tags : [],
     tagsList:[],
     img : null,
@@ -116,13 +115,13 @@ deleteTagHandler = (tag) =>{
   
   
 
-  publishArticleHandler = () => {
+  publishArticleHandler = async () => {
 
 
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
         sottotitolo: this.state.form.sottotitolo.value.trim(),
-        autore: this.state.autore,
+        autore: localStorage.getItem("username"),
         testo: this.state.form.testo.value,
         descrizione: this.state.form.descrizione.value.trim(),
         categoria: this.state.form.categoria.value.trim(),
@@ -132,15 +131,12 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId")
     }
-    this.props.onPostArticolo(articolo);
-    setTimeout(() => this.props.onInitArticoli() , 600) 
-    setTimeout(() =>   this.showModal() , 800)    
-
-    if(!this.props.loading)
-    setTimeout(() => this.props.history.push("/") , 2000)  
-
+    await this.props.onPostArticolo(articolo);
     
-  
+    await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
+    this.showModal();
+    setTimeout(() => this.props.history.push("/") , 3000)  
+
 }
 
 
@@ -172,7 +168,7 @@ checkValidityOfInput = (event, id) =>{
 render(){
 
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
-    const {loading, esito} = this.props;
+    const {loading, esito, onInitArticoli} = this.props;
  
     const formData = [];
     for(let key in  form){
@@ -234,7 +230,7 @@ return(
 
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = {this.publishArticleHandler}  disabled = {  isFormValid ? false : true } > Pubblica </button>           
+  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}> Pubblica </button>           
  
 
  <Modal  show = {show}  modalClosed = {  this.hideModal } >

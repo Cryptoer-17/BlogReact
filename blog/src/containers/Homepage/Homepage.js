@@ -40,18 +40,19 @@ render(){
   let {spinner, articoli, errore} = this.props;
 
    
-   if(spinner){
-     spinner = <Spinner />
-   }
    
    let errorMessage = null;
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
    }
-   localStorage.setItem("username","us");
+   //localStorage.setItem("username","us");
  
   
    let articoliVisualizzati;
+   
+   if(spinner){
+     articoliVisualizzati = <Spinner />
+    }else{
     articoliVisualizzati = articoli.map((art) =>{
       return (<AnteprimaArticolo 
          id={art.key} 
@@ -68,7 +69,7 @@ render(){
          clickHeart = {() => this.clickHeartHandler(art)}
          key={art.key}/>);
    })
-   
+}
    let error;
    if(this.props.error === "Auth token is expired"){
       error = document.getElementById("btnLoginLogout").click()   

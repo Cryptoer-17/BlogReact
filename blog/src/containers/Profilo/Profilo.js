@@ -77,8 +77,8 @@ class Profilo extends Component{
                     },
                     value: ''+this.props.profilo.numeroTelefono+'',
                     validation:{
-                        minLength:11,
-                        maxLength:11
+                        minLength:10,
+                        maxLength:10
                     },
                     valid: true,
                     touched: false
