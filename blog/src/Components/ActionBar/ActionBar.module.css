@@ -41,3 +41,18 @@
     float:left;
     width:50%;
 }
+
+.DropdownContent{
+  display: none;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 50px;
+  margin-left: 200px;
+  position: absolute;
+}
+.DropdownContent a{
+  color: black;
+  text-decoration: none;
+  display: block;
+}
