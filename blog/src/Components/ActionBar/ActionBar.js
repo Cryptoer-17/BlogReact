@@ -17,12 +17,11 @@ const ActionBar = (props) =>{
                 <FaRegCommentDots className={classes.Comments}  />
                 </div>
 
-                {console.log(props.showdropdown)}
                  <div className= {classes.MoreDiv} >
                      <FaEllipsisH className={classes.More} onClick={props.clickMenu}/>
                     <div className={classes.DropdownContent}  style={props.showdropdown ? {display:'block'} : null} >
                     <a href="#">Elimina</a>
-                    <a href={"/modifica/"+props.id}>Modifica</a>
+                    <a onClick={props.UpdateArticolo} href={"/modifica/"+props.id}>Modifica</a>
                     <a href="#">Link 3</a>
                     </div>
                 </div>

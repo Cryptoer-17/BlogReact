@@ -39,6 +39,11 @@ if(userId){
 }
 }
 
+
+updateArticoloHandler(){
+  console.log("ok");
+}
+
   render(){
 
     
@@ -98,12 +103,12 @@ if(userId){
          <BrowserRouter>
          <Navigazione idProfilo={key}/>
           <Switch>
-           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
+           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} clickUpdateArticolo={()=>this.updateArticoloHandler()} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
-            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  component = {Modifica} /> : null }
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {()=>(<Modifica/>)} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>
@@ -118,7 +123,7 @@ const mapStateToProps = state =>{
   return{
       loading: state.articolo.loading,
       error : state.articolo.error,
-      profilo: state.profilo.profilo
+      profilo: state.profilo.profilo,
   };
 };
 
