@@ -21,9 +21,7 @@ const updateDataFail = ( state) => {
 };
 
 const updateDataSuccess = ( state, action ) => {
-     let arrayArt = [...state.dati];
-     arrayArt.push(action.dati);
-    return updateObject( state, { loading: false, dati: arrayArt, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
+    return updateObject( state, { loading: false, dati: action.dati, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
 };
 
 

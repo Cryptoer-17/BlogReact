@@ -161,7 +161,7 @@ setTimeout(() =>{
 if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
     window.location.reload();
 }
-},1500)
+},1000)
   
 }
 
@@ -357,7 +357,11 @@ render(){
                 Data di nascita: {this.props.profilo.dataNascita !== "" ? this.props.profilo.dataNascita :  <b>non ancora inserita</b>}<br/>
                 Sesso: {this.props.profilo.sesso !== "" ? this.props.profilo.sesso :  <b>non ancora inserito</b>}<br/>
                 Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono :  <b>non ancora inserito</b>}<br/>
-                Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}
+                Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità :  <b>non ancora inserita</b>}<br/>
+                <hr/>
+                <div style={{height: '150px'}}>
+                Foto del tuo profilo: {this.props.profilo.img !== ""?<img style={{width:'15%', marginBottom: '-60px', borderStyle:'outset'}} src = {this.props.profilo.img} alt = ""/> :  <b>Non ancora inserita</b>}
+                </div>
                 </div>
                 <div>
                 Altri dati coming soon

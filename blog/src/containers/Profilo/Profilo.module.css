@@ -68,6 +68,7 @@ cursor: pointer;
 .InputImg{
     width: 50%;
     margin-right: -140px;
+    border-style: outset;
 }
 
 .InputForm{
