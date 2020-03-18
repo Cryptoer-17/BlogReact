@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     articoli: [],
+    articolo:[],
     loading:false,
     esitoCaricamento:"",
     cerca: null,
@@ -82,11 +83,26 @@ const deleteArticoloSuccess = (state,action) =>{
    return updateObject( state, { loading: false, articoli: arrayArt} );
 }
 
+/*
+const getArticoloStart = (state, action) =>{
+    return updateObject(state , {error:null, loading : true});
 
+}
 
+const getArticoloSuccess = (state, action ) =>{
+ 
+    return updateObject(state , {articolo : action.articolo, error:null, loading : false});
+}
+
+const getArticoloFail = (state , action) =>{
+    return updateObject( state, {error : action.error, loading: false});
+}*/
 
 const reducer = (state = initialState, action) =>  {
     switch(action.type){
+    /*    case actionTypes.GET_ARTICOLO_SUCCESS : return getArticoloSuccess(state,action);
+        case actionTypes.GET_ARTICOLO_START : return getArticoloStart(state,action);
+        case actionTypes.GET_ARTICOLO_FAIL : return getArticoloFail(state, action);*/
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);

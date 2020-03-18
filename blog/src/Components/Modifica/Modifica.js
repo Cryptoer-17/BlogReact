@@ -16,7 +16,7 @@ class Modifica extends Component{
         form :{
             titolo :{ 
                 type: "text",
-                value:"",
+                value:""+this.props.articolo.titolo+"",
                 validation:{
                 required:true},
                 touched:false,
@@ -28,7 +28,7 @@ class Modifica extends Component{
             },
             sottotitolo : { 
                 type: "text",
-                value:"",
+                value:""+this.props.articolo.sottotitolo+"",
                 touched:false,
                 valid:true,
                 config:{
@@ -36,7 +36,7 @@ class Modifica extends Component{
             },
             testo :{ 
                 type: "textarea",
-                value:"",
+                value:""+this.props.articolo.testo+"",
                 touched:false,
                 valid:false,
                 validation:{
@@ -47,7 +47,7 @@ class Modifica extends Component{
             },
             categoria: { 
                 type: "text",
-                value:"",
+                value:""+this.props.articolo.categoria+"",
                 touched:false,
                 valid:false,
                 validation:{
@@ -57,7 +57,7 @@ class Modifica extends Component{
             },
             descrizione: { 
                 type: "text",
-                value:"",
+                value:""+this.props.articolo.descrizione+"",
                 touched:false,
                 valid:true,
                 config:{
@@ -65,11 +65,11 @@ class Modifica extends Component{
                  }
             },
         },
-        tagInput:"",
+        tagInput:""+this.props.articolo.tags+"",
         tags : [],
         tagsList:[],
         img : null,
-        anteprimaImg:null,
+        anteprimaImg:(this.props.articolo.img === undefined ? null : <img src = {this.props.articolo.img} alt = "" />),
         isFormValid : false,
         show:false
     }
@@ -132,11 +132,13 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId")
     }
-    await this.props.onPostArticolo(articolo);
+    await this.props.onUpdateArticolo(articolo,this.props.idArticolo);/*
     
     await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
     this.showModal();
-    setTimeout(() => this.props.history.push("/") , 3000)  
+    setTimeout(() => this.props.history.push("/") , 3000)*/
+    
+    
 
 }
 
@@ -165,6 +167,7 @@ checkValidityOfInput = (event, id) =>{
 
 
     render(){
+        console.log(this.props.articolo.descrizione);
         const {form,tagInput,tags,tagsList,anteprimaImg,show} = this.state;
         const {loading, esito} = this.props;
 
@@ -224,15 +227,15 @@ checkValidityOfInput = (event, id) =>{
 const mapStateToProps = state =>{
     return{
    loading: state.articolo.loading,
-   esito: state.articolo.esitoCaricamento
+   esito: state.articolo.esitoCaricamento,
     };
 };
 
-// const mapDispatchToProps = dispatch => {
-//     return{
-//     onModifyArticolo: (articolo) => dispatch(actions.modifyArticolo(articolo)),
+const mapDispatchToProps = dispatch => {
+    return{
+        onUpdateArticolo: (articolo,id) => dispatch(actions.updateArticolo(articolo,id)),
    
-//     };
-//   };
+    };
+  };
 
-export default connect(mapStateToProps)(Modifica);
+export default connect(mapStateToProps,mapDispatchToProps)(Modifica);

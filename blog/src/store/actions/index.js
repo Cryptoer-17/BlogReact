@@ -4,7 +4,8 @@ export {
     startRicerca,
     ricercaArticoli,
     updateArticolo,
-    deleteArticolo
+    deleteArticolo,
+   // getArticolo
     
 }from './actionsArticolo';
 

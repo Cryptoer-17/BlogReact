@@ -138,7 +138,6 @@ export const updateDataFail = (error) =>{
 
 export const updateData = (dato,idProfilo) =>{
     return dispatch => {
-        console.log(idProfilo);
         dispatch(updateDataStart());
         axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
         .then(res =>{ 

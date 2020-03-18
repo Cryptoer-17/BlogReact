@@ -56,3 +56,16 @@
   text-decoration: none;
   display: block;
 }
+
+Link{
+    margin-top:2px;
+    float:left;
+    font-size:20px;
+    outline: none;
+    margin-left: 10px;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+    color:#1E1D1D;
+    vertical-align: middle;
+}

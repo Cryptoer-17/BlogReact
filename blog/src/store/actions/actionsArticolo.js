@@ -140,3 +140,46 @@ export const deleteArticolo = (articolo) =>{
         });
     }
 }
+
+
+/*
+export const getArticoloSuccess = (articolo)=>{
+    return{
+        type: actionTypes.GET_ARTICOLO_SUCCESS,
+        articolo: articolo
+    }
+} 
+
+
+export const getArticoloStart = () =>{
+    return {
+        type : actionTypes.GET_ARTICOLO_START
+    };
+}
+
+export const getArticoloFail = (error) =>{
+    
+    return{
+        type : actionTypes.GET_ARTICOLO_FAIL,
+        error : error
+    }
+}
+
+
+
+export const getArticolo = (id) =>{
+    return dispatch =>{
+        let temparray=[];
+        dispatch(getArticoloStart());
+        const token = localStorage.getItem('token');
+        axios.get('/articoli/'+id+'.json?auth=' +token)
+        .then(response =>{   
+            temparray={...response.data}        
+          dispatch(getArticoloSuccess(temparray) );
+        })
+        .catch(err => { 
+            dispatch(getArticoloFail(err.response.data.error));      
+        });
+    };
+};
+*/

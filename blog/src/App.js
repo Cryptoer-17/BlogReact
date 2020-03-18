@@ -28,6 +28,11 @@ const asyncMainPage = asyncComponent(() =>{
 
 
 class App extends Component {
+  state={
+    idArticleModify:null,
+    articolo:null
+  }
+
 
 componentDidMount(){
   
@@ -35,23 +40,54 @@ const userId = localStorage.getItem("userId");
 if(userId){
   this.props.onInitArticoli();
   this.props.onGetProfilo();
-
+  
 }
 }
 
 
-updateArticoloHandler(id){
-    console.log(id);
-    console.log("ok" + id);
+updateArticoloHandler = (articolo,id) =>{
+  
+  //this.props.onGetArticolo(id);
+  this.setState({idArticleModify:id})
+
+const updateArticolo={
+  autore:articolo.autore,
+  categoria:articolo.categoria,
+  data:articolo.data,
+  descrizione:articolo.descrizione,
+  img:articolo.img,
+  minuti:articolo.minuti,
+  sottotitolo:articolo.sottotitolo,
+  tags:(articolo.tags === undefined ? "" : articolo.tags),
+  testo:articolo.testo,
+  titolo:articolo.titolo,
+  userId:articolo.userId
+}
+
+  this.setState({articolo:updateArticolo})
+
 }
 
   render(){
-
     
 
 
-    //console.log(this.profili.profili);
-      let key; 
+    let tempArrayArticolo;
+   
+  /*  tempArrayArticolo={
+      autore:articolo.autore,
+      categoria:articolo.categoria,
+      data:articolo.data,
+      descrizione:articolo.descrizione,
+      minuti:articolo.minuti,
+      sottotitoli:articolo.sottotitoli,
+      tags:articolo.tags,
+      testo:articolo.testo,
+      titolo:articolo.titolo,
+      userId:articolo.userId
+    }*/
+
+    let key; 
       let tempArray;
        if(this.props.profilo.length){
           key=this.props.profilo[0].key;
@@ -80,24 +116,9 @@ updateArticoloHandler(id){
         }
       } 
 
-  /* let tempProfilo ={
-      nome: (this.props.profilo.nome===undefined ? '' : this.props.profilo.nome),
-      cognome : (this.props.profilo.cognome===undefined ? '' : this.props.profilo.cognome),
-      dataNascita:  this.props.profilo.dataNascita,
-      sesso:this.props.profilo.sesso,
-      numeroTelefono:(this.props.profilo.numeroTelefono===undefined ? '' : this.props.profilo.numeroTelefono),
-      nazionalità: this.props.profilo.nazionalità,
-      img:this.props.profilo.img
-     }*/
-  
-     /*let tempProfilo={
-       nome: '',
-       cognome: '',
-       dataNascita: undefined,
-       sesso:'',
-       numeroTelefono:'',
-       img:''
-     }*/
+
+      
+
     
   return (
     <div className="App">
@@ -109,7 +130,7 @@ updateArticoloHandler(id){
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
-            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {()=>(<Modifica/>)} /> : null }
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {()=>(<Modifica articolo={this.state.articolo} idArticolo={this.state.idArticleModify}/>)} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>
@@ -132,7 +153,8 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
   return{
      onInitArticoli: () => dispatch(actions.initArticoli()),
-     onGetProfilo:() => dispatch(actions.getProfilo()) 
+     onGetProfilo:() => dispatch(actions.getProfilo()),
+   //  onGetArticolo:(id) => dispatch(actions.getArticolo(id)) 
   }
 }
 
