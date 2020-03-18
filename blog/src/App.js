@@ -40,8 +40,9 @@ if(userId){
 }
 
 
-updateArticoloHandler(){
-  console.log("ok");
+updateArticoloHandler(id){
+    console.log(id);
+    console.log("ok" + id);
 }
 
   render(){
@@ -103,7 +104,7 @@ updateArticoloHandler(){
          <BrowserRouter>
          <Navigazione idProfilo={key}/>
           <Switch>
-           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} clickUpdateArticolo={()=>this.updateArticoloHandler()} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
+           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} clickUpdateArticolo={this.updateArticoloHandler} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo profilo={tempArray} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
