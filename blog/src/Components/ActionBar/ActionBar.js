@@ -33,6 +33,7 @@ const ActionBar = (props) =>{
                 <FaRegCommentDots className={classes.Comments}  />
                 </div>
 
+                {props.disableMore ? null : 
                  <div className= {classes.MoreDiv} >
                      <FaEllipsisH className={classes.More} onClick={()=>props.clickMenu()}/>
                     <div className={classes.DropdownContent}  style={props.showdropdown ? {display:'block'} : null} >
@@ -40,7 +41,7 @@ const ActionBar = (props) =>{
                     <NavLink to={"/modifica/"+ props.id}  onClick={()=>props.UpdateArticolo(userArticle,props.id)}/*className={classes.Link} activeClassName={classes.LinkAttivo}*/>Modifica</NavLink> 
                     <a href="#">Link 3</a>
                     </div>
-                </div>
+                </div>}
 
 
         </div>

@@ -57,7 +57,7 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown} clickMenu={this.clickMenuHandler} className = {classes.Actions} color={colore} onClick={clickHeart} UpdateArticolo={UpdateArticolo}/>   
+         <ActionBar id={id} showdropdown={showDropdown} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} UpdateArticolo={UpdateArticolo}/>   
 
         </div>
     

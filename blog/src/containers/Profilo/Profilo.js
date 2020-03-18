@@ -324,6 +324,8 @@ render(){
                 titolo = {art.articolo.titolo}
                 data = {art.articolo.data}
                 minuti = {art.articolo.minuti}
+                disableMore={false}
+                UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
                 key={art.key}/>
             );
