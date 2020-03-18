@@ -67,7 +67,7 @@ class Articolo extends Component{
 
     render(){
         const {articolo,loading} = this.state;
-
+        console.log(this.props);
         let articoloVisualizzato; 
         let colore = 'black';
         let tags;

@@ -7,19 +7,31 @@ import {NavLink} from 'react-router-dom';
 
 const ActionBar = (props) =>{
 
+   
+
     const [userArticle, setUserArticle] = useState([]);
 
 
     useEffect(()=>{
+        let isCancelled = false;
         const token = localStorage.getItem("token");
+        
         fetch('https://blog-monika-andrea.firebaseio.com/articoli/'+props.id+'.json?auth='+ token)
         .then(response=>response.json())
         .then(responseData =>{
             let loadedArticolo;
             loadedArticolo = {...responseData};
+            if(!isCancelled){
             setUserArticle(loadedArticolo);
+            }
+
 
         });
+
+
+        return function cleanup() {
+            isCancelled = true;
+          };
     }, []);
     
 

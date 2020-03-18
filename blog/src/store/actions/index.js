@@ -5,7 +5,6 @@ export {
     ricercaArticoli,
     updateArticolo,
     deleteArticolo,
-   // getArticolo
     
 }from './actionsArticolo';
 

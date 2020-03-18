@@ -132,7 +132,20 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId")
     }
-    await this.props.onUpdateArticolo(articolo,this.props.idArticolo);/*
+     this.props.onUpdateArticolo(articolo,this.props.idArticolo);
+    
+
+    this.setState({show:true})
+
+    setTimeout(() =>{
+        console.log(this.props.esito);
+    if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
+       this.props.props.history.push("/")
+    }
+    },1000)
+    
+    
+    /*
     
     await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
     this.showModal();
@@ -167,7 +180,6 @@ checkValidityOfInput = (event, id) =>{
 
 
     render(){
-        console.log(this.props.articolo.descrizione);
         const {form,tagInput,tags,tagsList,anteprimaImg,show} = this.state;
         const {loading, esito} = this.props;
 
@@ -233,8 +245,7 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-        onUpdateArticolo: (articolo,id) => dispatch(actions.updateArticolo(articolo,id)),
-   
+        onUpdateArticolo: (articolo,id) => dispatch(actions.updateArticolo(articolo,id))
     };
   };
 

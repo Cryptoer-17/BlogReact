@@ -106,10 +106,10 @@ export const updateArticoloSuccess = (articolo) =>{
     };
 }
 
-export const updateArticolo = (articolo) =>{
+export const updateArticolo = (articolo,idArticolo) =>{
     return dispatch => {
         dispatch(postArticoloStart());
-        axios.put('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        axios.put('/articoli/'+idArticolo+'.json?auth='+localStorage.getItem("token"), articolo)
         .then(res =>{ 
             dispatch(updateArticoloSuccess(articolo))
           })
@@ -142,44 +142,37 @@ export const deleteArticolo = (articolo) =>{
 }
 
 
-/*
-export const getArticoloSuccess = (articolo)=>{
+/*export const updateDataSuccess = (dati) =>{
     return{
-        type: actionTypes.GET_ARTICOLO_SUCCESS,
-        articolo: articolo
+        type: actionTypes.UPDATE_DATA_SUCCESS,
+        dati: dati
     }
 } 
 
-
-export const getArticoloStart = () =>{
+export const updateDataStart = () =>{
     return {
-        type : actionTypes.GET_ARTICOLO_START
+        type : actionTypes.UPDATE_DATA_START
     };
 }
 
-export const getArticoloFail = (error) =>{
+export const updateDataFail = (error) =>{
     
     return{
-        type : actionTypes.GET_ARTICOLO_FAIL,
+        type : actionTypes.UPDATE_DATA_FAIL,
         error : error
     }
 }
 
 
-
-export const getArticolo = (id) =>{
-    return dispatch =>{
-        let temparray=[];
-        dispatch(getArticoloStart());
-        const token = localStorage.getItem('token');
-        axios.get('/articoli/'+id+'.json?auth=' +token)
-        .then(response =>{   
-            temparray={...response.data}        
-          dispatch(getArticoloSuccess(temparray) );
-        })
-        .catch(err => { 
-            dispatch(getArticoloFail(err.response.data.error));      
+export const updateData = (dato,idProfilo) =>{
+    return dispatch => {
+        dispatch(updateDataStart());
+        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
+        .then(res =>{ 
+            dispatch(updateDataSuccess(dato))
+          })
+        .catch(error => { 
+            dispatch(updateDataFail(error));
         });
-    };
-};
-*/
+    }
+}*/

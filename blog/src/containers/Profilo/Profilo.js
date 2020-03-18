@@ -164,7 +164,6 @@ else {
 }
    
 setTimeout(() =>{
-    console.log(this.props.esito);
 if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
     window.location.reload();
 }
@@ -231,7 +230,7 @@ convertFile = (e)=>  {
 
 
 render(){
-
+    console.log(this.props);
     let {anteprimaImg,presentazione,modificaDati} = this.state;
     let {loading,profilo} = this.props;
 
