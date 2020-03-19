@@ -106,10 +106,13 @@ deleteTagHandler = (tag) =>{
 
 
  convertFile = (e)=>  { 
+        console.log(e);
         let reader = new FileReader();
-        reader.readAsDataURL(e);
-        reader.onloadend = () => {
-        this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+        if(e!==undefined){
+            reader.readAsDataURL(e);
+            reader.onloadend = () => {
+            this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+        }
         }
       };
   
