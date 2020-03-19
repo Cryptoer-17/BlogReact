@@ -151,8 +151,7 @@ class Modifica extends Component{
          })
          this.setState({tagsList:tagsList})
 
-         this.setState({anteprimaImg: (response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />),
-                         img:(response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
+         this.setState({anteprimaImg: (response.data.img === undefined ? null :(<div className={classes.ImgClose}><img src = {response.data.img} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)),img:(response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
 
          this.setState({loading:false})
        })
@@ -192,12 +191,18 @@ deleteTagHandler = (tag) =>{
     this.setState( { tagsList:tagsList, tags:tags } );
 }
 
+clickCloseImg(){
+    this.setState({anteprimaImg:null,
+                    img:null})
+}
 
  convertFile = (e)=>  { 
         let reader = new FileReader();
         reader.readAsDataURL(e);
         reader.onloadend = () => {
-        this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+        this.setState({img: reader.result, 
+            
+            anteprimaImg: (<div className={classes.ImgClose}><img src = {reader.result} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)})
         console.log(reader.result);
 
         }

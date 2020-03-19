@@ -52,6 +52,15 @@
 }
 
 
+.ImgClose i{
+    top:1px;
+    font-size:90%;
+    font-weight: bold;
+    cursor:pointer;
+    float:right;
+}
+
+
 .InputImg{
     display:block;
     margin:auto;
