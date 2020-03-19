@@ -10,6 +10,8 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import checkValidity from '../../utility/validation';
 import updateObject from '../../utility/updateObject';
 import Modal from '../../Components/UI/Modal/Modal';
+import axios from 'axios';
+
 
 class Profilo extends Component{
 
@@ -228,6 +230,31 @@ convertFile = (e)=>  {
         this.setState({isFormValid:formIsValid, profileForm: newForm})
     }
 
+  
+
+
+  clickHeartHandler(art){
+    const anteprima = {
+        autore : art.articolo.autore,
+        categoria : art.articolo.categoria,
+        data:art.articolo.data,
+        descrizione : art.articolo.descrizione,
+        img : art.articolo.img,
+        like: !art.articolo.like,
+        minuti:art.articolo.minuti,
+        sottotitolo : art.articolo.sottotitolo,
+        tags:art.articolo.tags,
+        testo : art.articolo.testo,
+        titolo : art.articolo.titolo,
+        userId:art.articolo.userId
+    } 
+    const id = art.key;
+    axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+    .then(response => {
+       this.props.mount();
+    })
+    .catch(error => console.log(error));
+}
 
 render(){
     console.log(this.props);

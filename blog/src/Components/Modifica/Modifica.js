@@ -139,9 +139,8 @@ class Modifica extends Component{
         }
 
 
-         this.setState({form: form})
-         this.setState({tags:(response.data.tags === undefined ? [] : response.data.tags)})
-        
+         this.setState({form: form,
+                        tags:(response.data.tags === undefined ? [] : response.data.tags)})
 
          const updateTags=[...this.state.tags]
          let tagsList=[];
@@ -152,7 +151,8 @@ class Modifica extends Component{
          })
          this.setState({tagsList:tagsList})
 
-         this.setState({anteprimaImg: (response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
+         this.setState({anteprimaImg: (response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />),
+                         img:(response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
 
          this.setState({loading:false})
        })
@@ -211,17 +211,18 @@ deleteTagHandler = (tag) =>{
         const id =this.props.match.params.id;
 
     const articolo = {
-        titolo: this.state.form.titolo.value.trim(),
-        sottotitolo: this.state.form.sottotitolo.value.trim(),
         autore: localStorage.getItem("username"),
-        testo: this.state.form.testo.value,
-        descrizione: this.state.form.descrizione.value.trim(),
         categoria: this.state.form.categoria.value.trim(),
-        tags: this.state.tags,
-        img: this.state.img,
         data: new Date().toLocaleDateString(),
+        descrizione: this.state.form.descrizione.value.trim(),
+        img: this.state.img,
+        like:false,
         minuti: this.countWordsHandler(this.state.form.testo.value),
-        userId: localStorage.getItem("userId")
+        sottotitolo: this.state.form.sottotitolo.value.trim(),
+        tags: this.state.tags,
+        testo: this.state.form.testo.value,
+        titolo: this.state.form.titolo.value.trim(),
+        userId: localStorage.getItem("userId")    
     }
 
      this.props.onUpdateArticolo(articolo,id);

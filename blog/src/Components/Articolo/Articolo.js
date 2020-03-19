@@ -41,15 +41,16 @@ class Articolo extends Component{
         const anteprima = {
             autore : this.state.articolo.autore,
             categoria : this.state.articolo.categoria,
+            data:this.state.articolo.data,
             descrizione : this.state.articolo.descrizione,
             img : this.state.articolo.img,
+            minuti:this.state.articolo.minuti,
+            sottotitolo : this.state.articolo.sottotitolo,
             tags : this.state.articolo.tags,
             like: !this.state.articolo.like,
-            sottotitolo : this.state.articolo.sottotitolo,
             testo : this.state.articolo.testo,
             titolo : this.state.articolo.titolo,
-            minuti:this.state.articolo.minuti,
-            data:this.state.articolo.data
+            userId:this.state.articolo.userId
         } 
 
         this.setState({

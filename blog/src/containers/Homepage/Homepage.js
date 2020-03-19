@@ -14,14 +14,16 @@ clickHeartHandler(art){
       const anteprima = {
           autore : art.articolo.autore,
           categoria : art.articolo.categoria,
+          data:art.articolo.data,
           descrizione : art.articolo.descrizione,
           img : art.articolo.img,
           like: !art.articolo.like,
+          minuti:art.articolo.minuti,
           sottotitolo : art.articolo.sottotitolo,
+          tags:art.articolo.tags,
           testo : art.articolo.testo,
           titolo : art.articolo.titolo,
-          minuti:art.articolo.minuti,
-          data:art.articolo.data
+          userId:art.articolo.userId
       } 
       const id = art.key;
       axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
