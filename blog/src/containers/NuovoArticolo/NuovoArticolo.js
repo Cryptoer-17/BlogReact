@@ -105,13 +105,19 @@ deleteTagHandler = (tag) =>{
 }
 
 
+clickCloseImg(){
+    this.setState({anteprimaImg:null,
+                    img:null})
+}
+
  convertFile = (e)=>  { 
         console.log(e);
         let reader = new FileReader();
         if(e!==undefined){
             reader.readAsDataURL(e);
             reader.onloadend = () => {
-            this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+            this.setState({img: reader.result,
+                             anteprimaImg: (<div className={classes.ImgClose}><img src = {reader.result} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)})
         }
         }
       };

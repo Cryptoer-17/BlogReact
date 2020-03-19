@@ -117,6 +117,16 @@
 }
 
 
+
+.ImgClose i{
+    top:1px;
+    font-size:90%;
+    font-weight: bold;
+    cursor:pointer;
+    float:right;
+}
+
+
 @media (max-width: 600px) {
  .InputTags{
      margin:auto;
