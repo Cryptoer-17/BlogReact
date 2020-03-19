@@ -21,7 +21,7 @@ const ActionBar = (props) =>{
                  <div className= {classes.MoreDiv} >
                      <FaEllipsisH className={classes.More} onClick={()=>props.clickMenu()}/>
                     <div className={classes.DropdownContent}  style={props.showdropdown ? {display:'block'} : null} >
-                    <a href="#">Elimina</a>
+                    <a style={{cursor: 'pointer'}}>Elimina</a>
                     <NavLink to={"/modifica/"+ props.id}/*className={classes.Link} activeClassName={classes.LinkAttivo}*/>Modifica</NavLink> 
                     <a href="#">Link 3</a>
                     </div>
