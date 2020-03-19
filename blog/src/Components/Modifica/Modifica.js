@@ -7,16 +7,17 @@ import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import axios from 'axios';
 
 
 
 class Modifica extends Component{
 
-    state = {
+    state = {    
         form :{
             titolo :{ 
                 type: "text",
-                value:""+this.props.articolo.titolo+"",
+                value:"",
                 validation:{
                 required:true},
                 touched:false,
@@ -28,7 +29,7 @@ class Modifica extends Component{
             },
             sottotitolo : { 
                 type: "text",
-                value:""+this.props.articolo.sottotitolo+"",
+                value:"",
                 touched:false,
                 valid:true,
                 config:{
@@ -36,7 +37,7 @@ class Modifica extends Component{
             },
             testo :{ 
                 type: "textarea",
-                value:""+this.props.articolo.testo+"",
+                value:"",
                 touched:false,
                 valid:false,
                 validation:{
@@ -47,7 +48,7 @@ class Modifica extends Component{
             },
             categoria: { 
                 type: "text",
-                value:""+this.props.articolo.categoria+"",
+                value:"",
                 touched:false,
                 valid:false,
                 validation:{
@@ -57,7 +58,7 @@ class Modifica extends Component{
             },
             descrizione: { 
                 type: "text",
-                value:""+this.props.articolo.descrizione+"",
+                value:"",
                 touched:false,
                 valid:true,
                 config:{
@@ -65,13 +66,99 @@ class Modifica extends Component{
                  }
             },
         },
+        loading:false,
         tagInput:"",
-        tags : this.props.articolo.tags,
-        tagsList:this.props.tagsList,
+        tags : [],
+        tagsList:[],
         img : null,
-        anteprimaImg:(this.props.articolo.img === undefined ? null : <img src = {this.props.articolo.img} alt = "" />),
+        anteprimaImg:null,
         isFormValid : false,
         show:false
+    }
+
+    componentDidMount(){
+       const id =this.props.match.params.id;
+       const token = localStorage.getItem("token");
+       this.setState({loading : true})
+       axios.get('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+token)
+       .then(response =>{
+         /*  if (typeof response.data.tags === 'undefined'){
+               response.data.tags = [];
+           }*/
+           let form ={
+            titolo :{ 
+                type: "text",
+                value:""+response.data.titolo+"",
+                validation:{
+                required:true},
+                touched:false,
+                valid:false,
+                config:{
+                placeholder: "Titolo *",
+                autoFocus:true
+                }
+            },
+            sottotitolo : { 
+                type: "text",
+                value:""+response.data.sottotitolo+"",
+                touched:false,
+                valid:true,
+                config:{
+                placeholder: "Sottotitolo"}
+            },
+            testo :{ 
+                type: "textarea",
+                value:""+response.data.testo+"",
+                touched:false,
+                valid:false,
+                validation:{
+                    required:true},
+                    config:{
+                    placeholder: "Scrivi qualcosa...  *"
+                    }
+            },
+            categoria: { 
+                type: "text",
+                value:""+response.data.categoria+"",
+                touched:false,
+                valid:false,
+                validation:{
+                    required:true},
+                config:{
+                placeholder: "Categoria *"}
+            },
+            descrizione: { 
+                type: "text",
+                value:""+response.data.descrizione+"",
+                touched:false,
+                valid:true,
+                config:{
+                placeholder: "Breve descrizione dell'articolo"
+                 }
+            }
+        }
+
+
+         this.setState({form: form})
+         this.setState({tags:(response.data.tags === undefined ? [] : response.data.tags)})
+        
+
+         const updateTags=[...this.state.tags]
+         let tagsList=[];
+         console.log(updateTags)
+         updateTags.map((tag)=>{
+            tagsList.push(<Tag key = {tag} click = {() =>this.deleteTagHandler(tag)}>{tag} </Tag>);
+          
+         })
+         this.setState({tagsList:tagsList})
+
+         this.setState({anteprimaImg: (response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
+
+         this.setState({loading:false})
+       })
+       .catch(error => {
+           this.setState({loading:false})
+       });
     }
 
     countWordsHandler = (testo) =>{
@@ -111,7 +198,10 @@ deleteTagHandler = (tag) =>{
         reader.readAsDataURL(e);
         reader.onloadend = () => {
         this.setState({img: reader.result, anteprimaImg: <img src = {reader.result} alt = "" />})
+        console.log(reader.result);
+
         }
+
       };
   
   
@@ -140,7 +230,7 @@ deleteTagHandler = (tag) =>{
     setTimeout(() =>{
         console.log(this.props.esito);
     if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
-       this.props.props.history.push("/")
+       this.props.history.push("/")
     }
     },1000)
     
@@ -208,10 +298,7 @@ checkValidityOfInput = (event, id) =>{
                 onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
                 onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
             <div className = {classes.InputTags}>
-            {console.log(tagInput)}
-                {console.log(tagsList)}
-                {console.log(tags)}
-                
+       
                 { tagsList}
                 { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
             </div>
@@ -241,7 +328,6 @@ checkValidityOfInput = (event, id) =>{
 
 
 const mapStateToProps = state =>{
-    console.log(state.articolo.loading);
 
     return{
    loading: state.articolo.loading,
