@@ -208,6 +208,7 @@ deleteTagHandler = (tag) =>{
 
       modifyArticleHandler = async () => {
 
+        const id =this.props.match.params.id;
 
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
@@ -223,7 +224,7 @@ deleteTagHandler = (tag) =>{
         userId: localStorage.getItem("userId")
     }
 
-     this.props.onUpdateArticolo(articolo,this.props.idArticolo);
+     this.props.onUpdateArticolo(articolo,id);
     
 
     this.setState({show:true})
@@ -232,6 +233,7 @@ deleteTagHandler = (tag) =>{
         console.log(this.props.esito);
     if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
        this.props.history.push("/")
+       window.location.reload();
     }
     },1000)
     

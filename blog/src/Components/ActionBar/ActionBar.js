@@ -9,8 +9,6 @@ const ActionBar = (props) =>{
 
 
     
-console.log(props.id);
-
     return(
         <div className ={classes.ActionBar}>
 

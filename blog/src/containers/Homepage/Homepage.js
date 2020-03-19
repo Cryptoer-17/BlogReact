@@ -56,6 +56,7 @@ render(){
      articoliVisualizzati = <Spinner />
     }else{
     articoliVisualizzati = articoli.map((art) =>{
+       console.log(art);
       return (<AnteprimaArticolo 
          id={art.key} 
          autore={art.articolo.autore}
