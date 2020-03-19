@@ -19,7 +19,7 @@ class Profilo extends Component{
     state={
         
         anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
-        presentazione:null,
+        presentazione:(this.props.profilo.descrizione ? false:null),//false
         modificaDati:null,
         img:null,
         descrizione:''+this.props.profilo.descrizione+'',
@@ -272,7 +272,7 @@ render(){
     let btnInviaInfo=null;
     {presentazione===null? 
         presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
-        : presentazione===false && ((presentazioneVisualizzata = <div><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend} style={{marginTop:'7px'}} ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
+        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
     } 
 
 
@@ -379,7 +379,7 @@ render(){
             </div>
             <div className={classes.Informazioni} style={presentazione===null ? null : {height:'185px'}}>
                 <h3>INFORMAZIONI</h3>
-                {presentazioneVisualizzata}
+                BREVE PRESENTAZIONE: {presentazioneVisualizzata}
                 {btnInviaInfo}
             </div>
            
