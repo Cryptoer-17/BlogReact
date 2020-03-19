@@ -36,7 +36,7 @@ class AnteprimaArticolo extends Component{
         variabile =  <div className={classes.AnteprimaArticolo}>
            
 <Info className = {classes.Info} autore = {autore} categoria = {categoria} data = {data} tempoLettura = {minuti} />
-
+            
            <NavLink to={"/articolo/" + id} style={{
                 textDecoration : 'none',
                 color : 'black'
@@ -57,7 +57,7 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} UpdateArticolo={UpdateArticolo}/>   
+         <ActionBar id={id} showdropdown={showDropdown} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
 
         </div>
     

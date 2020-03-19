@@ -222,6 +222,7 @@ deleteTagHandler = (tag) =>{
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId")
     }
+
      this.props.onUpdateArticolo(articolo,this.props.idArticolo);
     
 

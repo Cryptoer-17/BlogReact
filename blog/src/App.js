@@ -28,10 +28,7 @@ const asyncMainPage = asyncComponent(() =>{
 
 
 class App extends Component {
-  state={
-    idArticleModify:null,
-    articolo:null
-  }
+
 
 
 componentDidMount(){
@@ -45,29 +42,6 @@ if(userId){
 }
 
 
-updateArticoloHandler = (articolo,id) =>{
-  
-  //this.props.onGetArticolo(id);
-  this.setState({idArticleModify:id})
-
-const updateArticolo={
-  autore:articolo.autore,
-  categoria:articolo.categoria,
-  data:articolo.data,
-  descrizione:articolo.descrizione,
-  img:articolo.img,
-  minuti:articolo.minuti,
-  sottotitolo:articolo.sottotitolo,
-  tags:(articolo.tags === undefined ? [] : articolo.tags),
-  testo:articolo.testo,
-  titolo:articolo.titolo,
-  userId:articolo.userId
-}
-
-  this.setState({articolo:updateArticolo})
-
-  
-}
 
   render(){
     
@@ -125,12 +99,12 @@ const updateArticolo={
          <BrowserRouter>
          <Navigazione idProfilo={key}/>
           <Switch>
-           {localStorage.getItem("userId") ?  <Route path="/" exact render={() =>(<Homepage spinner={this.props.loading} errore={this.props.error} clickUpdateArticolo={this.updateArticoloHandler} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
+           {localStorage.getItem("userId") ?  <Route path="/" exact render={(props) =>(<Homepage {...props} spinner={this.props.loading} errore={this.props.error} clickUpdateArticolo={this.updateArticoloHandler} mount={() => this.componentDidMount()}/>)} /> :   <Route path="/" exact  component={asyncMainPage} /> }
            {localStorage.getItem("userId") ?    <Route path="/pubblica" exact  component={asyncNuovoArticolo} /> : null }
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo  profilo={tempArray} clickUpdateArticolo={this.updateArticoloHandler} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
-            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica {...props} articolo={this.state.articolo} idArticolo={this.state.idArticleModify}/>)} /> : null }
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica {...props} />)} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>
