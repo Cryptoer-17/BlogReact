@@ -15,7 +15,7 @@ if(props.error === "Auth token is expired"){
     if(props.error === "Auth token is expired"){
       document.getElementById("btnLogout").click()
     }
-   },5000),<Modal  show = {show} hideModal = {hideModal}>
+   },4500),<Modal  show = {show} hideModal = {hideModal}>
      E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
    </Modal>);
 }

@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 import { FaWindows } from 'react-icons/fa';
-
+import Tag from './Components/Tag/Tag';
 
 const asyncNuovoArticolo = asyncComponent(() =>{
   return import('./containers/NuovoArticolo/NuovoArticolo');
@@ -30,7 +30,8 @@ const asyncMainPage = asyncComponent(() =>{
 class App extends Component {
   state={
     idArticleModify:null,
-    articolo:null
+    articolo:null,
+    tagsList:[]
   }
 
 
@@ -58,7 +59,7 @@ const updateArticolo={
   img:articolo.img,
   minuti:articolo.minuti,
   sottotitolo:articolo.sottotitolo,
-  tags:(articolo.tags === undefined ? "" : articolo.tags),
+  tags:(articolo.tags === undefined ? [] : articolo.tags),
   testo:articolo.testo,
   titolo:articolo.titolo,
   userId:articolo.userId
@@ -66,6 +67,12 @@ const updateArticolo={
 
   this.setState({articolo:updateArticolo})
 
+  let tagsList=[];
+  updateArticolo.tags.map((tag) =>{
+    tagsList.push(<Tag key = {tag} click = {() =>this.deleteTagHandler(tag)}>{tag} </Tag>);
+  })
+
+  this.setState({tagsList:tagsList})
 }
 
   render(){
@@ -128,7 +135,7 @@ const updateArticolo={
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo  profilo={tempArray} clickUpdateArticolo={this.updateArticoloHandler} key={key}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
-            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica props={props} articolo={this.state.articolo} idArticolo={this.state.idArticleModify}/>)} /> : null }
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica props={props} articolo={this.state.articolo} tagsList={this.state.tagsList} idArticolo={this.state.idArticleModify}/>)} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>

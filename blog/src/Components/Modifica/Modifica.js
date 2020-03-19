@@ -65,9 +65,9 @@ class Modifica extends Component{
                  }
             },
         },
-        tagInput:""+this.props.articolo.tags+"",
-        tags : [],
-        tagsList:[],
+        tagInput:"",
+        tags : this.props.articolo.tags,
+        tagsList:this.props.tagsList,
         img : null,
         anteprimaImg:(this.props.articolo.img === undefined ? null : <img src = {this.props.articolo.img} alt = "" />),
         isFormValid : false,
@@ -208,6 +208,10 @@ checkValidityOfInput = (event, id) =>{
                 onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
                 onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
             <div className = {classes.InputTags}>
+            {console.log(tagInput)}
+                {console.log(tagsList)}
+                {console.log(tags)}
+                
                 { tagsList}
                 { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
             </div>
@@ -237,6 +241,8 @@ checkValidityOfInput = (event, id) =>{
 
 
 const mapStateToProps = state =>{
+    console.log(state.articolo.loading);
+
     return{
    loading: state.articolo.loading,
    esito: state.articolo.esitoCaricamento,
