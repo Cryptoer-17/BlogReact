@@ -2,11 +2,16 @@ import React, {useState, useEffect} from 'react';
 import classes from './ActionBar.module.css';
 import { FaHeart,FaRegCommentDots, FaEllipsisH } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
-
+import Elimina from '../EliminaArticolo/Elimina';
 
 
 const ActionBar = (props) =>{
 
+
+   const ClickModalDelete = (props) =>{
+           return <Elimina/>  
+              
+   }
 
     
     return(
@@ -21,7 +26,7 @@ const ActionBar = (props) =>{
                  <div className= {classes.MoreDiv} >
                      <FaEllipsisH className={classes.More} onClick={()=>props.clickMenu()}/>
                     <div className={classes.DropdownContent}  style={props.showdropdown ? {display:'block'} : null} >
-                    <a style={{cursor: 'pointer'}}>Elimina</a>
+                    <a onClick={ClickModalDelete} style={{cursor: 'pointer'}}>Elimina</a>
                     <NavLink to={"/modifica/"+ props.id}/*className={classes.Link} activeClassName={classes.LinkAttivo}*/>Modifica</NavLink> 
                     <a href="#">Link 3</a>
                     </div>

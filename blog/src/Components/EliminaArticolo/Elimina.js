@@ -1,19 +1,17 @@
 import React from 'react';
-import classes from './Elimins.module.css';
+import classes from './Elimina.module.css';
 import Modal from '../UI/Modal/Modal';
 
-const elimina = ( props) =>{
-
+const Elimina = ( props) =>{
+    console.log("ok");
 
 
     return(
         <div>
-        <Modal>
-        POI INSERISCO TUTTO IL CONTENUTO ALL'INTERNO
-        </Modal>
+        AHAHAHAH
         </div>
     )
 
 }
 
-export default elimina
+export default Elimina;
