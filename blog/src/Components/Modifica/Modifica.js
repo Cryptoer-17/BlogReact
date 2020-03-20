@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Tag from '../../Components/Tag/Tag';
+import Tag from '../Tag/Tag';
 import checkValidity from '../../utility/validation';
 import classes from './Modifica.module.css';
-import Input from '../../Components/UI/Input/Input';
-import Modal from '../../Components/UI/Modal/Modal';
-import Spinner from '../../Components/UI/Spinner/Spinner';
+import Input from '../UI/Input/Input';
+import Modal from '../UI/Modal/Modal';
+import Spinner from '../UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import axios from 'axios';

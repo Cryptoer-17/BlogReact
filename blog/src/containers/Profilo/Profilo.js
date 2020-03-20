@@ -121,7 +121,9 @@ class Profilo extends Component{
 
 
 
-
+clickModalDelete (){
+    console.log("ok");
+}
 
 handlerClickPresentazione(){
     this.setState({presentazione : false})
@@ -351,6 +353,7 @@ render(){
                 data = {art.articolo.data}
                 minuti = {art.articolo.minuti}
                 disableMore={false}
+                modalDelete={()=>this.clickModalDelete()}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
                 key={art.key}/>
