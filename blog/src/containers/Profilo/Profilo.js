@@ -145,18 +145,20 @@ orderHandler= ()=>{
     for(let formElementIdentifier in this.state.profileForm){
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
     }
+   
     const profile={
         nome: formData.nome,
         cognome:formData.cognome,
         dataNascita:formData.dataNascita.trim(),
         sesso: formData.sesso.trim(),
         numeroTelefono:formData.numeroTelefono.trim(),
-        nazionalità:formData.nazionalita.trim(),
+        nazionalità:(formData.nazionalita.trim() === '' ? 'italia' : formData.nazionalita.trim()),
         img:this.state.img,
         username:formData.username.trim(),
         userId:localStorage.getItem('userId').trim(),
         descrizione:this.state.descrizione
     }
+    console.log(profile.nazionalità);
 
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
