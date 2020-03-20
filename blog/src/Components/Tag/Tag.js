@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom';
 
 
 const Tag = (props) =>{
-    console.log(props)
     return(
         <div className ={classes.Tag}>
          <span className ={classes.Content}> {props.children}</span> 

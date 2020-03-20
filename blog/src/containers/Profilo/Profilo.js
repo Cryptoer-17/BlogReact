@@ -11,7 +11,7 @@ import checkValidity from '../../utility/validation';
 import updateObject from '../../utility/updateObject';
 import Modal from '../../Components/UI/Modal/Modal';
 import axios from 'axios';
-import Elimina from '../../Components/EliminaArticolo/Elimina';
+
 
 class Profilo extends Component{
 
@@ -25,7 +25,6 @@ class Profilo extends Component{
         descrizione:''+this.props.profilo.descrizione+'',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show:false,
-        showModalDelete:false,
         profileForm:{
                 nome:{
                     elementType:'input',
@@ -122,9 +121,7 @@ class Profilo extends Component{
 
 
 
-clickModalDelete (){
-    this.setState({showModalDelete:true})
-}
+
 
 handlerClickPresentazione(){
     this.setState({presentazione : false})
@@ -354,7 +351,6 @@ render(){
                 data = {art.articolo.data}
                 minuti = {art.articolo.minuti}
                 disableMore={false}
-                modalDelete={()=>this.clickModalDelete()}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
                 key={art.key}/>
@@ -374,14 +370,11 @@ render(){
        </Modal>);
    }
 
-   let showModalDelete;
-   if(this.state.showModalDelete){
-    showModalDelete= <Modal show={this.state.showModalDelete}><Elimina/></Modal>
-   } 
+   
    
     return(
         <div className={classes.Profilo}>
-            {showModalDelete ? showModalDelete: null}
+            
              {!loading ? modal : null}
             <div>
             <h1>Profilo Persona</h1>

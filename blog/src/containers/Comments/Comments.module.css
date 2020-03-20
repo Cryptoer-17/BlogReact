@@ -1,0 +1,23 @@
+.Commenti{
+    overflow: scroll;
+    height: 400px;
+}
+
+.Commento{
+   box-shadow:-1px 1px 10px 3px #D2CACA;
+   margin-top: 20px;
+}
+
+
+.ContitoreMessaggi{
+    width:60%;
+    margin:auto;
+    background-color: white;
+    padding:5px;
+    border: 1px solid #D2CACA;
+    border-radius: 10px;
+}
+
+.Messaggio{
+    
+}

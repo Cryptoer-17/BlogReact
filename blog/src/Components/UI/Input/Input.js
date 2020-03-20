@@ -45,7 +45,7 @@ case "radio": inputElement =<div className={inputClasses.join(' ')} style={{text
 break;
 
 
-  default: inputElement = <input value = { props.value} type = {props.type} style={props.config.placeholder==='breve presentazione di te' ? {marginTop:'-70px', display:'inline',marginLeft:'75px'} : null}  {...props.config} onChange = {props.changed} className =  {inputClasses.join(' ')} /> ;
+  default: inputElement = <input value = { props.value} type = {props.type} style={props.config.placeholder==='breve presentazione di te' ? {marginTop:'-70px', display:'inline',marginLeft:'75px'} : props.config.placeholder === "Scrivi un commento..." ? {backgroundColor: '#D2CACA',marginTop:'22px', width:'90%',boxShadow:' -3px 3px 3px #D2CACA' } : null }  {...props.config} onChange = {props.changed} className =  {inputClasses.join(' ')} /> ;
 }
 
 

@@ -194,10 +194,12 @@ deleteTagHandler = (tag) =>{
 clickCloseImg(){
     this.setState({anteprimaImg:null,
                     img:null})
+                    document.getElementById("inputFile").value = null;
 }
 
  convertFile = (e)=>  { 
         let reader = new FileReader();
+        if(e!==undefined){
         reader.readAsDataURL(e);
         reader.onloadend = () => {
         this.setState({img: reader.result, 
@@ -206,7 +208,7 @@ clickCloseImg(){
         console.log(reader.result);
 
         }
-
+    }
       };
   
   

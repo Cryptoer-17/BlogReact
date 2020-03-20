@@ -3,11 +3,14 @@ import classes from './AnteprimaArticolo.module.css';
 import {NavLink} from 'react-router-dom';
 import ActionBar from '../ActionBar/ActionBar';
 import Info from '../InfoArticolo/InfoArticolo';
-
+import Elimina from '../../Components/EliminaArticolo/Elimina';
+import Modal from '../UI/Modal/Modal';
 
 class AnteprimaArticolo extends Component{
     state={
-        showDropdown:false
+        showDropdown:false,
+        showModalDelete:false,
+
      }
   
 
@@ -15,6 +18,14 @@ class AnteprimaArticolo extends Component{
         this.setState({showDropdown:!this.state.showDropdown})
         }
 
+
+        clickModalDelete (){
+            this.setState({showModalDelete:true})
+        }
+        
+        hideModalDelete (){
+            this.setState({showModalDelete:false})
+        }
 
     render(){
 
@@ -57,14 +68,19 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown} modalDelete={this.props.modalDelete} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
+         <ActionBar id={id} showdropdown={showDropdown}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
 
         </div>
     
   
+    let showModalDelete;
+    if(this.state.showModalDelete){
+     showModalDelete= <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={()=>this.hideModalDelete()}/></Modal>
+    } 
 
     return(
         <div onClick={showDropdown?this.clickMenuHandler : null}>
+            {showModalDelete ? showModalDelete: null}
             {variabile}
         </div>
     );

@@ -108,6 +108,7 @@ deleteTagHandler = (tag) =>{
 clickCloseImg(){
     this.setState({anteprimaImg:null,
                     img:null})
+    document.getElementById("inputFile").value = null;
 }
 
  convertFile = (e)=>  { 
@@ -233,7 +234,8 @@ return(
 <hr/>
 
 <div className = {classes.InputImg}>
-    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0]) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+    
+    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => (console.log("ok"),this.convertFile(event.target.files[0])) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
     <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
     { anteprimaImg ?  anteprimaImg : null}

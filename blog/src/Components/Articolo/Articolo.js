@@ -5,13 +5,14 @@ import Spinner from '../UI/Spinner/Spinner';
 import ActionBar from '../ActionBar/ActionBar';
 import Tag from '../Tag/Tag';
 import Info from '../InfoArticolo/InfoArticolo';
-
+import Comments from '../../containers/Comments/Comments';
 
 
 class Articolo extends Component{
     state={
         articolo : null,
         loading : false,
+        comments:null
     }
   
 
@@ -65,10 +66,12 @@ class Articolo extends Component{
 
     }
 
+    viewCommentsHandler(){
+        this.setState({comments:true})
+    }
 
     render(){
         const {articolo,loading} = this.state;
-        console.log(this.props);
         let articoloVisualizzato; 
         let colore = 'black';
         let tags;
@@ -117,7 +120,7 @@ class Articolo extends Component{
             <div className={classes.TagContainer}>
                {tags} 
             </div>          
-                <ActionBar className={classes.Action} color={colore} onClick={() => this.clickHeartHandler()}/>
+                <ActionBar className={classes.Action} color={colore} disableMore={true} viewComments={()=>this.viewCommentsHandler()} onClick={() => this.clickHeartHandler()}/>
         </div>
         }
 
@@ -128,6 +131,8 @@ class Articolo extends Component{
         return (
             <div >
             {articoloVisualizzato}
+            {this.state.comments && <Comments/>}
+           
             </div>
             
             );

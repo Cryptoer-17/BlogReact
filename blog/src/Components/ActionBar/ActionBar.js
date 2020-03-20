@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import classes from './ActionBar.module.css';
 import { FaHeart,FaRegCommentDots, FaEllipsisH } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
-import Elimina from '../EliminaArticolo/Elimina';
-import Modal from '../UI/Modal/Modal';
 
 const ActionBar = (props) =>{
 
@@ -15,11 +13,10 @@ const ActionBar = (props) =>{
     
     return(
         <div className ={classes.ActionBar}>
-                {console.log(props)}
 
                 <div className = {classes.Actions}>
                 <FaHeart className={classes.Like} style={{color : props.color}} onClick={props.onClick}/>
-                <FaRegCommentDots className={classes.Comments}  />
+                <FaRegCommentDots className={classes.Comments} onClick={props.viewComments} />
                 </div>
 
                 {props.disableMore ? null : 
