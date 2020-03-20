@@ -19,7 +19,7 @@ class Comments extends Component{
         return(
         <div className={classes.ContitoreMessaggi}>
             <div onClick={()=>this.clickDiv()} id="divCommts" className={classes.Commenti} >
-                <div className={classes.Commento}>
+            {/* <div className={classes.Commento}>
                 <NomePersona>Props Nome Persona</NomePersona>
                 <Comment>
                     NWERIOFWOIWEFINWEFI  WIENEWI NWEIFIEWN INFIWENF EWN NFN  eiewif
@@ -60,7 +60,7 @@ class Comments extends Component{
                     dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
                     di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  d
                 </Comment>
-                </div>
+                </div> */}    
             </div>    
             <Messaggio/>
         </div>
