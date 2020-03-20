@@ -245,7 +245,7 @@ return(
 
 <br/>
 
-  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}> Pubblica </button>           
+  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}  disabled = {!isFormValid}> Pubblica </button>           
  
 
  <Modal  show = {show}  modalClosed = {  this.hideModal } >
