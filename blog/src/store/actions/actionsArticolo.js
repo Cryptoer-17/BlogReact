@@ -28,7 +28,8 @@ export const initArticoli = () =>{
     return dispatch =>{
         const temparray = [];
         dispatch(setArticoliStart());
-        axios.get('/articoli.json')
+        const token = localStorage.getItem('token');
+        axios.get('/articoli.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
@@ -68,7 +69,8 @@ export const postArticoloStart = () =>{
 export const postArticolo = (articolo) => {
     return dispatch => {
         dispatch(postArticoloStart());
-        axios.post('/articoli.json', articolo)
+        console.log(articolo);
+        axios.post('/articoli.json?auth='+localStorage.getItem("token"), articolo)
         .then(res =>{ 
             dispatch(postArticoloSuccess(articolo))
           })
@@ -96,3 +98,81 @@ export const ricercaArticoli = ( filtro) =>{
     };
 
 }
+
+export const updateArticoloSuccess = (articolo) =>{
+    return{
+        type: actionTypes.UPDATE_ARTICOLO_SUCCESS,
+        articolo:articolo
+    };
+}
+
+export const updateArticolo = (articolo,idArticolo) =>{
+    return dispatch => {
+        dispatch(postArticoloStart());
+        axios.put('/articoli/'+idArticolo+'.json?auth='+localStorage.getItem("token"), articolo)
+        .then(res =>{ 
+            dispatch(updateArticoloSuccess(articolo))
+          })
+        .catch(error => { 
+            dispatch(postArticoloFail(error));
+        });
+    }
+}
+
+
+export const deleteArticoloSuccess = (articolo) =>{
+    return{
+        type: actionTypes.DELETE_ARTICOLO_SUCCESS,
+        articolo:articolo
+    };
+}
+
+
+export const deleteArticolo = (articolo) =>{
+    return dispatch => {
+        dispatch(postArticoloStart());
+        axios.delete('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        .then(res =>{ 
+            dispatch(deleteArticoloSuccess(articolo))
+          })
+        .catch(error => { 
+            dispatch(postArticoloFail(error));
+        });
+    }
+}
+
+
+/*export const updateDataSuccess = (dati) =>{
+    return{
+        type: actionTypes.UPDATE_DATA_SUCCESS,
+        dati: dati
+    }
+} 
+
+export const updateDataStart = () =>{
+    return {
+        type : actionTypes.UPDATE_DATA_START
+    };
+}
+
+export const updateDataFail = (error) =>{
+    
+    return{
+        type : actionTypes.UPDATE_DATA_FAIL,
+        error : error
+    }
+}
+
+
+export const updateData = (dato,idProfilo) =>{
+    return dispatch => {
+        dispatch(updateDataStart());
+        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
+        .then(res =>{ 
+            dispatch(updateDataSuccess(dato))
+          })
+        .catch(error => { 
+            dispatch(updateDataFail(error));
+        });
+    }
+}*/

@@ -1,0 +1,51 @@
+.Rules{
+    display:flex;
+    font-size: 14px;
+    padding:10px;
+}
+.Rules ul{
+list-style: none;
+text-align: left;
+list-style: circle;
+margin-bottom:15px;
+}
+
+.Rules p {
+   text-align:left;
+   font-size: 18px;
+} 
+
+.AnnullaButton{
+    font-family: inherit;
+    border:none;
+    background-color: transparent;
+    outline:none;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.ConfermaButton{
+    width:100px;
+    outline:none;
+    padding:6px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #B4ADAD;
+    margin-top: 10px;
+    margin-bottom:10px;
+    margin-left:10px;
+    font-size:18px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.ConfermaButton:hover{
+    background-color: #D2CACA; 
+}
+
+.AnnullaButton:hover{
+    color: #787373; 
+    font-weight: bold;
+}
+

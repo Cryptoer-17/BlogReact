@@ -1,0 +1,92 @@
+.Profilo{
+    padding-top: 20px;
+}
+
+.DatiPersonali{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+
+.Informazioni{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
+
+}
+
+
+.UsernamePage{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 169px;
+}
+
+.ModificaDati{
+    background-color: white;
+    border: 1px solid #D2CACA;
+    text-align: justify;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.BtnPresentazione{
+background-color: transparent;
+border: none;
+color: blue;
+cursor: pointer;
+}
+
+.ButtonSend{
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid;
+    float: right;
+    cursor: pointer;
+    margin-right: 2px;
+    font-size: large;
+}
+
+.Input{
+    margin-right: 150px;
+}
+
+.DivFoto{
+    width: 36%;
+    display: inline-flex;
+    margin-bottom: 30px;
+}
+
+.InputImg{
+    width: 50%;
+    margin-right: -140px;
+    border-style: outset;
+}
+
+.InputForm{
+    width: 120px;
+}
+
+.CaricaImgButton{
+    margin:auto;
+    width: 130px;
+     font-size:16px;
+     padding:5px;
+     background-color: white;
+     border-radius: 8px;
+     border: 1px solid #B4ADAD;
+     font-family: inherit;
+     cursor:pointer;
+ }
+ 
+ 

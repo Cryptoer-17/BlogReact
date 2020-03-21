@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     articoli: [],
+    articolo:[],
     loading:false,
     esitoCaricamento:"",
     cerca: null,
@@ -33,16 +34,12 @@ const SetArticoliStart = (state, action) =>{
 }
 
 const setArticoliSuccess = (state, action ) =>{
-    return updateObject(state , {articoli : action.articoli, error:null, loading : false})
+    return updateObject(state , {articoli : action.articoli.reverse(), error:null, loading : false})
 }
 
 const setArticoliFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false})
 }
-
-const setArticoli = (state,action) =>{
-    return updateObject(state , {articoli : action.articoli})
-};
 
 
 
@@ -66,21 +63,42 @@ let articoli = [];
     if(action.filtro === "categoria"){
         articoli= state.articoli.filter(art => art.articolo.categoria === state.cerca);
     }
-
+  
     return updateObject( state, { risultatiRicerca: articoli} );
 
 }
 
 
+const updateArticoloSuccess = ( state, action ) => {
+    return updateObject( state, { loading: false, articolo: action.articolo, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
+};
 
+/*
+const updateArticoloSuccess = (state,action) =>{
+    let arrayArt = [...state.articoli];
+    let idArt = state.articoli.findIndex(i=>i.key  === action.articolo.key);
+    arrayArt.splice(idArt, 1);
+    arrayArt.push(action.articolo);
+   return updateObject( state, { loading: false, articoli: arrayArt} );
+}*/
+
+const deleteArticoloSuccess = (state,action) =>{
+    let arrayArt = [...state.articoli];
+    let idArt = state.articoli.findIndex(i=>i.key  === action.articolo.key);
+    arrayArt.splice(idArt, 1);
+   return updateObject( state, { loading: false, articoli: arrayArt} );
+}
 
 
 
 const reducer = (state = initialState, action) =>  {
     switch(action.type){
+    
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
+        case actionTypes.UPDATE_ARTICOLO_SUCCESS: return updateArticoloSuccess( state, action);
+        case actionTypes.DELETE_ARTICOLO_SUCCESS: return deleteArticoloSuccess( state, action);
         case actionTypes.SET_ARTICOLI_SUCCESS : return setArticoliSuccess(state,action);
         case actionTypes.SET_ARTICOLI_START : return SetArticoliStart(state,action);
         case actionTypes.SET_ARTICOLI_FAIL : return setArticoliFail(state, action);

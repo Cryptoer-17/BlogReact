@@ -12,7 +12,7 @@
     padding:5px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid #B4ADAD;
     margin-top: 10px;
     margin-bottom:10px;
     font-size:17px;
@@ -31,7 +31,7 @@
     padding:5px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid #B4ADAD;
     margin-top: 10px;
     margin-bottom:10px;
     font-size:17px;
@@ -52,7 +52,7 @@
     display:inline-flex;
 }
 .AccediButton:hover,.AccediGoogleButton:hover, .RegistratiButton:hover{
-    background-color: lightgray; 
+    background-color: #D2CACA; 
    
 }
 
@@ -63,7 +63,7 @@
     padding:5px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 1px solid #B4ADAD;
     margin-top: 10px;
     margin-bottom:10px;
     font-size:15px;

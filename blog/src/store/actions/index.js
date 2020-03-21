@@ -2,6 +2,22 @@ export {
     postArticolo,
     initArticoli,
     startRicerca,
-    ricercaArticoli
+    ricercaArticoli,
+    updateArticolo,
+    deleteArticolo,
+    
 }from './actionsArticolo';
 
+export {
+login,
+logout,
+googleAuth,
+setLoginRedirectPath
+}from './actionsLogin';
+
+export{
+sendData,
+getProfilo,
+updateData,
+setUsername
+}from './actionsProfilo';

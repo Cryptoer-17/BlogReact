@@ -66,6 +66,7 @@ componentDidUpdate(prevState){
                     risultati.map( art =>
 
                     <AnteprimaArticolo 
+                    className = {classes.Risultati}
                     id={art.key} 
                     autore={art.articolo.autore}
                     categoria = {art.articolo.categoria}
@@ -75,6 +76,8 @@ componentDidUpdate(prevState){
                     sottotitolo = {art.articolo.sottotitolo}
                     testo = {art.articolo.testo}
                     titolo = {art.articolo.titolo}
+                    data = {art.articolo.data}
+                    minuti = {art.articolo.minuti}
                     key={art.key}/>          
                   )
 

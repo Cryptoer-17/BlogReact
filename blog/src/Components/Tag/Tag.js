@@ -7,7 +7,7 @@ const Tag = (props) =>{
     return(
         <div className ={classes.Tag}>
          <span className ={classes.Content}> {props.children}</span> 
-    {props.location.pathname === "/pubblica"? <i className="material-icons" onClick = {props.click}>close</i> : null}
+    { (props.location.pathname === "/pubblica" || props.match.path === "/modifica/:id")  && <i className="material-icons" onClick = {props.click}>close</i>}
         </div>
     );
 }

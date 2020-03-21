@@ -10,18 +10,22 @@
     height: 35px;
     box-shadow: 0px 3px 8px 0px rgba(158,158,158,1);
     z-index:80;
+    opacity:0.95;
 }
+
 .BarraNavigazione a{
-    margin-right:10px;
     text-decoration: none;   
     color:#1E1D1D;
 }
+
+
+
 
 .BarraNavigazione i{
     font-size: 28px;
 }
 
-.BarraNavigazione a:hover, .LoginButton:hover{
+.BarraNavigazione a:hover, .LoginButton:hover, .Link:hover{
     font-weight: bold;
     color: #787373;
 }
@@ -32,22 +36,26 @@
     font-size:20px;
     outline: none;
     margin-left: 10px;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+    color:#1E1D1D;
+    vertical-align: middle;
+}
+
+.Username{
+    font-size:15px;
+    float:left;
+    vertical-align: middle;
+    margin-left:1px;
+    cursor: default;
 }
 
 .LoginButton{
-    margin-top:2px;
-    position:fixed;
-    right:10px;
-    float:right;
+    cursor: pointer;
     border:none;
     background-color: transparent;
-    outline: none;
-    width:30px;
-    height: 30px;
-    cursor: pointer;
-    border-radius: 50%;  
-    text-align: center;
-    padding:2px;
+    float: left;
 }
 
 .LoginButton i{
@@ -63,6 +71,18 @@
     float:right;
 }
 
+
+
+.LoginNew{
+    background-color: transparent;
+    border: none;
+    float: right;
+    margin-top: 8px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .Titolo{
     font-weight: bold;
     font-size: 26px;
@@ -74,3 +94,34 @@
     color:#3C3A3A;
     cursor: pointer;
 }
+
+@media (max-width: 500px) {
+   
+    .Link{
+        margin-top:2px;
+        float:left;
+        font-size:20px;
+        outline: none;
+        margin-left: 0px;
+        }
+    .BarraNavigazione a{
+        text-decoration: none;   
+        color:#1E1D1D;
+        margin-right: 0px;
+        }
+    
+    .LoginNew{
+        background-color: transparent;
+        border: none;
+        float: right;
+        margin-top: 8px;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .Username, .Titolo{
+        display:none;
+    }
+    }
+
