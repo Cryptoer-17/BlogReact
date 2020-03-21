@@ -18,7 +18,7 @@ class Comments extends Component{
    
         return(
         <div className={classes.ContitoreMessaggi}>
-            <div onClick={()=>this.clickDiv()} id="divCommts" className={classes.Commenti} >
+            <div onChange={this.clickDiv} id="divCommts" className={classes.Commenti} >
             {/* <div className={classes.Commento}>
                 <NomePersona>Props Nome Persona</NomePersona>
                 <Comment>

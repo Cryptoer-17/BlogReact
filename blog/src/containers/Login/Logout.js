@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './Logout.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
 import {connect} from 'react-redux';
@@ -9,14 +9,19 @@ const Logout = ( props) =>{
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
 
+
+const [showModalLogoutError, setshowModalLogoutError] = useState(false);
+
+
 let error;
 if(props.error === "Auth token is expired"){
    error = (setTimeout(()=>{
     if(props.error === "Auth token is expired"){
+      document.getElementById("btnLogout").style.display = 'none';
       document.getElementById("btnLogout").click()
-      
+      hideModal();
     }
-   },4500),hideModal(),<Modal  show = {true} hideModal = {hideModal}>
+   },4500),<Modal  show = {true} hideModal = {hideModal}>
      E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
    </Modal>);
 }

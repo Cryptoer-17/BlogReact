@@ -66,8 +66,39 @@ class Articolo extends Component{
 
     }
 
-    handlerSendMessage(props){
+    handlerSendMessage = (props)=>{
         console.log(props);
+        const messaggi = {
+            username:localStorage.getItem("username"),
+            messaggio:props
+        }
+        console.log(this.state.articolo)
+
+        const anteprima = {
+            autore : this.state.articolo.autore,
+            categoria : this.state.articolo.categoria,
+            data:this.state.articolo.data,
+            descrizione : this.state.articolo.descrizione,
+            img : this.state.articolo.img,
+            minuti:this.state.articolo.minuti,
+            sottotitolo : this.state.articolo.sottotitolo,
+            tags : this.state.articolo.tags,
+            like: this.state.articolo.like,
+            testo : this.state.articolo.testo,
+            titolo : this.state.articolo.titolo,
+            messaggi: messaggi,
+            userId:this.state.articolo.userId
+        } 
+
+        this.setState({
+            articolo : anteprima
+        })
+         
+        const id= this.props.match.params.id;
+
+        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
     }
 
 
