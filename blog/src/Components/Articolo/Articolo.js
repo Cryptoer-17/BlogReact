@@ -131,7 +131,7 @@ class Articolo extends Component{
         return (
             <div >
             {articoloVisualizzato}
-            {this.state.comments && <Comments/>}
+            {this.state.comments && <Comments />}
            
             </div>
             

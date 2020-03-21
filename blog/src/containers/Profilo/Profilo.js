@@ -17,7 +17,8 @@ class Profilo extends Component{
 
 
     state={
-        
+        showDropdown:false,
+        idArticoloCambiamenti:null,
         anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:(this.props.profilo.descrizione ? false:null),//false
         modificaDati:null,
@@ -120,7 +121,11 @@ class Profilo extends Component{
 
 
 
-
+    clickMenuHandler = (props)=>{
+    console.log(props);
+    this.setState({showDropdown:!this.state.showDropdown})
+    this.setState({idArticoloCambiamenti : props})
+    }
 
 
 handlerClickPresentazione(){
@@ -266,7 +271,7 @@ convertFile = (e)=>  {
 
 render(){
     console.log(this.props);
-    let {anteprimaImg,presentazione,modificaDati} = this.state;
+    let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
     let {loading,profilo} = this.props;
 
     
@@ -359,6 +364,8 @@ render(){
                 data = {art.articolo.data}
                 minuti = {art.articolo.minuti}
                 disableMore={false}
+                showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown :false}
+                clickMenuHandler={this.clickMenuHandler}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
                 key={art.key}/>
@@ -381,7 +388,7 @@ render(){
    
    
     return(
-        <div className={classes.Profilo}>
+        <div className={classes.Profilo} onClick={showDropdown?this.clickMenuHandler : null}>
             
              {!loading ? modal : null}
             <div>
