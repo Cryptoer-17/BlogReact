@@ -12,7 +12,7 @@ class Comments extends Component{
     }
 
     render(){
-
+        const {clickSendMessage} = this.props;
         
         
    
@@ -62,7 +62,7 @@ class Comments extends Component{
                 </Comment>
                 </div> */}    
             </div>    
-            <Messaggio/>
+            <Messaggio clickSendMessage={clickSendMessage}/>
         </div>
         );
        

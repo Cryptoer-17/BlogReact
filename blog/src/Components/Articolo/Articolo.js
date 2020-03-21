@@ -66,6 +66,11 @@ class Articolo extends Component{
 
     }
 
+    handlerSendMessage(props){
+        console.log(props);
+    }
+
+
     viewCommentsHandler(){
         this.setState({comments:true})
     }
@@ -120,7 +125,7 @@ class Articolo extends Component{
             <div className={classes.TagContainer}>
                {tags} 
             </div>          
-                <ActionBar className={classes.Action} color={colore} disableMore={true} viewComments={()=>this.viewCommentsHandler()} onClick={() => this.clickHeartHandler()}/>
+                <ActionBar className={classes.Action}  color={colore} disableMore={true} viewComments={()=>this.viewCommentsHandler()} onClick={() => this.clickHeartHandler()}/>
         </div>
         }
 
@@ -131,7 +136,7 @@ class Articolo extends Component{
         return (
             <div >
             {articoloVisualizzato}
-            {this.state.comments && <Comments />}
+            {this.state.comments && <Comments clickSendMessage={this.handlerSendMessage}/>}
            
             </div>
             
