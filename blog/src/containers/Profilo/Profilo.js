@@ -213,10 +213,16 @@ updatedFormElement.value = event.target.value;
 
 convertFile = (e)=>  { 
     let reader = new FileReader();
+    if(e !== undefined){
     reader.readAsDataURL(e);
     reader.onloadend = () => {
   
     this.setState({img: reader.result, anteprimaImg: <img className={classes.InputImg} src = {reader.result} alt = "" />})
+    }
+    }
+    else {
+        this.setState({img: null, anteprimaImg: null})
+        document.getElementById("inputFile").value = null;
     }
   };
 
