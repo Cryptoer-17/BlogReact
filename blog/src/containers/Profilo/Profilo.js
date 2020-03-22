@@ -287,7 +287,7 @@ render(){
     let btnInviaInfo=null;
     {presentazione===null? 
         presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
-        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
+        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px' ,height:'49%'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
     } 
 
 
