@@ -152,7 +152,7 @@ class Modifica extends Component{
          })
          this.setState({tagsList:tagsList})
 
-         this.setState({anteprimaImg: (response.data.img === undefined ? null :(<div className={classes.ImgClose}><img src = {response.data.img} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)),img:(response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
+         this.setState({anteprimaImg: (response.data.img === undefined ? null :(<div className={classes.ImgClose}><img src = {response.data.img} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)),img:(response.data.img === undefined ? null :  response.data.img)})
 
          this.setState({loading:false})
          this.setState({messaggi : (response.data.messaggi === undefined ? [] : response.data.messaggi)})
