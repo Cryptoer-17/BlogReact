@@ -14,18 +14,20 @@ class Comments extends Component{
 
 
     componentDidMount(){
-        if(this.props.articolo.messaggi){
-            document.getElementById("divCommts").style.height= '400px';
-            document.getElementById("divCommts").style.overflow= 'scroll';
+        if(this.props.articolo.messaggi !== undefined){
+            if(this.props.articolo.messaggi.length > 1){
+                document.getElementById("divCommts").style.height= '400px';
+                document.getElementById("divCommts").style.overflow= 'scroll';
+            }
         }
-       
     }
 
     render(){
         const {clickSendMessage,articolo} = this.props;
         
-
-        const commenti = articolo.messaggi.map((messaggio,index)=>{
+        let commenti
+        if(articolo.messaggi !== undefined){
+        commenti = articolo.messaggi.map((messaggio,index)=>{
             return (<div className={classes.Commento} key={index}>
             <NomePersona>{messaggio.username}</NomePersona>
             <Comment>
@@ -33,7 +35,7 @@ class Comments extends Component{
             </Comment>
             </div>)
         }) 
-        
+        } else commenti = null;
 
    
         return(

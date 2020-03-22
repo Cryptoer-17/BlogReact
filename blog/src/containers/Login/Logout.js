@@ -20,11 +20,8 @@ if(props.error === "Auth token is expired"){
       document.getElementById("btnLogout").style.display = 'none'
     },10),
     setTimeout(()=>{
-    
     if(props.error === "Auth token is expired"){
-     
       document.getElementById("btnLogout").click()
-   //   document.getElementById("btnLogout").style.display = 'none'
     }
    },4500),
    <Modal  show = {true} hideModal = {hideModal}>

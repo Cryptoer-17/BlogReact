@@ -42,7 +42,7 @@ render(){
 
 
 
-  let {spinner, articoli, errore} = this.props;
+  let {spinner, articoli, errore,mount} = this.props;
 
    
    
@@ -73,6 +73,7 @@ render(){
          data = {art.articolo.data}
          minuti = {art.articolo.minuti}
          disableMore = {true}
+         mount = {mount}
          clickHeart = {() => this.clickHeartHandler(art)} 
          key={art.key}/>);
    })

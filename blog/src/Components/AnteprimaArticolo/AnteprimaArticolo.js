@@ -72,7 +72,7 @@ class AnteprimaArticolo extends Component{
   
     let showModalDelete;
     if(this.state.showModalDelete){
-     showModalDelete= <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={()=>this.hideModalDelete()}/></Modal>
+     showModalDelete= <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={()=>this.hideModalDelete()} mount={this.props.mount}/></Modal>
     } 
 
     return(

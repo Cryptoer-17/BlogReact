@@ -6,6 +6,8 @@ import ActionBar from '../ActionBar/ActionBar';
 import Tag from '../Tag/Tag';
 import Info from '../InfoArticolo/InfoArticolo';
 import Comments from '../../containers/Comments/Comments';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 
 class Articolo extends Component{
@@ -24,6 +26,9 @@ class Articolo extends Component{
             console.log(response)
             if (typeof response.data.tags === 'undefined'){
                 response.data.tags = [];
+            }
+            if(typeof response.data.messaggi === 'undefined'){
+                response.data.messaggi = [];
             }
 
           this.setState({articolo : response.data})
@@ -49,7 +54,7 @@ class Articolo extends Component{
             sottotitolo : this.state.articolo.sottotitolo,
             tags : this.state.articolo.tags,
             like: !this.state.articolo.like,
-            messaggio: this.state.articolo.messaggi,
+            messaggi: this.state.articolo.messaggi,
             testo : this.state.articolo.testo,
             titolo : this.state.articolo.titolo,
             userId:this.state.articolo.userId
@@ -62,7 +67,10 @@ class Articolo extends Component{
         const id= this.props.match.params.id;
 
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
-        .then(response => console.log(response))
+        .then(response =>{
+             console.log(response)
+             this.props.onInitArticoli();
+            })
         .catch(error => console.log(error));
 
     }
@@ -103,7 +111,10 @@ class Articolo extends Component{
         const id= this.props.match.params.id;
 
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
-        .then(response => console.log(response))
+        .then(response => {
+            this.props.onInitArticoli();
+            console.log(response);
+        })
         .catch(error => console.log(error));
     }
 
@@ -181,4 +192,11 @@ class Articolo extends Component{
     }
 }
 
-export default Articolo;
+
+const mapDispatchToProps = dispatch =>{
+    return{
+       onInitArticoli: () => dispatch(actions.initArticoli()),
+    }
+  }
+
+export default connect(mapDispatchToProps)(Articolo);

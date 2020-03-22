@@ -254,6 +254,7 @@ convertFile = (e)=>  {
         descrizione : art.articolo.descrizione,
         img : art.articolo.img,
         like: !art.articolo.like,
+        messaggi: art.articolo.messaggi,
         minuti:art.articolo.minuti,
         sottotitolo : art.articolo.sottotitolo,
         tags:art.articolo.tags,
@@ -264,6 +265,7 @@ convertFile = (e)=>  {
     const id = art.key;
     axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
     .then(response => {
+        console.log("ok");
        this.props.mount();
     })
     .catch(error => console.log(error));
@@ -272,14 +274,14 @@ convertFile = (e)=>  {
 render(){
     console.log(this.props);
     let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
-    let {loading,profilo} = this.props;
+    let {loading,profilo,mount} = this.props;
 
     
     let email;
     email = localStorage.getItem('email');
 
 
-    const personal_article = [...this.props.articoli]
+    
 
     let presentazioneVisualizzata ;
     let btnInviaInfo=null;
@@ -345,7 +347,7 @@ render(){
     </div>);
 
 
-
+const personal_article = [...this.props.articoli];
 
     let articoliVisualizzati;
     articoliVisualizzati = personal_article.map((art) =>{
@@ -365,6 +367,7 @@ render(){
                 minuti = {art.articolo.minuti}
                 disableMore={false}
                 showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown :false}
+                mount = {mount}
                 clickMenuHandler={this.clickMenuHandler}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
