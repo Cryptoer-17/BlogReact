@@ -120,7 +120,11 @@ class Articolo extends Component{
 
 
     viewCommentsHandler(){
+        
         this.setState({comments:true})
+         setTimeout(() => {
+            window.scrollTo(0,9999)
+         }, 1); 
     }
 
     render(){

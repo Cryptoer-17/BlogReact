@@ -24,7 +24,7 @@ class Comments extends Component{
 
     render(){
         const {clickSendMessage,articolo} = this.props;
-        
+        console.log(articolo);
         let commenti
         if(articolo.messaggi !== undefined){
         commenti = articolo.messaggi.map((messaggio,index)=>{
@@ -39,7 +39,7 @@ class Comments extends Component{
 
    
         return(
-        <div className={classes.ContitoreMessaggi}>
+        <div id="parentDiv" className={classes.ContitoreMessaggi}>
             <div  id="divCommts" className={classes.Commenti} >
             {commenti}
            
