@@ -33,13 +33,13 @@ errorMsg:""
 }
 
 
-
+//controllo username
 checkValidityOfUsername= (event) =>{
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     let formIsValid = newObj.valid;
     let error = "";
    
-   for (let key in this.props.profili){
+   for (let key in this.props.profili){ //controllo unicità dell'username
      if(this.props.profili[key].username === event.target.value){
       newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
       error = "L'username non è disponibile";

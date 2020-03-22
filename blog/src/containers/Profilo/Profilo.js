@@ -197,6 +197,24 @@ descrizioneChangeHandler = (event) =>{
 
 inputChangedHandler = (event, inputIdentifier)=>{
 
+    //controllo unicità dell'username 
+    
+//(questo è quello che ho fatto io in Username.js , inseriscilo e aggiustalo come più preferisci, non volevo creare conflitti inutili)
+
+/*
+ let error = "";
+   let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
+    let formIsValid = newObj.valid;
+
+   for (let key in this.props.profili){ 
+     if(this.props.profili[key].username === event.target.value){
+      newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
+      error = "L'username non è disponibile";
+      formIsValid= false;
+   }
+   
+   this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
+*/
 
 const updatedprofileForm = {
     ...this.state.profileForm
@@ -278,7 +296,7 @@ convertFile = (e)=>  {
 render(){
     console.log(this.props);
     let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
-    let {loading,profilo} = this.props;
+    let {loading,profilo, profili} = this.props;
 
     
     let email;
@@ -449,7 +467,8 @@ const mapStateToProps = state =>{
        articoli : state.articolo.articoli,
        loading: state.profilo.loading,
        esito: state.profilo.esitoCaricamento,
-       profiloReducer:state.profilo.profilo
+       profiloReducer:state.profilo.profilo,
+       profili:state.profilo.profili
     }
  }
  
