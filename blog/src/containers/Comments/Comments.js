@@ -7,60 +7,41 @@ import Messaggio from '../../Components/Articolo/Messagio/Messagio';
 class Comments extends Component{
 
 
-    clickDiv(){
-        {console.log(document.getElementById("divCommts"))}
+
+    resizeDivComments(){
+        console.log("ok")
+    }
+
+
+    componentDidMount(){
+        if(this.props.articolo.messaggi){
+            document.getElementById("divCommts").style.height= '400px';
+            document.getElementById("divCommts").style.overflow= 'scroll';
+        }
+       
     }
 
     render(){
-        const {clickSendMessage} = this.props;
+        const {clickSendMessage,articolo} = this.props;
         
+
+        const commenti = articolo.messaggi.map((messaggio,index)=>{
+            return (<div className={classes.Commento} key={index}>
+            <NomePersona>{messaggio.username}</NomePersona>
+            <Comment>
+                {messaggio.testo}
+            </Comment>
+            </div>)
+        }) 
         
+
    
         return(
         <div className={classes.ContitoreMessaggi}>
-            <div onChange={this.clickDiv} id="divCommts" className={classes.Commenti} >
-            {/* <div className={classes.Commento}>
-                <NomePersona>Props Nome Persona</NomePersona>
-                <Comment>
-                    NWERIOFWOIWEFINWEFI  WIENEWI NWEIFIEWN INFIWENF EWN NFN  eiewif
-                    iewiiewfiewfefi   jefeiw jewi  weimcimcm mc  cm cm ewccme cmew mc
-                    c oewowomcewmwc ocw om ewomweoowemwemomewomcoe emcm
-                </Comment>
-                </div> 
-                <div className={classes.Commento}>
-                <NomePersona>Props Nome Persona2</NomePersona>
-                <Comment>
-                    NWERIOFWOIWEFIN wemomewomcoe emcm
-                </Comment>
-                </div>
-                <div className={classes.Commento}>
-                <NomePersona>Props Nome Persona2</NomePersona>
-                <Comment>
-                    NWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  d
-                </Comment>
-                </div>
-                <div className={classes.Commento}>
-                <NomePersona>Props Nome Persona2</NomePersona>
-                <Comment>
-                NWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  
-                    dNWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  
-                    dNWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  
-                    dNWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  
-                    dNWERIOFWOIWEFIN wemdsdscmdsmdkckmkmckdmcksdmmkcdskmdcomewomcoe emcm
-                    dsincisdkckdndsjkn   id mid mi dsd  sddsmd d dmdii dsmvdis mvdmds 
-                    di v idsvidsm sdimvs dimv d dsmvsdmidsmvsdimsimv  imdim dvmi m  d
-                </Comment>
-                </div> */}    
+            <div  id="divCommts" className={classes.Commenti} >
+            {commenti}
+           
+            
             </div>    
             <Messaggio clickSendMessage={clickSendMessage}/>
         </div>

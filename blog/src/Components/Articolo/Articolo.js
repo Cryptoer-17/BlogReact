@@ -173,7 +173,7 @@ class Articolo extends Component{
         return (
             <div >
             {articoloVisualizzato}
-            {this.state.comments && <Comments clickSendMessage={this.handlerSendMessage}/>}
+            {this.state.comments && <Comments articolo={articolo} clickSendMessage={this.handlerSendMessage}/>}
            
             </div>
             
