@@ -2,7 +2,7 @@
 .Modal {
     transition: all 0.3s ease-in-out;
     position: fixed;
-    z-index: 300;
+    z-index: 400;
     border: 1px solid #F0E7E7;
     background-color: white;
     padding: 10px;
@@ -15,12 +15,22 @@
     max-height:70%;
     overflow-y: auto;
     border-radius: 8px;
+    opacity:1;
 }
 
 @media (min-width: 500px) {
     .Modal {
         width: 400px;
         left: calc(50% - 200px);
+    }
+   
+}
+
+@media (max-width: 500px) {
+    .Modal {
+        width: 350px;
+        left: calc(50% - 170px);
+   
     }
    
 }

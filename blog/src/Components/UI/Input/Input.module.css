@@ -3,7 +3,6 @@
     margin:auto;
     margin-top:50px;
     margin-bottom:50px;
-    padding:12px;
     width:80%;
     outline:none;
     padding:5px;
@@ -11,6 +10,10 @@
     background-color: transparent;
     border-bottom: 0.5px solid  #969090;
 }
+
+
+
+
 
 .Input:focus{
     border-bottom: 1px solid #3C3A3A;

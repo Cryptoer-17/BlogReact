@@ -19,3 +19,34 @@ button:disabled{
 
 
 ::selection { background-color:#D2CACA; }
+
+
+
+q,
+blockquote {
+  quotes: "“" "”" "‘" "’";
+  font-style: italic;
+}
+
+
+
+q:before,
+blockquote:before {
+  content: open-quote;
+}
+
+q:after,
+blockquote:after {
+  content: close-quote;
+  margin-left: 700px;
+}
+
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  font-size: 3.8em;
+  color: #F0E7E7;
+}
+
+

@@ -1,0 +1,106 @@
+.AnteprimaArticolo{
+    width:60%;
+    margin:auto;
+    background-color: white;
+    padding:5px;
+    border: 1px solid #D2CACA;
+    margin-bottom: 10px;
+    height: 25%;
+    display:block;
+}
+
+
+.Imgdiv{
+    height: 100%;
+    float:right;
+    padding:0px;
+    border:none;
+    outline: none;
+    margin-bottom:20px;
+}
+
+.Img{
+ border:none;
+ outline: none;
+ float:right;
+ width: 90%;
+ max-width:250px;
+ height:90%;
+ margin:auto;
+}
+
+.Testo{
+    font-size: 15px;
+    font-family: auto;
+    height: 30%;
+    width: 50%;
+    margin-top: 1%;
+    word-wrap: break-word;
+    text-align: justify;
+    margin-left: 5px;
+    margin-bottom: 2px;
+}
+
+
+.Titolo {
+    text-align: center;
+    height:5%;
+    width: 50%;
+    margin-bottom:8px;
+}
+
+.Sottotitolo{
+    text-align: left;
+    width: 60%;
+    height:1%;
+    border-bottom: 0.3px solid #B4ADAD;
+    margin-bottom:5px;
+}
+
+
+.Sottotitolo h5{
+    margin-left: 5px;
+    margin-top:0px;
+    margin-bottom: 3px;
+}
+
+
+
+.Actions{
+    margin:auto;
+}
+
+
+
+
+@media (max-width: 600px) {
+    .AnteprimaArticolo {
+        width: 300px;
+        left: calc(50% - 200px);
+        margin:auto;
+        margin-bottom: 10px;
+    }
+    .Titolo , .Sottotitolo{
+        width:100%;
+        text-align: center;
+    }
+  
+    .Testo{
+    position: relative;
+    bottom:5px;
+    display: grid;
+    width: 100%;
+    }
+    .Imgdiv, .Actions{
+        width: 100%;
+    }
+    .Img{
+        float:none;
+        margin:auto;
+    }
+  .Info{
+      width: 100%;
+     margin:auto;
+  }
+    
+}

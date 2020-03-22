@@ -1,0 +1,29 @@
+.ButtonDelete{
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid;
+    cursor: pointer;
+    margin-right: 2px;
+    font-size: large;
+    width: 20%;
+    box-shadow: -3px 3px 5px 1px;
+}
+
+.ButtonDelete:hover{
+    background-color: red;
+}
+
+.ButtonNoDelete{
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid;
+    cursor: pointer;
+    margin-right: 2px;
+    font-size: large;
+    width: 20%;
+    box-shadow: -3px 3px 5px 1px;
+}
+
+.ButtonNoDelete:hover{
+   background-color: green;
+}

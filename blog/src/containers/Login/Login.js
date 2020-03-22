@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import classes from './Login.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
-import axios from 'axios';
 import checkValidity from '../../utility/validation';
 import Input from '../../Components/UI/Input/Input';
-
+import * as actions from '../../store/actions/index';
+import {connect } from 'react-redux';
+import { withRouter } from "react-router";
+import updateObject  from '../../utility/updateObject';
 
 class Login extends Component{
 
@@ -16,7 +18,8 @@ loginForm: {
         valid:false,
         touched:false,
       config:
-      {  placeholder: "Email"},
+        { 
+         placeholder: "Email"},
         validation: {
         isEmail:true,
         required:true
@@ -36,79 +39,81 @@ loginForm: {
         }
     }
 },
-isFormValid : false
+isFormValid : false,
+isSignup: true
 }
 
 
-
-
-loginWithPassword = () =>{
-    /*
-    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
-    const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
-    axios.post(url,data ).then( response => {
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        localStorage.setItem('token',response.data.idToken);
-        localStorage.setItem('userId',response.data.localId);
-        localStorage.setItem('expirationDate', expirationDate);
-}).catch(err => console.log(err));
-
-*/
-
-this.props.hideModal();
-}
-
-signUpWithPassword = () =>{
-    /*
-    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU";
-    const data = {email: this.state.email, password: this.state.password, returnSecureToken:true}
-    axios.post(url,data ).then( response => {
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        localStorage.setItem('token',response.data.idToken);
-        localStorage.setItem('userId',response.data.localId);
-        localStorage.setItem('expirationDate', expirationDate);
-}).catch(err => console.log(err));
-*/
-this.props.hideModal();
+switchAuthModeHandler = () =>{
+    this.setState(prevState =>{
+        return {isSignup : !prevState.isSignup};
+    })
 }
 
 
 checkValidityOfInput = (event, id) =>{
 
-let newObj = { ...this.state.loginForm[id], value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true };
-
-let newForm = {...this.state.loginForm,  [id]: {...newObj}}
-
-let formIsValid = true;
-
-for (let key in newForm) {
-    formIsValid = newForm[key].valid && formIsValid;
+    let newObj = updateObject(this.state.loginForm[id], {value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true});
+    let newForm = updateObject(this.state.loginForm, {[id]: {...newObj}});
+    let formIsValid = true;
+    for (let key in newForm) {
+        formIsValid = newForm[key].valid && formIsValid;
+    }
+        this.setState({isFormValid:formIsValid, loginForm: newForm})
 }
-    this.setState({isFormValid:formIsValid, loginForm: newForm})
 
+checkValidityOfUsername= (event) =>{
+    let newObj = updateObject(this.state.signUpForm.username, {value: event.target.value, valid:checkValidity(event.target.value, this.state.signUpForm.username.validation), touched:true});
+    let newForm = updateObject(this.state.signUpForm, {username: {...newObj}} );
+    let formIsValid = newObj.valid;
+    this.setState({isUsernameValid:formIsValid, signUpForm: newForm})
+    }
+
+
+submitHandlerSignIn = (event) =>{   
+    event.preventDefault();  
+    const errore="Problemi di accesso, controlla che i dati inseriti siano corretti";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, false,errore);
+    //this.props.hideGoogle();
+    this.props.hideModal();
+     this.props.showMessage();
+    this.props.messageLogin();
+      setTimeout(() => {
+        window.location.reload();
+    }, 1500); 
+}
+
+submitHandlerSignUp = (event) =>{   
+    event.preventDefault();  
+    const errore = "Problemi di registrazione, controlla che la mail inserita non sia già esistente";
+    this.props.onLogin(this.state.loginForm.email.value, this.state.loginForm.password.value, true,errore);
+   // this.props.hideGoogle();
+    this.props.hideModal();
+   this.props.showMessage();
+    this.props.messageRegister();
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500); 
 }
 
 
 render(){
+    
+const {show, hideModal} = this.props;
+const {loginForm, isFormValid} = this.state;
+
 const formData = [];
 
-for(let key in this.state.loginForm){
-    formData.push( {id: key , obj: this.state.loginForm[key] });
-};
 
 
-
-return(
-
-<Modal show = {this.props.show}  modalClosed = {  this.props.hideModal }>
-<div className = {classes.Login}>
-<h3>Login</h3>
-
-<form>
+    for(let key in loginForm){
+        formData.push( {id: key , obj: loginForm[key] });
+    };
     
-    {formData.map(el =>
+    
+    let form = formData.map(el =>
         <Input 
-        show = {this.props.show}
+        show = {show}
         value = {el.obj.value}
         key = {el.id}
         type = {el.obj.type}
@@ -118,26 +123,58 @@ return(
         changed = {(e) => this.checkValidityOfInput(e, el.id)}
         shouldValidate = {el.obj.validation}
         />
-        ) }
-
+        )
     
-</form>
+        
+    
+    return(
+    <div>
+    <Modal show = {show}  modalClosed = {  hideModal }>
+    <div className = {classes.Login}>
+    <h3>Login</h3>  
+    <form>       
+      {form}  
+    <div className = {classes.ButtonContainer}>
+        <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
+      {/* <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle(); showMessage(); messageLogin();}}> Accedi con Google</button> */}  
+    </div>
+     <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
+        
+    </form>
+    </div>
+    </Modal>
 
-<div className = {classes.ButtonContainer}>
-    <button className = {classes.AccediButton} onClick = {this.loginWithPassword}  disabled = { !this.state.isFormValid} > Accedi</button>
-    <button className = {classes.AccediGoogleButton} > Accedi con Google</button>
 </div>
- <button className = {classes.RegistratiButton}  onClick = {this.signUpWithPassword} disabled = { !this.state.isFormValid}> Registrati</button> 
-
-</div>
-
-</Modal>
 
 
-);
+    );
+
+
 
 
 }
-
 }
-export default Login;
+
+const mapStateToProps = state =>{
+    return{
+  user: state.login.user,
+        error : state.login.error,
+        isAuthenticated : state.login.token !== null
+
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return{
+    onGoogleAuth: () => dispatch(actions.googleAuth()),
+    onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
+    onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
+
+    };
+  };
+
+
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
+
+

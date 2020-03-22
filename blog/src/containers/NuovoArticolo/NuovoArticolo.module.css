@@ -115,3 +115,29 @@
    font-family: inherit;
    font-size: 15px;
 }
+
+
+
+.ImgClose i{
+    top:1px;
+    font-size:90%;
+    font-weight: bold;
+    cursor:pointer;
+    float:right;
+}
+
+
+@media (max-width: 600px) {
+ .InputTags{
+     margin:auto;
+     width:100%;
+ }
+
+ .InputImg{
+    width:80%; 
+ }
+ .InputImg img{
+     width:100%;
+     height:100%;
+ }
+}
