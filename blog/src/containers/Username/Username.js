@@ -28,7 +28,8 @@ state = {
         isUsername:true
         }
 },
-isFormValid : false
+isFormValid : false,
+errorMsg:""
 }
 
 
@@ -36,15 +37,26 @@ isFormValid : false
 checkValidityOfUsername= (event) =>{
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     let formIsValid = newObj.valid;
-    this.setState({isFormValid:formIsValid, username:newObj})
+    let error = "";
+   
+   for (let key in this.props.profili){
+     if(this.props.profili[key].username === event.target.value){
+      newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
+      error = "L'username non è disponibile";
+      formIsValid= false;
+   }
+
+   this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
+  
+    }
     }
 
-
+   
 
 render(){
-    
+  console.log(this.props.profili)
 const {show, modalClosed, onSetUsername,loading} = this.props;
-const {username, isFormValid} = this.state;
+const {username, isFormValid, errorMsg} = this.state;
 let contenutoModale = <Spinner/>
 
 if(!loading){
@@ -61,7 +73,7 @@ if(!loading){
                     changed = {(e) => this.checkValidityOfUsername(e)}
                     shouldValidate = {username.validation}
                     />
-
+          {errorMsg}
         <div className = {classes.Rules}>
         <ul>
          <FaThumbsUp/>
@@ -99,7 +111,8 @@ if(!loading){
 const mapStateToProps = state =>{
     return{
          user: state.login.user,
-         loadingUsername:state.profilo.loading
+         loadingUsername:state.profilo.loading,
+         profili: state.profilo.profili
     };
 };
 

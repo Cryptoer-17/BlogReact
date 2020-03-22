@@ -110,6 +110,12 @@ class Profilo extends Component{
                         type: 'text',
                         placeholder: 'username'
                     },
+                    validation: {
+                        required:true,
+                        minLength:4,
+                        maxLength:15,
+                        isUsername:true
+                        },
                     value: ''+this.props.profilo.username+'',
                     valid: true,
                     touched: false

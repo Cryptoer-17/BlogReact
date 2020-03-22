@@ -24,6 +24,12 @@ export const getProfiloFail = (error) =>{
     }
 }
 
+export const getAllProfiliSuccess = (profili)=>{
+    return{
+        type: actionTypes.GET_ALLPROFILI_SUCCESS,
+        profili: profili
+    }
+} 
 
 
 export const getProfilo = () =>{
@@ -33,11 +39,13 @@ export const getProfilo = () =>{
         const token = localStorage.getItem('token');
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
+            dispatch(getAllProfiliSuccess(response.data))
           for(let key in response.data){
-            if(localStorage.getItem("userId") === response.data[key].userId)
+            if(localStorage.getItem("userId") === response.data[key].userId){
             temparray.push({profilo: response.data[key], key: key })
             if(response.data[key].username)
             localStorage.setItem("username",response.data[key].username)
+            }
         };         
           dispatch(getProfiloSuccess(temparray) );
         })
