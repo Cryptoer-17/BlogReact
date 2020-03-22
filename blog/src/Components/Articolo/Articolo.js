@@ -67,12 +67,18 @@ class Articolo extends Component{
     }
 
     handlerSendMessage = (props)=>{
-        console.log(props);
-        const messaggi = {
-            username:localStorage.getItem("username"),
-            messaggio:props
-        }
-        console.log(this.state.articolo)
+        
+       let messaggio;
+        const messaggi = [
+            ...this.state.articolo.messaggi,
+            messaggio={
+                username: localStorage.getItem("username"),
+                testo:props
+            }
+           
+        ]
+
+        console.log(messaggi);
 
         const anteprima = {
             autore : this.state.articolo.autore,

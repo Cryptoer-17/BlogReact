@@ -17,11 +17,13 @@ let error;
 if(props.error === "Auth token is expired"){
    error = (setTimeout(()=>{
     if(props.error === "Auth token is expired"){
-      document.getElementById("btnLogout").style.display = 'none';
-      document.getElementById("btnLogout").click()
-      hideModal();
+      document.getElementById("btnLogout").style.display = 'none'
+  //    document.getElementById("btnLogout").click()
+   //   document.getElementById("btnLogout").style.display = 'none'
     }
-   },4500),<Modal  show = {true} hideModal = {hideModal}>
+   },4500),
+   ()=>document.getElementById("btnLogout").style.display = 'none',
+   <Modal  show = {true} hideModal = {hideModal}>
      E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
    </Modal>);
 }
