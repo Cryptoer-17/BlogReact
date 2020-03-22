@@ -18,6 +18,7 @@ clickHeartHandler(art){
           descrizione : art.articolo.descrizione,
           img : art.articolo.img,
           like: !art.articolo.like,
+          messaggi:art.articolo.messaggi,
           minuti:art.articolo.minuti,
           sottotitolo : art.articolo.sottotitolo,
           tags:art.articolo.tags,

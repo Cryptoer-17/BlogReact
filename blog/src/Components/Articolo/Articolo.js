@@ -49,6 +49,7 @@ class Articolo extends Component{
             sottotitolo : this.state.articolo.sottotitolo,
             tags : this.state.articolo.tags,
             like: !this.state.articolo.like,
+            messaggio: this.state.articolo.messaggi,
             testo : this.state.articolo.testo,
             titolo : this.state.articolo.titolo,
             userId:this.state.articolo.userId
@@ -78,7 +79,6 @@ class Articolo extends Component{
            
         ]
 
-        console.log(messaggi);
 
         const anteprima = {
             autore : this.state.articolo.autore,
