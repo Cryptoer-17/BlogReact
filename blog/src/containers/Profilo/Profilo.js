@@ -17,7 +17,8 @@ class Profilo extends Component{
 
 
     state={
-        
+        showDropdown:false,
+        idArticoloCambiamenti:null,
         anteprimaImg:<img className={classes.InputImg} src = {this.props.profilo.img} alt = "" />,
         presentazione:(this.props.profilo.descrizione ? false:null),//false
         modificaDati:null,
@@ -120,7 +121,11 @@ class Profilo extends Component{
 
 
 
-
+    clickMenuHandler = (props)=>{
+    console.log(props);
+    this.setState({showDropdown:!this.state.showDropdown})
+    this.setState({idArticoloCambiamenti : props})
+    }
 
 
 handlerClickPresentazione(){
@@ -145,18 +150,20 @@ orderHandler= ()=>{
     for(let formElementIdentifier in this.state.profileForm){
         formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
     }
+   
     const profile={
         nome: formData.nome,
         cognome:formData.cognome,
         dataNascita:formData.dataNascita.trim(),
         sesso: formData.sesso.trim(),
         numeroTelefono:formData.numeroTelefono.trim(),
-        nazionalità:formData.nazionalita.trim(),
+        nazionalità:(formData.nazionalita.trim() === '' ? 'italia' : formData.nazionalita.trim()),
         img:this.state.img,
         username:formData.username.trim(),
         userId:localStorage.getItem('userId').trim(),
         descrizione:this.state.descrizione
     }
+    console.log(profile.nazionalità);
 
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
@@ -211,10 +218,16 @@ updatedFormElement.value = event.target.value;
 
 convertFile = (e)=>  { 
     let reader = new FileReader();
+    if(e !== undefined){
     reader.readAsDataURL(e);
     reader.onloadend = () => {
   
     this.setState({img: reader.result, anteprimaImg: <img className={classes.InputImg} src = {reader.result} alt = "" />})
+    }
+    }
+    else {
+        this.setState({img: null, anteprimaImg: null})
+        document.getElementById("inputFile").value = null;
     }
   };
 
@@ -258,7 +271,7 @@ convertFile = (e)=>  {
 
 render(){
     console.log(this.props);
-    let {anteprimaImg,presentazione,modificaDati} = this.state;
+    let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
     let {loading,profilo} = this.props;
 
     
@@ -351,6 +364,8 @@ render(){
                 data = {art.articolo.data}
                 minuti = {art.articolo.minuti}
                 disableMore={false}
+                showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown :false}
+                clickMenuHandler={this.clickMenuHandler}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
                 key={art.key}/>
@@ -373,7 +388,7 @@ render(){
    
    
     return(
-        <div className={classes.Profilo}>
+        <div className={classes.Profilo} onClick={showDropdown?this.clickMenuHandler : null}>
             
              {!loading ? modal : null}
             <div>

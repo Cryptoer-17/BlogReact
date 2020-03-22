@@ -12,13 +12,13 @@ class Comments extends Component{
     }
 
     render(){
-
+        const {clickSendMessage} = this.props;
         
         
    
         return(
         <div className={classes.ContitoreMessaggi}>
-            <div onClick={()=>this.clickDiv()} id="divCommts" className={classes.Commenti} >
+            <div onChange={this.clickDiv} id="divCommts" className={classes.Commenti} >
             {/* <div className={classes.Commento}>
                 <NomePersona>Props Nome Persona</NomePersona>
                 <Comment>
@@ -62,7 +62,7 @@ class Comments extends Component{
                 </Comment>
                 </div> */}    
             </div>    
-            <Messaggio/>
+            <Messaggio clickSendMessage={clickSendMessage}/>
         </div>
         );
        

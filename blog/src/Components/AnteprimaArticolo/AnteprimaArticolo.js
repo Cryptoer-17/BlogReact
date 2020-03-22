@@ -8,15 +8,12 @@ import Modal from '../UI/Modal/Modal';
 
 class AnteprimaArticolo extends Component{
     state={
-        showDropdown:false,
         showModalDelete:false,
 
      }
   
 
-     clickMenuHandler = ()=>{
-        this.setState({showDropdown:!this.state.showDropdown})
-        }
+     
 
 
         clickModalDelete (){
@@ -32,8 +29,8 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo} = this.props; 
-    const {showDropdown} =this.state;
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo,showDropdown} = this.props; 
+    
 
 
         if(this.props.like){
@@ -68,7 +65,7 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
+         <ActionBar id={id} showdropdown={showDropdown}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
 
         </div>
     
@@ -79,7 +76,7 @@ class AnteprimaArticolo extends Component{
     } 
 
     return(
-        <div onClick={showDropdown?this.clickMenuHandler : null}>
+        <div >
             {showModalDelete ? showModalDelete: null}
             {variabile}
         </div>

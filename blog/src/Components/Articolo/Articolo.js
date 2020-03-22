@@ -66,6 +66,42 @@ class Articolo extends Component{
 
     }
 
+    handlerSendMessage = (props)=>{
+        console.log(props);
+        const messaggi = {
+            username:localStorage.getItem("username"),
+            messaggio:props
+        }
+        console.log(this.state.articolo)
+
+        const anteprima = {
+            autore : this.state.articolo.autore,
+            categoria : this.state.articolo.categoria,
+            data:this.state.articolo.data,
+            descrizione : this.state.articolo.descrizione,
+            img : this.state.articolo.img,
+            minuti:this.state.articolo.minuti,
+            sottotitolo : this.state.articolo.sottotitolo,
+            tags : this.state.articolo.tags,
+            like: this.state.articolo.like,
+            testo : this.state.articolo.testo,
+            titolo : this.state.articolo.titolo,
+            messaggi: messaggi,
+            userId:this.state.articolo.userId
+        } 
+
+        this.setState({
+            articolo : anteprima
+        })
+         
+        const id= this.props.match.params.id;
+
+        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+    }
+
+
     viewCommentsHandler(){
         this.setState({comments:true})
     }
@@ -120,7 +156,7 @@ class Articolo extends Component{
             <div className={classes.TagContainer}>
                {tags} 
             </div>          
-                <ActionBar className={classes.Action} color={colore} disableMore={true} viewComments={()=>this.viewCommentsHandler()} onClick={() => this.clickHeartHandler()}/>
+                <ActionBar className={classes.Action}  color={colore} disableMore={true} viewComments={()=>this.viewCommentsHandler()} onClick={() => this.clickHeartHandler()}/>
         </div>
         }
 
@@ -131,7 +167,7 @@ class Articolo extends Component{
         return (
             <div >
             {articoloVisualizzato}
-            {this.state.comments && <Comments/>}
+            {this.state.comments && <Comments clickSendMessage={this.handlerSendMessage}/>}
            
             </div>
             
