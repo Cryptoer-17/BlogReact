@@ -181,17 +181,32 @@ class Articolo extends Component{
             articoloVisualizzato = <Spinner />;
         }
 
+
+        let error;
+        if(this.props.error === "Auth token is expired"){
+            console.log("ok");
+           error = document.getElementById("btnLoginLogout").click()   
+        }
+        
+
+
         return (
             <div >
             {articoloVisualizzato}
             {this.state.comments && <Comments articolo={articolo} clickSendMessage={this.handlerSendMessage}/>}
-           
+            
             </div>
             
             );
     }
 }
 
+const mapStateToProps = state =>{
+    return{    
+        error : state.articolo.error,
+    };
+  };
+  
 
 const mapDispatchToProps = dispatch =>{
     return{
@@ -199,4 +214,4 @@ const mapDispatchToProps = dispatch =>{
     }
   }
 
-export default connect(mapDispatchToProps)(Articolo);
+export default connect(mapStateToProps,mapDispatchToProps)(Articolo);
