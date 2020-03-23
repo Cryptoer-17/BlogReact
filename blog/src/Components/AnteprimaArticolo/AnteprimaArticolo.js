@@ -13,13 +13,14 @@ class AnteprimaArticolo extends Component{
      }
   
 
-        viewMessageArticle(){
+        viewMessageArticle(id){
+           
             // document.getElementById("divTitolo").click()
             // document.getElementById("messageIcon").click()
-            document.getElementById("divTitolo").click()
+           document.getElementById(id).click()
             setTimeout(() => {
                document.getElementById("messageIcon").click();
-            }, 2000);
+            }, 500);
            // document.getElementById("messageIcon").click()
         }
 
@@ -57,9 +58,9 @@ class AnteprimaArticolo extends Component{
                 textDecoration : 'none',
                 color : 'black'
             }}>
-            <div id="divTitolo" className={classes.Titolo}>
+            <div id={id} className={classes.Titolo}>
             <h1>{titolo}</h1>
-            </div>{ sottotitolo ?   <div className={classes.Sottotitolo}>
+            </div>{ sottotitolo ?   <div id="divSottotitolo" className={classes.Sottotitolo}>
             <h5>{sottotitolo} </h5> 
             </div> : null } 
           
@@ -73,7 +74,7 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown} viewComments={()=>this.viewMessageArticle()}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
+         <ActionBar id={id} showdropdown={showDropdown} viewComments={()=>this.viewMessageArticle(id)}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
 
         </div>
     

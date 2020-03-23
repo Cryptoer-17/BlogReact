@@ -24,7 +24,6 @@ class Comments extends Component{
 
     render(){
         const {clickSendMessage,articolo} = this.props;
-        console.log(articolo);
         let commenti
         if(articolo.messaggi !== undefined){
         commenti = articolo.messaggi.map((messaggio,index)=>{

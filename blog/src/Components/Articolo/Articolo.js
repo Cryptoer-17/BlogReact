@@ -20,10 +20,10 @@ class Articolo extends Component{
 
     componentDidMount(){
         const id= this.props.match.params.id;
+        console.log(id);
         this.setState({loading : true})
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"))
         .then(response =>{
-            console.log(response)
             if (typeof response.data.tags === 'undefined'){
                 response.data.tags = [];
             }
