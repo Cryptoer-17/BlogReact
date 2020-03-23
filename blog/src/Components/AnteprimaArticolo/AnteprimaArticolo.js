@@ -20,7 +20,7 @@ class AnteprimaArticolo extends Component{
            document.getElementById(id).click()
             setTimeout(() => {
                document.getElementById("messageIcon").click();
-            }, 500);
+            }, 800);
            // document.getElementById("messageIcon").click()
         }
 
