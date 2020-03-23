@@ -247,13 +247,22 @@ convertFile = (e)=>  {
 
 
   clickHeartHandler(art){
+
+    let heartChange = art.articolo.like.map((object)=>{
+        if(object.username === localStorage.getItem("username")){
+           object.like = !object.like
+        }
+        return object
+     })
+     console.log(heartChange);
+    
     const anteprima = {
         autore : art.articolo.autore,
         categoria : art.articolo.categoria,
         data:art.articolo.data,
         descrizione : art.articolo.descrizione,
         img : art.articolo.img,
-        like: !art.articolo.like,
+        like: heartChange,
         messaggi: art.articolo.messaggi,
         minuti:art.articolo.minuti,
         sottotitolo : art.articolo.sottotitolo,
