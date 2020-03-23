@@ -13,15 +13,11 @@ class AnteprimaArticolo extends Component{
      }
   
 
-        viewMessageArticle(id){
-           
-            // document.getElementById("divTitolo").click()
-            // document.getElementById("messageIcon").click()
+        viewMessageArticle(id){     
            document.getElementById(id).click()
             setTimeout(() => {
                document.getElementById("messageIcon").click();
-            }, 800);
-           // document.getElementById("messageIcon").click()
+            }, 1000);
         }
 
 

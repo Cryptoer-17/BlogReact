@@ -190,19 +190,10 @@ if(this.props.profiloReducer.length){
                 
 
                 let updateArticolo={
+                    ...articolo.articolo,
                     autore:profile.username,
-                    categoria:articolo.articolo.categoria,
-                    data:articolo.articolo.data,
-                    descrizione:articolo.articolo.descrizione,
-                    img:articolo.articolo.img,
-                    like:articolo.articolo.like,
                     messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
-                    minuti:articolo.articolo.minuti,
-                    sottotitolo:articolo.articolo.sottotitolo,
-                    tags:articolo.articolo.tags,
-                    testo:articolo.articolo.testo,
-                    titolo:articolo.articolo.titolo,
-                    userId:articolo.articolo.userId
+                    
                 }
                 
                 this.props.onUpdateArticolo(updateArticolo,articolo.key)
@@ -220,19 +211,8 @@ if(this.props.profiloReducer.length){
                     }
     
                     let updateArticolo={
-                        autore:articolo.articolo.autore,
-                        categoria:articolo.articolo.categoria,
-                        data:articolo.articolo.data,
-                        descrizione:articolo.articolo.descrizione,
-                        img:articolo.articolo.img,
-                        like:articolo.articolo.like,
+                        ...articolo.articolo,
                         messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
-                        minuti:articolo.articolo.minuti,
-                        sottotitolo:articolo.articolo.sottotitolo,
-                        tags:articolo.articolo.tags,
-                        testo:articolo.articolo.testo,
-                        titolo:articolo.articolo.titolo,
-                        userId:articolo.articolo.userId
                     }     
                     this.props.onUpdateArticolo(updateArticolo,articolo.key)
         }
@@ -337,19 +317,9 @@ convertFile = (e)=>  {
 
     
     const anteprima = {
-        autore : art.articolo.autore,
-        categoria : art.articolo.categoria,
-        data:art.articolo.data,
-        descrizione : art.articolo.descrizione,
-        img : art.articolo.img,
-        like: heartChange,
-        messaggi: art.articolo.messaggi,
-        minuti:art.articolo.minuti,
-        sottotitolo : art.articolo.sottotitolo,
-        tags:art.articolo.tags,
-        testo : art.articolo.testo,
-        titolo : art.articolo.titolo,
-        userId:art.articolo.userId
+        ...art.articolo,
+        like: heartChange
+       
     } 
     const id = art.key;
     axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
