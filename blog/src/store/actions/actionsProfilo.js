@@ -34,10 +34,12 @@ export const getProfilo = () =>{
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
-            if(localStorage.getItem("userId") === response.data[key].userId)
+              console.log(response.data)
+            if(localStorage.getItem("userId") === response.data[key].userId){
             temparray.push({profilo: response.data[key], key: key })
-            if(response.data[key].username)
             localStorage.setItem("username",response.data[key].username)
+            }
+         
         };         
           dispatch(getProfiloSuccess(temparray) );
         })

@@ -171,7 +171,7 @@ if(this.props.profiloReducer.length){
 else {
     this.props.onSendData(profile);
 }
-   
+
 setTimeout(() =>{
 if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
     window.location.reload();

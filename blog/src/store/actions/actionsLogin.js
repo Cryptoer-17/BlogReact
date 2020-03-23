@@ -56,7 +56,7 @@ export const login = (email, password, isSignup,errore) =>{
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('userId', response.data.localId);
             localStorage.setItem('email', response.data.email);
-            dispatch(loginSuccess(response.data.idToken, response.data.localId));
+          //  dispatch(loginSuccess(response.data.idToken, response.data.localId));
             // dispatch(checkLoginTimeout(response.data.expiresIn));
         })
         .catch( err =>{
