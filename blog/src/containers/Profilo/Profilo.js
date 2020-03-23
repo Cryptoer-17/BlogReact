@@ -170,6 +170,75 @@ if(this.props.profiloReducer.length){
       //aggiorni gli articoli con il nuovo autore
       //gli passi l'userId, così quando trovi quell'articolo con quiell userId, allora cambi l'username presente con quello che passi
       //fai un un update totale degli articoli
+     //fai una map di articoli che è nello stato globale e gli passi ad update articolo il nuovo username
+     this.props.articoli.map((articolo)=>{
+        console.log(articolo)
+        if(articolo.articolo.userId === localStorage.getItem("userId")){
+    
+                let messaggioUpdate;
+                if(articolo.articolo.messaggi !== undefined){
+                    messaggioUpdate = articolo.articolo.messaggi.map((messaggio)=>{
+                        if(messaggio.username === localStorage.getItem("username")){
+                            messaggio.username = profile.username
+                        }
+                        return messaggio;
+                    })
+                
+
+                let updateArticolo={
+                    autore:profile.username,
+                    categoria:articolo.articolo.categoria,
+                    data:articolo.articolo.data,
+                    descrizione:articolo.articolo.descrizione,
+                    img:articolo.articolo.img,
+                    like:articolo.articolo.like,
+                    messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
+                    minuti:articolo.articolo.minuti,
+                    sottotitolo:articolo.articolo.sottotitolo,
+                    tags:articolo.articolo.tags,
+                    testo:articolo.articolo.testo,
+                    titolo:articolo.articolo.titolo,
+                    userId:articolo.articolo.userId
+                }
+                
+                this.props.onUpdateArticolo(updateArticolo,articolo.key)
+            }
+        }
+
+
+        //devi aggiornare i messaggi anche se non è suo l'articolo
+        else if(articolo.articolo.userId !== localStorage.getItem("userId")){
+                //controlli se ci sono alucni messaggio in quel post e se c'è n'è lo aggiorni
+               
+               
+                    let messaggioUpdate;
+                    if(articolo.articolo.messaggi !== undefined){
+                        messaggioUpdate = articolo.articolo.messaggi.map((messaggio)=>{
+                            if(messaggio.username === localStorage.getItem("username")){
+                                messaggio.username = profile.username
+                            }
+                            return messaggio;
+                        })
+                    }
+    
+                    let updateArticolo={
+                        autore:articolo.articolo.autore,
+                        categoria:articolo.articolo.categoria,
+                        data:articolo.articolo.data,
+                        descrizione:articolo.articolo.descrizione,
+                        img:articolo.articolo.img,
+                        like:articolo.articolo.like,
+                        messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
+                        minuti:articolo.articolo.minuti,
+                        sottotitolo:articolo.articolo.sottotitolo,
+                        tags:articolo.articolo.tags,
+                        testo:articolo.articolo.testo,
+                        titolo:articolo.articolo.titolo,
+                        userId:articolo.articolo.userId
+                    }     
+                    this.props.onUpdateArticolo(updateArticolo,articolo.key)
+        }
+     })
 
 }
 else {
@@ -294,7 +363,6 @@ convertFile = (e)=>  {
 }
 
 render(){
-    console.log(this.props);
     let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
     let {loading,profilo,mount} = this.props;
 
@@ -479,7 +547,8 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
+       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo)),
+       onUpdateArticolo:(articolo,idArticolo) =>dispatch(actions.updateArticolo(articolo,idArticolo))
     };
   };
 

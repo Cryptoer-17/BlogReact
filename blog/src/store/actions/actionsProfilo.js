@@ -34,7 +34,6 @@ export const getProfilo = () =>{
         axios.get('/profili.json?auth=' +token)
         .then(response =>{   
           for(let key in response.data){
-              console.log(response.data)
             if(localStorage.getItem("userId") === response.data[key].userId){
             temparray.push({profilo: response.data[key], key: key })
             localStorage.setItem("username",response.data[key].username)

@@ -42,7 +42,6 @@ class AnteprimaArticolo extends Component{
     
 
         like.map((object)=>{
-            console.log(object)
             if(object.username===localStorage.getItem("username")){
                 if(object.like){
                     colore = 'red';
