@@ -171,13 +171,64 @@ orderHandler= ()=>{
     }
     console.log(profile.nazionalità);
 
+//se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
+//altrimenti mando il nuovo profilo.
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
+     
+    
+
+     this.props.articoli.map((articolo)=>{
+        
+        
+        //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
+        //se non è il proprietario dell'articolo faccio solo il controllo sui messaggi e cambi l'username
+        if(articolo.articolo.userId === localStorage.getItem("userId")){
+    
+                let messaggioUpdate;
+                if(articolo.articolo.messaggi !== undefined){
+                    messaggioUpdate = articolo.articolo.messaggi.map((messaggio)=>{
+                        if(messaggio.username === localStorage.getItem("username")){
+                            messaggio.username = profile.username
+                        }
+                        return messaggio;
+                    })
+                
+
+                let updateArticolo={
+                    ...articolo.articolo,
+                    autore:profile.username,
+                    messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
+                    
+                }
+                
+                this.props.onUpdateArticolo(updateArticolo,articolo.key)
+            }
+        }
+        else if(articolo.articolo.userId !== localStorage.getItem("userId")){          
+            let messaggioUpdate;
+                    if(articolo.articolo.messaggi !== undefined){
+                        messaggioUpdate = articolo.articolo.messaggi.map((messaggio)=>{
+                            if(messaggio.username === localStorage.getItem("username")){
+                                messaggio.username = profile.username
+                            }
+                            return messaggio;
+                        })
+                    }
+    
+                    let updateArticolo={
+                        ...articolo.articolo,
+                        messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
+                    }     
+                    this.props.onUpdateArticolo(updateArticolo,articolo.key)
+        }
+     })
+
 }
 else {
     this.props.onSendData(profile);
 }
-   
+
 setTimeout(() =>{
 if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
     window.location.reload();
@@ -271,45 +322,54 @@ convertFile = (e)=>  {
 
 
   clickHeartHandler(art){
+
+    let length = art.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = art.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+
+    
     const anteprima = {
-        autore : art.articolo.autore,
-        categoria : art.articolo.categoria,
-        data:art.articolo.data,
-        descrizione : art.articolo.descrizione,
-        img : art.articolo.img,
-        like: !art.articolo.like,
-        minuti:art.articolo.minuti,
-        sottotitolo : art.articolo.sottotitolo,
-        tags:art.articolo.tags,
-        testo : art.articolo.testo,
-        titolo : art.articolo.titolo,
-        userId:art.articolo.userId
+        ...art.articolo,
+        like: heartChange
+       
     } 
     const id = art.key;
     axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
     .then(response => {
+        console.log("ok");
        this.props.mount();
     })
     .catch(error => console.log(error));
 }
 
 render(){
-    console.log(this.props);
     let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
-    let {loading,profilo, profili} = this.props;
+    let {loading,profilo, profili,mount} = this.props;
 
     
     let email;
     email = localStorage.getItem('email');
 
 
-    const personal_article = [...this.props.articoli]
+    
 
     let presentazioneVisualizzata ;
     let btnInviaInfo=null;
     {presentazione===null? 
         presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
-        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
+        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px' ,height:'49%'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
     } 
 
 
@@ -369,7 +429,7 @@ render(){
     </div>);
 
 
-
+const personal_article = [...this.props.articoli];
 
     let articoliVisualizzati;
     articoliVisualizzati = personal_article.map((art) =>{
@@ -389,6 +449,7 @@ render(){
                 minuti = {art.articolo.minuti}
                 disableMore={false}
                 showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown :false}
+                mount = {mount}
                 clickMenuHandler={this.clickMenuHandler}
                 UpdateArticolo = {this.props.clickUpdateArticolo}
                 clickHeart = {() => this.clickHeartHandler(art)}
@@ -479,7 +540,8 @@ const mapStateToProps = state =>{
     // onLogin : (email,password,isSignup,errore) => dispatch(actions.login(email,password,isSignup,errore)),
     // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
-       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
+       onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo)),
+       onUpdateArticolo:(articolo,idArticolo) =>dispatch(actions.updateArticolo(articolo,idArticolo))
     };
   };
 

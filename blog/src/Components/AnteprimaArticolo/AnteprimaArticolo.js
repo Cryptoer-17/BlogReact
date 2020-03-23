@@ -13,7 +13,12 @@ class AnteprimaArticolo extends Component{
      }
   
 
-     
+        viewMessageArticle(id){     
+           document.getElementById(id).click()
+            setTimeout(() => {
+               document.getElementById("messageIcon").click();
+            }, 1000);
+        }
 
 
         clickModalDelete (){
@@ -29,13 +34,19 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo,showDropdown} = this.props; 
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo,showDropdown,like} = this.props; 
     
 
+        like.map((object)=>{
+            if(object.username===localStorage.getItem("username")){
+                if(object.like){
+                    colore = 'red';
+                }
+            }
+         
 
-        if(this.props.like){
-            colore = 'red';
-        }
+        })
+       
 
         variabile = <div>
             {titolo}
@@ -49,9 +60,9 @@ class AnteprimaArticolo extends Component{
                 textDecoration : 'none',
                 color : 'black'
             }}>
-            <div className={classes.Titolo}>
+            <div id={id} className={classes.Titolo}>
             <h1>{titolo}</h1>
-            </div>{ sottotitolo ?   <div className={classes.Sottotitolo}>
+            </div>{ sottotitolo ?   <div id="divSottotitolo" className={classes.Sottotitolo}>
             <h5>{sottotitolo} </h5> 
             </div> : null } 
           
@@ -65,14 +76,14 @@ class AnteprimaArticolo extends Component{
           </div>
           : null}  </NavLink>
            
-         <ActionBar id={id} showdropdown={showDropdown}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
+         <ActionBar id={id} showdropdown={showDropdown} viewComments={()=>this.viewMessageArticle(id)}  modalDelete={()=>this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className = {classes.Actions} color={colore} onClick={clickHeart} />   
 
         </div>
     
   
     let showModalDelete;
     if(this.state.showModalDelete){
-     showModalDelete= <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={()=>this.hideModalDelete()}/></Modal>
+     showModalDelete= <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={()=>this.hideModalDelete()} mount={this.props.mount}/></Modal>
     } 
 
     return(

@@ -15,13 +15,16 @@ const [showModalLogoutError, setshowModalLogoutError] = useState(false);
 
 let error;
 if(props.error === "Auth token is expired"){
-   error = (setTimeout(()=>{
+   error = (
+    setTimeout(()=>{
+      document.getElementById("btnLogout").style.display = 'none'
+    },10),
+    setTimeout(()=>{
     if(props.error === "Auth token is expired"){
-      document.getElementById("btnLogout").style.display = 'none';
       document.getElementById("btnLogout").click()
-      hideModal();
     }
-   },4500),<Modal  show = {true} hideModal = {hideModal}>
+   },4500),
+   <Modal  show = {true} hideModal = {hideModal}>
      E' scaduto il tempo di sessione, riaccedi per continuare ad usare il blog
    </Modal>);
 }

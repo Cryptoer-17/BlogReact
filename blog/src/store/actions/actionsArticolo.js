@@ -142,6 +142,8 @@ export const deleteArticolo = (articolo) =>{
 }
 
 
+
+
 /*export const updateDataSuccess = (dati) =>{
     return{
         type: actionTypes.UPDATE_DATA_SUCCESS,

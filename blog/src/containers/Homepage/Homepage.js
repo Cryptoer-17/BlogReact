@@ -11,13 +11,32 @@ import Modal from '../../Components/UI/Modal/Modal';
 class Homepage extends Component{
   
 clickHeartHandler(art){
+   
+      let length = art.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = art.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+      
+
       const anteprima = {
           autore : art.articolo.autore,
           categoria : art.articolo.categoria,
           data:art.articolo.data,
           descrizione : art.articolo.descrizione,
           img : art.articolo.img,
-          like: !art.articolo.like,
+          like: heartChange,
+          messaggi:art.articolo.messaggi,
           minuti:art.articolo.minuti,
           sottotitolo : art.articolo.sottotitolo,
           tags:art.articolo.tags,
@@ -41,7 +60,7 @@ render(){
 
 
 
-  let {spinner, articoli, errore} = this.props;
+  let {spinner, articoli, errore,mount} = this.props;
 
    
    
@@ -58,7 +77,6 @@ render(){
      articoliVisualizzati = <Spinner />
     }else{
     articoliVisualizzati = articoli.map((art) =>{
-       console.log(art);
       return (<AnteprimaArticolo 
          id={art.key} 
          autore={art.articolo.autore}
@@ -72,6 +90,7 @@ render(){
          data = {art.articolo.data}
          minuti = {art.articolo.minuti}
          disableMore = {true}
+         mount = {mount}
          clickHeart = {() => this.clickHeartHandler(art)} 
          key={art.key}/>);
    })

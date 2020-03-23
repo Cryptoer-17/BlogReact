@@ -18,6 +18,7 @@ const Elimina = ( props) =>{
         .then(response =>{
           setLoading(null);
         setTimeout(()=>{
+            props.mount();
             window.location.reload();
         },500)
         })

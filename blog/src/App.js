@@ -104,7 +104,7 @@ if(userId){
            {localStorage.getItem("userId") ?    <Route path={"/profilo" + (key ? "/:key" : "")} exact  render={() =>(<AsyncProfilo  profilo={tempArray} clickUpdateArticolo={this.updateArticoloHandler} key={key} mount={() => this.componentDidMount()}/>)} /> : null }
           {localStorage.getItem("userId") ?  <Route path="/ricerca"  component = {RisultatiRicerca} /> : null }
             {localStorage.getItem("userId") ?  <Route path="/articolo/:id" component ={asyncArticolo} /> : null}
-            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica {...props} />)} /> : null }
+            {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica {...props} mount={() => this.componentDidMount()}/>)} /> : null }
             <Redirect to= "/" />
            </Switch>
          </BrowserRouter>

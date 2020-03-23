@@ -140,7 +140,7 @@ clickCloseImg(){
         data: new Date().toLocaleDateString(),
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId"),
-        like:false
+        like:[{username:localStorage.getItem("username"),like:false}]
     }
     await this.props.onPostArticolo(articolo);
     

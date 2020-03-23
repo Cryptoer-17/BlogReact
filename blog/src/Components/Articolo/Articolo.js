@@ -6,6 +6,8 @@ import ActionBar from '../ActionBar/ActionBar';
 import Tag from '../Tag/Tag';
 import Info from '../InfoArticolo/InfoArticolo';
 import Comments from '../../containers/Comments/Comments';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 
 class Articolo extends Component{
@@ -18,12 +20,15 @@ class Articolo extends Component{
 
     componentDidMount(){
         const id= this.props.match.params.id;
+        console.log(id);
         this.setState({loading : true})
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"))
         .then(response =>{
-            console.log(response)
             if (typeof response.data.tags === 'undefined'){
                 response.data.tags = [];
+            }
+            if(typeof response.data.messaggi === 'undefined'){
+                response.data.messaggi = [];
             }
 
           this.setState({articolo : response.data})
@@ -38,7 +43,25 @@ class Articolo extends Component{
 
 
     clickHeartHandler(){
-       
+        
+
+        let length = this.state.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = this.state.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+
+
         const anteprima = {
             autore : this.state.articolo.autore,
             categoria : this.state.articolo.categoria,
@@ -48,7 +71,8 @@ class Articolo extends Component{
             minuti:this.state.articolo.minuti,
             sottotitolo : this.state.articolo.sottotitolo,
             tags : this.state.articolo.tags,
-            like: !this.state.articolo.like,
+            like: heartChange,
+            messaggi: this.state.articolo.messaggi,
             testo : this.state.articolo.testo,
             titolo : this.state.articolo.titolo,
             userId:this.state.articolo.userId
@@ -61,18 +85,26 @@ class Articolo extends Component{
         const id= this.props.match.params.id;
 
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
-        .then(response => console.log(response))
+        .then(response =>{
+             console.log(response)
+             this.props.onInitArticoli();
+            })
         .catch(error => console.log(error));
 
     }
 
     handlerSendMessage = (props)=>{
-        console.log(props);
-        const messaggi = {
-            username:localStorage.getItem("username"),
-            messaggio:props
-        }
-        console.log(this.state.articolo)
+        
+       let messaggio;
+        const messaggi = [
+            ...this.state.articolo.messaggi,
+            messaggio={
+                username: localStorage.getItem("username"),
+                testo:props
+            }
+           
+        ]
+
 
         const anteprima = {
             autore : this.state.articolo.autore,
@@ -97,13 +129,20 @@ class Articolo extends Component{
         const id= this.props.match.params.id;
 
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
-        .then(response => console.log(response))
+        .then(response => {
+            this.props.onInitArticoli();
+            console.log(response);
+        })
         .catch(error => console.log(error));
     }
 
 
     viewCommentsHandler(){
+        
         this.setState({comments:true})
+         setTimeout(() => {
+            window.scrollTo(0,9999)
+         }, 1); 
     }
 
     render(){
@@ -126,12 +165,15 @@ class Articolo extends Component{
                    })
             }
     
-               
-       
 
-            if(articolo.like){
-                colore = 'red';
-            }
+            articolo.like.map((object)=>{
+                console.log(object)
+                if(object.username===localStorage.getItem("username")){
+                    if(object.like){
+                        colore = 'red';
+                    }
+                }
+            })
 
             articoloVisualizzato = 
 
@@ -164,15 +206,37 @@ class Articolo extends Component{
             articoloVisualizzato = <Spinner />;
         }
 
+
+        let error;
+        if(this.props.error === "Auth token is expired"){
+            console.log("ok");
+           error = document.getElementById("btnLoginLogout").click()   
+        }
+        
+
+
         return (
             <div >
             {articoloVisualizzato}
-            {this.state.comments && <Comments clickSendMessage={this.handlerSendMessage}/>}
-           
+            {this.state.comments && <Comments articolo={articolo} clickSendMessage={this.handlerSendMessage}/>}
+            
             </div>
             
             );
     }
 }
 
-export default Articolo;
+const mapStateToProps = state =>{
+    return{    
+        error : state.articolo.error,
+    };
+  };
+  
+
+const mapDispatchToProps = dispatch =>{
+    return{
+       onInitArticoli: () => dispatch(actions.initArticoli()),
+    }
+  }
+
+export default connect(mapStateToProps,mapDispatchToProps)(Articolo);

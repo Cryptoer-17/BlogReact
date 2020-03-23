@@ -42,7 +42,7 @@ const sendDataSuccess = ( state, action ) => {
      arrayDati.splice(id, 1);
 
      arrayDati.push(action.dati);
-    return updateObject( state, { loading: false, dati: arrayDati, esitoCaricamento: "I dati sono stati modificati con successo." } );
+    return updateObject( state, { loading: false, dati: arrayDati, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
 };
 
 

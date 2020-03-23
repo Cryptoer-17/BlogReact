@@ -73,7 +73,8 @@ class Modifica extends Component{
         img : null,
         anteprimaImg:null,
         isFormValid : false,
-        show:false
+        show:false,
+        messaggi:null
     }
 
     componentDidMount(){
@@ -151,9 +152,10 @@ class Modifica extends Component{
          })
          this.setState({tagsList:tagsList})
 
-         this.setState({anteprimaImg: (response.data.img === undefined ? null :(<div className={classes.ImgClose}><img src = {response.data.img} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)),img:(response.data.img === undefined ? null : <img src = {response.data.img} alt = "" />)})
+         this.setState({anteprimaImg: (response.data.img === undefined ? null :(<div className={classes.ImgClose}><img src = {response.data.img} alt = "" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>)),img:(response.data.img === undefined ? null :  response.data.img)})
 
          this.setState({loading:false})
+         this.setState({messaggi : (response.data.messaggi === undefined ? [] : response.data.messaggi)})
        })
        .catch(error => {
            this.setState({loading:false})
@@ -224,6 +226,7 @@ clickCloseImg(){
         descrizione: this.state.form.descrizione.value.trim(),
         img: this.state.img,
         like:false,
+        messaggi: this.state.messaggi,
         minuti: this.countWordsHandler(this.state.form.testo.value),
         sottotitolo: this.state.form.sottotitolo.value.trim(),
         tags: this.state.tags,
@@ -238,12 +241,13 @@ clickCloseImg(){
     this.setState({show:true})
 
     setTimeout(() =>{
-        console.log(this.props.esito);
     if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
-       this.props.history.push("/")
-       window.location.reload();
+        this.props.mount();
+        this.props.history.push("/");
+        window.location.reload();
+        console.log("fatto tutto ");
     }
-    },1000)
+    },2000)
     
     
     /*
@@ -339,7 +343,6 @@ checkValidityOfInput = (event, id) =>{
 
 
 const mapStateToProps = state =>{
-
     return{
    loading: state.articolo.loading,
    esito: state.articolo.esitoCaricamento,

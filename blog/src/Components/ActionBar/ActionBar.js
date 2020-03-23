@@ -15,8 +15,8 @@ const ActionBar = (props) =>{
         <div className ={classes.ActionBar}>
 
                 <div className = {classes.Actions}>
-                <FaHeart className={classes.Like} style={{color : props.color}} onClick={props.onClick}/>
-                <FaRegCommentDots className={classes.Comments} onClick={props.viewComments} />
+                <FaHeart  className={classes.Like} style={{color : props.color}} onClick={props.onClick}/>
+                <div id="messageIcon" onClick={props.viewComments}><FaRegCommentDots  className={classes.Comments}  /></div>
                 </div>
 
                 {props.disableMore ? null : 

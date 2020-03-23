@@ -43,9 +43,9 @@ export const getProfilo = () =>{
           for(let key in response.data){
             if(localStorage.getItem("userId") === response.data[key].userId){
             temparray.push({profilo: response.data[key], key: key })
-            if(response.data[key].username)
             localStorage.setItem("username",response.data[key].username)
             }
+         
         };         
           dispatch(getProfiloSuccess(temparray) );
         })
@@ -59,6 +59,7 @@ export const getProfilo = () =>{
 
 export const setUsername = (username) =>{
     const token = localStorage.getItem('token');
+    console.log(token);
        let profilo = null;
        let id = "";
 
@@ -75,10 +76,31 @@ export const setUsername = (username) =>{
             }
             id = key;
         }; localStorage.setItem("username",username);
-         axios.put('profili/'+ id + '.json?auth='+token,profilo).then(res =>  
+
+        if(profilo!==null){
+         axios.put('/profili/'+ id + '.json?auth='+token,profilo).then(res =>  
             dispatch(sendDataSuccess(profilo))
-            ).catch( err => dispatch(sendDataFail(err), console.log(err)) );  });      
-       
+            ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
+        }  
+        else{
+            profilo = {
+                nome: '',
+                cognome:'',
+                dataNascita:'',
+                sesso: '',
+                numeroTelefono:'',
+                nazionalità:'',
+                img:'',
+                username:username,
+                userId:localStorage.getItem('userId').trim(),
+                descrizione:''
+            }
+            axios.post('/profili.json?auth='+token,profilo).then(res=>dispatch(sendDataSuccess(profilo))
+            ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
+        }
+    
+    });      
+         
                  
         }     
 
