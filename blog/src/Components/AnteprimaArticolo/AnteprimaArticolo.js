@@ -38,13 +38,20 @@ class AnteprimaArticolo extends Component{
     
     let colore = 'black';  
     let variabile ; 
-    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo,showDropdown} = this.props; 
+    const {autore, titolo, sottotitolo,categoria, img,descrizione,clickHeart, data, minuti, id,UpdateArticolo,showDropdown,like} = this.props; 
     
 
+        like.map((object)=>{
+            console.log(object)
+            if(object.username===localStorage.getItem("username")){
+                if(object.like){
+                    colore = 'red';
+                }
+            }
+         
 
-        if(this.props.like){
-            colore = 'red';
-        }
+        })
+       
 
         variabile = <div>
             {titolo}

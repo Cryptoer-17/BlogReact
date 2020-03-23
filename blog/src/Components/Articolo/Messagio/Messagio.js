@@ -14,8 +14,8 @@ const Messaggio = (props)=>{
 
     return (
         <div>
-           <Input type="text" value={messaggio} changed={changeMessage} config={{placeholder:"Scrivi un commento..."}}/>
-           <button className={classes.ButtonSend} onClick={()=>props.clickSendMessage(messaggio)} style={{marginTop:'-30px'}}>INVIA</button>
+           <Input type="text" value={messaggio} changed={changeMessage} click={()=>{props.clickSendMessage(messaggio);setMessaggio('')}} config={{placeholder:"Scrivi un commento..."}}/>
+           <button className={classes.ButtonSend} onClick={()=>{props.clickSendMessage(messaggio);setMessaggio('')}} style={{marginTop:'-30px'}}>INVIA</button>
         </div>
     );
 
