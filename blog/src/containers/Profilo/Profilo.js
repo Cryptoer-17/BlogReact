@@ -167,6 +167,10 @@ orderHandler= ()=>{
 
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
+      //aggiorni gli articoli con il nuovo autore
+      //gli passi l'userId, così quando trovi quell'articolo con quiell userId, allora cambi l'username presente con quello che passi
+      //fai un un update totale degli articoli
+
 }
 else {
     this.props.onSendData(profile);
