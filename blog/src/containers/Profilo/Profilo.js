@@ -248,13 +248,22 @@ convertFile = (e)=>  {
 
   clickHeartHandler(art){
 
-    let heartChange = art.articolo.like.map((object)=>{
-        if(object.username === localStorage.getItem("username")){
-           object.like = !object.like
-        }
-        return object
-     })
-     console.log(heartChange);
+    let length = art.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = art.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+
     
     const anteprima = {
         autore : art.articolo.autore,

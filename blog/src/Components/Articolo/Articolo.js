@@ -43,7 +43,25 @@ class Articolo extends Component{
 
 
     clickHeartHandler(){
-       
+        
+
+        let length = this.state.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = this.state.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+
+
         const anteprima = {
             autore : this.state.articolo.autore,
             categoria : this.state.articolo.categoria,
@@ -53,7 +71,7 @@ class Articolo extends Component{
             minuti:this.state.articolo.minuti,
             sottotitolo : this.state.articolo.sottotitolo,
             tags : this.state.articolo.tags,
-            like: !this.state.articolo.like,
+            like: heartChange,
             messaggi: this.state.articolo.messaggi,
             testo : this.state.articolo.testo,
             titolo : this.state.articolo.titolo,
@@ -147,12 +165,15 @@ class Articolo extends Component{
                    })
             }
     
-               
-       
 
-            if(articolo.like){
-                colore = 'red';
-            }
+            articolo.like.map((object)=>{
+                console.log(object)
+                if(object.username===localStorage.getItem("username")){
+                    if(object.like){
+                        colore = 'red';
+                    }
+                }
+            })
 
             articoloVisualizzato = 
 
