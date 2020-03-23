@@ -165,14 +165,18 @@ orderHandler= ()=>{
     }
     console.log(profile.nazionalità);
 
+//se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
+//altrimenti mando il nuovo profilo.
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
-      //aggiorni gli articoli con il nuovo autore
-      //gli passi l'userId, così quando trovi quell'articolo con quiell userId, allora cambi l'username presente con quello che passi
-      //fai un un update totale degli articoli
-     //fai una map di articoli che è nello stato globale e gli passi ad update articolo il nuovo username
+     
+    
+
      this.props.articoli.map((articolo)=>{
-        console.log(articolo)
+        
+        
+        //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
+        //se non è il proprietario dell'articolo faccio solo il controllo sui messaggi e cambi l'username
         if(articolo.articolo.userId === localStorage.getItem("userId")){
     
                 let messaggioUpdate;
@@ -204,14 +208,8 @@ if(this.props.profiloReducer.length){
                 this.props.onUpdateArticolo(updateArticolo,articolo.key)
             }
         }
-
-
-        //devi aggiornare i messaggi anche se non è suo l'articolo
-        else if(articolo.articolo.userId !== localStorage.getItem("userId")){
-                //controlli se ci sono alucni messaggio in quel post e se c'è n'è lo aggiorni
-               
-               
-                    let messaggioUpdate;
+        else if(articolo.articolo.userId !== localStorage.getItem("userId")){          
+            let messaggioUpdate;
                     if(articolo.articolo.messaggi !== undefined){
                         messaggioUpdate = articolo.articolo.messaggi.map((messaggio)=>{
                             if(messaggio.username === localStorage.getItem("username")){
