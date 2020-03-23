@@ -51,6 +51,10 @@ checkValidityOfUsername= (event) =>{
     }
     }
 
+<<<<<<< HEAD
+   
+=======
+
   handlerClickConfirm=()=>{
     this.props.onSetUsername(this.state.username.value); 
     setTimeout(()=>{
@@ -62,7 +66,7 @@ checkValidityOfUsername= (event) =>{
     
   }
 
-   
+>>>>>>> b27e67bb165eb22a808008a4f30e3db3a7eebbb7
 
 render(){
   console.log(this.props.profili)
@@ -123,9 +127,12 @@ const mapStateToProps = state =>{
     return{
          user: state.login.user,
          loadingUsername:state.profilo.loading,
-         profiloReducer:state.profilo.profilo,
+<<<<<<< HEAD
          profili: state.profilo.profili
+=======
+         profiloReducer:state.profilo.profilo
 
+>>>>>>> b27e67bb165eb22a808008a4f30e3db3a7eebbb7
     };
 };
 
