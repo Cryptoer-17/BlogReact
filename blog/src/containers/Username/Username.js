@@ -40,6 +40,17 @@ checkValidityOfUsername= (event) =>{
     }
 
 
+  handlerClickConfirm=()=>{
+    this.props.onSetUsername(this.state.username.value); 
+    setTimeout(()=>{
+      window.location.reload();
+    },2000)
+    setTimeout(this.props.modalClosed,1000);
+  
+    
+    
+  }
+
 
 render(){
     
@@ -77,7 +88,7 @@ if(!loading){
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid} onClick = {() => {return (onSetUsername(username.value), setTimeout(modalClosed,1000)  )}  }>Conferma</button>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid} onClick ={()=>this.handlerClickConfirm()}>Conferma</button>
      </div>);
  
 
@@ -99,7 +110,9 @@ if(!loading){
 const mapStateToProps = state =>{
     return{
          user: state.login.user,
-         loadingUsername:state.profilo.loading
+         loadingUsername:state.profilo.loading,
+         profiloReducer:state.profilo.profilo
+
     };
 };
 
@@ -107,6 +120,8 @@ const mapDispatchToProps = dispatch => {
     return{
     
         onSetUsername: (username) => dispatch(actions.setUsername(username)),
+        onSendData: (data) => dispatch(actions.sendData(data)),
+        onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
 
     };
   };
