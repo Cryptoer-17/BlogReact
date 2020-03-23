@@ -169,8 +169,7 @@ orderHandler= ()=>{
 //altrimenti mando il nuovo profilo.
 if(this.props.profiloReducer.length){
       this.props.onUpdateData(profile,this.props.profiloReducer[0].key);
-     
-    
+
 
      this.props.articoli.map((articolo)=>{
         
@@ -188,16 +187,15 @@ if(this.props.profiloReducer.length){
                         return messaggio;
                     })
                 
-
+                }
                 let updateArticolo={
                     ...articolo.articolo,
                     autore:profile.username,
                     messaggi:(messaggioUpdate === undefined ? [] : messaggioUpdate),
                     
                 }
-                
                 this.props.onUpdateArticolo(updateArticolo,articolo.key)
-            }
+            
         }
         else if(articolo.articolo.userId !== localStorage.getItem("userId")){          
             let messaggioUpdate;
