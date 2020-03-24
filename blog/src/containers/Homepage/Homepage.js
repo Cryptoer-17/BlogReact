@@ -28,21 +28,9 @@ clickHeartHandler(art){
          heartChange.push({like:true, username:localStorage.getItem("username")})
       }
       
-
       const anteprima = {
-          autore : art.articolo.autore,
-          categoria : art.articolo.categoria,
-          data:art.articolo.data,
-          descrizione : art.articolo.descrizione,
-          img : art.articolo.img,
-          like: heartChange,
-          messaggi:art.articolo.messaggi,
-          minuti:art.articolo.minuti,
-          sottotitolo : art.articolo.sottotitolo,
-          tags:art.articolo.tags,
-          testo : art.articolo.testo,
-          titolo : art.articolo.titolo,
-          userId:art.articolo.userId
+          ...art.articolo,
+          like: heartChange
       } 
       const id = art.key;
       axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
@@ -53,24 +41,15 @@ clickHeartHandler(art){
 }
 
 
-
-
-
 render(){
 
-
-
   let {spinner, articoli, errore,mount} = this.props;
-
-   
    
    let errorMessage = null;
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
    }
-   //localStorage.setItem("username","us");
  
-  
    let articoliVisualizzati;
    
    if(spinner){
@@ -100,11 +79,8 @@ render(){
       error = document.getElementById("btnLoginLogout").click()   
    }
    
-
 return(
-
    <div className={classes.Homepage}>
-
       <h1 className={classes.Titolo}>Blog</h1>
       {spinner}
       {errorMessage ? errorMessage : null}
@@ -115,21 +91,14 @@ return(
          : null
          }
       </div>
-
          {error }
 
    <ScrollTopButton/>
-
-
 </div>
 
 );
-
-
 }
-
 }
-
 
 const mapStateToProps = state =>{
   
@@ -138,6 +107,5 @@ const mapStateToProps = state =>{
       error:state.articolo.error
    }
 }
-
 
 export default connect(mapStateToProps)(Homepage);

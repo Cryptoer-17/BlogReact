@@ -104,12 +104,9 @@ const {loginForm, isFormValid} = this.state;
 
 const formData = [];
 
-
-
     for(let key in loginForm){
         formData.push( {id: key , obj: loginForm[key] });
     };
-    
     
     let form = formData.map(el =>
         <Input 
@@ -125,8 +122,6 @@ const formData = [];
         />
         )
     
-        
-    
     return(
     <div>
     <Modal show = {show}  modalClosed = {  hideModal }>
@@ -138,20 +133,12 @@ const formData = [];
         <button className = {classes.AccediButton} onClick = { this.submitHandlerSignIn}  disabled = { !isFormValid} > Accedi</button>
       {/* <button className = {classes.AccediGoogleButton} onClick = {() => {onGoogleAuth(); hideModal(); showGoogle(); showMessage(); messageLogin();}}> Accedi con Google</button> */}  
     </div>
-     <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button> 
-        
+     <button className = {classes.RegistratiButton}  onClick = {this.submitHandlerSignUp} disabled = { !isFormValid}> Registrati</button>     
     </form>
     </div>
     </Modal>
-
 </div>
-
-
     );
-
-
-
-
 }
 }
 
@@ -172,8 +159,6 @@ const mapDispatchToProps = dispatch => {
 
     };
   };
-
-
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
 

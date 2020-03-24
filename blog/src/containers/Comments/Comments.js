@@ -6,12 +6,9 @@ import Messaggio from '../../Components/Articolo/Messagio/Messagio';
 
 class Comments extends Component{
 
-
-
     resizeDivComments(){
         console.log("ok")
     }
-
 
     componentDidMount(){
         if(this.props.articolo.messaggi !== undefined){
@@ -36,18 +33,14 @@ class Comments extends Component{
         }) 
         } else commenti = null;
 
-   
         return(
         <div id="parentDiv" className={classes.ContitoreMessaggi}>
             <div  id="divCommts" className={classes.Commenti} >
-            {commenti}
-           
-            
+            {commenti}          
             </div>    
             <Messaggio clickSendMessage={clickSendMessage}/>
         </div>
-        );
-       
+        );  
     }
 } 
 

@@ -9,9 +9,7 @@ const Logout = ( props) =>{
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
 
-
 const [showModalLogoutError, setshowModalLogoutError] = useState(false);
-
 
 let error;
 if(props.error === "Auth token is expired"){
@@ -32,8 +30,6 @@ if(props.error === "Auth token is expired"){
 if(google){
 const user = JSON.parse(localStorage.getItem("userId"));
 console.log("entrato");
-
-
 
 
 return(
@@ -68,7 +64,6 @@ return(
 {error}
 </div>
 
-
 </Modal>
   );
 
@@ -83,12 +78,9 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
- 
     onLogout: () => dispatch(actions.logout())
     };
   };
-
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(Logout);
 

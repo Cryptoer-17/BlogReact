@@ -240,30 +240,19 @@ return(
     <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
     { anteprimaImg ?  anteprimaImg : null}
 </div>
-
 <hr/>
-
 <br/>
-
-  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}  disabled = {!isFormValid}> Pubblica </button>           
- 
-
+  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}  disabled = {!isFormValid}> Pubblica </button>          
  <Modal  show = {show}  modalClosed = {  this.hideModal } >
          {!loading ? 
         esito
         :  <Spinner/>}
     </Modal>
-  
-
 </div>
 
 );
-
-
 }
-
 }
-
 
 const mapStateToProps = state =>{
     return{
@@ -278,7 +267,6 @@ const mapDispatchToProps = dispatch => {
     onInitArticoli: () => dispatch(actions.initArticoli())
     };
   };
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(NuovoArticolo);
 

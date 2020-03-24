@@ -23,14 +23,11 @@ const Ricerca = (props) =>{
     );
 }
 
-
 const mapDispatchToProps = dispatch => {
     return{
     onStartRicerca: (cerca) => dispatch(actions.startRicerca(cerca))
     };
   };
-
-
 
 export default connect(null,mapDispatchToProps)(withRouter(Ricerca));
 
