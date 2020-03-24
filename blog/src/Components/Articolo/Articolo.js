@@ -18,7 +18,6 @@ class Articolo extends Component {
     }
     componentDidMount() {
         const id = this.props.match.params.id;
-        console.log(id);
         this.setState({ loading: true })
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"))
             .then(response => {
@@ -86,7 +85,6 @@ class Articolo extends Component {
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
             .then(response => {
                 this.props.onInitArticoli();
-                console.log(response);
             })
             .catch(error => console.log(error));
     }
@@ -113,7 +111,6 @@ class Articolo extends Component {
                 })
             }
             articolo.like.map((object) => {
-                console.log(object)
                 if (object.username === localStorage.getItem("username")) {
                     if (object.like) {
                         colore = 'red';
