@@ -71,6 +71,7 @@ if(!loading){
                     valid = { username.valid}
                     changed = {(e) => this.checkValidityOfUsername(e)}
                     shouldValidate = {username.validation}
+                    click={()=>this.handlerClickConfirm()}
                     />
 
         <div className = {classes.Rules}>
@@ -88,7 +89,7 @@ if(!loading){
         <li>Più di 15 caratteri</li>
         </ul>
         </div>
-       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid} onClick ={()=>this.handlerClickConfirm()}>Conferma</button>
+       <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid}  onClick ={()=>this.handlerClickConfirm()}>Conferma</button>
      </div>);
  
 

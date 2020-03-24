@@ -22,13 +22,16 @@ class Comments extends Component{
     render(){
         const {clickSendMessage,articolo} = this.props;
         let tempUserArray = [];
+        let colorArray=['red','blue','aqua','black','blueviolet','brown','chocolate','coral','chartreuse','crimson','darkcyan','darkgoldenrod','darkgreen',
+                        'darkmagenta','darkorange','darkred','forestgreen','gold','green','indigo','lawngreen','lime','maroon','mediumblue']
         articolo.messaggi.map((messaggio)=>{
             if(!tempUserArray.includes(messaggio.username)){
-                let colore = '';
-                while (colore.length < 8) {
-                  colore += (Math.random()).toString(16).substr(-6).substr(-1)
-                }
-                tempUserArray.push({username:messaggio.username,colore:'#'+colore+''})
+                let colore;
+               // while (colore.length < 8) {
+                  colore = Math.floor(Math.random() * colorArray.length-1 + 1) 
+                  console.log(colore)
+            //    }
+                tempUserArray.push({username:messaggio.username,colore:colorArray[colore]})
             }
         })
         console.log(tempUserArray);
