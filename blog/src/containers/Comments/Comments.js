@@ -21,11 +21,25 @@ class Comments extends Component{
 
     render(){
         const {clickSendMessage,articolo} = this.props;
+        let tempUserArray = [];
+        articolo.messaggi.map((messaggio)=>{
+            if(!tempUserArray.includes(messaggio.username)){
+                let colore = '';
+                while (colore.length < 8) {
+                  colore += (Math.random()).toString(16).substr(-6).substr(-1)
+                }
+                tempUserArray.push({username:messaggio.username,colore:'#'+colore+''})
+            }
+        })
+        console.log(tempUserArray);
+
+        
+
         let commenti
         if(articolo.messaggi !== undefined){
         commenti = articolo.messaggi.map((messaggio,index)=>{
             return (<div className={classes.Commento} key={index}>
-            <NomePersona>{messaggio.username}</NomePersona>
+            <NomePersona userArray={tempUserArray}>{messaggio.username}</NomePersona>
             <Comment>
                 {messaggio.testo}
             </Comment>
