@@ -2,6 +2,53 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { auth, provider } from '../../utility/firebase';
 
+export const updateEmailStart = () =>{
+    return{
+        type:actionTypes.UPDATE_EMAIL_START
+    };
+}
+
+export const updateEmailFail = () =>{
+    return{
+        type:actionTypes.UPDATE_EMAIL_FAIL
+    };
+}
+
+export const updateEmailSuccess = () =>{
+    return{
+        type:actionTypes.UPDATE_EMAIL_SUCCESS
+    };
+}
+
+export const updateEmail = (email) =>{
+    return dispatch =>{
+        dispatch(updateEmailStart());
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        const authData ={
+            idToken : localStorage.getItem("token"),
+            email : email,
+            returnSecureToken:true 
+          }
+        axios.post(url,authData)
+        .then(response=>{
+            //bisognerà vedere se impostare il refresh token come locale anche se non penso 
+            //bisognerà impostare la nuova email
+            //bisognerà impostare una nuova expire date
+            console.log(response);
+            localStorage.removeItem("email");
+            localStorage.setItem('email', response.data.email);
+            localStorage.removeItem("token");
+            localStorage.setItem('token', response.data.idToken);
+            dispatch(updateEmailSuccess());
+        })
+        .catch(error =>{
+            dispatch(updateEmailFail());
+        })
+    }
+}
+
+
+
 //login
 export const loginStart = () =>{
 
@@ -146,3 +193,6 @@ export const googleAuth = () =>{
          });
      }
 }
+
+
+

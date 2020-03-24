@@ -24,6 +24,20 @@ class Profilo extends Component {
         descrizione: '' + this.props.profilo.descrizione + '',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show: false,
+        emailIsValid:true,
+        email: {
+            elementType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'email'
+            },
+            value: '' + localStorage.getItem("email") + '',
+            validation: {
+                isEmail: true
+            },
+            valid: true,
+            touched: false
+        },
         profileForm: {
             nome: {
                 elementType: 'input',
@@ -108,12 +122,12 @@ class Profilo extends Component {
                     placeholder: 'username'
                 },
                 value: '' + this.props.profilo.username + '',
-                validation:{
-                    isUsername:true
+                validation: {
+                    isUsername: true
                 },
                 valid: true,
                 touched: false
-            },
+            }
 
         }
     }
@@ -131,6 +145,17 @@ class Profilo extends Component {
     }
     showModal = () => {
         this.setState({ show: true })
+    }
+
+    handlerChangeEmail = (props)=>{
+        console.log(props);
+        this.showModal();
+        this.props.onChangeEmail(props);
+        setTimeout(() => {
+            if (this.props.esitoChangeEmail === "Il cambio e-mail è stato completato") {
+                window.location.reload();
+            }
+        }, 1000)
     }
     orderHandler = () => {
         this.showModal();
@@ -204,8 +229,8 @@ class Profilo extends Component {
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
         setTimeout(() => {
-            window.scrollTo(0, 724)
-        }, 40); 
+            window.scrollTo(0, 609)
+        }, 40);
     }
     descrizioneChangeHandler = (event) => {
         this.setState({ descrizione: event.target.value })
@@ -227,6 +252,17 @@ class Profilo extends Component {
         }
         this.setState({ profileForm: updatedprofileForm, formIsValid: formIsValid });
 
+    }
+    inputChangeEmail = (event) => {
+        const updateEmail ={
+            ...this.state.email
+        }
+        updateEmail.value=event.target.value;
+        updateEmail.valid = checkValidity(updateEmail.value,updateEmail.validation);
+        updateEmail.touched = true;
+       
+        let emailIsValid = updateEmail.valid;
+        this.setState({email : updateEmail, emailIsValid : emailIsValid})
     }
     convertFile = (e) => {
         let reader = new FileReader();
@@ -281,7 +317,7 @@ class Profilo extends Component {
     }
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown } = this.state;
-        let { loading, mount } = this.props;
+        let { loading, mount, loadingChangeEmail } = this.props;
         let email;
         let modificaEmail;
         email = localStorage.getItem('email');
@@ -294,6 +330,21 @@ class Profilo extends Component {
                 : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
+        
+        modificaEmail = (<div><h3>MODIFICA EMAIL O PASSWORD</h3>
+            <Input
+                type={this.state.email.elementType}
+                config={this.state.email.elementConfig}
+                value={this.state.email.value}
+                changed={(event) => this.inputChangeEmail(event)}
+                touched={this.state.email.touched}
+                shouldValidate={this.state.email.validation}
+                valid={this.state.email.valid}
+            />
+        <button className={classes.ButtonSend} onClick={()=>this.handlerChangeEmail(this.state.email.value)} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
+            <br/>
+        </div>)
+
         const formElemetsArray = [];
         for (let key in this.state.profileForm) {
             formElemetsArray.push({
@@ -302,18 +353,6 @@ class Profilo extends Component {
 
             })
         }
-
-
-        modificaEmail = (
-            <div>
-                <hr/>
-                <h3>Modifica la tua email o la tua password</h3>
-                {/* inserire input, ma prima la validazione dell'email */}
-                <hr/>
-            </div>
-            
-        );
-
 
         let form = (
             <form>
@@ -327,24 +366,24 @@ class Profilo extends Component {
                         touched={formElement.config.touched}
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
-                    /> : <div key={formElement.id}>
-                            <h3>MODIFICA IL TUO USERNAME</h3>
-                            <Input
-                                key={formElement.id}
-                                type={formElement.config.elementType}
-                                config={formElement.config.elementConfig}
-                                value={formElement.config.value}
-                                changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                                touched={formElement.config.touched}
-                                shouldValidate={formElement.config.validation}
-                                valid={formElement.config.valid} /></div>
+                    /> : formElement.id === 'username' ? <div key={formElement.id}>
+                        <h3>MODIFICA IL TUO USERNAME</h3>
+                        <Input
+                            key={formElement.id}
+                            type={formElement.config.elementType}
+                            config={formElement.config.elementConfig}
+                            value={formElement.config.value}
+                            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                            touched={formElement.config.touched}
+                            shouldValidate={formElement.config.validation}
+                            valid={formElement.config.valid} /></div> : null
                 )
                 )}
             </form>
         );
         let pageModificaDati = (<div className={classes.ModificaDati}>
+             {modificaEmail}
             <h3>MODIFICA I TUOI DATI</h3>
-            {modificaEmail}
             {form}
             <h3>MODIFICA LA TUA FOTO PROFILO</h3>
             <div className={classes.DivFoto} >
@@ -387,11 +426,15 @@ class Profilo extends Component {
             pageModificaDati = <Spinner />
         }
         let modal = null;
-        if (loading === false) {
+        
+        if (loading === false || loadingChangeEmail === false) {
             modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
-                {this.props.esito}
+                {console.log(this.props.esitoChangeEmail)}
+                {this.props.esito === '' ? null : this.props.esito}
+                {this.props.esitoChangeEmail === '' ? null : this.props.esitoChangeEmail}
             </Modal>);
         }
+        
 
         return (
             <div className={classes.Profilo} onClick={showDropdown ? this.clickMenuHandler : null}>
@@ -426,7 +469,7 @@ class Profilo extends Component {
                         </div>
                     </div>
                     <div>
-                        <button className={classes.ButtonSend} style={{ marginTop: '-25px' }} onClick={() => this.handlerModificaDati()}><MdEmail style={{ verticalAlign: 'middle' }} /> Modifica Dati</button>
+                        <button className={classes.ButtonSend} style={{ marginTop: '-25px' }} onClick={() => this.handlerModificaDati()}><MdEmail style={{ verticalAlign: 'middle' }} /> Mostra dati da modificare</button>
                     </div>
                 </div>
                 {(modificaDati) ? pageModificaDati : null}
@@ -442,7 +485,9 @@ const mapStateToProps = state => {
         articoli: state.articolo.articoli,
         loading: state.profilo.loading,
         esito: state.profilo.esitoCaricamento,
-        profiloReducer: state.profilo.profilo
+        profiloReducer: state.profilo.profilo,
+        loadingChangeEmail: state.login.loading,
+        esitoChangeEmail:state.login.esitoCaricamento
     }
 }
 
@@ -453,7 +498,8 @@ const mapDispatchToProps = dispatch => {
         // onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
         onSendData: (data) => dispatch(actions.sendData(data)),
         onUpdateData: (data, idProfilo) => dispatch(actions.updateData(data, idProfilo)),
-        onUpdateArticolo: (articolo, idArticolo) => dispatch(actions.updateArticolo(articolo, idArticolo))
+        onUpdateArticolo: (articolo, idArticolo) => dispatch(actions.updateArticolo(articolo, idArticolo)),
+        onChangeEmail : (email) => dispatch(actions.updateEmail(email))
     };
 };
 

@@ -11,6 +11,7 @@ export {
 export {
 login,
 logout,
+updateEmail,
 googleAuth,
 setLoginRedirectPath
 }from './actionsLogin';

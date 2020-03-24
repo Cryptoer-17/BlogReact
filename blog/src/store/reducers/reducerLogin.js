@@ -8,7 +8,20 @@ const initialState = {
     error:null,
     loading:false,
     user:null,
-    loginRedirectPath: '/' 
+    loginRedirectPath: '/',
+    esitoCaricamento:"" 
+}
+
+const updateEmailStart = (state) =>{
+    return updateObject( state, {error: null,  loading : true} );
+}
+
+const updateEmailFail = (state) =>{
+    return updateObject ( state, {error:null, loading:false, esitoCaricamento: "La procedure di cambio mail non è stata completata.\n L'email potrebbe esse già in uso.\n Si prega di riprovare più tardi"});
+}
+
+const updateEmailSuccess = (state)=>{
+    return updateObject (state , {error : null, loading : false, esitoCaricamento: "Il cambio e-mail è stato completato"} );
 }
 
 const loginStart = (state) =>{
@@ -68,6 +81,7 @@ export const googleAuthSuccess = (state,action) =>{
 }
 
 
+
 const reducer = (state = initialState,action) => {
 
     switch(action.type){
@@ -80,6 +94,10 @@ const reducer = (state = initialState,action) => {
         case actionTypes.GOOGLE_AUTH_START: return googleAuthStart(state,action);
         case actionTypes.GOOGLE_AUTH_SUCCESS: return googleAuthSuccess(state,action);  
         case actionTypes.GOOGLE_AUTH_FAIL: return googleAuthFail(state,action);  
+
+        case actionTypes.UPDATE_EMAIL_START:return updateEmailStart(state,action);
+        case actionTypes.UPDATE_EMAIL_FAIL:return updateEmailFail(state, action);
+        case actionTypes.UPDATE_EMAIL_SUCCESS : return updateEmailSuccess(state,action);
         default: return state;
 
     }
