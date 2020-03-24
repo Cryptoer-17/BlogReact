@@ -17,7 +17,7 @@
         isValid = pattern.test(value) && isValid
     }
     if (rules.isUsername) {
-        const pattern = /^[a-z0-9_]{4,15}$/;
+        const pattern = /^[A-Za-z0-9_]{4,15}$/;
         isValid = pattern.test(value) && isValid
     }
     if (rules.isNumeric) {
