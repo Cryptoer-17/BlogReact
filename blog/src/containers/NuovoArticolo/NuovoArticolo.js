@@ -8,6 +8,7 @@ import * as actions from '../../store/actions/index';
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import Editor from 'Dante2';
+import { FaThinkPeaks } from 'react-icons/fa';
 
 
 class NuovoArticolo extends Component{
@@ -142,14 +143,14 @@ clickCloseImg(){
         userId: localStorage.getItem("userId"),
         like:[{username:localStorage.getItem("username"),like:false}]
     }
-    await this.props.onPostArticolo(articolo);
     
-    await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
-    this.showModal();
-    setTimeout(() => {
+    this.props.onPostArticolo(articolo);
+    
+     this.showModal();
+     setTimeout(() => {
         this.props.history.push("/")
         window.location.reload();
-    } , 3000)  
+    } , 1800)  
 
 }
 

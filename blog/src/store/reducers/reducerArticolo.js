@@ -22,9 +22,7 @@ const postArticoloFail = ( state) => {
 };
 
 const postArticoloSuccess = ( state, action ) => {
-     let arrayArt = [...state.articoli];
-     arrayArt.push(action.articolo);
-    return updateObject( state, { loading: false, articoli: arrayArt, esitoCaricamento: "Il post è stato caricato con successo." } );
+    return updateObject( state, { loading: false, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
 
 
