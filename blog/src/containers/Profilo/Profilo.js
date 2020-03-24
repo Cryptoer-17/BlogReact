@@ -203,6 +203,9 @@ class Profilo extends Component {
     }
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
+        setTimeout(() => {
+            window.scrollTo(0, 724)
+        }, 40); 
     }
     descrizioneChangeHandler = (event) => {
         this.setState({ descrizione: event.target.value })
@@ -280,6 +283,7 @@ class Profilo extends Component {
         let { anteprimaImg, presentazione, modificaDati, showDropdown } = this.state;
         let { loading, mount } = this.props;
         let email;
+        let modificaEmail;
         email = localStorage.getItem('email');
 
         let presentazioneVisualizzata;
@@ -298,6 +302,18 @@ class Profilo extends Component {
 
             })
         }
+
+
+        modificaEmail = (
+            <div>
+                <hr/>
+                <h3>Modifica la tua email o la tua password</h3>
+                {/* inserire input, ma prima la validazione dell'email */}
+                <hr/>
+            </div>
+            
+        );
+
 
         let form = (
             <form>
@@ -328,6 +344,7 @@ class Profilo extends Component {
         );
         let pageModificaDati = (<div className={classes.ModificaDati}>
             <h3>MODIFICA I TUOI DATI</h3>
+            {modificaEmail}
             {form}
             <h3>MODIFICA LA TUA FOTO PROFILO</h3>
             <div className={classes.DivFoto} >
