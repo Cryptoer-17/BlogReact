@@ -100,7 +100,6 @@ class Profilo extends Component {
                 },
                 value: '' + this.props.profilo.nazionalità + '',
                 valid: true
-
             },
             username: {
                 elementType: 'input',
@@ -109,6 +108,9 @@ class Profilo extends Component {
                     placeholder: 'username'
                 },
                 value: '' + this.props.profilo.username + '',
+                validation:{
+                    isUsername:true
+                },
                 valid: true,
                 touched: false
             },
@@ -156,7 +158,6 @@ class Profilo extends Component {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
                 //se non è il proprietario dell'articolo faccio solo il controllo sui messaggi e cambi l'username
                 if (articolo.articolo.userId === localStorage.getItem("userId")) {
-
                     let messaggioUpdate;
                     if (articolo.articolo.messaggi !== undefined) {
                         messaggioUpdate = articolo.articolo.messaggi.map((messaggio) => {
