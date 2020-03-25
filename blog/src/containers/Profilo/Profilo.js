@@ -234,10 +234,19 @@ class Profilo extends Component {
             // console.log(error)
             this.showModalPassword();
             this.setState({messageModalPassord : <Modal show={true} modalClosed={()=>this.hideModalPassword()}>
-                Purtroppo la vecchia password non corrisponde, ricontrolla che i dati inseriti siano corretti
+                Errore!!
+                La vecchia password inserita non corrisponde a quella memorizzata,si prega di reinserire correttamente la vecchia password.
             </Modal> })
             
           })
+
+          if(psw.newpassword1 !== psw.newpassword2){
+            this.showModalPassword();
+            this.setState({messageModalPassord : <Modal show={true} modalClosed={()=>this.hideModalPassword()}>
+            Errore!!
+            Purtroppo la nuova password inserita non risulta uguale in entrambi i campi, si prega di reinserire correttamente la nuova password da utilizzare.
+            </Modal> })
+          }
         
     }
     orderHandler = () => {
