@@ -10,3 +10,11 @@
     border: 1px solid #D2CACA;
     border-radius: 10px;
 }
+
+.Commento i{
+    font-size:90%;
+    font-weight: bold;
+    cursor:pointer;
+    float:right;
+    margin-top: -9.5%;
+}

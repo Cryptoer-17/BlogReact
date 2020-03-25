@@ -33,6 +33,7 @@ class Comments extends Component {
                     <Comment>
                         {messaggio.testo}
                     </Comment>
+                    <i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i>
                 </div>)
             })
         } else commenti = null;
