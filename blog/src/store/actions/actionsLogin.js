@@ -67,7 +67,6 @@ export const updatePasswordFail = () =>{
 }
 
 export const updatePassword = (props)=>{
-    console.log(props)
     return dispatch=>{
         dispatch(updatePasswordStart());
         let url= 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';

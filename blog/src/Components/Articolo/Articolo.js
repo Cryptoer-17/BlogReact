@@ -17,6 +17,7 @@ class Articolo extends Component {
         comments: null
     }
     componentDidMount() {
+        console.log("ok")
         const id = this.props.match.params.id;
         this.setState({ loading: true })
         axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"))
@@ -145,13 +146,12 @@ class Articolo extends Component {
         }
         let error;
         if (this.props.error === "Auth token is expired") {
-            console.log("ok");
             error = document.getElementById("btnLoginLogout").click()
         }
         return (
             <div >
                 {articoloVisualizzato}
-                {this.state.comments && <Comments articolo={articolo} clickSendMessage={this.handlerSendMessage} />}
+                {this.state.comments && <Comments {...this.props} cmpDidMount={()=>this.componentDidMount()} articolo={articolo} clickSendMessage={this.handlerSendMessage} />}
             </div>
         );
     }
