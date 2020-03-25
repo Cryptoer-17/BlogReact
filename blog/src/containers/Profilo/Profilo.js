@@ -201,7 +201,7 @@ class Profilo extends Component {
     }
 
     handlerChangeEmail = ()=>{
-       
+
         this.showModal();
         this.props.onChangeEmail(this.state.email.value);
         setTimeout(() => {
@@ -238,7 +238,7 @@ class Profilo extends Component {
                 Errore!!
                 La vecchia password inserita non corrisponde a quella memorizzata,si prega di reinserire correttamente la vecchia password.
             </Modal> })
-            
+
           })
 
           if(psw.newpassword1 !== psw.newpassword2){
@@ -260,7 +260,7 @@ class Profilo extends Component {
                 }
             }, 1000)
           }
-        
+
     }
     orderHandler = () => {
         this.showModal();
@@ -383,9 +383,14 @@ class Profilo extends Component {
         updateEmail.value=event.target.value;
         updateEmail.valid = checkValidity(updateEmail.value,updateEmail.validation);
         updateEmail.touched = true;
-       
+
         let emailIsValid = updateEmail.valid;
         this.setState({email : updateEmail, emailIsValid : emailIsValid})
+    }
+    clickCloseImg(){         
+        this.setState({anteprimaImg:null,
+                        img:null})
+        document.getElementById("inputFile").value = null;
     }
     convertFile = (e) => {
         let reader = new FileReader();
@@ -393,7 +398,7 @@ class Profilo extends Component {
             reader.readAsDataURL(e);
             reader.onloadend = () => {
 
-                this.setState({ img: reader.result, anteprimaImg: <img className={classes.InputImg} src={reader.result} alt="" /> })
+                this.setState({ img: reader.result, anteprimaImg:(<div className={classes.ImgClose}><img className={classes.InputImg} src={reader.result} alt="" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>) })
             }
         }
         else {
@@ -454,7 +459,7 @@ class Profilo extends Component {
                 : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
-        
+
         modificaEmail = (<div><h3>MODIFICA EMAIL</h3>
             <Input
                 type={this.state.email.elementType}
@@ -469,7 +474,7 @@ class Profilo extends Component {
             <br/>
         </div>)
 
-        let passwordElementsArray = []; 
+        let passwordElementsArray = [];
         for(let key in this.state.password){
             passwordElementsArray.push({
                 id:key,
@@ -479,7 +484,7 @@ class Profilo extends Component {
         console.log(passwordElementsArray)
         modificaPassword = ( <div><h3>MODIFICA PASSWORD</h3>
            {passwordElementsArray.map(elementArray=>(
-               <Input 
+               <Input
                     key={elementArray.id}
                     type={elementArray.psw.elementType}
                     config={elementArray.psw.elementConfig}
@@ -490,7 +495,7 @@ class Profilo extends Component {
                     valid = {elementArray.psw.valid}
                />
            ))}
-          <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>  
+          <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>
             <br/>
         </div>
         )
@@ -575,7 +580,7 @@ class Profilo extends Component {
             pageModificaDati = <Spinner />
         }
         let modal = null;
-        
+
         if (loading === false ||    loadingLogin === false) {
             modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
                 {console.log(this.props.esitoLogin)}
@@ -583,7 +588,7 @@ class Profilo extends Component {
                 {this.props.esitoLogin === '' ? null : this.props.esitoLogin}
             </Modal>);
         }
-        
+
 
         return (
             <div className={classes.Profilo} onClick={showDropdown ? this.clickMenuHandler : null}>
@@ -637,7 +642,7 @@ const mapStateToProps = state => {
         profiloReducer: state.profilo.profilo,
         loadingLogin: state.login.loading,
         esitoLogin:state.login.esitoCaricamento
-        
+
     }
 }
 

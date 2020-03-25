@@ -68,9 +68,10 @@ cursor: pointer;
 }
 
 .InputImg{
-    width: 50%;
+    width: 80%;
     margin-right: -140px;
     border-style: outset;
+    margin-left: 6%;
 }
 
 .InputForm{
@@ -89,4 +90,14 @@ cursor: pointer;
      cursor:pointer;
  }
  
- 
+ .ImgClose i{
+    top:1px;
+    font-size:90%;
+    font-weight: bold;
+    cursor:pointer;
+    float:right;
+ }
+
+ .ImgClose{
+     width: 60%;
+ }

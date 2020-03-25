@@ -29,8 +29,6 @@ const EliminaMessaggio = (props) => {
             props.cmpDidMount();
         }, 300);
        
-        
-        
     }
     return (
         <div>
