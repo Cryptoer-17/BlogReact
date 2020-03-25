@@ -205,12 +205,13 @@ class Profilo extends Component {
         this.showModal();
         this.props.onChangeEmail(this.state.email.value);
         setTimeout(() => {
-            if (this.props.esitoChangeEmail === "Il cambio e-mail è stato completato") {
+            if (this.props.esitoLogin === "Il cambio e-mail è stato completato") {
                 window.location.reload();
             }
         }, 1000)
     }
     passswordChangeHandler = ()=>{
+        let errorePassword=false;
         let passwordData = {};
         for (let passwordElementIdentifier in this.state.password) {
             passwordData[passwordElementIdentifier] = this.state.password[passwordElementIdentifier].value;
@@ -231,7 +232,7 @@ class Profilo extends Component {
              console.log(response)
           })
           .catch(error =>{
-            // console.log(error)
+            errorePassword=true;
             this.showModalPassword();
             this.setState({messageModalPassord : <Modal show={true} modalClosed={()=>this.hideModalPassword()}>
                 Errore!!
@@ -241,11 +242,23 @@ class Profilo extends Component {
           })
 
           if(psw.newpassword1 !== psw.newpassword2){
+            errorePassword=true;
             this.showModalPassword();
             this.setState({messageModalPassord : <Modal show={true} modalClosed={()=>this.hideModalPassword()}>
             Errore!!
             Purtroppo la nuova password inserita non risulta uguale in entrambi i campi, si prega di reinserire correttamente la nuova password da utilizzare.
             </Modal> })
+          }
+
+          if(!errorePassword){
+              //completo il cambio password
+              this.showModal();
+              this.props.onChangePassword(psw.newpassword1);
+              setTimeout(() => {
+                if (this.props.esitoLogin === "Il cambio password è stato completato") {
+                    window.location.reload();
+                }
+            }, 1000)
           }
         
     }
@@ -427,7 +440,7 @@ class Profilo extends Component {
     }
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
-        let { loading, mount, loadingChangeEmail } = this.props;
+        let { loading, mount,   loadingLogin } = this.props;
         let email;
         let modificaEmail;
         let modificaPassword;
@@ -563,11 +576,11 @@ class Profilo extends Component {
         }
         let modal = null;
         
-        if (loading === false || loadingChangeEmail === false) {
+        if (loading === false ||    loadingLogin === false) {
             modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
-                {console.log(this.props.esitoChangeEmail)}
+                {console.log(this.props.esitoLogin)}
                 {this.props.esito === '' ? null : this.props.esito}
-                {this.props.esitoChangeEmail === '' ? null : this.props.esitoChangeEmail}
+                {this.props.esitoLogin === '' ? null : this.props.esitoLogin}
             </Modal>);
         }
         
@@ -622,8 +635,9 @@ const mapStateToProps = state => {
         loading: state.profilo.loading,
         esito: state.profilo.esitoCaricamento,
         profiloReducer: state.profilo.profilo,
-        loadingChangeEmail: state.login.loading,
-        esitoChangeEmail:state.login.esitoCaricamento
+        loadingLogin: state.login.loading,
+        esitoLogin:state.login.esitoCaricamento
+        
     }
 }
 
@@ -635,7 +649,8 @@ const mapDispatchToProps = dispatch => {
         onSendData: (data) => dispatch(actions.sendData(data)),
         onUpdateData: (data, idProfilo) => dispatch(actions.updateData(data, idProfilo)),
         onUpdateArticolo: (articolo, idArticolo) => dispatch(actions.updateArticolo(articolo, idArticolo)),
-        onChangeEmail : (email) => dispatch(actions.updateEmail(email))
+        onChangeEmail : (email) => dispatch(actions.updateEmail(email)),
+        onChangePassword:(password) => dispatch(actions.updatePassword(password))
     };
 };
 

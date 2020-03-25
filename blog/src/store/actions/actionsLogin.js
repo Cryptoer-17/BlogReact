@@ -54,9 +54,39 @@ export const updatePasswordStart = ()=>{
     }
 }
 
-export const updatePassword = ()=>{
+export const updatePasswordSuccess = () =>{
+    return{
+        type:actionTypes.UPDATE_PASSWORD_SUCCESS
+    }
+}
+
+export const updatePasswordFail = () =>{
+    return{
+        type:actionTypes.UPDATE_PASSWORD_FAIL
+    }
+}
+
+export const updatePassword = (props)=>{
+    console.log(props)
     return dispatch=>{
         dispatch(updatePasswordStart());
+        let url= 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        const authData ={
+            idToken : localStorage.getItem("token"),
+            password : props,
+            returnSecureToken:true 
+        }
+        axios.post(url,authData)
+        .then((response)=>{
+            console.log(response)
+            localStorage.removeItem("token");
+            localStorage.setItem('token', response.data.idToken);
+            dispatch(updatePasswordSuccess())
+        })
+        .catch((error)=>{
+            console.log(error)
+            dispatch(updatePasswordFail())
+        })
     }
 }
 
