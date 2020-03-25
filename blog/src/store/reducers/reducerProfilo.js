@@ -7,12 +7,12 @@ const initialState = {
     loading:false,
     esitoCaricamento:"",
     error : null,
-    profilo:[]
+    profilo:[],
+    profili:[]
 }
 
 
 const updateDataStart = ( state ) => {
-    console.log("entrato");
     return updateObject( state, { loading:true } );
 };
 
@@ -28,7 +28,6 @@ const updateDataSuccess = ( state, action ) => {
 
 
 const sendDataStart = ( state ) => {
-    console.log("entrato");
     return updateObject( state, { loading:true } );
 };
 
@@ -57,6 +56,12 @@ const getProfiloSuccess = (state, action ) =>{
     return updateObject(state , {profilo : action.profilo, error:null, loading : false});
 }
 
+const getAllProfiliSuccess = (state, action ) =>{
+ 
+    return updateObject(state , {profili : action.profili, error:null, loading : false});
+}
+
+
 const getProfiloFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false});
 }
@@ -69,6 +74,7 @@ const reducer = (state = initialState, action) =>  {
         case actionTypes.SEND_DATA_FAIL: return sendDataFail( state, action);
         case actionTypes.SEND_DATA_SUCCESS: return sendDataSuccess( state, action);
         case actionTypes.GET_PROFILO_SUCCESS : return getProfiloSuccess(state,action);
+        case actionTypes.GET_ALLPROFILI_SUCCESS : return getAllProfiliSuccess(state,action);
         case actionTypes.GET_PROFILO_START : return getProfiloStart(state,action);
         case actionTypes.GET_PROFILO_FAIL : return getProfiloFail(state, action);
         case actionTypes.UPDATE_DATA_SUCCESS : return updateDataSuccess(state,action);

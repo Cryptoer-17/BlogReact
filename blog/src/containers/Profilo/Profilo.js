@@ -80,6 +80,7 @@ class Profilo extends Component {
                     minLength: 6,
                     required:true
                 },
+<<<<<<< HEAD
                 value: '',
                 valid: false,
                 touched: false
@@ -91,6 +92,23 @@ class Profilo extends Component {
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Tuo nome'
+=======
+                username:{
+                    elementType:'input',
+                    elementConfig:{
+                        type: 'text',
+                        placeholder: 'username'
+                    },
+                    validation: {
+                        required:true,
+                        minLength:4,
+                        maxLength:15,
+                        isUsername:true
+                        },
+                    value: ''+this.props.profilo.username+'',
+                    valid: true,
+                    touched: false
+>>>>>>> develop
                 },
                 value: '' + this.props.profilo.nome + '',
                 valid: true,
@@ -322,6 +340,7 @@ class Profilo extends Component {
                 }
             })
         }
+<<<<<<< HEAD
         else {
             this.props.onSendData(profile);
         }
@@ -356,6 +375,63 @@ class Profilo extends Component {
             passwordIsValid = updatedPasswordForm[inputIdentifier].valid && passwordIsValid;
         }
         this.setState({ password : updatedPasswordForm, passwordIsValid : passwordIsValid})
+=======
+     })
+
+}
+else {
+    this.props.onSendData(profile);
+}
+
+setTimeout(() =>{
+if(this.props.esito === "I dati sono stati inviati/modificati con successo."){
+    window.location.reload();
+}
+},1000)
+  
+}
+
+handlerModificaDati(){
+    this.setState({modificaDati: !this.state.modificaDati})
+
+}
+
+descrizioneChangeHandler = (event) =>{
+    this.setState({descrizione: event.target.value})
+}
+
+inputChangedHandler = (event, inputIdentifier)=>{
+
+    //controllo unicità dell'username 
+    
+//(questo è quello che ho fatto io in Username.js , inseriscilo e aggiustalo come più preferisci, non volevo creare conflitti inutili)
+
+/*
+ let error = "";
+   let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
+    let formIsValid = newObj.valid;
+
+   for (let key in this.props.profili){ 
+     if(this.props.profili[key].username === event.target.value){
+      newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
+      error = "L'username non è disponibile";
+      formIsValid= false;
+   }
+   
+   this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
+*/
+
+const updatedprofileForm = {
+    ...this.state.profileForm
+}
+
+  const updatedFormElement= {
+    ...updatedprofileForm[inputIdentifier]
+}
+
+
+updatedFormElement.value = event.target.value;
+>>>>>>> develop
 
     }
     inputChangedHandler = (event, inputIdentifier) => {
@@ -459,6 +535,71 @@ class Profilo extends Component {
                 : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
+<<<<<<< HEAD
+=======
+  
+
+
+  clickHeartHandler(art){
+
+    let length = art.articolo.like.length;
+      console.log(length)
+      let c = 0;
+      let heartChange = art.articolo.like.map((object)=>{
+         if(object.username === localStorage.getItem("username")){
+            object.like = !object.like
+         }
+         else{
+            c++;
+         }
+         return object
+      })
+      if(c === length){
+         heartChange.push({like:true, username:localStorage.getItem("username")})
+      }
+
+    
+    const anteprima = {
+        ...art.articolo,
+        like: heartChange
+       
+    } 
+    const id = art.key;
+    axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+    .then(response => {
+        console.log("ok");
+       this.props.mount();
+    })
+    .catch(error => console.log(error));
+}
+
+render(){
+    let {anteprimaImg,presentazione,modificaDati,showDropdown} = this.state;
+    let {loading,profilo, profili,mount} = this.props;
+
+    
+    let email;
+    email = localStorage.getItem('email');
+
+
+    
+
+    let presentazioneVisualizzata ;
+    let btnInviaInfo=null;
+    {presentazione===null? 
+        presentazioneVisualizzata= <button className={classes.BtnPresentazione} onClick={()=>this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button> 
+        : presentazione===false && ((presentazioneVisualizzata = <div style={{marginTop:'-27px' ,height:'49%'}}><blockquote></blockquote><Input type="text" config={{placeholder:'breve presentazione di te'}} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{verticalAlign: 'middle',marginRight: '4px'}}/>Invia breve presentazione</button>))
+    } 
+
+
+
+
+    const formElemetsArray = [];
+    for(let key in this.state.profileForm){
+        formElemetsArray.push({
+            id: key,
+             config: this.state.profileForm[key],
+>>>>>>> develop
 
         modificaEmail = (<div><h3>MODIFICA EMAIL</h3>
             <Input
@@ -643,6 +784,16 @@ const mapStateToProps = state => {
         loadingLogin: state.login.loading,
         esitoLogin:state.login.esitoCaricamento
 
+<<<<<<< HEAD
+=======
+const mapStateToProps = state =>{
+    return{
+       articoli : state.articolo.articoli,
+       loading: state.profilo.loading,
+       esito: state.profilo.esitoCaricamento,
+       profiloReducer:state.profilo.profilo,
+       profili:state.profilo.profili
+>>>>>>> develop
     }
 }
 
