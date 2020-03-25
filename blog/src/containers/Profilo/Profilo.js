@@ -26,6 +26,8 @@ class Profilo extends Component {
         show: false,
         passwordIsValid:false,
         emailIsValid:true,
+        messageModalPassord:null,
+        modalPassword: false,
         email: {
             elementType: 'input',
             elementConfig: {
@@ -51,7 +53,7 @@ class Profilo extends Component {
                     required:true
                 },
                 value: '',
-                valid: true,
+                valid: false,
                 touched: false
             },
             newpassword1:{
@@ -65,7 +67,7 @@ class Profilo extends Component {
                     required:true
                 },
                 value: '',
-                valid: true,
+                valid: false,
                 touched: false
             },
             newpassword2:{
@@ -79,7 +81,7 @@ class Profilo extends Component {
                     required:true
                 },
                 value: '',
-                valid: true,
+                valid: false,
                 touched: false
             },
         },
@@ -191,16 +193,52 @@ class Profilo extends Component {
     showModal = () => {
         this.setState({ show: true })
     }
+    hideModalPassword = () => {
+        this.setState({ modalPassword: false })
+    }
+    showModalPassword = () => {
+        this.setState({ modalPassword: true })
+    }
 
-    handlerChangeEmail = (props)=>{
-        console.log(props);
+    handlerChangeEmail = ()=>{
+       
         this.showModal();
-        this.props.onChangeEmail(props);
+        this.props.onChangeEmail(this.state.email.value);
         setTimeout(() => {
             if (this.props.esitoChangeEmail === "Il cambio e-mail è stato completato") {
                 window.location.reload();
             }
         }, 1000)
+    }
+    passswordChangeHandler = ()=>{
+        let passwordData = {};
+        for (let passwordElementIdentifier in this.state.password) {
+            passwordData[passwordElementIdentifier] = this.state.password[passwordElementIdentifier].value;
+        }
+        const psw ={
+            oldpassword:passwordData.oldpassword,
+            newpassword1:passwordData.newpassword1,
+            newpassword2:passwordData.newpassword2
+        }
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        const authData ={
+            email : localStorage.getItem("email"),
+            password:psw.oldpassword,
+            returnSecureToken:true
+          }
+          axios.post(url,authData)
+          .then(response=>{
+             console.log(response)
+          })
+          .catch(error =>{
+            // console.log(error)
+            this.showModalPassword();
+            this.setState({messageModalPassord : <Modal show={true} modalClosed={()=>this.hideModalPassword()}>
+                Purtroppo la vecchia password non corrisponde, ricontrolla che i dati inseriti siano corretti
+            </Modal> })
+            
+          })
+        
     }
     orderHandler = () => {
         this.showModal();
@@ -379,7 +417,7 @@ class Profilo extends Component {
             .catch(error => console.log(error));
     }
     render() {
-        let { anteprimaImg, presentazione, modificaDati, showDropdown } = this.state;
+        let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount, loadingChangeEmail } = this.props;
         let email;
         let modificaEmail;
@@ -405,7 +443,7 @@ class Profilo extends Component {
                 shouldValidate={this.state.email.validation}
                 valid={this.state.email.valid}
             />
-        <button className={classes.ButtonSend} onClick={()=>this.handlerChangeEmail(this.state.email.value)} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
+        <button className={classes.ButtonSend} onClick={this.handlerChangeEmail} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
             <br/>
         </div>)
 
@@ -417,7 +455,7 @@ class Profilo extends Component {
             })
         }
         console.log(passwordElementsArray)
-        modificaPassword = ( <div><h3>MODIFICA O RESETTA PASSWORD</h3>
+        modificaPassword = ( <div><h3>MODIFICA PASSWORD</h3>
            {passwordElementsArray.map(elementArray=>(
                <Input 
                     key={elementArray.id}
@@ -430,7 +468,7 @@ class Profilo extends Component {
                     valid = {elementArray.psw.valid}
                />
            ))}
-          {/*<button className={classes.ButtonSend} onClick={()=>this.handlerChangeEmail(this.state.email.value)} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button> */}  
+          <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>  
             <br/>
         </div>
         )
@@ -527,7 +565,7 @@ class Profilo extends Component {
 
         return (
             <div className={classes.Profilo} onClick={showDropdown ? this.clickMenuHandler : null}>
-
+                {modalPassword ? messageModalPassord : null}
                 {!loading ? modal : null}
                 <div>
                     <h1>Profilo Persona</h1>
