@@ -101,3 +101,13 @@ cursor: pointer;
  .ImgClose{
      width: 60%;
  }
+
+ .ImgMediaQuery{
+     height: 200px;
+ }
+
+ @media (max-width: 600px) {
+ .ImgMediaQuery{
+     height: 90px;
+ }
+}
