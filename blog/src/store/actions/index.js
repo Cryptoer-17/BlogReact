@@ -12,6 +12,7 @@ export {
 login,
 logout,
 updateEmail,
+updatePassword,
 googleAuth,
 setLoginRedirectPath
 }from './actionsLogin';

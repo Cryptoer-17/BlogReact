@@ -24,6 +24,7 @@ class Profilo extends Component {
         descrizione: '' + this.props.profilo.descrizione + '',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show: false,
+        passwordIsValid:false,
         emailIsValid:true,
         email: {
             elementType: 'input',
@@ -37,6 +38,50 @@ class Profilo extends Component {
             },
             valid: true,
             touched: false
+        },
+        password:{
+            oldpassword:{
+                elementType: 'input',
+                elementConfig: {
+                    type: 'password',
+                    placeholder: 'Vecchia password'
+                },
+                validation: {
+                    minLength: 6,
+                    required:true
+                },
+                value: '',
+                valid: true,
+                touched: false
+            },
+            newpassword1:{
+                elementType: 'input',
+                elementConfig: {
+                    type: 'password',
+                    placeholder: 'Nuova password'
+                },
+                validation: {
+                    minLength: 6,
+                    required:true
+                },
+                value: '',
+                valid: true,
+                touched: false
+            },
+            newpassword2:{
+                elementType: 'input',
+                elementConfig: {
+                    type: 'password',
+                    placeholder: 'Nuova password'
+                },
+                validation: {
+                    minLength: 6,
+                    required:true
+                },
+                value: '',
+                valid: true,
+                touched: false
+            },
         },
         profileForm: {
             nome: {
@@ -235,6 +280,24 @@ class Profilo extends Component {
     descrizioneChangeHandler = (event) => {
         this.setState({ descrizione: event.target.value })
     }
+    inputChangePassword = (event , inputIdentifier) =>{
+        const updatedPasswordForm = {
+            ...this.state.password
+        }
+        const updatedPasswordElement = {
+            ...updatedPasswordForm[inputIdentifier]
+        }
+        updatedPasswordElement.value = event.target.value;
+        updatedPasswordElement.valid = checkValidity(updatedPasswordElement.value, updatedPasswordElement.validation);
+        updatedPasswordElement.touched = true;
+        updatedPasswordForm[inputIdentifier] = updatedPasswordElement;
+        let passwordIsValid = true;
+        for(let inputIdentifier in updatedPasswordForm){
+            passwordIsValid = updatedPasswordForm[inputIdentifier].valid && passwordIsValid;
+        }
+        this.setState({ password : updatedPasswordForm, passwordIsValid : passwordIsValid})
+
+    }
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedprofileForm = {
             ...this.state.profileForm
@@ -320,6 +383,7 @@ class Profilo extends Component {
         let { loading, mount, loadingChangeEmail } = this.props;
         let email;
         let modificaEmail;
+        let modificaPassword;
         email = localStorage.getItem('email');
 
         let presentazioneVisualizzata;
@@ -331,7 +395,7 @@ class Profilo extends Component {
         }
 
         
-        modificaEmail = (<div><h3>MODIFICA EMAIL O PASSWORD</h3>
+        modificaEmail = (<div><h3>MODIFICA EMAIL</h3>
             <Input
                 type={this.state.email.elementType}
                 config={this.state.email.elementConfig}
@@ -345,6 +409,31 @@ class Profilo extends Component {
             <br/>
         </div>)
 
+        let passwordElementsArray = []; 
+        for(let key in this.state.password){
+            passwordElementsArray.push({
+                id:key,
+                psw:this.state.password[key]
+            })
+        }
+        console.log(passwordElementsArray)
+        modificaPassword = ( <div><h3>MODIFICA O RESETTA PASSWORD</h3>
+           {passwordElementsArray.map(elementArray=>(
+               <Input 
+                    key={elementArray.id}
+                    type={elementArray.psw.elementType}
+                    config={elementArray.psw.elementConfig}
+                    value={elementArray.psw.value}
+                    changed={(event) => this.inputChangePassword(event, elementArray.id)}
+                    touched = {elementArray.psw.touched}
+                    shouldValidate = {elementArray.psw.validation}
+                    valid = {elementArray.psw.valid}
+               />
+           ))}
+          {/*<button className={classes.ButtonSend} onClick={()=>this.handlerChangeEmail(this.state.email.value)} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button> */}  
+            <br/>
+        </div>
+        )
         const formElemetsArray = [];
         for (let key in this.state.profileForm) {
             formElemetsArray.push({
@@ -353,7 +442,6 @@ class Profilo extends Component {
 
             })
         }
-
         let form = (
             <form>
                 {formElemetsArray.map(formElement => (
@@ -383,6 +471,7 @@ class Profilo extends Component {
         );
         let pageModificaDati = (<div className={classes.ModificaDati}>
              {modificaEmail}
+             {modificaPassword}
             <h3>MODIFICA I TUOI DATI</h3>
             {form}
             <h3>MODIFICA LA TUA FOTO PROFILO</h3>

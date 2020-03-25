@@ -48,6 +48,18 @@ export const updateEmail = (email) =>{
 }
 
 
+export const updatePasswordStart = ()=>{
+    return {
+        type:actionTypes.UPDATE_PASSWORD_START
+    }
+}
+
+export const updatePassword = ()=>{
+    return dispatch=>{
+        dispatch(updatePasswordStart());
+    }
+}
+
 
 //login
 export const loginStart = () =>{
