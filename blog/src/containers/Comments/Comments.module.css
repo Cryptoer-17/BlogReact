@@ -1,6 +1,8 @@
 .Commento{
    box-shadow:-1px 1px 10px 3px #D2CACA;
    margin-top: 20px;
+   word-wrap: break-word;
+   position: relative;
 }
 .ContitoreMessaggi{
     width:60%;
@@ -15,6 +17,7 @@
     font-size:90%;
     font-weight: bold;
     cursor:pointer;
-    float:right;
-    margin-top: -9.5%;
+    position: absolute;
+    top:0;
+    right: 0;
 }
