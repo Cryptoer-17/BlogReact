@@ -132,11 +132,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-    
         onSetUsername: (username) => dispatch(actions.setUsername(username)),
-        onSendData: (data) => dispatch(actions.sendData(data)),
         onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
-
     };
   };
 

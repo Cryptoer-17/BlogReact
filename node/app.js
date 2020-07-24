@@ -10,8 +10,9 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 /*
 //routes
-const users = require("./routes/users");
-const activities = require("./routes/activities");
+const users = require("./routes/users");*/
+const profili = require("./routes/profili");
+/*
 const events = require("./routes/events");*/
 
 const url = process.env.MONGODB_URI || config.database.url;
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /*
 const whitelist = ['http://localhost:3000', 'http://localhost:4200','http://localhost:4000']*/
+/*
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -35,9 +37,9 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   }
-}
+}*/
 
-app.use(cors(corsOptions));
+app.use(cors(/*corsOptions*/));
 
 
 // Add headers
@@ -77,8 +79,9 @@ app.use(
   })
 );
 
-users(app);
-activities(app);
+users(app);*/
+profili(app);
+/*
 events(app);
 
 boot.initialize();
