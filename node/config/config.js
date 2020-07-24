@@ -7,5 +7,5 @@ config.database = {
 config.port = 3000;
 
 config.secret = "supercalifragilisticexpialidocious";
-
+config.algorithms = ['HS256'];
 module.exports = config;

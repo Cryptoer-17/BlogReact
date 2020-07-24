@@ -2,6 +2,7 @@ const exjwt = require("express-jwt");
 const config = require("../config/config");
 const jwtMW = exjwt({
   secret: config.secret,
+  algorithms: config.algorithms
 });
 
 module.exports = {

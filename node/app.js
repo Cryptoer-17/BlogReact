@@ -68,7 +68,7 @@ const unless = function (path, middleware) {
   };
 };
 
-/*app.use(
+app.use(
   unless(["/login", "/register"], function (req, res, next) {
     jwtMW.jwtMiddleware(req, res, next);
   })
@@ -77,7 +77,7 @@ app.use(
   unless(["/login", "/register"], function (req, res, next) {
     userMW.userMiddleware(req, res, next);
   })
-);*/
+);
 
 users(app);
 profili(app);
