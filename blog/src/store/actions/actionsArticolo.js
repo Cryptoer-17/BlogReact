@@ -1,7 +1,6 @@
 import axios from '../../utility/axios';
 import * as actionTypes from './actionTypes';
 
-
 export const setArticoliSuccess = (articoli) =>{
     return{
         type: actionTypes.SET_ARTICOLI_SUCCESS,
@@ -22,7 +21,6 @@ export const setArticoliFail = (error) =>{
         error : error
     }
 }
-
 
 export const initArticoli = () =>{
     return dispatch =>{
@@ -140,41 +138,3 @@ export const deleteArticolo = (articolo) =>{
         });
     }
 }
-
-
-
-
-/*export const updateDataSuccess = (dati) =>{
-    return{
-        type: actionTypes.UPDATE_DATA_SUCCESS,
-        dati: dati
-    }
-} 
-
-export const updateDataStart = () =>{
-    return {
-        type : actionTypes.UPDATE_DATA_START
-    };
-}
-
-export const updateDataFail = (error) =>{
-    
-    return{
-        type : actionTypes.UPDATE_DATA_FAIL,
-        error : error
-    }
-}
-
-
-export const updateData = (dato,idProfilo) =>{
-    return dispatch => {
-        dispatch(updateDataStart());
-        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
-        .then(res =>{ 
-            dispatch(updateDataSuccess(dato))
-          })
-        .catch(error => { 
-            dispatch(updateDataFail(error));
-        });
-    }
-}*/

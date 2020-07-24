@@ -56,9 +56,6 @@ return(
 <div className = {classes.Logout}>
 <h3>Logout</h3>
 
-{/*<p> {user.displayName} </p>*/}
-
-{/*<img src = {user.photoURL}   className = {classes.UserImg} alt = "" />*/}
 
 <button id="btnLogout" className = {classes.LogoutButton} onClick = {() => {onLogout(); hideModal();  } }  > Esci</button>
 {error}

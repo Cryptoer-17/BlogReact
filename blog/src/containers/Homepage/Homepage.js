@@ -5,7 +5,6 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
-import Modal from '../../Components/UI/Modal/Modal';
 
 
 class Homepage extends Component{
@@ -96,7 +95,6 @@ return(
 
    <ScrollTopButton/>
 </div>
-
 );
 }
 }

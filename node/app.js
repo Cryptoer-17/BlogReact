@@ -55,7 +55,7 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-/*
+
 const unless = function (path, middleware) {
   return function (req, res, next) {
     if (path.includes(req.path)) {
@@ -65,7 +65,7 @@ const unless = function (path, middleware) {
     }
   };
 };
-
+/*
 app.use(
   unless(["/login", "/register"], function (req, res, next) {
     jwtMW.jwtMiddleware(req, res, next);

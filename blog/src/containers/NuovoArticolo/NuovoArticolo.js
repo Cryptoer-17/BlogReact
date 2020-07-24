@@ -213,13 +213,6 @@ return(
         />
         ) }
 
-{ /* 
-<div  className = {classes.editor}>
-    <Editor body_placeholder ={'Scrivi qualcosa'}  /> 
-
-    </div>
-
-*/}
 
 <input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
