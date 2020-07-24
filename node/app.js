@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 /*const boot = require("./boot/boot");
 // const graphql = require("./routes/graphql");*/
 const config = require("./config/config");
-/*const jwtMW = require("./middleware/jwt.middleware");
-const userMW = require("./middleware/user.middleware");*/
+const jwtMW = require("./middleware/jwt.middleware");
+const userMW = require("./middleware/user.middleware");
 // require("./cron/cron");
 const bodyParser = require("body-parser");
 const cors = require('cors');
-/*
+
 //routes
-const users = require("./routes/users");*/
+const users = require("./routes/users");
 const profili = require("./routes/profili");
 /*
 const events = require("./routes/events");*/
@@ -67,8 +67,8 @@ const unless = function (path, middleware) {
     }
   };
 };
-/*
-app.use(
+
+/*app.use(
   unless(["/login", "/register"], function (req, res, next) {
     jwtMW.jwtMiddleware(req, res, next);
   })
@@ -77,15 +77,15 @@ app.use(
   unless(["/login", "/register"], function (req, res, next) {
     userMW.userMiddleware(req, res, next);
   })
-);
+);*/
 
-users(app);*/
+users(app);
 profili(app);
 /*
 events(app);
 
 boot.initialize();
 */
-app.listen(process.env.PORT || 4000, function () {
-  console.log("Example app listening on port 4000!");
+app.listen(process.env.PORT || 4001, function () {
+  console.log("Example app listening on port 4001!");
 });

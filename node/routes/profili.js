@@ -22,7 +22,7 @@ module.exports = (app) => {
   
   
 
-
+/*
   app.post("/activity/save", async function (req, res) {
     try {
       const result = await activityService.insertActivity(req.body, req.userid);
@@ -37,7 +37,7 @@ module.exports = (app) => {
       res.send("error");
     }
   });
-/*
+
   app.put("/activity/update/:id", async function (req, res) {
     try {
       const id = req.params["id"];

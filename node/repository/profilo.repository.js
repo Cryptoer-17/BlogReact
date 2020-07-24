@@ -1,7 +1,7 @@
-const Profili = require("../models/profili.model");
+const Profilo = require("../models/profilo.model");
 const mongoose = require("mongoose");
 
-class ProfiliRepository {
+class ProfiloRepository {
  /* async findOne(id) {
     try {
       return await Activity.findOne({ _id: id }, (error, docs) => {
@@ -36,7 +36,7 @@ class ProfiliRepository {
 
   async findAll(query) {
     try {
-      return await Profili.find(query, (error, docs) => {
+      return await Profilo.find(query, (error, docs) => {
         return docs;
       });
     } catch (error) {
@@ -97,4 +97,4 @@ class ProfiliRepository {
   
 }
 
-module.exports = ProfiliRepository;
+module.exports = ProfiloRepository;
