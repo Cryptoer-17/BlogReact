@@ -12,8 +12,7 @@ const cors = require('cors');
 //routes
 const users = require("./routes/users");
 const profili = require("./routes/profili");
-/*
-const events = require("./routes/events");*/
+const articoli = require("./routes/articoli");
 
 const url = process.env.MONGODB_URI || config.database.url;
 mongoose.connect(url, {
@@ -81,9 +80,8 @@ app.use(
 
 users(app);
 profili(app);
+articoli(app);
 /*
-events(app);
-
 boot.initialize();
 */
 app.listen(process.env.PORT || 4001, function () {
