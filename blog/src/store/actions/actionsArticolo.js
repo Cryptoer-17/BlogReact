@@ -34,7 +34,6 @@ export const initArticoli = () =>{
           }
         axios.get('http://localhost:4001/articoli',config)
         .then(response =>{   
-            console.log(response);
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
         };         
@@ -149,7 +148,7 @@ export const deleteArticolo = (articolo) =>{
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-        axios.delete('http://localhost:4001/articolo/delete/5f1e8d51bca4d542340477b0', articolo)
+        axios.delete('http://localhost:4001/articolo/delete/5f1e8d51bca4d542340477b0', articolo,config)
         .then(res =>{ 
             dispatch(deleteArticoloSuccess(articolo))
           })

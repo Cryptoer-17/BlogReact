@@ -68,6 +68,7 @@ module.exports = (app) => {
       const id = req.params["id"];
       console.log(req.userid);
       console.log(req.body);
+      console.log("entrato");
       const result = await userService.updateEmail(id, req.body, req.userid);
       if (result.success) {
         res.send(result);

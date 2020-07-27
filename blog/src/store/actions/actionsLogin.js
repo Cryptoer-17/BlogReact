@@ -23,13 +23,18 @@ export const updateEmailSuccess = () =>{
 export const updateEmail = (email) =>{
     return dispatch =>{
         dispatch(updateEmailStart());
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
-        const authData ={
-            idToken : localStorage.getItem("token"),
-            email : email,
-            returnSecureToken:true 
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
           }
-        axios.post(url,authData)
+        let url = 'http://localhost:4001/email/update/'+ localStorage.getItem("userId");
+        const authData ={
+            _id:localStorage.getItem("userId"),
+            email : email,
+            username : email,
+          }
+        axios.put(url,authData,config)
         .then(response=>{
             //bisognerà vedere se impostare il refresh token come locale anche se non penso 
             //bisognerà impostare la nuova email
