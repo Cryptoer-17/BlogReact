@@ -71,8 +71,10 @@ module.exports = {
       success: true,
       errors: [],
       data: {
-        token: token,
-        expires: moment().add(1, "d"),
+        idToken: token,
+        expiresIn: moment().add(1, "d"),
+        localId:user._id,
+        email:user.email
       },
     };
   },
@@ -88,7 +90,19 @@ module.exports = {
       password: hash,
      /* created_at: new Date(),*/
     });
-    return { success: true, errors: [] };
+    const expireMillis = moment().endOf("day").valueOf() - moment().valueOf();
+    const token = jwt.sign({ userid: userCreated._id}, config.secret, {
+      expiresIn: expireMillis,
+    });
+    
+
+    return { 
+      success: true, 
+      errors: [],
+      idToken:token,
+      expiresIn:moment().add(1,"d"),
+      localId:userCreated._id,
+      email:userCreated.username};
   },
  /* findAll: async () => {
     const users = await userRepository.findAll();

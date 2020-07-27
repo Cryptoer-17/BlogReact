@@ -8,7 +8,7 @@ import Spinner from '../UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import axios from 'axios';
-
+import * as moment from 'moment';
 class Modifica extends Component {
     state = {
         form: {
@@ -81,16 +81,23 @@ class Modifica extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         const token = localStorage.getItem("token");
-        this.setState({ loading: true })
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + token)
+        this.setState({ loading: true });
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
+        axios.get('http://localhost:4001/articolo/' + id,config)
             .then(response => {
                 /*  if (typeof response.data.tags === 'undefined'){
                       response.data.tags = [];
                   }*/
+                  console.log(response);
+                  console.log(response.data[0].sottotitolo);
                 let form = {
                     titolo: {
                         type: "text",
-                        value: "" + response.data.titolo + "",
+                        value: "" + response.data[0].titolo + "",
                         validation: {
                             required: true
                         },
@@ -103,7 +110,7 @@ class Modifica extends Component {
                     },
                     sottotitolo: {
                         type: "text",
-                        value: "" + response.data.sottotitolo + "",
+                        value: "" + response.data[0].sottotitolo + "",
                         touched: false,
                         valid: true,
                         config: {
@@ -112,7 +119,7 @@ class Modifica extends Component {
                     },
                     testo: {
                         type: "textarea",
-                        value: "" + response.data.testo + "",
+                        value: "" + response.data[0].testo + "",
                         touched: false,
                         valid: false,
                         validation: {
@@ -124,7 +131,7 @@ class Modifica extends Component {
                     },
                     categoria: {
                         type: "text",
-                        value: "" + response.data.categoria + "",
+                        value: "" + response.data[0].categoria + "",
                         touched: false,
                         valid: false,
                         validation: {
@@ -136,7 +143,7 @@ class Modifica extends Component {
                     },
                     descrizione: {
                         type: "text",
-                        value: "" + response.data.descrizione + "",
+                        value: "" + response.data[0].descrizione + "",
                         touched: false,
                         valid: true,
                         config: {
@@ -146,7 +153,7 @@ class Modifica extends Component {
                 }
                 this.setState({
                     form: form,
-                    tags: (response.data.tags === undefined ? [] : response.data.tags)
+                    tags: (response.data.tags === undefined ? [] : response.data[0].tags)
                 })
                 const updateTags = [...this.state.tags]
                 let tagsList = [];
@@ -155,9 +162,9 @@ class Modifica extends Component {
                     tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
                 })
                 this.setState({ tagsList: tagsList })
-                this.setState({ anteprimaImg: (response.data.img === undefined ? null : (<div className={classes.ImgClose}><img src={response.data.img} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>)), img: (response.data.img === undefined ? null : response.data.img) })
+                this.setState({ anteprimaImg: (response.data[0].img === undefined ? null : (<div className={classes.ImgClose}><img src={response.data[0].img} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>)), img: (response.data[0].img === undefined ? null : response.data[0].img) })
                 this.setState({ loading: false })
-                this.setState({ messaggi: (response.data.messaggi === undefined ? [] : response.data.messaggi) })
+                this.setState({ messaggi: (response.data[0].messaggi === undefined ? [] : response.data[0].messaggi) })
             })
             .catch(error => {
                 this.setState({ loading: false })
@@ -210,10 +217,12 @@ class Modifica extends Component {
     };
     modifyArticleHandler = async () => {
         const id = this.props.match.params.id;
+        console.log(new Date().toLocaleDateString());
         const articolo = {
+            _id:this.props.match.params.id,
             autore: localStorage.getItem("username"),
             categoria: this.state.form.categoria.value.trim(),
-            data: new Date().toLocaleDateString(),
+            data: moment(new Date()),
             descrizione: this.state.form.descrizione.value.trim(),
             img: this.state.img,
             like: false,
@@ -225,6 +234,7 @@ class Modifica extends Component {
             titolo: this.state.form.titolo.value.trim(),
             userId: localStorage.getItem("userId")
         }
+        console.log(this.state.form.sottotitolo.value.trim());
         this.props.onUpdateArticolo(articolo, id);
         this.setState({ show: true })
         setTimeout(() => {

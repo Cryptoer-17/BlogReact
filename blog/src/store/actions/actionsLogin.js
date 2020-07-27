@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { auth, provider } from '../../utility/firebase';
-
+import * as moment from 'moment'; 
 export const updateEmailStart = () =>{
     return{
         type:actionTypes.UPDATE_EMAIL_START
@@ -127,19 +127,23 @@ export const login = (email, password, isSignup,errore) =>{
     return dispatch =>{
         dispatch(loginStart());
         const authData ={
-          email : email,
+          username : email,
           password : password,
-          returnSecureToken:true 
+          email:email
         }
         console.log(isSignup);
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        //registrazione
+        let url = 'http://localhost:4001/register';
         if(!isSignup){
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+            //login
+            url = 'http://localhost:4001/login';
         }
         axios.post(url, authData)
         .then(response =>{
             console.log(response);
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+            const express = response.data.expiresIn;
+            const expiresIn = moment(express).toDate().getTime();
+            const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
             localStorage.setItem('token', response.data.idToken);
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('userId', response.data.localId);

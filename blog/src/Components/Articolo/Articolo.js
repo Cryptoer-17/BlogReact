@@ -19,16 +19,22 @@ class Articolo extends Component {
     componentDidMount() {
         console.log("ok")
         const id = this.props.match.params.id;
-        this.setState({ loading: true })
-        axios.get('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"))
+        this.setState({ loading: true });
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.get('http://localhost:4001/articolo/' + id,config)
             .then(response => {
-                if (typeof response.data.tags === 'undefined') {
-                    response.data.tags = [];
+                console.log(response);
+                if (typeof response.data[0].tags === 'undefined') {  
+                    response.data[0].tags = [];
                 }
-                if (typeof response.data.messaggi === 'undefined') {
-                    response.data.messaggi = [];
+                if (typeof response.data[0].messaggi === 'undefined') {
+                    response.data[0].messaggi = [];
                 }
-                this.setState({ articolo: response.data })
+                this.setState({ articolo: response.data[0] })
                 this.setState({ loading: false })
             })
             .catch(error => {
@@ -59,7 +65,12 @@ class Articolo extends Component {
             articolo: anteprima
         })
         const id = this.props.match.params.id;
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
                 console.log(response)
                 this.props.onInitArticoli();

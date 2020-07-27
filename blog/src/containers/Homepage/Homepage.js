@@ -31,8 +31,13 @@ clickHeartHandler(art){
           ...art.articolo,
           like: heartChange
       } 
-      const id = art.key;
-      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+      const id = art.articolo._id;
+      let config = {
+         headers: {
+             authorization: 'Bearer '+ localStorage.getItem("token"),
+         }
+       }
+      axios.put('http://localhost:4001/articolo/update/'+ id,anteprima,config)
       .then(response => {
          this.props.mount();
       })
@@ -56,8 +61,9 @@ render(){
     }else{
        
     articoliVisualizzati = articoli.map((art) =>{
+       console.log(art);
       return (<AnteprimaArticolo 
-         id={art.key} 
+         id={art.articolo._id} 
          autore={art.articolo.autore}
          categoria = {art.articolo.categoria}
          descrizione = {art.articolo.descrizione}
@@ -71,7 +77,7 @@ render(){
          disableMore = {true}
          mount = {mount}
          clickHeart = {() => this.clickHeartHandler(art)} 
-         key={art.key}/>);
+         key={art.articolo._id}/>);
    })
 }
    let error;

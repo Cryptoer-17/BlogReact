@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const ActionBar = (props) => {
     let modal = null;
+    console.log(props.id);
     return (
         <div className={classes.ActionBar}>
             <div className={classes.Actions}>
@@ -13,7 +14,7 @@ const ActionBar = (props) => {
             </div>
             {props.disableMore ? null :
                 <div className={classes.MoreDiv} >
-                    <FaEllipsisH className={classes.More} onClick={() => props.clickMenu(props.id)} />
+                    <FaEllipsisH className={classes.More} onClick={() => {props.clickMenu(props.id);console.log("CLICCATO")}} />
                     <div className={classes.DropdownContent} style={props.showdropdown ? { display: 'block' } : null} >
                         <a onClick={() => props.modalDelete()} style={{ cursor: 'pointer' }}>Elimina</a>
                         <NavLink to={"/modifica/" + props.id}/*className={classes.Link} activeClassName={classes.LinkAttivo}*/>Modifica</NavLink>

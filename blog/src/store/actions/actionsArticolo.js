@@ -27,7 +27,12 @@ export const initArticoli = () =>{
         const temparray = [];
         dispatch(setArticoliStart());
         const token = localStorage.getItem('token');
-        axios.get('/articoli.json?auth=' +token)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
+        axios.get('http://localhost:4001/articoli',config)
         .then(response =>{   
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
@@ -67,10 +72,14 @@ export const postArticoloStart = () =>{
 export const postArticolo = (articolo) => {
     return dispatch => {
         dispatch(postArticoloStart());
-        console.log(articolo);
-        axios.post('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.post('http://localhost:4001/articolo/save', articolo,config)
         .then(res =>{ 
-            dispatch(postArticoloSuccess(articolo))
+         //   dispatch(postArticoloSuccess(articolo))
           })
         .catch(error => { 
             dispatch(postArticoloFail(error));
@@ -107,7 +116,12 @@ export const updateArticoloSuccess = (articolo) =>{
 export const updateArticolo = (articolo,idArticolo) =>{
     return dispatch => {
         dispatch(postArticoloStart());
-        axios.put('/articoli/'+idArticolo+'.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.put('http://localhost:4001/articolo/update/'+idArticolo, articolo,config)
         .then(res =>{ 
             dispatch(updateArticoloSuccess(articolo))
           })
@@ -129,7 +143,13 @@ export const deleteArticoloSuccess = (articolo) =>{
 export const deleteArticolo = (articolo) =>{
     return dispatch => {
         dispatch(postArticoloStart());
-        axios.delete('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+          console.log(articolo);
+        axios.delete('http://localhost:4001/articolo/delete/', articolo,config)
         .then(res =>{ 
             dispatch(deleteArticoloSuccess(articolo))
           })

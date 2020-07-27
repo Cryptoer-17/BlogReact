@@ -181,8 +181,8 @@ class Profilo extends Component {
 
     clickMenuHandler = (props) => {
         console.log(props);
-        this.setState({ showDropdown: !this.state.showDropdown })
-        this.setState({ idArticoloCambiamenti: props })
+       this.setState({ showDropdown: !this.state.showDropdown });
+        this.setState({ idArticoloCambiamenti: props });
     }
     handlerClickPresentazione() {
         this.setState({ presentazione: false })
@@ -446,6 +446,7 @@ class Profilo extends Component {
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount,   loadingLogin } = this.props;
+        console.log(showDropdown);
         let email;
         let modificaEmail;
         let modificaPassword;
@@ -555,7 +556,7 @@ class Profilo extends Component {
             if (art.articolo.userId === localStorage.getItem('userId')) {
                 return (
                     <AnteprimaArticolo
-                        id={art.key}
+                        id={art.articolo._id}
                         autore={art.articolo.autore}
                         categoria={art.articolo.categoria}
                         descrizione={art.articolo.descrizione}
@@ -567,12 +568,12 @@ class Profilo extends Component {
                         data={art.articolo.data}
                         minuti={art.articolo.minuti}
                         disableMore={false}
-                        showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown : false}
+                        showDropdown={this.state.idArticoloCambiamenti === art.articolo._id ? showDropdown : false}
                         mount={mount}
                         clickMenuHandler={this.clickMenuHandler}
                         UpdateArticolo={this.props.clickUpdateArticolo}
                         clickHeart={() => this.clickHeartHandler(art)}
-                        key={art.key} />
+                        key={art.articolo._id} />
                 );
             } else return null;
         })

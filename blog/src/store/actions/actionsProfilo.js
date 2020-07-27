@@ -37,7 +37,12 @@ export const getProfilo = () =>{
         let temparray=[];
         dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
-        axios.get('/profili.json?auth=' +token)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
+        axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
             dispatch(getAllProfiliSuccess(response.data))
           for(let key in response.data){
@@ -62,11 +67,15 @@ export const setUsername = (username) =>{
     console.log(token);
        let profilo = null;
        let id = "";
-
+       let config = {
+        headers: {
+            authorization: 'Bearer '+ token,
+        }
+      }
     return dispatch =>{
         
        dispatch(sendDataStart())
-        axios.get('/profili.json?auth=' +token)
+        axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
           for(let key in response.data){
             if(response.data[key].userId === localStorage.getItem("userId"))

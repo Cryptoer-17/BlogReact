@@ -29,6 +29,7 @@ module.exports = {
     if (!validateUpdate(articolo, id)) {
       return { success: false, errors: ["articolo error"] };
     }
+    console.log("arrivato fino a qui");
     const filter = { _id: id };
     const result = await articoloRepository.updateOne(filter, articolo);
     return { success: true, errors: [], data: result };

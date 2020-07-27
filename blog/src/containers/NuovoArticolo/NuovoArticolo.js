@@ -147,10 +147,10 @@ clickCloseImg(){
     this.props.onPostArticolo(articolo);
     
      this.showModal();
-     setTimeout(() => {
+     /*setTimeout(() => {
         this.props.history.push("/")
         window.location.reload();
-    } , 1800)  
+    } , 1800) */
 
 }
 
