@@ -9,13 +9,13 @@ const profiloRepository = new ProfiloRepository();
 /*
 validateUser = (activity, userId) => {
   return activity.userId == userId;
-}; 
+};*/
 
 
-/* COMMENTATO
-validateUpdate = (activity, id) => {
-  return activity._id == id;
-};
+
+validateUpdate = (profilo, id) => {
+  return profilo._id == id;
+};/* COMMENTATO
 findById = (id) => {
   return activityRepository.findOne(id);
 };*/
@@ -47,23 +47,23 @@ module.exports = {
     });
     const result = await activityRepository.bulkInsert(arr);
     return { success: true, errors: [], data: result };
-  },
-  updateOne: async (id, activity, userId) => {
-    let errors = [];*/
+  },*/
+  updateOne: async (id, profilo, userId) => {
+    let errors = [];
 
    /* if (!validateUser(activity, userId)) {
       return { success: false, errors: ["user error"] };
     } */
 
-  /*  COMMENTATO if(userId){
-    if (!validateUpdate(activity, id)) {
-      return { success: false, errors: ["activityerror"] };
+   if(userId){
+    if (!validateUpdate(profilo, id)) {
+      return { success: false, errors: ["profiloerror"] };
     }
     const filter = { _id: id };
-    const result = await activityRepository.updateOne(filter, activity);
+    const result = await profiloRepository.updateOne(filter, profilo);
     return { success: true, errors: [], data: result };
   };
-  },
+  },/*
   deleteOne: async (id, userId) => {
     if(userId){
     const filter = { _id: id };

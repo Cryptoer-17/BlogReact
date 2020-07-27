@@ -73,13 +73,13 @@ class ProfiloRepository {
     } catch (error) {
       return error;
     }
-  }
+  }*/
 
   async updateOne(filter, update) {
     console.log(filter);
     console.log(update);
     try {
-      let doc = await Activity.findOneAndUpdate(filter, update, {
+      let doc = await Profilo.findOneAndUpdate(filter, update, {
         new: true,
       });
       console.log(doc);
@@ -87,7 +87,7 @@ class ProfiloRepository {
     } catch (error) {
       return error;
     }
-  }
+  }/*
   async deleteOne(filter) {
     console.log(filter);
     let doc = await Activity.findOneAndDelete(filter);

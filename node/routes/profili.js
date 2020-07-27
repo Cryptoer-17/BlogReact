@@ -37,13 +37,13 @@ module.exports = (app) => {
       res.send("error");
     }
   });
-/*
-  app.put("/activity/update/:id", async function (req, res) {
+
+  app.put("/profilo/update/:id", async function (req, res) {
     try {
       const id = req.params["id"];
       console.log(req.userid);
       console.log(req.body);
-      const result = await activityService.updateOne(id, req.body, req.userid);
+      const result = await profiliService.updateOne(id, req.body, req.userid);
       if (result.success) {
         res.send(result);
       } else {
@@ -54,7 +54,7 @@ module.exports = (app) => {
       res.send("error");
     }
   });
-
+/*
   app.delete("/activity/delete/:id", async function (req, res) {
     try {
       let id = req.params["id"];
