@@ -36,14 +36,13 @@ export const updateEmail = (email) =>{
           }
         axios.put(url,authData,config)
         .then(response=>{
+            console.log(response);
             //bisognerà vedere se impostare il refresh token come locale anche se non penso 
             //bisognerà impostare la nuova email
             //bisognerà impostare una nuova expire date
             console.log(response);
             localStorage.removeItem("email");
-            localStorage.setItem('email', response.data.email);
-            localStorage.removeItem("token");
-            localStorage.setItem('token', response.data.idToken);
+            localStorage.setItem('email', response.data.data.email);
             dispatch(updateEmailSuccess());
         })
         .catch(error =>{
@@ -74,17 +73,24 @@ export const updatePasswordFail = () =>{
 export const updatePassword = (props)=>{
     return dispatch=>{
         dispatch(updatePasswordStart());
-        let url= 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+         const email = localStorage.getItem("email");
+        let url= 'http://localhost:4001/password/update/' + localStorage.getItem("userId");
         const authData ={
-            idToken : localStorage.getItem("token"),
+            _id:localStorage.getItem("userId"),
+            email:email,
+            username: email,
             password : props,
-            returnSecureToken:true 
         }
-        axios.post(url,authData)
+        axios.put(url,authData,config)
         .then((response)=>{
             console.log(response)
-            localStorage.removeItem("token");
-            localStorage.setItem('token', response.data.idToken);
+          /*  localStorage.removeItem("token");
+            localStorage.setItem('token', response.data.idToken);*/
             dispatch(updatePasswordSuccess())
         })
         .catch((error)=>{

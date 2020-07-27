@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {  } from 'react';
 import classes from './ActionBar.module.css';
 import { FaHeart, FaRegCommentDots, FaEllipsisH } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const ActionBar = (props) => {
-    let modal = null;
     console.log(props.id);
     return (
         <div className={classes.ActionBar}>

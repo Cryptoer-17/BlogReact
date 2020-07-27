@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import classes from './EliminaMessaggio.module.css';
-import axios from 'axios';
+
 import Spinner from '../../UI/Spinner/Spinner';
 import * as actions from '../../../store/actions/index';
 import { connect } from 'react-redux';

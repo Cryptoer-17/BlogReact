@@ -7,8 +7,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-import Editor from 'Dante2';
-import { FaThinkPeaks } from 'react-icons/fa';
+
 
 
 class NuovoArticolo extends Component{
@@ -183,7 +182,7 @@ checkValidityOfInput = (event, id) =>{
 render(){
 
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
-    const {loading, esito, onInitArticoli} = this.props;
+    const {loading, esito} = this.props;
  
     const formData = [];
     for(let key in  form){

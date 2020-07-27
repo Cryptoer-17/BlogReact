@@ -7,8 +7,7 @@ import Modifica from './Components/Modifica/Modifica';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
-import { FaWindows } from 'react-icons/fa';
-import Tag from './Components/Tag/Tag';
+
 
 const asyncNuovoArticolo = asyncComponent(() =>{
   return import('./containers/NuovoArticolo/NuovoArticolo');
@@ -65,6 +64,7 @@ if(userId){
     let key; 
       let tempArray;
        if(this.props.profilo.length){
+         console.log(this.props.profilo);
          console.log(this.props.profilo[0]);
           key=this.props.profilo[0].profilo._id;
           tempArray={

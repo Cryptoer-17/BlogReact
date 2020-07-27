@@ -221,11 +221,10 @@ class Profilo extends Component {
             newpassword1:passwordData.newpassword1,
             newpassword2:passwordData.newpassword2
         }
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        let url = 'http://localhost:4001/login';
         const authData ={
-            email : localStorage.getItem("email"),
+            username : localStorage.getItem("email"),
             password:psw.oldpassword,
-            returnSecureToken:true
           }
           axios.post(url,authData)
           .then(response=>{
@@ -302,7 +301,8 @@ class Profilo extends Component {
                         autore: profile.username,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key)
+                    this.props.onUpdateArticolo(updateArticolo, articolo.key);
+                    return;
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
                     let messaggioUpdate;
@@ -318,8 +318,10 @@ class Profilo extends Component {
                         ...articolo.articolo,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key)
+                    this.props.onUpdateArticolo(updateArticolo, articolo.key);
+                    return;
                 }
+                return;
             })
         }
         else {

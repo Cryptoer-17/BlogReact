@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {} from 'react';
 import classes from './Logout.module.css';
 import Modal from '../../Components/UI/Modal/Modal';
 import {connect} from 'react-redux';
@@ -9,7 +9,7 @@ const Logout = ( props) =>{
 const {show, onLogout, hideModal,google} = props;
 console.log(google);
 
-const [showModalLogoutError, setshowModalLogoutError] = useState(false);
+
 
 let error;
 if(props.error === "Auth token is expired"){

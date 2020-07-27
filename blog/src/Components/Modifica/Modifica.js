@@ -159,7 +159,7 @@ class Modifica extends Component {
                 let tagsList = [];
                 console.log(updateTags)
                 updateTags.map((tag) => {
-                    tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
+                    return tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
                 })
                 this.setState({ tagsList: tagsList })
                 this.setState({ anteprimaImg: (response.data[0].img === undefined ? null : (<div className={classes.ImgClose}><img src={response.data[0].img} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>)), img: (response.data[0].img === undefined ? null : response.data[0].img) })
