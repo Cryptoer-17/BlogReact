@@ -43,12 +43,12 @@ module.exports = {
     }
     const result = await articoloRepository.deleteOne(filter);
     return { success: true, errors: [], data: result };
-  },/*
-  findOne: async (userId) => {
-    let query = { userId: userId };
+  },
+  findOne: async (id) => {
+    let query = { _id: id };
     const result = await articoloRepository.findAll(query);
     return { success: true, errors: [], data: result };
-  },*/
+  },
   findAll: async (userId, requestQuery = {}) => {
     let query = { userId: userId };
   /*  const { dateFrom, dateTo } = requestQuery;

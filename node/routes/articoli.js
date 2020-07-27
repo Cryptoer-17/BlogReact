@@ -55,22 +55,22 @@ module.exports = (app) => {
       console.log("err");
       res.status(500).send("error");
     }
-  });
+  });*/
 
-  app.get("/event/:id", async function (req, res) {
+  app.get("/articolo/:id", async function (req, res) {
     try {
       let id = req.params["id"];
-      const event = await eventService.findOne(id, req.userid);
-      if (event.success) {
-        res.send(event.data);
+      const articolo = await articoloService.findOne(id, req.userid);
+      if (articolo.success) {
+        res.send(articolo.data);
       } else {
-        res.status(400).send(event.errors);
+        res.status(400).send(articolo.errors);
       }
     } catch (err) {
       console.log(err);
       res.send("error");
     }
-  });*/
+  });
   app.post("/articolo/save", async function (req, res) {
     try {
       const result = await articoloService.insertOne(req.body, req.userid);
