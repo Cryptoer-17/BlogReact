@@ -52,7 +52,23 @@ module.exports = (app) => {
       const id = req.params["id"];
       console.log(req.userid);
       console.log(req.body);
-      const result = await userService.updateOne(id, req.body, req.userid);
+      const result = await userService.updatePassword(id, req.body, req.userid);
+      if (result.success) {
+        res.send(result);
+      } else {
+        res.status(400).send(result.errors);
+      }
+    } catch (err) {
+      console.log(err);
+      res.send("error");
+    }
+  });
+  app.put("/email/update/:id", async function (req, res) {
+    try {
+      const id = req.params["id"];
+      console.log(req.userid);
+      console.log(req.body);
+      const result = await userService.updateEmail(id, req.body, req.userid);
       if (result.success) {
         res.send(result);
       } else {

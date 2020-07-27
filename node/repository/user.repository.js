@@ -2,9 +2,19 @@ const User = require("../models/user.model");
 const mongoose = require("mongoose");
 
 class UserRepository {
-  async findOne(username) {
+  async findOneByUsername(username) {
     try {
       return await User.findOne({ username: username }, (error, docs) => {
+        return docs;
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async findOneById(id) {
+    try {
+      return await Activity.findOne({ _id: id }, (error, docs) => {
         return docs;
       });
     } catch (error) {

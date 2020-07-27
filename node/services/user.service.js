@@ -53,7 +53,7 @@ module.exports = {
       errors.push("payload error");
       return { success: false, errors: errors };
     }
-    const user = await userRepository.findOne(username);
+    const user = await userRepository.findOneByUsername(username);
     if (!user) {
       errors.push("auth error");
       return { success: false, errors: errors };
@@ -94,7 +94,7 @@ module.exports = {
     const users = await userRepository.findAll();
     return { success: true, errors: [], data: users };
   },*/
-  updateOne: async (id, user, userId) => {
+  updatePassword: async (id, user, userId) => {
     let errors = [];
 
    /* if (!validateUser(activity, userId)) {
@@ -103,11 +103,54 @@ module.exports = {
 
     if(userId){
     if (!validateUpdate(user, id)) {
-      return { success: false, errors: ["activityerror"] };
+      return { success: false, errors: ["usererror"] };
+    }
+    if (!validatePassword(user.password)) {
+      return { success: false, errors: ["password weak"] };
     }
     const filter = { _id: id };
-    const result = await activityRepository.updateOne(filter, user);
-    return { success: true, errors: [], data: result };
+    const user_find = await userRepository.findOneByUsername(user.username);
+    if(user_find){
+      const hash = await bcrypt.hashSync(user.password, saltRounds);
+    const updateUserPassword ={
+      ...user_find._doc,
+      password: hash,
+    }
+      const result = await userRepository.updateOne(filter, updateUserPassword);
+      return { success: true, errors: [], data: result };
+    }else{
+      return { success: false, errors: ["username is incorrect"] };
+    }
+    
+  };
+  },
+  updateEmail: async (id, user, userId) => {
+    let errors = [];
+
+   /* if (!validateUser(activity, userId)) {
+      return { success: false, errors: ["user error"] };
+    } */
+
+    if(userId){
+    if (!validateUpdate(user, id)) {
+      return { success: false, errors: ["usererror"] };
+    }
+    /*if (!validatePassword(password)) {
+      return { success: false, errors: ["password weak"] };
+    }*/
+    const filter = { _id: id };
+    const user_find = await userRepository.findOneById(id);
+    if(user_find){
+      const updateUserEmail = {
+        ...user._doc,
+        email:user.email,
+        username:user.email
+      }
+      const result = await userRepository.updateOne(filter, updateUserEmail);
+      return { success: true, errors: [], data: result };
+    }else{
+      return { success: false, errors: ["username "] };
+    }
   };
   },
 };
