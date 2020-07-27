@@ -97,9 +97,6 @@ module.exports = {
   updatePassword: async (id, user, userId) => {
     let errors = [];
 
-   /* if (!validateUser(activity, userId)) {
-      return { success: false, errors: ["user error"] };
-    } */
 
     if(userId){
     if (!validateUpdate(user, id)) {
@@ -127,17 +124,10 @@ module.exports = {
   updateEmail: async (id, user, userId) => {
     let errors = [];
 
-   /* if (!validateUser(activity, userId)) {
-      return { success: false, errors: ["user error"] };
-    } */
-
     if(userId){
     if (!validateUpdate(user, id)) {
       return { success: false, errors: ["usererror"] };
     }
-    /*if (!validatePassword(password)) {
-      return { success: false, errors: ["password weak"] };
-    }*/
     const filter = { _id: id };
     const user_find = await userRepository.findOneById(id);
     if(user_find){
