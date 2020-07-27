@@ -2,15 +2,15 @@ const Articolo = require("../models/articolo.model");
 const mongoose = require("mongoose");
 
 class ArticoloRepository {
-  /*async findOne(id) {
+  async findOne(id) {
     try {
-      return await Event.findOne({ _id: id }, (error, docs) => {
+      return await Articolo.findOne({ _id: id }, (error, docs) => {
         return docs;
       });
     } catch (error) {
       return error;
     }
-  }*/
+  }
 
   async insertOne(articolo) {
     try {
@@ -35,12 +35,12 @@ class ArticoloRepository {
     } catch (error) {
       return error;
     }
-  }
+  }*/
   async deleteOne(filter) {
     console.log(filter);
-    let doc = await Event.findOneAndDelete(filter);
+    let doc = await Articolo.findOneAndDelete(filter);
     console.log(doc);
-  }*/
+  }
 
   async findAll(query) {
     try {

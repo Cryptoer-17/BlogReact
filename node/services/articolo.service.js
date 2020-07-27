@@ -2,16 +2,16 @@ const moment = require("moment");
 
 const ArticoloRepository = require("../repository/articolo.repository");
 const articoloRepository = new ArticoloRepository();
-/*
-validateUser = (event, userId) => {
-  return event.userId == userId;
-};
+
+validateUser = (articolo, userId) => {
+  return articolo.userId == userId;
+};/*
 validateUpdate = (event, id) => {
   return event._id == id;
-};
-findById = (id) => {
-  return eventRepository.findOne(id);
 };*/
+findById = (id) => {
+  return articoloRepository.findOne(id);
+};
 
 module.exports = {
   insertOne: async (articolo, userId) => {
@@ -29,21 +29,21 @@ module.exports = {
     const filter = { _id: id };
     const result = await eventRepository.updateOne(filter, event);
     return { success: true, errors: [], data: result };
-  },
+  },*/
   deleteOne: async (id, userId) => {
     const filter = { _id: id };
-    const event = await findById(id);
-    console.log(event.userId);
+    const articolo = await findById(id);
+    console.log(articolo.userId);
     console.log(userId);
-    if (!validateUser(event, userId)) {
+    if (!validateUser(articolo, userId)) {
       return { success: false, errors: ["user error"] };
     }
-    const result = await eventRepository.deleteOne(filter);
+    const result = await articoloRepository.deleteOne(filter);
     return { success: true, errors: [], data: result };
-  },
+  },/*
   findOne: async (userId) => {
     let query = { userId: userId };
-    const result = await eventRepository.findAll(query);
+    const result = await articoloRepository.findAll(query);
     return { success: true, errors: [], data: result };
   },*/
   findAll: async (userId, requestQuery = {}) => {

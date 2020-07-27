@@ -98,11 +98,11 @@ module.exports = (app) => {
       console.log(err);
       res.send("error");
     }
-  });
-  app.delete("/event/delete/:id", async function (req, res) {
+  });*/
+  app.delete("/articolo/delete/:id", async function (req, res) {
     try {
       let id = req.params["id"];
-      const result = await eventService.deleteOne(id, req.userid);
+      const result = await articoloService.deleteOne(id, req.userid);
       if (result.success) {
         res.send(result.data);
       } else {
@@ -112,5 +112,5 @@ module.exports = (app) => {
       console.log(err);
       res.send("error");
     }
-  });*/
+  });
 };
