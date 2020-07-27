@@ -34,6 +34,7 @@ export const initArticoli = () =>{
           }
         axios.get('http://localhost:4001/articoli',config)
         .then(response =>{   
+            console.log(response);
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
         };         
@@ -79,7 +80,7 @@ export const postArticolo = (articolo) => {
           }
         axios.post('http://localhost:4001/articolo/save', articolo,config)
         .then(res =>{ 
-         //   dispatch(postArticoloSuccess(articolo))
+            dispatch(postArticoloSuccess(articolo))
           })
         .catch(error => { 
             dispatch(postArticoloFail(error));
@@ -148,8 +149,7 @@ export const deleteArticolo = (articolo) =>{
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(articolo);
-        axios.delete('http://localhost:4001/articolo/delete/', articolo,config)
+        axios.delete('http://localhost:4001/articolo/delete/5f1e8d51bca4d542340477b0', articolo)
         .then(res =>{ 
             dispatch(deleteArticoloSuccess(articolo))
           })

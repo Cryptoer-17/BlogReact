@@ -51,8 +51,9 @@ module.exports = {
     return { success: true, errors: [], data: result };
   },
   findAll: async (userId, requestQuery = {}) => {
-    let query = { userId: userId };
-  /*  const { dateFrom, dateTo } = requestQuery;
+    let query;
+   /* let query = { userId: userId };
+    const { dateFrom, dateTo } = requestQuery;
     query = {
       ...query,
       ...(dateFrom && {

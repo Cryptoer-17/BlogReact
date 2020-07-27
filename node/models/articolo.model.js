@@ -12,6 +12,7 @@ let ArticoloModel = new Schema({
   minuti:mongoose.Schema.Types.Number,
   sottotitolo:mongoose.Schema.Types.String,
   tags:mongoose.Schema.Types.Array,
+  messaggi:mongoose.Schema.Types.Array,
   testo:mongoose.Schema.Types.String,
   titolo:mongoose.Schema.Types.String,
   userId:mongoose.Schema.Types.ObjectId

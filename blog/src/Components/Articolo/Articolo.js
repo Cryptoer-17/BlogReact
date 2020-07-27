@@ -94,7 +94,12 @@ class Articolo extends Component {
             articolo: anteprima
         })
         const id = this.props.match.params.id;
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
                 this.props.onInitArticoli();
             })
