@@ -22,10 +22,10 @@ module.exports = (app) => {
   
   
 
-/*
-  app.post("/activity/save", async function (req, res) {
+
+  app.post("/profilo/save", async function (req, res) {
     try {
-      const result = await activityService.insertActivity(req.body, req.userid);
+      const result = await profiliService.insertProfilo(req.body, req.userid);
       console.log(req)
       if (result.success) {
         res.send(result.data);
@@ -37,7 +37,7 @@ module.exports = (app) => {
       res.send("error");
     }
   });
-
+/*
   app.put("/activity/update/:id", async function (req, res) {
     try {
       const id = req.params["id"];

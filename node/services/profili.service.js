@@ -4,6 +4,8 @@ const moment = require("moment");
 const ProfiloRepository = require("../repository/profilo.repository");
 const profiloRepository = new ProfiloRepository();
 
+
+
 /*
 validateUser = (activity, userId) => {
   return activity.userId == userId;
@@ -18,7 +20,6 @@ findById = (id) => {
   return activityRepository.findOne(id);
 };*/
 
-
 module.exports = {
   findAll: async (flagValid) => {
     let query = {};
@@ -31,11 +32,11 @@ module.exports = {
     }
     const result = await profiloRepository.findAll(query);
     return { success: true, errors: [], data: result };
-  },/* COMMENTATO
-  insertActivity: async (activity) => {
-    const result = await activityRepository.insertOne(activity);
-    return { success: true, errors: [], data: result };
   },
+  insertProfilo: async (profilo) => {
+      const result = await profiloRepository.insertOne(profilo);
+      return { success: true, errors: [], data: result };
+  },/* COMMENTATO
   bulkInsert: async (collection) => {
     const arr = collection.map((activity) => {
       return {

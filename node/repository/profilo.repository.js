@@ -10,19 +10,19 @@ class ProfiloRepository {
     } catch (error) {
       return error;
     }
-  }
+  }*/
 
-  async insertOne(activity) {
+  async insertOne(profilo) {
     try {
-      return new Activity({
-        ...activity,
+      return new Profilo({
+        ...profilo,
         _id: new mongoose.Types.ObjectId(),
       }).save();
     } catch (error) {
       return error;
     }
   }
-
+/*
   async bulkInsert(collection) {
     try {
       return Activity.insertMany(collection, function (error, docs) {
