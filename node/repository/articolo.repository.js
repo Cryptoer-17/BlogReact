@@ -22,12 +22,12 @@ class ArticoloRepository {
       return error;
     }
   }
-/*
+
   async updateOne(filter, update) {
     console.log(filter);
     console.log(update);
     try {
-      let doc = await Event.findOneAndUpdate(filter, update, {
+      let doc = await Articolo.findOneAndUpdate(filter, update, {
         new: true,
       });
       console.log(doc);
@@ -35,7 +35,7 @@ class ArticoloRepository {
     } catch (error) {
       return error;
     }
-  }*/
+  }
   async deleteOne(filter) {
     console.log(filter);
     let doc = await Articolo.findOneAndDelete(filter);

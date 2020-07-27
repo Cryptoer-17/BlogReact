@@ -5,10 +5,10 @@ const articoloRepository = new ArticoloRepository();
 
 validateUser = (articolo, userId) => {
   return articolo.userId == userId;
-};/*
-validateUpdate = (event, id) => {
-  return event._id == id;
-};*/
+};
+validateUpdate = (articolo, id) => {
+  return articolo._id == id;
+};
 findById = (id) => {
   return articoloRepository.findOne(id);
 };
@@ -17,19 +17,22 @@ module.exports = {
   insertOne: async (articolo, userId) => {
     const result = await articoloRepository.insertOne(articolo);
     return { success: true, errors: [], data: result };
-  },/*
-  updateOne: async (id, event, userId) => {
+  },
+  updateOne: async (id, articolo, userId) => {
     let errors = [];
-    if (!validateUser(event, userId)) {
+    console.log("prima dell'id");
+    console.log(id);
+    console.log("dopo l'id");
+    if (!validateUser(articolo, userId)) {
       return { success: false, errors: ["user error"] };
     }
-    if (!validateUpdate(event, id)) {
-      return { success: false, errors: ["event error"] };
+    if (!validateUpdate(articolo, id)) {
+      return { success: false, errors: ["articolo error"] };
     }
     const filter = { _id: id };
-    const result = await eventRepository.updateOne(filter, event);
+    const result = await articoloRepository.updateOne(filter, articolo);
     return { success: true, errors: [], data: result };
-  },*/
+  },
   deleteOne: async (id, userId) => {
     const filter = { _id: id };
     const articolo = await findById(id);
