@@ -44,25 +44,9 @@ if(userId){
 
   render(){
     
-
-   
-  /*  tempArrayArticolo={
-      autore:articolo.autore,
-      categoria:articolo.categoria,
-      data:articolo.data,
-      descrizione:articolo.descrizione,
-      minuti:articolo.minuti,
-      sottotitoli:articolo.sottotitoli,
-      tags:articolo.tags,
-      testo:articolo.testo,
-      titolo:articolo.titolo,
-      userId:articolo.userId
-    }*/
-
     let key; 
       let tempArray;
        if(this.props.profilo.length){
-         console.log(this.props.profilo[0].profilo.dataNascita);
          let data = (this.props.profilo[0].profilo.dataNascita ===undefined || this.props.profilo[0].profilo.dataNascita === null? '' : this.props.profilo[0].profilo.dataNascita);
           if(data !== ''){
             data = moment(data).toDate().toISOString().substr(0,10);

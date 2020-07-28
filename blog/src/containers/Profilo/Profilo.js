@@ -325,6 +325,7 @@ class Profilo extends Component {
                     console.log(articolo);
                     this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
+                return null;
             })
         }
         else {
