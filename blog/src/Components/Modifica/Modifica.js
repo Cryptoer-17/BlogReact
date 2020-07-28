@@ -162,7 +162,7 @@ class Modifica extends Component {
                     return tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
                 })
                 this.setState({ tagsList: tagsList })
-                this.setState({ anteprimaImg: (response.data[0].img === undefined ? null : (<div className={classes.ImgClose}><img src={response.data[0].img} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>)), img: (response.data[0].img === undefined ? null : response.data[0].img) })
+                this.setState({ anteprimaImg: response.data[0].img === null ? null : <div className={classes.ImgClose}><img src={response.data[0].img} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>, img: (response.data[0].img === null ? null : response.data[0].img) })
                 this.setState({ loading: false })
                 this.setState({ messaggi: (response.data[0].messaggi === undefined ? [] : response.data[0].messaggi) })
             })
