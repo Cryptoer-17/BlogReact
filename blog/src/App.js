@@ -62,7 +62,8 @@ if(userId){
     let key; 
       let tempArray;
        if(this.props.profilo.length){
-         let data = (this.props.profilo[0].profilo.dataNascita ===undefined? '' : this.props.profilo[0].profilo.dataNascita);
+         console.log(this.props.profilo[0].profilo.dataNascita);
+         let data = (this.props.profilo[0].profilo.dataNascita ===undefined || this.props.profilo[0].profilo.dataNascita === null? '' : this.props.profilo[0].profilo.dataNascita);
           if(data !== ''){
             data = moment(data).toDate().toISOString().substr(0,10);
           }

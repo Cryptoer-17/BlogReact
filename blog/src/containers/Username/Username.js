@@ -47,18 +47,19 @@ checkValidityOfUsername= (event) =>{
       error = "L'username non è disponibile";
       formIsValid= false;
    }
+  }
 
    this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
   
-    }
+    
     }
 
   handlerClickConfirm=()=>{
     this.props.onSetUsername(this.state.username.value); 
-    /*setTimeout(()=>{
+    setTimeout(()=>{
       window.location.reload();
     },2000)
-    setTimeout(this.props.modalClosed,1000);*/
+    setTimeout(this.props.modalClosed,1000);
   
     
     
@@ -73,9 +74,9 @@ let contenutoModale = <Spinner/>
 if(!loading){
 
   contenutoModale =  (<div>
-   <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
+   <p>Prima di poter pubblicare degli articoli o scrivere un commento, devi scegliere un username.</p>
             <Input 
-                    value = {this.state.username.value}
+                    value = {username.value}
                     type = {username.type}
                     config = {username.config}
                     touched = {username.touched}

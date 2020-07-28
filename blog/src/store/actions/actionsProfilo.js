@@ -88,7 +88,7 @@ export const setUsername = (username) =>{
         }; localStorage.setItem("username",username);
 
         if(profilo!==null){
-         axios.put('/profili/'+ id + '.json?auth='+token,profilo).then(res =>  
+         axios.put('http://localhost:4001/profilo/update/'+ id,profilo,config).then(res =>  
             dispatch(sendDataSuccess(profilo))
             ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
         }  
@@ -105,7 +105,7 @@ export const setUsername = (username) =>{
                 userId:localStorage.getItem('userId').trim(),
                 descrizione:''
             }
-            axios.post('/profili.json?auth='+token,profilo).then(res=>dispatch(sendDataSuccess(profilo))
+            axios.post('http://localhost:4001/profilo/save',profilo,config).then(res=>dispatch(sendDataSuccess(profilo))
             ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
         }
     

@@ -12,10 +12,7 @@ const saltRounds = 10;
 
 validateUpdate = (user, id) => {
   return user._id == id;
-};/* COMMENTATO
-findById = (id) => {
-  return activityRepository.findOne(id);
-};*/
+};
 
 validateRegistration = async (user) => {
   let errors = [];
@@ -104,10 +101,7 @@ module.exports = {
       localId:userCreated._id,
       email:userCreated.username};
   },
- /* findAll: async () => {
-    const users = await userRepository.findAll();
-    return { success: true, errors: [], data: users };
-  },*/
+
   updatePassword: async (id, user, userId) => {
     let errors = [];
 

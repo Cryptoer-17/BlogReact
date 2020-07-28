@@ -17,45 +17,7 @@ module.exports = (app) => {
       console.log(err);
       res.status(500).send("error");
     }
-  }); /*
-  app.get("/eventsByDay", async function (req, res) {
-    try {
-      console.log(req.query);
-      const { day } = req.query;
-      console.log(req.userid);
-      console.log(day);
-      const events = await eventService.findByDay(req.userid, day);
-      if (events.success) {
-        res.send(events.data);
-      } else {
-        res.status(400).send(events.errors);
-      }
-    } catch (err) {
-      console.log(err);
-      console.log("err");
-      res.status(500).send("error");
-    }
-  });
-  //find by month
-  app.get("/eventsByMonth", async function (req, res) {
-    try {
-      console.log(req.query);
-      const { month,year } = req.query;
-      console.log(req.userid);
-      console.log(month);
-      console.log(year)
-      const events = await eventService.findByMonth(req.userid, year,month);
-      if (events.success) {
-        res.send(events.data);
-      } else {
-        res.status(400).send(events.errors);
-      }
-    } catch (err) {
-      console.log(err);
-      console.log("err");
-      res.status(500).send("error");
-    }
-  });*/
+  }); 
 
   app.get("/articolo/:id", async function (req, res) {
     try {

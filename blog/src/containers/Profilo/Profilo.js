@@ -305,7 +305,8 @@ class Profilo extends Component {
                         autore: profile.username,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key);
+                    console.log(articolo);
+                    this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
                     let messaggioUpdate;
@@ -321,7 +322,8 @@ class Profilo extends Component {
                         ...articolo.articolo,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key);
+                    console.log(articolo);
+                    this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
             })
         }
@@ -439,8 +441,14 @@ class Profilo extends Component {
             ...art.articolo,
             like: heartChange
         }
-        const id = art.key;
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
+        const id = art.articolo._id;
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+          console.log(anteprima);
+        axios.put('http://localhost:4001/articolo/update/' + id , anteprima,config)
             .then(response => {
                 this.props.mount();
             })

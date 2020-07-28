@@ -4,7 +4,6 @@ import { FaHeart, FaRegCommentDots, FaEllipsisH } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const ActionBar = (props) => {
-    console.log(props.id);
     return(<>
     <div className={classes.ActionBar}>
         <div className={classes.Actions}>

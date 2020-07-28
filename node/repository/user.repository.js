@@ -32,8 +32,6 @@ class UserRepository {
       return error;
     }
   }
-/*
-  async updateOne() {}*/
 
   async usernameExists(username) {
     try {
@@ -54,16 +52,7 @@ class UserRepository {
       return error;
     }
   }
-/*
-  async findAll() {
-    try {
-      return await User.find({}, (error, docs) => {
-        return docs;
-      });
-    } catch (error) {
-      return error;
-    }
-  }*/
+
   async updateOne(filter, update) {
     console.log(filter);
     console.log(update);

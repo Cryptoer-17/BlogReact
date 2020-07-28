@@ -25,9 +25,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*
-const whitelist = ['http://localhost:3000', 'http://localhost:4200','http://localhost:4000']*/
-/*
+
+const whitelist = ['http://localhost:3000', 'http://localhost:4200','http://localhost:4000']
+
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -36,9 +36,9 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   }
-}*/
+}
 
-app.use(cors(/*corsOptions*/));
+app.use(cors(corsOptions));
 
 
 // Add headers

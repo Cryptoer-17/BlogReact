@@ -17,7 +17,6 @@ class Articolo extends Component {
         comments: null
     }
     componentDidMount() {
-        console.log("ok")
         const id = this.props.match.params.id;
         this.setState({ loading: true });
         let config = {
@@ -27,7 +26,6 @@ class Articolo extends Component {
           }
         axios.get('http://localhost:4001/articolo/' + id,config)
             .then(response => {
-                console.log(response);
                 if (typeof response.data[0].tags === 'undefined') {  
                     response.data[0].tags = [];
                 }
@@ -58,8 +56,10 @@ class Articolo extends Component {
         if (c === length) {
             heartChange.push({ like: true, username: localStorage.getItem("username") })
         }
+        console.log(heartChange);
         const anteprima = {
-            ...this.state.articolo
+            ...this.state.articolo,
+            like:heartChange
         }
         this.setState({
             articolo: anteprima
@@ -70,6 +70,7 @@ class Articolo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
+          console.log(anteprima);
         axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
                 console.log(response)
@@ -99,6 +100,9 @@ class Articolo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
+          console.log(anteprima);
+          console.log("prima della chiamata");
+
         axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
                 this.props.onInitArticoli();

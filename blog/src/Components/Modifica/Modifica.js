@@ -215,7 +215,6 @@ class Modifica extends Component {
                     img: reader.result,
                     anteprimaImg: (<div className={classes.ImgClose}><img src={reader.result} alt="" /><i className="material-icons" onClick={() => this.clickCloseImg()}>close</i></div>)
                 })
-                console.log(reader.result);
             }
         }
     };
@@ -242,14 +241,14 @@ class Modifica extends Component {
         console.log(this.state.form.sottotitolo.value.trim());
         this.props.onUpdateArticolo(articolo, id);
         this.setState({ show: true })
-        /*setTimeout(() => {
+        setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 this.props.mount();
                 this.props.history.push("/");
                 window.location.reload();
                 console.log("fatto tutto ");
             }
-        }, 2000)*/
+        }, 2000)
         
         
         /*await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  

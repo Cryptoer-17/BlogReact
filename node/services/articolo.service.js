@@ -20,16 +20,9 @@ module.exports = {
   },
   updateOne: async (id, articolo, userId) => {
     let errors = [];
-    console.log("prima dell'id");
-    console.log(id);
-    console.log("dopo l'id");
-    if (!validateUser(articolo, userId)) {
-      return { success: false, errors: ["user error"] };
-    }
     if (!validateUpdate(articolo, id)) {
       return { success: false, errors: ["articolo error"] };
     }
-    console.log("arrivato fino a qui");
     const filter = { _id: id };
     const result = await articoloRepository.updateOne(filter, articolo);
     return { success: true, errors: [], data: result };
@@ -52,45 +45,7 @@ module.exports = {
   },
   findAll: async (userId, requestQuery = {}) => {
     let query;
-   /* let query = { userId: userId };
-    const { dateFrom, dateTo } = requestQuery;
-    query = {
-      ...query,
-      ...(dateFrom && {
-        dateStart: { $gte: moment(dateFrom).startOf("day").format() },
-      }),
-      ...(dateTo && {
-        dateEnd: { $lte: moment(dateTo).endOf("day").format() },
-      }),
-    };
-    console.log(query);*/
     const result = await articoloRepository.findAll(query);
     return { success: true, errors: [], data: result };
-  },/*
-  findByDay: async (userId, day) => {
-
-    let query = { userId: userId };
-    query = {
-      ...query,
-      dateStart: { $lte: moment(day).endOf("day").format() },
-      dateEnd: { $gte: moment(day).startOf("day").format() },
-    };
-    console.log(query);
-    const result = await eventRepository.findAll(query);
-    return { success: true, errors: [], data: result };
   },
-  //find by month
-  findByMonth: async (userId, year, month) => {
-
-    let query = { userId: userId };
-    let startDate = moment([year, month]);
-    query = {
-      ...query,
-      dateStart: { $gte:moment([year, month]).format() },
-      dateEnd: { $lt: moment(startDate).endOf('month').format() },
-    };
-    console.log(query);
-    const result = await eventRepository.findAll(query);
-    return { success: true, errors: [], data: result };
-  },*/
 };

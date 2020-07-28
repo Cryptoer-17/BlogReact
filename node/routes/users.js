@@ -3,21 +3,7 @@ const _ = require("lodash");
 const userService = require("../services/user.service");
 
 module.exports = (app) => {
-  
- /* app.get("/users", async function (req, res) {
-    try {
-      const users = await userService.findAll();
-      if (users.success) {
-        res.send(users.data);
-      } else {
-        res.status(400).send(users.errors);
-      }
-    } catch (err) {
-      console.log(err);
-      console.log("err");
-      res.status(500).send("error");
-    }
-  });*/
+
   app.post("/login", async function (req, res) {
     try {
       const { username, password } = req.body;

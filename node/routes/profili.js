@@ -2,7 +2,6 @@ const _ = require("lodash");
 
 const profiliService = require("../services/profili.service");
 
-/* activityService = profiliService     activities = profili */
 module.exports = (app) => {
   app.get("/profili", async function (req, res) {
     const flagValid = req.query["flagValid"];
@@ -54,21 +53,6 @@ module.exports = (app) => {
       res.send("error");
     }
   });
-/*
-  app.delete("/activity/delete/:id", async function (req, res) {
-    try {
-      let id = req.params["id"];
-      const result = await activityService.deleteOne(id, req.userid);
-      if (result.success) {
-        console.log(result)
-        res.send(result.data);
-      } else {
-        res.status(400).send(result.errors);
-      }
-    } catch (err) {
-      console.log(err);
-      res.send("error");
-    }
-  });*/
+
 
 };
