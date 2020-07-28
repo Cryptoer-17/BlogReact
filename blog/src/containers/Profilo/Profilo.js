@@ -180,7 +180,6 @@ class Profilo extends Component {
     }
 
     clickMenuHandler = (props) => {
-        console.log(props);
        this.setState({ showDropdown: !this.state.showDropdown });
         this.setState({ idArticoloCambiamenti: props });
     }
@@ -302,7 +301,7 @@ class Profilo extends Component {
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
                     this.props.onUpdateArticolo(updateArticolo, articolo.key);
-                    return;
+                    return null;
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
                     let messaggioUpdate;
@@ -319,9 +318,9 @@ class Profilo extends Component {
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
                     this.props.onUpdateArticolo(updateArticolo, articolo.key);
-                    return;
+                    return null;
                 }
-                return;
+                else return null;
             })
         }
         else {
@@ -419,7 +418,6 @@ class Profilo extends Component {
     }
     clickHeartHandler(art) {
         let length = art.articolo.like.length;
-        console.log(length)
         let c = 0;
         let heartChange = art.articolo.like.map((object) => {
             if (object.username === localStorage.getItem("username")) {
@@ -440,7 +438,6 @@ class Profilo extends Component {
         const id = art.key;
         axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
             .then(response => {
-                console.log("ok");
                 this.props.mount();
             })
             .catch(error => console.log(error));
@@ -448,7 +445,6 @@ class Profilo extends Component {
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount,   loadingLogin } = this.props;
-        console.log(showDropdown);
         let email;
         let modificaEmail;
         let modificaPassword;
@@ -484,7 +480,6 @@ class Profilo extends Component {
                 psw:this.state.password[key]
             })
         }
-        console.log(passwordElementsArray)
         modificaPassword = ( <div><h3>MODIFICA PASSWORD</h3>
            {passwordElementsArray.map(elementArray=>(
                <Input
@@ -586,7 +581,6 @@ class Profilo extends Component {
 
         if (loading === false ||    loadingLogin === false) {
             modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
-                {console.log(this.props.esitoLogin)}
                 {this.props.esito === '' ? null : this.props.esito}
                 {this.props.esitoLogin === '' ? null : this.props.esitoLogin}
             </Modal>);

@@ -65,8 +65,7 @@ checkValidityOfUsername= (event) =>{
    
 
 render(){
-  console.log(this.props.profili)
-const {show, modalClosed, onSetUsername,loading} = this.props;
+const {show, modalClosed,loading} = this.props;
 const {username, isFormValid, errorMsg} = this.state;
 let contenutoModale = <Spinner/>
 

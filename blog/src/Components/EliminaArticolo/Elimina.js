@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classes from './Elimina.module.css';
-import Modal from '../UI/Modal/Modal';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 

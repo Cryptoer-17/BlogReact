@@ -93,7 +93,7 @@ submitHandlerSignUp = (event) =>{
     this.props.messageRegister();
     setTimeout(() => {
         window.location.reload();
-    }, 1500); 
+    }, 2500); 
 }
 
 

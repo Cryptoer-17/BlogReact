@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Modal from '../../Components/UI/Modal/Modal';
 import Spinner from '../../Components/UI/Spinner/Spinner';
-
+import * as moment from 'moment';
 
 
 class NuovoArticolo extends Component{
@@ -127,7 +127,7 @@ clickCloseImg(){
 
   publishArticleHandler = async () => {
 
-
+    console.log(moment(new Date()));
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
         sottotitolo: this.state.form.sottotitolo.value.trim(),
@@ -137,7 +137,7 @@ clickCloseImg(){
         categoria: this.state.form.categoria.value.trim(),
         tags: this.state.tags,
         img: this.state.img,
-        data: new Date().toLocaleDateString(),
+        data: moment(new Date()),
         minuti: this.countWordsHandler(this.state.form.testo.value),
         userId: localStorage.getItem("userId"),
         like:[{username:localStorage.getItem("username"),like:false}]
@@ -146,10 +146,10 @@ clickCloseImg(){
     this.props.onPostArticolo(articolo);
     
      this.showModal();
-     /*setTimeout(() => {
+     setTimeout(() => {
         this.props.history.push("/")
         window.location.reload();
-    } , 1800) */
+    } , 1800) 
 
 }
 
@@ -228,7 +228,7 @@ return(
 
 <div className = {classes.InputImg}>
     
-    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => (console.log("ok"),this.convertFile(event.target.files[0])) } style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0])} style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
 
     <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
     { anteprimaImg ?  anteprimaImg : null}

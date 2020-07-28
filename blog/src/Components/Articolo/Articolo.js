@@ -133,6 +133,7 @@ class Articolo extends Component {
                         colore = 'red';
                     }
                 }
+                return null;
             })
             articoloVisualizzato =
                 <div className={classes.Articolo}>
@@ -160,10 +161,10 @@ class Articolo extends Component {
         if (loading) {
             articoloVisualizzato = <Spinner />;
         }
-        let error;
+      /*  let error;
         if (this.props.error === "Auth token is expired") {
             error = document.getElementById("btnLoginLogout").click()
-        }
+        }*/
         return (
             <div >
                 {articoloVisualizzato}

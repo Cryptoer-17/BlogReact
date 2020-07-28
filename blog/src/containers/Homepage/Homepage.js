@@ -61,7 +61,6 @@ render(){
     }else{
        
     articoliVisualizzati = articoli.map((art) =>{
-       console.log(art);
       return (<AnteprimaArticolo 
          id={art.articolo._id} 
          autore={art.articolo.autore}

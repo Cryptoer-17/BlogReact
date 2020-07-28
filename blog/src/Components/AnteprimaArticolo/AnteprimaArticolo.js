@@ -33,6 +33,7 @@ class AnteprimaArticolo extends Component {
                     colore = 'red';
                 }
             }
+            return null;
         })
         variabile = <div>
             {titolo}

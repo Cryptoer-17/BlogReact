@@ -45,8 +45,6 @@ if(userId){
   render(){
     
 
-
-    let tempArrayArticolo;
    
   /*  tempArrayArticolo={
       autore:articolo.autore,
@@ -64,8 +62,6 @@ if(userId){
     let key; 
       let tempArray;
        if(this.props.profilo.length){
-         console.log(this.props.profilo);
-         console.log(this.props.profilo[0]);
           key=this.props.profilo[0].profilo._id;
           tempArray={
           nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
