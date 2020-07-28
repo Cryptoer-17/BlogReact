@@ -153,7 +153,7 @@ class Modifica extends Component {
                 }
                 this.setState({
                     form: form,
-                    tags: (response.data.tags === undefined ? [] : response.data[0].tags)
+                    tags: (response.data[0].tags === undefined ? [] : response.data[0].tags)
                 })
                 const updateTags = [...this.state.tags]
                 let tagsList = [];
@@ -183,10 +183,14 @@ class Modifica extends Component {
         let tagsList = [...this.state.tagsList];
         let tags = this.state.tags;
         if (tags.indexOf(tag) < 0 && tags.length < 15 && tag.length > 0) {
+            console.log("entrato");
             tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
             tags = tags.concat(tag);
+            console.log(tagsList);
+            console.log(tags);
             this.setState({ tagsList: tagsList, tags: tags });
         }
+        
     }
     deleteTagHandler = (tag) => {
         let tagsList = [...this.state.tagsList];
@@ -229,25 +233,26 @@ class Modifica extends Component {
             messaggi: this.state.messaggi,
             minuti: this.countWordsHandler(this.state.form.testo.value),
             sottotitolo: this.state.form.sottotitolo.value.trim(),
-            tags: this.state.tags,
+            tags: [...this.state.tags],
             testo: this.state.form.testo.value,
             titolo: this.state.form.titolo.value.trim(),
             userId: localStorage.getItem("userId")
         }
+        console.log(articolo);
         console.log(this.state.form.sottotitolo.value.trim());
         this.props.onUpdateArticolo(articolo, id);
         this.setState({ show: true })
-        setTimeout(() => {
+        /*setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 this.props.mount();
                 this.props.history.push("/");
                 window.location.reload();
                 console.log("fatto tutto ");
             }
-        }, 2000)
-        /*
+        }, 2000)*/
         
-        await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
+        
+        /*await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
         this.showModal();
         setTimeout(() => this.props.history.push("/") , 3000)*/
     }
@@ -269,6 +274,7 @@ class Modifica extends Component {
     render() {
         const { form, tagInput, tags, tagsList, anteprimaImg, show } = this.state;
         const { loading, esito } = this.props;
+    
         const formData = [];
         for (let key in form) {
             formData.push({ id: key, obj: form[key] });

@@ -180,7 +180,7 @@ class Profilo extends Component {
         }
     }
 
-  
+
 
     clickMenuHandler = (props) => {
        this.setState({ showDropdown: !this.state.showDropdown });
@@ -306,7 +306,6 @@ class Profilo extends Component {
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
                     this.props.onUpdateArticolo(updateArticolo, articolo.key);
-                    return null;
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
                     let messaggioUpdate;
@@ -323,19 +322,17 @@ class Profilo extends Component {
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
                     this.props.onUpdateArticolo(updateArticolo, articolo.key);
-                    return null;
                 }
-                else return null;
             })
         }
         else {
             this.props.onSendData(profile);
         }
-        /*setTimeout(() => {
+        setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 window.location.reload();
             }
-        }, 1000)*/
+        }, 1000)
     }
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
@@ -577,7 +574,7 @@ class Profilo extends Component {
                         clickMenuHandler={this.clickMenuHandler}
                         UpdateArticolo={this.props.clickUpdateArticolo}
                         clickHeart={() => this.clickHeartHandler(art)}
-                        key={art.articolo._id} />
+                        key={art.key} />
                 );
             } else return null;
         })
