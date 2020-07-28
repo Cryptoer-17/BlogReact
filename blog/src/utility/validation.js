@@ -26,7 +26,7 @@
     } 
 
     if (rules.isDate) {
-        const pattern =/^\d{4}[./-]\d{2}[./-]\d{2}$/;
+        const pattern =/^(19|20)\d{2}[./-]\d{2}[./-]\d{2}$/;
         isValid = pattern.test(value) && isValid
     } 
     return isValid;

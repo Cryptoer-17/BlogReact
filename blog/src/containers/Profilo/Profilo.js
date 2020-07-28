@@ -20,7 +20,7 @@ class Profilo extends Component {
         anteprimaImg: <img className={classes.InputImg} src={this.props.profilo.img} alt="" />,
         presentazione: (this.props.profilo.descrizione ? false : null),//false
         modificaDati: null,
-        img: null,
+        img: (this.props.profilo.img === undefined ? null : this.props.profilo.img),
         idProfilo:''+this.props.profilo._id+'',
         descrizione: '' + this.props.profilo.descrizione + '',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
@@ -180,6 +180,9 @@ class Profilo extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.props.profilo.img);
+    }
 
     clickMenuHandler = (props) => {
        this.setState({ showDropdown: !this.state.showDropdown });
@@ -330,11 +333,11 @@ class Profilo extends Component {
         else {
             this.props.onSendData(profile);
         }
-        setTimeout(() => {
+        /*setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 window.location.reload();
             }
-        }, 1000)
+        }, 1000)*/
     }
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
@@ -370,8 +373,10 @@ class Profilo extends Component {
         const updatedFormElement = {
             ...updatedprofileForm[inputIdentifier]
         }
+        console.log(updatedFormElement);
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        console.log(updatedFormElement);
         updatedFormElement.touched = true;
         updatedprofileForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
@@ -402,7 +407,7 @@ class Profilo extends Component {
         if (e !== undefined) {
             reader.readAsDataURL(e);
             reader.onloadend = () => {
-
+                console.log(reader.result);
                 this.setState({ img: reader.result, anteprimaImg:(<div className={classes.ImgClose}><img className={classes.InputImg} src={reader.result} alt="" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>) })
             }
         }
@@ -449,7 +454,6 @@ class Profilo extends Component {
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount,   loadingLogin } = this.props;
-        console.log("rirender");
         let email;
         let modificaEmail;
         let modificaPassword;
@@ -513,7 +517,6 @@ class Profilo extends Component {
         let form = (
             <form>
                 {formElemetsArray.map(formElement => (
-                    console.log(formElement),
                     formElement.id !== 'username' ? <Input
                         key={formElement.id}
                         type={formElement.config.elementType}
@@ -622,7 +625,7 @@ class Profilo extends Component {
                 Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità : <b>non ancora inserita</b>}<br />
                         <hr />
                         <div className={this.props.profilo.img ? classes.ImgMediaQuery : null}>
-                            Foto profilo: {this.props.profilo.img !== undefined ? <img  style={{ width: '15%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
+                            Foto profilo: {this.props.profilo.img !== undefined ? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
                         </div>
                     </div>
                     <div>

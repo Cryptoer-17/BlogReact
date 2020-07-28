@@ -19,7 +19,7 @@ const postArticoloStart = ( state ) => {
 
 const postArticoloFail = ( state,err) => {
     console.log(console.log(err));
-    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nel caricamento del post. Utilizzare un'immagine di dimensioni inferiori a 2 mb"} );
+    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nel caricamento del post. Utilizzare un'immagine di dimensioni inferiori a 1 mb"} );
 };
 
 const postArticoloSuccess = ( state, action ) => {

@@ -17,7 +17,7 @@ const updateDataStart = ( state ) => {
 };
 
 const updateDataFail = ( state) => {
-    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nell'invio dei dati."} );
+    return updateObject( state, {  loading:false , esitoCaricamento: "Errore nell'invio dei dati. Controllare che la foto profilo sia inferiore ad 1 mb"} );
 };
 
 const updateDataSuccess = ( state, action ) => {

@@ -69,7 +69,6 @@ checkValidityOfUsername= (event) =>{
 render(){
 const {show, modalClosed,loading} = this.props;
 const {username, isFormValid, errorMsg} = this.state;
-console.log("rirender")
 let contenutoModale = <Spinner/>
 if(!loading){
 

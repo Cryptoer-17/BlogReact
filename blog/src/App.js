@@ -7,7 +7,7 @@ import Modifica from './Components/Modifica/Modifica';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
-
+import * as moment from 'moment';
 
 const asyncNuovoArticolo = asyncComponent(() =>{
   return import('./containers/NuovoArticolo/NuovoArticolo');
@@ -62,14 +62,16 @@ if(userId){
     let key; 
       let tempArray;
        if(this.props.profilo.length){
-         console.log("if");
-         console.log(this.props.profilo[0].profilo.dataNascita);
+         let data = (this.props.profilo[0].profilo.dataNascita ===undefined? '' : this.props.profilo[0].profilo.dataNascita);
+          if(data !== ''){
+            data = moment(data).toDate().toISOString().substr(0,10);
+          }
           key=this.props.profilo[0].profilo._id;
           tempArray={
           _id:this.props.profilo[0].profilo._id,
           nome: (this.props.profilo[0].profilo.nome === undefined  ? '' : this.props.profilo[0].profilo.nome),
           cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
-          dataNascita: (this.props.profilo[0].profilo.dataNascita ===undefined? '' : this.props.profilo[0].profilo.dataNascita),
+          dataNascita: data,
           sesso:this.props.profilo[0].profilo.sesso,
           numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
           nazionalità:(this.props.profilo[0].profilo.nazionalità === undefined? '' : this.props.profilo[0].profilo.nazionalità) ,
