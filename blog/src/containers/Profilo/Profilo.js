@@ -180,9 +180,7 @@ class Profilo extends Component {
         }
     }
 
-    componentDidMount(){
-        console.log(this.props.profilo.img);
-    }
+  
 
     clickMenuHandler = (props) => {
        this.setState({ showDropdown: !this.state.showDropdown });
