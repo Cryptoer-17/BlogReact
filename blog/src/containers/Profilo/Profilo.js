@@ -335,7 +335,7 @@ class Profilo extends Component {
         else {
             this.props.onSendData(profile);
         }
-        /*setTimeout(() => {
+       /* setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 window.location.reload();
             }
