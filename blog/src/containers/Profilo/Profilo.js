@@ -21,6 +21,7 @@ class Profilo extends Component {
         presentazione: (this.props.profilo.descrizione ? false : null),//false
         modificaDati: null,
         img: null,
+        idProfilo:''+this.props.profilo._id+'',
         descrizione: '' + this.props.profilo.descrizione + '',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show: false,
@@ -179,6 +180,7 @@ class Profilo extends Component {
         }
     }
 
+
     clickMenuHandler = (props) => {
        this.setState({ showDropdown: !this.state.showDropdown });
         this.setState({ idArticoloCambiamenti: props });
@@ -267,6 +269,7 @@ class Profilo extends Component {
             formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
         }
         const profile = {
+            _id:this.state.idProfilo,
             nome: formData.nome,
             cognome: formData.cognome,
             dataNascita: formData.dataNascita.trim(),
@@ -281,7 +284,8 @@ class Profilo extends Component {
         //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
         //altrimenti mando il nuovo profilo.
         if (this.props.profiloReducer.length) {
-            this.props.onUpdateData(profile, this.props.profiloReducer[0].key);
+            console.log(this.props.profiloReducer);
+            this.props.onUpdateData(profile, this.props.profiloReducer[0].profilo._id);
             this.props.articoli.map((articolo) => {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
                 //se non è il proprietario dell'articolo faccio solo il controllo sui messaggi e cambi l'username
@@ -445,6 +449,7 @@ class Profilo extends Component {
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount,   loadingLogin } = this.props;
+        console.log("rirender");
         let email;
         let modificaEmail;
         let modificaPassword;
@@ -508,6 +513,7 @@ class Profilo extends Component {
         let form = (
             <form>
                 {formElemetsArray.map(formElement => (
+                    console.log(formElement),
                     formElement.id !== 'username' ? <Input
                         key={formElement.id}
                         type={formElement.config.elementType}

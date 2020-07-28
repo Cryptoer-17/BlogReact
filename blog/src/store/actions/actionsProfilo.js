@@ -67,16 +67,17 @@ export const setUsername = (username) =>{
     console.log(token);
        let profilo = null;
        let id = "";
-       let config = {
-        headers: {
-            authorization: 'Bearer '+ token,
-        }
-      }
+      
     return dispatch =>{
-        
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
        dispatch(sendDataStart())
         axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
+            console.log(response);
           for(let key in response.data){
             if(response.data[key].userId === localStorage.getItem("userId"))
            profilo ={
@@ -140,7 +141,12 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-    axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
+    let config = {
+        headers: {
+            authorization: 'Bearer '+ localStorage.getItem("token"),
+        }
+      }
+    axios.post('http://localhost:4001/profilo/save', dati,config)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
@@ -176,6 +182,8 @@ export const updateDataFail = (error) =>{
 
 
 export const updateData = (dato,idProfilo) =>{
+    console.log(idProfilo);
+    console.log(dato);
     return dispatch => {
         dispatch(updateDataStart());
         let config = {

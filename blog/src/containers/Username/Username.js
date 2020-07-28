@@ -27,15 +27,17 @@ state = {
         maxLength:15,
         isUsername:true
         }
-},
-isFormValid : false,
-errorMsg:""
+  },
+  isFormValid : false,
+  errorMsg:""
 }
 
 
 //controllo username
 checkValidityOfUsername= (event) =>{
+  console.log(event.target.value);
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
+    console.log(newObj);
     let formIsValid = newObj.valid;
     let error = "";
    
@@ -53,10 +55,10 @@ checkValidityOfUsername= (event) =>{
 
   handlerClickConfirm=()=>{
     this.props.onSetUsername(this.state.username.value); 
-    setTimeout(()=>{
+    /*setTimeout(()=>{
       window.location.reload();
     },2000)
-    setTimeout(this.props.modalClosed,1000);
+    setTimeout(this.props.modalClosed,1000);*/
   
     
     
@@ -67,15 +69,14 @@ checkValidityOfUsername= (event) =>{
 render(){
 const {show, modalClosed,loading} = this.props;
 const {username, isFormValid, errorMsg} = this.state;
+console.log("rirender")
 let contenutoModale = <Spinner/>
-
 if(!loading){
 
   contenutoModale =  (<div>
    <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
-          
             <Input 
-                    value = {username.value}
+                    value = {this.state.username.value}
                     type = {username.type}
                     config = {username.config}
                     touched = {username.touched}
