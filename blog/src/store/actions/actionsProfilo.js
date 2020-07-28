@@ -79,15 +79,18 @@ export const setUsername = (username) =>{
         .then(response =>{   
             console.log(response);
           for(let key in response.data){
-            if(response.data[key].userId === localStorage.getItem("userId"))
-           profilo ={
-               ...response.data[key],
-               username:username
+            if(response.data[key].userId === localStorage.getItem("userId")){
+                profilo ={
+                    ...response.data[key],
+                    username:username
+                 }
+                 id = response.data[key]._id;
             }
-            id = key;
+           
         }; localStorage.setItem("username",username);
 
         if(profilo!==null){
+            console.log("profilo non nullo");
          axios.put('http://localhost:4001/profilo/update/'+ id,profilo,config).then(res =>  
             dispatch(sendDataSuccess(profilo))
             ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
@@ -193,6 +196,7 @@ export const updateData = (dato,idProfilo) =>{
           }
         axios.put('http://localhost:4001/profilo/update/' + idProfilo , dato,config)
         .then(res =>{ 
+            console.log("update fatto");
             dispatch(updateDataSuccess(dato))
           })
         .catch(error => { 

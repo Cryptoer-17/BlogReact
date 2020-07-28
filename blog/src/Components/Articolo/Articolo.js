@@ -100,9 +100,6 @@ class Articolo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(anteprima);
-          console.log("prima della chiamata");
-
         axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
                 this.props.onInitArticoli();

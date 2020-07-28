@@ -12,7 +12,6 @@ class Homepage extends Component{
 clickHeartHandler(art){
    
       let length = art.articolo.like.length;
-      console.log(length)
       let c = 0;
       let heartChange = art.articolo.like.map((object)=>{
          if(object.username === localStorage.getItem("username")){

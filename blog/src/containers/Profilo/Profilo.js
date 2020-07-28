@@ -282,10 +282,14 @@ class Profilo extends Component {
             userId: localStorage.getItem('userId').trim(),
             descrizione: this.state.descrizione
         }
+        console.log(formData);
+        console.log(formData.numeroTelefono === '');
+        console.log(formData.numeroTelefono === null);
         //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
         //altrimenti mando il nuovo profilo.
         if (this.props.profiloReducer.length) {
             console.log(this.props.profiloReducer);
+            console.log(profile);
             this.props.onUpdateData(profile, this.props.profiloReducer[0].profilo._id);
             this.props.articoli.map((articolo) => {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
@@ -331,11 +335,11 @@ class Profilo extends Component {
         else {
             this.props.onSendData(profile);
         }
-        setTimeout(() => {
+        /*setTimeout(() => {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 window.location.reload();
             }
-        }, 1000)
+        }, 1000)*/
     }
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
