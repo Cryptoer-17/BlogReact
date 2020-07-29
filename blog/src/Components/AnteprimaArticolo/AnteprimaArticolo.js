@@ -26,7 +26,8 @@ class AnteprimaArticolo extends Component {
         let colore = 'black';
         let variabile;
         const { autore, titolo, sottotitolo, categoria, img, descrizione, clickHeart, data, minuti, id, showDropdown, like,ricerca } = this.props;
-        let showModalDelete;
+        let {showModalDelete} = this.state;
+        let showModalDeleteVar;
         like.map((object) => {
             if (object.username === localStorage.getItem("username")) {
                 if (object.like) {
@@ -59,12 +60,12 @@ class AnteprimaArticolo extends Component {
                     : null}  </NavLink>
             <ActionBar id={id} showdropdown={showDropdown} viewComments={() => this.viewMessageArticle(id)} modalDelete={() => this.clickModalDelete()} clickMenu={this.props.clickMenuHandler} disableMore={this.props.disableMore} className={classes.Actions} color={colore} onClick={clickHeart} ricerca={ricerca} />
         </div>
-        if (this.state.showModalDelete) {
-            showModalDelete = <Modal show={this.state.showModalDelete}><Elimina {...this.props} hideModal={() => this.hideModalDelete()} mount={this.props.mount} /></Modal>
+        if (showModalDelete) {
+            showModalDeleteVar = <Modal show={showModalDelete}><Elimina {...this.props} hideModal={() => this.hideModalDelete()} mount={this.props.mount} /></Modal>
         }
         return (
             <div >
-                {showModalDelete ? showModalDelete : null}
+                {showModalDeleteVar ? showModalDeleteVar : null}
                 {variabile}
             </div>
         );
