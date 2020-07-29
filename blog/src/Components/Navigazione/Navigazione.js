@@ -16,7 +16,7 @@ animation: 0.3s ${keyframes`${fadeIn}`} `;
 
 const Navigazione = (props) => {
 
-    const {loading, error, userId} = props;
+    const {loading,error, userId, idProfilo} = props;
 
     const [show, setShow] = useState(false);
     const [showmsg, setShowMsg] = useState(false);
@@ -59,14 +59,14 @@ const Navigazione = (props) => {
     const hideUsernameModal = () => {
         setShowUsername(false);
     }
-    let errore = null;
+    let errorVar = null;
     let messageSuccess = null;
     let form = (<div>
         <nav className={classes.BarraNavigazione}>
             <NavLink to="/" exact> <p className={classes.Titolo}>Blog</p> </NavLink>
             {localStorage.getItem("userId") ? <NavLink to="/" exact className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">home</i> </NavLink> : null}
             {localStorage.getItem("userId") && localStorage.getItem("username") ? <NavLink to="/pubblica" className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">add_box</i> </NavLink> : localStorage.getItem("userId") ? <button className={classes.Link}><i className="material-icons" onClick={showUsernameModal}>add_box</i> </button> : null}
-            {localStorage.getItem("userId") ? <NavLink to={"/profilo" + (props.idProfilo ? "/" + props.idProfilo : "")} className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">account_circle</i></NavLink> : null}
+            {localStorage.getItem("userId") ? <NavLink to={"/profilo" + (idProfilo ? "/" + idProfilo : "")} className={classes.Link} activeClassName={classes.LinkAttivo}><i className="material-icons">account_circle</i></NavLink> : null}
             {localStorage.getItem("username") ? <p className={classes.Username}> {localStorage.getItem("username")} </p> : null}
             {(show && props.error === null && showmsg === false) ? <AnimatedModal> {!localStorage.getItem("userId") ? <Login show={show} showGoogle={showGoogle} hideGoogle={hideGoogle} hideModal={hideModal} messageLogin={messageLogin} showMessage={showMessage} hideMessage={hideMessage} messageRegister={messageRegister} /> : <Logout show={show} google={google} hideModal={hideModal} />} </AnimatedModal> : null}
             {localStorage.getItem("userId") ? <Ricerca className={classes.Ricerca} /> : null}
@@ -80,11 +80,11 @@ const Navigazione = (props) => {
     }
 
     if (error) {
-        errore = (
+        errorVar = (
             <Modal show={!show} modalClosed={showModal} >{error} </Modal>
         );
     }
-    else if (errore === null && userId !== null && showmsg) {
+    else if (error === null && userId !== null && showmsg) {
         messageSuccess = (<Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>
         );
     }
@@ -93,7 +93,7 @@ const Navigazione = (props) => {
         <div>
             {form}
             {messageSuccess}
-            {error}
+            {errorVar}
             <Username show={showUsername} modalClosed={hideUsernameModal} />
         </div>
     );
