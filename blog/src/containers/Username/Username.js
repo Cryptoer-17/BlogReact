@@ -55,14 +55,13 @@ checkValidityOfUsername= (event) =>{
     }
 
   handlerClickConfirm=()=>{
-    this.props.onSetUsername(this.state.username.value); 
+    if(this.state.isFormValid){
+      this.props.onSetUsername(this.state.username.value); 
     setTimeout(()=>{
       window.location.reload();
     },2000)
     setTimeout(this.props.modalClosed,1000);
-  
-    
-    
+    }
   }
 
    
