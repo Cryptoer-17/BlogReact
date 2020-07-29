@@ -293,8 +293,6 @@ class Profilo extends Component {
             for(let x in profili){
                 console.log(x);
                 if(profili[x].username ===  formData.username.trim()){
-                    console.log("entrato");
-                    console.log("si ferma qui e non fa l'update");
                     c++;
                 }
             }
@@ -304,7 +302,6 @@ class Profilo extends Component {
             //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
         //altrimenti mando il nuovo profilo.
         if (this.props.profiloReducer.length) {
-            console.log(this.props.profiloReducer);
             this.props.onUpdateData(profile, this.props.profiloReducer[0].profilo._id);
             this.props.articoli.map((articolo) => {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi

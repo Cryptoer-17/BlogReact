@@ -115,7 +115,6 @@ export const updateArticoloSuccess = (articolo) =>{
 
 export const updateArticolo = (articolo,idArticolo) =>{
     return dispatch => {
-        console.log(articolo);
         dispatch(postArticoloStart());
         let config = {
             headers: {

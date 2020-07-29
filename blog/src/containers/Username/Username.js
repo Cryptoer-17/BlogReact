@@ -32,27 +32,21 @@ state = {
   errorMsg:""
 }
 
-
 //controllo username
 checkValidityOfUsername= (event) =>{
-  console.log(event.target.value);
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
     console.log(newObj);
     let formIsValid = newObj.valid;
     let error = "";
-   
-   for (let key in this.props.profili){ //controllo unicità dell'username
-     if(this.props.profili[key].username === event.target.value){
-      newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
-      error = "L'username non è disponibile";
-      formIsValid= false;
-   }
-  }
-
-   this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
-  
-    
+    for (let key in this.props.profili){ //controllo unicità dell'username
+      if(this.props.profili[key].username === event.target.value){
+        newObj = updateObject(this.state.username,{value: event.target.value, valid:false, touched:true}); 
+        error = "L'username non è disponibile";
+        formIsValid= false;
     }
+  }
+   this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
+}
 
   handlerClickConfirm=()=>{
     if(this.state.isFormValid){
@@ -63,8 +57,6 @@ checkValidityOfUsername= (event) =>{
     setTimeout(this.props.modalClosed,1000);
     }
   }
-
-   
 
 render(){
 const {show, modalClosed,loading} = this.props;
@@ -102,22 +94,13 @@ if(!loading){
         </div>
        <button className = {classes.AnnullaButton} onClick = {modalClosed}>Annulla</button> <button className = {classes.ConfermaButton} disabled = {!isFormValid}  onClick ={()=>this.handlerClickConfirm()}>Conferma</button>
      </div>);
- 
-
-}
-    
-    return(
-
-        <Modal show = {show} modalClosed = {modalClosed}>
-           {contenutoModale}
-           </Modal>
-    );
-
-
-
-
-}
-}
+}   
+  return(
+      <Modal show = {show} modalClosed = {modalClosed}>
+          {contenutoModale}
+          </Modal>
+  );
+}}
 
 const mapStateToProps = state =>{
     return{
@@ -135,8 +118,6 @@ const mapDispatchToProps = dispatch => {
         onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
     };
   };
-
-
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Username));
 

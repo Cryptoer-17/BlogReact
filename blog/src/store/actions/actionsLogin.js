@@ -36,11 +36,6 @@ export const updateEmail = (email) =>{
           }
         axios.put(url,authData,config)
         .then(response=>{
-            console.log(response);
-            //bisognerà vedere se impostare il refresh token come locale anche se non penso 
-            //bisognerà impostare la nuova email
-            //bisognerà impostare una nuova expire date
-            console.log(response);
             localStorage.removeItem("email");
             localStorage.setItem('email', response.data.data.email);
             dispatch(updateEmailSuccess());
@@ -50,7 +45,6 @@ export const updateEmail = (email) =>{
         })
     }
 }
-
 
 export const updatePasswordStart = ()=>{
     return {
@@ -88,9 +82,6 @@ export const updatePassword = (props)=>{
         }
         axios.put(url,authData,config)
         .then((response)=>{
-            console.log(response)
-          /*  localStorage.removeItem("token");
-            localStorage.setItem('token', response.data.idToken);*/
             dispatch(updatePasswordSuccess())
         })
         .catch((error)=>{
@@ -99,8 +90,6 @@ export const updatePassword = (props)=>{
         })
     }
 }
-
-
 //login
 export const loginStart = () =>{
 
@@ -108,7 +97,6 @@ export const loginStart = () =>{
         type:actionTypes.LOGIN_START
     };
 }
-
 
 export const loginFail= (error) =>{
     return{
@@ -172,7 +160,6 @@ export const login = (email, password, isSignup,errore) =>{
     }; 
 }
 
-
 export const logout = () =>{
 
     return{
@@ -188,11 +175,7 @@ export const setLoginRedirectPath = (path) =>{
     }
 
 };
-
-
-
 //google
-
 export const googleAuthStart= () =>{
     return{
         type:actionTypes.GOOGLE_AUTH_START
@@ -214,7 +197,6 @@ export const googleAuthSuccess = (user, token) =>{
         };
 }
 
-
 export const googleAuth = () =>{
     return dispatch => {
         dispatch(googleAuthStart());
@@ -227,6 +209,3 @@ export const googleAuth = () =>{
          });
      }
 }
-
-
-

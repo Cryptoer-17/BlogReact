@@ -4,14 +4,14 @@ import { FaHeart, FaRegCommentDots, FaEllipsisH } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 const ActionBar = (props) => {
-    const { disableMore, color, showdropdown, id } = props;
+    const { disableMore, color, showdropdown, id, ricerca } = props;
     return(<>
     <div className={classes.ActionBar}>
-        <div className={classes.Actions}>
+        {ricerca ? null : <div className={classes.Actions}>
             <FaHeart className={classes.Like} style={{ color: color }} onClick={props.onClick} />
             <div id="messageIcon" onClick={props.viewComments}><FaRegCommentDots className={classes.Comments} /></div>
-        </div>
-        {disableMore ? null :
+        </div>}
+        {disableMore || ricerca ? null :
             <div className={classes.MoreDiv} >
                 <FaEllipsisH className={classes.More} onClick={()=>props.clickMenu(props.id)} />
                 <div className={classes.DropdownContent} style={showdropdown ? { display: 'block' } : null} >

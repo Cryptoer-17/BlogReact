@@ -13,7 +13,6 @@ const asyncComponent = (importComponent) => {
                 });
         }
 
-
         render(){
             const C = this.state.component;
 

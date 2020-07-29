@@ -46,7 +46,6 @@ clickHeartHandler(art){
 render(){
 
   let {spinner, articoli, errore,mount,error} = this.props;
-   
    let errorMessage = null;
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;

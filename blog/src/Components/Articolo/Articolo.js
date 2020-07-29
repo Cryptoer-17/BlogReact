@@ -41,7 +41,6 @@ class Articolo extends Component {
     }
     clickHeartHandler() {
         let length = this.state.articolo.like.length;
-        console.log(length)
         let c = 0;
         let heartChange = this.state.articolo.like.map((object) => {
             if (object.username === localStorage.getItem("username")) {

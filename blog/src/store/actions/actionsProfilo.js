@@ -1,14 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
-
 export const getProfiloSuccess = (profilo)=>{
     return{
         type: actionTypes.GET_PROFILO_SUCCESS,
         profilo: profilo
     }
 } 
-
 
 export const getProfiloStart = () =>{
     return {
@@ -60,8 +58,6 @@ export const getProfilo = () =>{
     };
 };
 
-
-
 export const setUsername = (username) =>{
     const token = localStorage.getItem('token');
     console.log(token);
@@ -110,11 +106,8 @@ export const setUsername = (username) =>{
                 axios.post('http://localhost:4001/profilo/save',profilo,config).then(res=>dispatch(sendDataSuccess(profilo))
                 ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
             }   
-        });      
-            
-                    
-    }     
-
+        });                          
+    } 
 }
 
 export const sendDataSuccess = (dati) =>{
@@ -131,13 +124,11 @@ export const sendDataStart = () =>{
 }
 
 export const sendDataFail = (error) =>{
-    
     return{
         type : actionTypes.SEND_DATA_FAIL,
         error : error
     }
 }
-
 
  export const sendData = (dati) =>{
    return dispatch => {
@@ -156,9 +147,6 @@ export const sendDataFail = (error) =>{
     });
     }
 };
-
-
-
 
 export const updateDataSuccess = (dati) =>{
     return{
@@ -180,7 +168,6 @@ export const updateDataFail = (error) =>{
         error : error
     }
 }
-
 
 export const updateData = (dato,idProfilo) =>{
     console.log(idProfilo);
