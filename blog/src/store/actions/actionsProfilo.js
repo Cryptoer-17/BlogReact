@@ -78,8 +78,6 @@ export const setUsername = (username) =>{
         axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
             console.log(response);
-        
-            let c = 0;
             for(let key in response.data){
                 if(response.data[key].userId === localStorage.getItem("userId")){
                     profilo ={
@@ -87,13 +85,9 @@ export const setUsername = (username) =>{
                         username:username
                     }
                     id = response.data[key]._id;
-                    c++;
-            }
-           
-            }; 
-            console.log(c);
-        if(c<2){
-        /*  localStorage.setItem("username",username);
+            }}; 
+        
+          localStorage.setItem("username",username);
             if(profilo!==null){
                 console.log("profilo non nullo");
             axios.put('http://localhost:4001/profilo/update/'+ id,profilo,config).then(res =>  
@@ -115,18 +109,11 @@ export const setUsername = (username) =>{
                 }
                 axios.post('http://localhost:4001/profilo/save',profilo,config).then(res=>dispatch(sendDataSuccess(profilo))
                 ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
-            }*/
-        }else{
-            throw 'L\' username scelto è già in uso';
-        }
-            
-        
-        }).catch(err=>{
-            dispatch(sendDataFail(err));
+            }   
         });      
             
                     
-            }     
+    }     
 
 }
 

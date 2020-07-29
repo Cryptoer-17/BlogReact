@@ -251,9 +251,9 @@ class Modifica extends Component {
         }, 2000)
         
         
-        /*await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
+        await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
         this.showModal();
-        setTimeout(() => this.props.history.push("/") , 3000)*/
+        setTimeout(() => this.props.history.push("/") , 3000)
     }
     showModal = () => {
         this.setState({ show: true });

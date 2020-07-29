@@ -5,7 +5,7 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
-
+import * as moment from 'moment';
 
 class Homepage extends Component{
   
@@ -60,6 +60,10 @@ render(){
     }else{
        
     articoliVisualizzati = articoli.map((art) =>{
+      let data;
+       if(art.articolo.data){
+         data = moment(art.articolo.data).toDate().toISOString().substr(0,10);
+       }
       return (<AnteprimaArticolo 
          id={art.articolo._id} 
          autore={art.articolo.autore}
@@ -70,7 +74,7 @@ render(){
          sottotitolo = {art.articolo.sottotitolo}
          testo = {art.articolo.testo}
          titolo = {art.articolo.titolo}
-         data = {art.articolo.data}
+         data = {data}
          minuti = {art.articolo.minuti}
          disableMore = {true}
          mount = {mount}
