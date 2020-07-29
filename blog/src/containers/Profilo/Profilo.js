@@ -638,7 +638,6 @@ class Profilo extends Component {
                 </div>
 
                 <div className={classes.DatiPersonali}>
-
                     <h3>DATI PERSONALI</h3>
                     <div style={{ marginBottom: '10px', fontSize: '18px', lineHeight: '35px' }}>
                         <hr />
@@ -652,8 +651,8 @@ class Profilo extends Component {
                 Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono : <b>non ancora inserito</b>}<br />
                 Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità : <b>non ancora inserita</b>}<br />
                         <hr />
-                        <div className={this.props.profilo.img ? classes.ImgMediaQuery : null}>
-                            Foto profilo: {this.props.profilo.img !== undefined ? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
+                       <div className={this.props.profilo.img ? classes.ImgMediaQuery : null}>
+                            Foto profilo: {this.props.profilo.img !== undefined && this.props.profilo.img !== ''? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
                         </div>
                     </div>
                     <div>
