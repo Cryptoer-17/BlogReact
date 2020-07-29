@@ -112,7 +112,6 @@ clickCloseImg(){
 }
 
  convertFile = (e)=>  { 
-        console.log(e);
         let reader = new FileReader();
         if(e!==undefined){
             reader.readAsDataURL(e);
@@ -123,11 +122,7 @@ clickCloseImg(){
         }
       };
   
-  
-
-  publishArticleHandler = async () => {
-
-    console.log(moment(new Date()));
+publishArticleHandler = async () => {
     const articolo = {
         titolo: this.state.form.titolo.value.trim(),
         sottotitolo: this.state.form.sottotitolo.value.trim(),
@@ -154,13 +149,13 @@ clickCloseImg(){
 }
 
 
- showModal = () =>{
+showModal = () =>{
     this.setState( {show:true} );
 }
 
  hideModal = () =>{
     this.setState( {show:false} );
-        }
+}
 
      
     
@@ -177,10 +172,11 @@ checkValidityOfInput = (event, id) =>{
     }
 
 
-
+doNothing = ()=>{
+    //do nothing
+}
 
 render(){
-
     const {form,tagInput,tags,tagsList,anteprimaImg,isFormValid,show} = this.state;
     const {loading, esito} = this.props;
  
@@ -189,58 +185,46 @@ render(){
         formData.push( {id: key , obj:  form[key] });
     };
     
-    
-
 return(
 
 <div className = {classes.NuovoArticolo}>
-
-<h2>Nuovo articolo</h2>
-
- 
-
-{formData.map(el =>
-        <Input 
-        value = {el.obj.value}
-        key = {el.id}
-        type = {el.obj.type}
-        config = {el.obj.config}
-        touched = { el.obj.touched}
-        valid = { el.obj.valid}
-        changed = {(e) => this.checkValidityOfInput(e, el.id)}
-        shouldValidate = {el.obj.validation}
-        />
-        ) }
-
-
-<input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput}
+    <h2>Nuovo articolo</h2>
+    {formData.map(el =>
+            <Input 
+            value = {el.obj.value}
+            key = {el.id}
+            type = {el.obj.type}
+            config = {el.obj.config}
+            touched = { el.obj.touched}
+            valid = { el.obj.valid}
+            changed = {(e) => this.checkValidityOfInput(e, el.id)}
+            shouldValidate = {el.obj.validation}
+            click={this.doNothing}
+            />
+            ) }
+    <input className = {classes.Input}  type = "text" placeholder = "#tag" value = { tagInput} 
     onChange={( event ) => this.setState( {tagInput: event.target.value } )} 
-    onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} />
-
-
-<div className = {classes.InputTags}>
-    { tagsList}
-    { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
-</div>
-
-<br/>
-<hr/>
-
-<div className = {classes.InputImg}>
-    
-    <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0])} style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
-
-    <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
-    { anteprimaImg ?  anteprimaImg : null}
-</div>
-<hr/>
-<br/>
-  <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}  disabled = {!isFormValid}> Pubblica </button>          
- <Modal  show = {show}  modalClosed = {  this.hideModal } >
-         {!loading ? 
-        esito
-        :  <Spinner/>}
-    </Modal>
+    onKeyPress={ event => { if(event.key === 'Enter'){ this.addTagHandler(event.target.value); this.setState({tagInput:""})}}} 
+    />
+    <div className = {classes.InputTags}>
+        { tagsList}
+        { tags.length === 15 ? <p><br/> Hai raggiunto il numero massimo di tag consentiti.</p> : null}
+    </div>
+    <br/>
+    <hr/>
+    <div className = {classes.InputImg}>
+        <input  id = "inputFile" type = "file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0])} style = {{display:'none', visibility:'hidden',zIndex:'-200'}}/>
+        <button className = {classes.CaricaImgButton} onClick = {() => document.getElementById("inputFile").click() }> <i className="material-icons"  style = {{verticalAlign:'middle'}}>photo_camera</i> Carica una foto</button>
+        { anteprimaImg ?  anteprimaImg : null}
+    </div>
+    <hr/>
+    <br/>
+    <button className = {classes.PubblicaButton} onClick = { this.publishArticleHandler}  disabled = {!isFormValid}> Pubblica </button>          
+    <Modal  show = {show}  modalClosed = {  this.hideModal } >
+            {!loading ? 
+            esito
+            :  <Spinner/>}
+        </Modal>
 </div>
 
 );

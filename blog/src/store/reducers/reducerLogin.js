@@ -56,7 +56,6 @@ const loginSuccess = (state,action) =>{
 }
 
 const logout = (state,action) =>{
-    
     auth.signOut(); 
     localStorage.removeItem("email");
     localStorage.removeItem("username");
@@ -65,20 +64,16 @@ const logout = (state,action) =>{
     localStorage.removeItem("user");
     localStorage.removeItem("expirationDate");
     window.location.reload();
- 
     return updateObject( state, initialState );
-
 }
 
 const setLoginRedirectPath = (state, action) =>{
     return updateObject(state , {loginRedirectPath : action.path})
-
 }
 
 export const googleAuthStart= (state,action) =>{
     return updateObject( state, { loading:true } );
 }
-
 
 export const googleAuthFail= (state,action) =>{
     console.log(action.error);
@@ -91,7 +86,6 @@ export const googleAuthSuccess = (state,action) =>{
     localStorage.setItem("token", action.token );
     return updateObject( state, { user:action.user, userId: action.user.uid, token : action.token, loading:false } );
 }
-
 
 const reducer = (state = initialState,action) => {
 
@@ -114,7 +108,6 @@ const reducer = (state = initialState,action) => {
         case actionTypes.UPDATE_PASSWORD_SUCCESS: return updatePasswordSuccess(state,action);
         case actionTypes.UPDATE_PASSWORD_FAIL : return updatePasswordFail(state,action);
         default: return state;
-
     }
 };
 

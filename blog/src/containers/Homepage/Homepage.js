@@ -10,7 +10,6 @@ import * as moment from 'moment';
 class Homepage extends Component{
   
 clickHeartHandler(art){
-   
       let length = art.articolo.like.length;
       let c = 0;
       let heartChange = art.articolo.like.map((object)=>{
@@ -46,8 +45,7 @@ clickHeartHandler(art){
 
 render(){
 
-  let {spinner, articoli, errore,mount} = this.props;
-   
+  let {spinner, articoli, errore,mount,error} = this.props;
    let errorMessage = null;
    if(typeof errore === 'undefined'){
      errorMessage =  <h3>Errore nel caricamento dati.</h3>;
@@ -82,9 +80,9 @@ render(){
          key={art.articolo._id}/>);
    })
 }
-   let error;
-   if(this.props.error === "Auth token is expired"){
-      error = document.getElementById("btnLoginLogout").click()   
+   let errorVar;
+   if(error === "Auth token is expired"){
+      errorVar = document.getElementById("btnLoginLogout").click()   
    }
    
 return(
@@ -99,7 +97,7 @@ return(
          : null
          }
       </div>
-         {error }
+         {errorVar }
 
    <ScrollTopButton/>
 </div>

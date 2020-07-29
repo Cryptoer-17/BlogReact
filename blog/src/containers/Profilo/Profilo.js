@@ -231,7 +231,6 @@ class Profilo extends Component {
           }
           axios.post(url,authData)
           .then(response=>{
-             console.log(response)
           })
           .catch(error =>{
             errorePassword=true;
@@ -287,14 +286,10 @@ class Profilo extends Component {
 
         //faccio il controllo che l'username scelto se inserito, non sià già in uso
         let c = 0;
-        if(formData.username.trim() != ''){
+        if(formData.username.trim() !== ''){
             let profili = this.props.profili;
-            console.log(profili);
             for(let x in profili){
-                console.log(x);
                 if(profili[x].username ===  formData.username.trim()){
-                    console.log("entrato");
-                    console.log("si ferma qui e non fa l'update");
                     c++;
                 }
             }
@@ -304,7 +299,6 @@ class Profilo extends Component {
             //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
         //altrimenti mando il nuovo profilo.
         if (this.props.profiloReducer.length) {
-            console.log(this.props.profiloReducer);
             this.props.onUpdateData(profile, this.props.profiloReducer[0].profilo._id);
             this.props.articoli.map((articolo) => {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
@@ -324,7 +318,6 @@ class Profilo extends Component {
                         autore: profile.username,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    console.log(articolo);
                     this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
@@ -355,7 +348,6 @@ class Profilo extends Component {
             }
         }, 1000);
         }else {
-            console.log("errore nell'aggiornare il profilo perchè l'username è già in uso");
             this.setState({
                 errorMessage:'Errore nell\'aggiornare il profilo. L\'username scelto è già in uso'
             })
@@ -397,10 +389,8 @@ class Profilo extends Component {
         const updatedFormElement = {
             ...updatedprofileForm[inputIdentifier]
         }
-        console.log(updatedFormElement);
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        console.log(updatedFormElement);
         updatedFormElement.touched = true;
         updatedprofileForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
@@ -431,7 +421,6 @@ class Profilo extends Component {
         if (e !== undefined) {
             reader.readAsDataURL(e);
             reader.onloadend = () => {
-                console.log(reader.result);
                 this.setState({ img: reader.result, anteprimaImg:(<div className={classes.ImgClose}><img className={classes.InputImg} src={reader.result} alt="" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>) })
             }
         }
@@ -474,12 +463,15 @@ class Profilo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(anteprima);
         axios.put('http://localhost:4001/articolo/update/' + id , anteprima,config)
             .then(response => {
                 this.props.mount();
             })
             .catch(error => console.log(error));
+    }
+
+    doNothing = ()=>{
+        //nothing
     }
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
@@ -494,7 +486,8 @@ class Profilo extends Component {
         {
             presentazione === null ?
                 presentazioneVisualizzata = <button className={classes.BtnPresentazione} onClick={() => this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button>
-                : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
+                : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} 
+                value={this.state.descrizione} click = {this.doNothing}/></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
 
@@ -507,6 +500,7 @@ class Profilo extends Component {
                 touched={this.state.email.touched}
                 shouldValidate={this.state.email.validation}
                 valid={this.state.email.valid}
+                click = {this.doNothing}
             />
         <button className={classes.ButtonSend} onClick={this.handlerChangeEmail} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
             <br/>
@@ -530,6 +524,7 @@ class Profilo extends Component {
                     touched = {elementArray.psw.touched}
                     shouldValidate = {elementArray.psw.validation}
                     valid = {elementArray.psw.valid}
+                    click = {this.doNothing}
                />
            ))}
           <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>
@@ -556,6 +551,7 @@ class Profilo extends Component {
                         touched={formElement.config.touched}
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
+                        click = {this.doNothing}
                     /> : formElement.id === 'username' ? <div key={formElement.id}>
                         <h3>MODIFICA IL TUO USERNAME</h3>
                         <Input
@@ -566,7 +562,8 @@ class Profilo extends Component {
                             changed={(event) => this.inputChangedHandler(event, formElement.id)}
                             touched={formElement.config.touched}
                             shouldValidate={formElement.config.validation}
-                            valid={formElement.config.valid} /></div> : null
+                            valid={formElement.config.valid}
+                            click = {this.doNothing}/></div> : null
                 )
                 )}
             </form>

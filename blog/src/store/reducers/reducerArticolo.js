@@ -11,14 +11,12 @@ const initialState = {
     error : null
 }
 
-
-
 const postArticoloStart = ( state ) => {
     return updateObject( state, { loading:true } );
 };
 
 const postArticoloFail = ( state,err) => {
-    console.log(console.log(err));
+    console.log(err);
     return updateObject( state, {  loading:false , esitoCaricamento: "Errore nel caricamento del post. Utilizzare un'immagine di dimensioni inferiori a 1 mb"} );
 };
 
@@ -26,10 +24,8 @@ const postArticoloSuccess = ( state, action ) => {
     return updateObject( state, { loading: false, esitoCaricamento: "Il post è stato caricato con successo." } );
 };
 
-
 const SetArticoliStart = (state, action) =>{
     return updateObject(state , {error:null, loading : true})
-
 }
 
 const setArticoliSuccess = (state, action ) =>{
@@ -40,17 +36,12 @@ const setArticoliFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false})
 }
 
-
-
-
 const startRicerca = (state,action) => {
     return updateObject( state, { cerca: action.cerca} );
 }
 
-
 const ricercaArticoli = (state,action) =>{
 let articoli = [];
-
     if(action.filtro === "tag"){
         articoli= state.articoli.filter(art => {return  art.articolo.tags ?
              art.articolo.tags.indexOf(state.cerca) >= 0
@@ -58,28 +49,15 @@ let articoli = [];
             }
         );
     }
-
     if(action.filtro === "categoria"){
         articoli= state.articoli.filter(art => art.articolo.categoria === state.cerca);
     }
-  
     return updateObject( state, { risultatiRicerca: articoli} );
-
 }
-
 
 const updateArticoloSuccess = ( state, action ) => {
     return updateObject( state, { loading: false, articolo: action.articolo, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
 };
-
-/*
-const updateArticoloSuccess = (state,action) =>{
-    let arrayArt = [...state.articoli];
-    let idArt = state.articoli.findIndex(i=>i.key  === action.articolo.key);
-    arrayArt.splice(idArt, 1);
-    arrayArt.push(action.articolo);
-   return updateObject( state, { loading: false, articoli: arrayArt} );
-}*/
 
 const deleteArticoloSuccess = (state,action) =>{
     let arrayArt = [...state.articoli];
@@ -88,11 +66,8 @@ const deleteArticoloSuccess = (state,action) =>{
    return updateObject( state, { loading: false, articoli: arrayArt} );
 }
 
-
-
 const reducer = (state = initialState, action) =>  {
-    switch(action.type){
-    
+    switch(action.type){ 
         case actionTypes.POST_ARTICOLO_START: return postArticoloStart( state, action);
         case actionTypes.POST_ARTICOLO_FAIL: return postArticoloFail( state, action);
         case actionTypes.POST_ARTICOLO_SUCCESS: return postArticoloSuccess( state, action);
@@ -106,6 +81,5 @@ const reducer = (state = initialState, action) =>  {
         default: return state;
     }
 }
-
 
 export default reducer;

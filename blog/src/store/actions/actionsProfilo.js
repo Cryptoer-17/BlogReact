@@ -1,14 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../utility/axios';
 
-
 export const getProfiloSuccess = (profilo)=>{
     return{
         type: actionTypes.GET_PROFILO_SUCCESS,
         profilo: profilo
     }
 } 
-
 
 export const getProfiloStart = () =>{
     return {
@@ -60,14 +58,10 @@ export const getProfilo = () =>{
     };
 };
 
-
-
 export const setUsername = (username) =>{
     const token = localStorage.getItem('token');
-    console.log(token);
        let profilo = null;
        let id = "";
-      
     return dispatch =>{
         let config = {
             headers: {
@@ -77,7 +71,6 @@ export const setUsername = (username) =>{
        dispatch(sendDataStart())
         axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
-            console.log(response);
             for(let key in response.data){
                 if(response.data[key].userId === localStorage.getItem("userId")){
                     profilo ={
@@ -89,7 +82,6 @@ export const setUsername = (username) =>{
         
           localStorage.setItem("username",username);
             if(profilo!==null){
-                console.log("profilo non nullo");
             axios.put('http://localhost:4001/profilo/update/'+ id,profilo,config).then(res =>  
                 dispatch(sendDataSuccess(profilo))
                 ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
@@ -110,11 +102,8 @@ export const setUsername = (username) =>{
                 axios.post('http://localhost:4001/profilo/save',profilo,config).then(res=>dispatch(sendDataSuccess(profilo))
                 ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
             }   
-        });      
-            
-                    
-    }     
-
+        });                          
+    } 
 }
 
 export const sendDataSuccess = (dati) =>{
@@ -131,13 +120,11 @@ export const sendDataStart = () =>{
 }
 
 export const sendDataFail = (error) =>{
-    
     return{
         type : actionTypes.SEND_DATA_FAIL,
         error : error
     }
 }
-
 
  export const sendData = (dati) =>{
    return dispatch => {
@@ -156,9 +143,6 @@ export const sendDataFail = (error) =>{
     });
     }
 };
-
-
-
 
 export const updateDataSuccess = (dati) =>{
     return{
@@ -181,10 +165,7 @@ export const updateDataFail = (error) =>{
     }
 }
 
-
 export const updateData = (dato,idProfilo) =>{
-    console.log(idProfilo);
-    console.log(dato);
     return dispatch => {
         dispatch(updateDataStart());
         let config = {
@@ -194,7 +175,6 @@ export const updateData = (dato,idProfilo) =>{
           }
         axios.put('http://localhost:4001/profilo/update/' + idProfilo , dato,config)
         .then(res =>{ 
-            console.log("update fatto");
             dispatch(updateDataSuccess(dato))
           })
         .catch(error => { 

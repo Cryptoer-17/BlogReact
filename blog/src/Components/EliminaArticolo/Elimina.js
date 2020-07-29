@@ -4,11 +4,11 @@ import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 
 const Elimina = (props) => {
+    const {id} = props;
 
     const [loading, setLoading] = useState(null);
 
     const clickBtnSi = () => {
-        const id = props.id;
         setLoading(<Spinner />);
         let config = {
             headers: {

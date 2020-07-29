@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Tag.module.css';
 import {withRouter} from 'react-router-dom';
 
-
 const Tag = (props) =>{
     return(
         <div className ={classes.Tag}>

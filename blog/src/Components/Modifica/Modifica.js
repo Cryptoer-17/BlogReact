@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import axios from 'axios';
 import * as moment from 'moment';
+
 class Modifica extends Component {
     state = {
         form: {
@@ -92,8 +93,6 @@ class Modifica extends Component {
                 /*  if (typeof response.data.tags === 'undefined'){
                       response.data.tags = [];
                   }*/
-                  console.log(response);
-                  console.log(response.data[0].sottotitolo);
                 let form = {
                     titolo: {
                         type: "text",
@@ -157,7 +156,6 @@ class Modifica extends Component {
                 })
                 const updateTags = [...this.state.tags]
                 let tagsList = [];
-                console.log(updateTags)
                 updateTags.map((tag) => {
                     return tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
                 })
@@ -190,7 +188,6 @@ class Modifica extends Component {
             console.log(tags);
             this.setState({ tagsList: tagsList, tags: tags });
         }
-        
     }
     deleteTagHandler = (tag) => {
         let tagsList = [...this.state.tagsList];
@@ -220,7 +217,6 @@ class Modifica extends Component {
     };
     modifyArticleHandler = async () => {
         const id = this.props.match.params.id;
-        console.log(new Date().toLocaleDateString());
         const articolo = {
             _id:this.props.match.params.id,
             autore: localStorage.getItem("username"),
@@ -237,8 +233,6 @@ class Modifica extends Component {
             titolo: this.state.form.titolo.value.trim(),
             userId: localStorage.getItem("userId")
         }
-        console.log(articolo);
-        console.log(this.state.form.sottotitolo.value.trim());
         this.props.onUpdateArticolo(articolo, id);
         this.setState({ show: true })
         setTimeout(() => {
@@ -246,14 +240,8 @@ class Modifica extends Component {
                 this.props.mount();
                 this.props.history.push("/");
                 window.location.reload();
-                console.log("fatto tutto ");
             }
-        }, 2000)
-        
-        
-        await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
-        this.showModal();
-        setTimeout(() => this.props.history.push("/") , 3000)
+        }, 2000);
     }
     showModal = () => {
         this.setState({ show: true });
@@ -269,6 +257,9 @@ class Modifica extends Component {
             formIsValid = newForm[key].valid && formIsValid;
         }
         this.setState({ isFormValid: formIsValid, form: newForm })
+    }
+    doNothing = ()=>{
+        //do nothing
     }
     render() {
         const { form, tagInput, tags, tagsList, anteprimaImg, show } = this.state;
@@ -291,6 +282,7 @@ class Modifica extends Component {
                         valid={el.obj.valid}
                         changed={(e) => this.checkValidityOfInput(e, el.id)}
                         shouldValidate={el.obj.validation}
+                        click={this.doNothing}
                     />
                 )}
                 <input className={classes.Input} type="text" placeholder="#tag" value={tagInput}

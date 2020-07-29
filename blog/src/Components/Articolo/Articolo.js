@@ -8,7 +8,7 @@ import Info from '../InfoArticolo/InfoArticolo';
 import Comments from '../../containers/Comments/Comments';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
-
+import * as moment from 'moment';
 
 class Articolo extends Component {
     state = {
@@ -36,13 +36,11 @@ class Articolo extends Component {
                 this.setState({ loading: false })
             })
             .catch(error => {
-
                 this.setState({ loading: false })
             });
     }
     clickHeartHandler() {
         let length = this.state.articolo.like.length;
-        console.log(length)
         let c = 0;
         let heartChange = this.state.articolo.like.map((object) => {
             if (object.username === localStorage.getItem("username")) {
@@ -56,7 +54,6 @@ class Articolo extends Component {
         if (c === length) {
             heartChange.push({ like: true, username: localStorage.getItem("username") })
         }
-        console.log(heartChange);
         const anteprima = {
             ...this.state.articolo,
             like:heartChange
@@ -70,10 +67,8 @@ class Articolo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(anteprima);
         axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
-                console.log(response)
                 this.props.onInitArticoli();
             })
             .catch(error => console.log(error));
@@ -135,10 +130,11 @@ class Articolo extends Component {
                     }
                 }
                 return null;
-            })
+            });
+            let data = moment(articolo.data).toDate().toISOString().substr(0,10)
             articoloVisualizzato =
                 <div className={classes.Articolo}>
-                    <Info className={classes.Info} autore={articolo.autore} categoria={articolo.categoria} data={articolo.data} tempoLettura={articolo.minuti} />
+                    <Info className={classes.Info} autore={articolo.autore} categoria={articolo.categoria} data={data} tempoLettura={articolo.minuti} />
                     <div className={classes.Titolo}>
                         <h1>{articolo.titolo}</h1>
                     </div>

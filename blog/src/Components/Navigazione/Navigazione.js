@@ -16,6 +16,8 @@ animation: 0.3s ${keyframes`${fadeIn}`} `;
 
 const Navigazione = (props) => {
 
+    const {loading, error, userId} = props;
+
     const [show, setShow] = useState(false);
     const [showmsg, setShowMsg] = useState(false);
     const [google, setGoogle] = useState(false);
@@ -57,7 +59,7 @@ const Navigazione = (props) => {
     const hideUsernameModal = () => {
         setShowUsername(false);
     }
-    let error = null;
+    let errore = null;
     let messageSuccess = null;
     let form = (<div>
         <nav className={classes.BarraNavigazione}>
@@ -73,16 +75,16 @@ const Navigazione = (props) => {
         </nav>
     </div>);
 
-    if (props.loading) {
+    if (loading) {
         form = <Spinner />
     }
 
-    if (props.error) {
-        error = (
-            <Modal show={!show} modalClosed={showModal} >{props.error} </Modal>
+    if (error) {
+        errore = (
+            <Modal show={!show} modalClosed={showModal} >{error} </Modal>
         );
     }
-    else if (props.error === null && props.userId !== null && showmsg) {
+    else if (errore === null && userId !== null && showmsg) {
         messageSuccess = (<Modal show={showmsg} modalClosed={hideMessage} >{message}</Modal>
         );
     }

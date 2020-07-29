@@ -33,15 +33,15 @@ class Comments extends Component {
     modalRemoveComment = (index)=>{
         this.setState({showModalDelete:true})
         this.setState({indexmsg:index})
-        //this.props.onUpdateArticolo();
     }
 
     render() {
         const { clickSendMessage, articolo } = this.props;
-        let showModalDelete;
+        const {showModalDelete, indexmsg} = this.state;
+        let showModalDeleteVar;
         let tempUserArray = [];
         let colorArray = ['red', 'blue', 'aqua', 'black', 'blueviolet', 'brown', 'chocolate', 'coral', 'chartreuse', 'crimson', 'darkcyan', 'darkgoldenrod', 'darkgreen',
-            'darkmagenta', 'darkorange', 'darkred', 'forestgreen', 'gold', 'green', 'indigo', 'lawngreen', 'lime', 'maroon', 'mediumblue']
+            'darkmagenta', 'darkorange', 'darkred', 'forestgreen', 'gold', 'green', 'indigo', 'lawngreen', 'lime', 'maroon', 'mediumblue'];
         articolo.messaggi.map((messaggio) => {
             if (!tempUserArray.includes(messaggio.username)) {
                 let colore;
@@ -64,14 +64,12 @@ class Comments extends Component {
             })
         } else commenti = null;
 
-        if (this.state.showModalDelete) {
-        showModalDelete = <Modal show={this.state.showModalDelete}><EliminaMessaggio {...this.props} cmpDidMount={this.props.cmpDidMount} indexmsg={this.state.indexmsg} articolo={articolo} hideModal={() => this.hideModalDelete()} /*mount={this.props.mount}*/ /></Modal>
-        console.log(showModalDelete);
+        if (showModalDelete) {
+            showModalDeleteVar = <Modal show={showModalDelete}><EliminaMessaggio {...this.props} cmpDidMount={this.props.cmpDidMount} indexmsg={indexmsg} articolo={articolo} hideModal={() => this.hideModalDelete()} /*mount={this.props.mount}*/ /></Modal>
         }
         return (
-            //ritornare il modal da renderizzare
             <div id="parentDiv" className={classes.ContitoreMessaggi}>
-                {showModalDelete}
+                {showModalDeleteVar}
                 <div id="divCommts" className={classes.Commenti} >
                     {commenti}
                 </div>

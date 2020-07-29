@@ -28,22 +28,15 @@ const asyncMainPage = asyncComponent(() =>{
 
 class App extends Component {
 
-
-
 componentDidMount(){
-   
-const userId = localStorage.getItem("userId");
-if(userId){
-  this.props.onInitArticoli();
-  this.props.onGetProfilo();
+  const userId = localStorage.getItem("userId");
+  if(userId){
+    this.props.onInitArticoli();
+    this.props.onGetProfilo();
+  }
 }
-
-}
-
-
 
   render(){
-    
     let key; 
       let tempArray;
        if(this.props.profilo.length){
@@ -79,10 +72,7 @@ if(userId){
         }
       } 
 
-
-
   return (
-    
     <div className="App">
          <BrowserRouter>
          <Navigazione idProfilo={key}/>
@@ -95,12 +85,10 @@ if(userId){
             {localStorage.getItem("userId") ?  <Route path="/modifica/:id"  render = {(props)=>(<Modifica {...props} mount={() => this.componentDidMount()}/>)} /> : null }
             <Redirect to= "/" />
            </Switch>
-         </BrowserRouter>
-        
+         </BrowserRouter> 
     </div>
   );
   }
-
 }
 
 const mapStateToProps = state =>{
@@ -111,12 +99,10 @@ const mapStateToProps = state =>{
   };
 };
 
-
 const mapDispatchToProps = dispatch =>{
   return{
      onInitArticoli: () => dispatch(actions.initArticoli()),
      onGetProfilo:() => dispatch(actions.getProfilo()),
-   //  onGetArticolo:(id) => dispatch(actions.getArticolo(id)) 
   }
 }
 

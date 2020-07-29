@@ -11,7 +11,6 @@ const initialState = {
     profili:[]
 }
 
-
 const updateDataStart = ( state ) => {
     return updateObject( state, { loading:true } );
 };
@@ -23,9 +22,6 @@ const updateDataFail = ( state) => {
 const updateDataSuccess = ( state, action ) => {
     return updateObject( state, { loading: false, dati: action.dati, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
 };
-
-
-
 
 const sendDataStart = ( state ) => {
     return updateObject( state, { loading:true } );
@@ -39,8 +35,7 @@ const sendDataSuccess = ( state, action ) => {
      let arrayDati = [...state.dati];
      let id = state.dati.findIndex(i=>i.key  === action.profilo.userId);
      if(id > 0)
-     arrayDati.splice(id, 1);
-
+        arrayDati.splice(id, 1);
      arrayDati.push(action.dati);
     return updateObject( state, { loading: false, dati: arrayDati, esitoCaricamento: "I dati sono stati inviati/modificati con successo." } );
 };
@@ -48,25 +43,19 @@ const sendDataSuccess = ( state, action ) => {
 
 const getProfiloStart = (state, action) =>{
     return updateObject(state , {error:null, loading : true});
-
 }
 
 const getProfiloSuccess = (state, action ) =>{
- 
     return updateObject(state , {profilo : action.profilo, error:null, loading : false});
 }
 
 const getAllProfiliSuccess = (state, action ) =>{
- 
     return updateObject(state , {profili : action.profili, error:null, loading : false});
 }
-
 
 const getProfiloFail = (state , action) =>{
     return updateObject( state, {error : action.error, loading: false});
 }
-
-
 
 const reducer = (state = initialState, action) =>  {
     switch(action.type){
@@ -83,6 +72,5 @@ const reducer = (state = initialState, action) =>  {
         default: return state;
     }
 }
-
 
 export default reducer;
