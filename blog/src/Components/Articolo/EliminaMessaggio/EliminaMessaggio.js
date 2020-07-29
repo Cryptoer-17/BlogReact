@@ -8,21 +8,17 @@ import { connect } from 'react-redux';
 
 const EliminaMessaggio = (props) => {
 
-    
+    const {articolo, indexmsg, loading} = props;    
 
     const clickBtnSi = () => {
         const id = props.match.params.id;
-        console.log(props.articolo)
-        console.log(props.indexmsg);
-
-        let messageUpdate=[...props.articolo.messaggi];
-        messageUpdate.splice(props.indexmsg,1)
+        let messageUpdate=[...articolo.messaggi];
+        messageUpdate.splice(indexmsg,1)
 
         let updateArticolo={
-            ...props.articolo,
+            ...articolo,
             messaggi:messageUpdate
         }
-        console.log(updateArticolo);
         props.onUpdateArticolo(updateArticolo,id);
         props.hideModal();
         setTimeout(() => {
@@ -32,7 +28,7 @@ const EliminaMessaggio = (props) => {
     }
     return (
         <div>
-            {props.loading ? <Spinner /> : null}
+            {loading ? <Spinner /> : null}
             <p>SEI SICURO DI VOLER ELIMINARE IL MESSAGGIO?</p>
             <button className={classes.ButtonDelete} onClick={clickBtnSi}>SI</button>
             <button className={classes.ButtonNoDelete} onClick={props.hideModal}>NO</button>

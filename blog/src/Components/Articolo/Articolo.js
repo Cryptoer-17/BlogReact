@@ -36,7 +36,6 @@ class Articolo extends Component {
                 this.setState({ loading: false })
             })
             .catch(error => {
-
                 this.setState({ loading: false })
             });
     }
@@ -56,7 +55,6 @@ class Articolo extends Component {
         if (c === length) {
             heartChange.push({ like: true, username: localStorage.getItem("username") })
         }
-        console.log(heartChange);
         const anteprima = {
             ...this.state.articolo,
             like:heartChange
@@ -70,10 +68,8 @@ class Articolo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(anteprima);
         axios.put('http://localhost:4001/articolo/update/' + id, anteprima,config)
             .then(response => {
-                console.log(response)
                 this.props.onInitArticoli();
             })
             .catch(error => console.log(error));

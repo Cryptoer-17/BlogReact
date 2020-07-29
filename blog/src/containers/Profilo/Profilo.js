@@ -287,7 +287,7 @@ class Profilo extends Component {
 
         //faccio il controllo che l'username scelto se inserito, non sià già in uso
         let c = 0;
-        if(formData.username.trim() != ''){
+        if(formData.username.trim() !== ''){
             let profili = this.props.profili;
             console.log(profili);
             for(let x in profili){
