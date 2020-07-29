@@ -481,6 +481,10 @@ class Profilo extends Component {
             })
             .catch(error => console.log(error));
     }
+
+    doNothing = ()=>{
+        //nothing
+    }
     render() {
         let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
         let { loading, mount,   loadingLogin } = this.props;
@@ -494,7 +498,8 @@ class Profilo extends Component {
         {
             presentazione === null ?
                 presentazioneVisualizzata = <button className={classes.BtnPresentazione} onClick={() => this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button>
-                : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} value={this.state.descrizione} /></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
+                : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} 
+                value={this.state.descrizione} click = {this.doNothing}/></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
 
@@ -507,6 +512,7 @@ class Profilo extends Component {
                 touched={this.state.email.touched}
                 shouldValidate={this.state.email.validation}
                 valid={this.state.email.valid}
+                click = {this.doNothing}
             />
         <button className={classes.ButtonSend} onClick={this.handlerChangeEmail} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
             <br/>
@@ -530,6 +536,7 @@ class Profilo extends Component {
                     touched = {elementArray.psw.touched}
                     shouldValidate = {elementArray.psw.validation}
                     valid = {elementArray.psw.valid}
+                    click = {this.doNothing}
                />
            ))}
           <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>
@@ -556,6 +563,7 @@ class Profilo extends Component {
                         touched={formElement.config.touched}
                         shouldValidate={formElement.config.validation}
                         valid={formElement.config.valid}
+                        click = {this.doNothing}
                     /> : formElement.id === 'username' ? <div key={formElement.id}>
                         <h3>MODIFICA IL TUO USERNAME</h3>
                         <Input
@@ -566,7 +574,8 @@ class Profilo extends Component {
                             changed={(event) => this.inputChangedHandler(event, formElement.id)}
                             touched={formElement.config.touched}
                             shouldValidate={formElement.config.validation}
-                            valid={formElement.config.valid} /></div> : null
+                            valid={formElement.config.valid}
+                            click = {this.doNothing}/></div> : null
                 )
                 )}
             </form>
