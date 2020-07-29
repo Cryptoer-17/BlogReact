@@ -474,12 +474,13 @@ class Profilo extends Component {
         //nothing
     }
     render() {
-        let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword } = this.state;
-        let { loading, mount,   loadingLogin } = this.props;
-        let email;
+        let { anteprimaImg, presentazione, modificaDati, showDropdown, messageModalPassord, modalPassword,descrizione, email, emailIsValid,password,profileForm,
+            passwordIsValid, formIsValid, idArticoloCambiamenti, show, errorMessage } = this.state;
+        let { loading, mount, loadingLogin, esito, esitoLogin, profilo, articoli } = this.props;
+        let emailVar;
         let modificaEmail;
         let modificaPassword;
-        email = localStorage.getItem('email');
+        emailVar = localStorage.getItem('email');
 
         let presentazioneVisualizzata;
         let btnInviaInfo = null;
@@ -487,30 +488,30 @@ class Profilo extends Component {
             presentazione === null ?
                 presentazioneVisualizzata = <button className={classes.BtnPresentazione} onClick={() => this.handlerClickPresentazione()}><i>Aggiungi una breve presentazione</i></button>
                 : presentazione === false && ((presentazioneVisualizzata = <div style={{ marginTop: '-27px', height: '49%' }}><blockquote></blockquote><Input type="text" config={{ placeholder: 'breve presentazione di te' }} changed={this.descrizioneChangeHandler} 
-                value={this.state.descrizione} click = {this.doNothing}/></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
+                value={descrizione} click = {this.doNothing}/></div>) && (btnInviaInfo = <button onClick={this.orderHandler} className={classes.ButtonSend}  ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia breve presentazione</button>))
         }
 
 
         modificaEmail = (<div><h3>MODIFICA EMAIL</h3>
             <Input
-                type={this.state.email.elementType}
-                config={this.state.email.elementConfig}
-                value={this.state.email.value}
+                type={email.elementType}
+                config={email.elementConfig}
+                value={email.value}
                 changed={(event) => this.inputChangeEmail(event)}
-                touched={this.state.email.touched}
-                shouldValidate={this.state.email.validation}
-                valid={this.state.email.valid}
+                touched={email.touched}
+                shouldValidate={email.validation}
+                valid={email.valid}
                 click = {this.doNothing}
             />
-        <button className={classes.ButtonSend} onClick={this.handlerChangeEmail} disabled={!this.state.emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
+        <button className={classes.ButtonSend} onClick={this.handlerChangeEmail} disabled={!emailIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica l'e-mail</button>
             <br/>
         </div>)
 
         let passwordElementsArray = [];
-        for(let key in this.state.password){
+        for(let key in password){
             passwordElementsArray.push({
                 id:key,
-                psw:this.state.password[key]
+                psw:password[key]
             })
         }
         modificaPassword = ( <div><h3>MODIFICA PASSWORD</h3>
@@ -527,15 +528,15 @@ class Profilo extends Component {
                     click = {this.doNothing}
                />
            ))}
-          <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!this.state.passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>
+          <button className={classes.ButtonSend} onClick={this.passswordChangeHandler} disabled={!passwordIsValid} ><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Modifica la password</button>
             <br/>
         </div>
         )
         const formElemetsArray = [];
-        for (let key in this.state.profileForm) {
+        for (let key in profileForm) {
             formElemetsArray.push({
                 id: key,
-                config: this.state.profileForm[key],
+                config: profileForm[key],
 
             })
         }
@@ -579,10 +580,10 @@ class Profilo extends Component {
 
                 {anteprimaImg ? anteprimaImg : null}</div>
             <input id="inputFile" type="file" accept="image/png,image/gif,image/jpeg, image/jpg" onChange={event => this.convertFile(event.target.files[0])} style={{ width: '0px' }}/* style = {{display:'none', visibility:'hidden',zIndex:'-200'}}*/ />
-            <button className={classes.ButtonSend} onClick={this.orderHandler} disabled={!this.state.formIsValid} style={{ position: 'absolute', right: '0px', bottom: '0px' }}><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia dati</button>
+            <button className={classes.ButtonSend} onClick={this.orderHandler} disabled={!formIsValid} style={{ position: 'absolute', right: '0px', bottom: '0px' }}><IoIosSend style={{ verticalAlign: 'middle', marginRight: '4px' }} />Invia dati</button>
         </div>);
 
-        const personal_article = [...this.props.articoli];
+        const personal_article = [...articoli];
 
         let articoliVisualizzati;
         articoliVisualizzati = personal_article.map((art) => {
@@ -601,7 +602,7 @@ class Profilo extends Component {
                         data={art.articolo.data}
                         minuti={art.articolo.minuti}
                         disableMore={false}
-                        showDropdown={this.state.idArticoloCambiamenti === art.articolo._id ? showDropdown : false}
+                        showDropdown={idArticoloCambiamenti === art.articolo._id ? showDropdown : false}
                         mount={mount}
                         clickMenuHandler={this.clickMenuHandler}
                         UpdateArticolo={this.props.clickUpdateArticolo}
@@ -616,10 +617,10 @@ class Profilo extends Component {
         let modal = null;
 
         if (loading === false ||    loadingLogin === false) {
-            modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
-                {this.props.esito === '' ? null : this.props.esito}
-                {this.props.esitoLogin === '' ? null : this.props.esitoLogin}
-                {this.state.errorMessage === '' ? null : this.state.errorMessage}
+            modal = (<Modal show={show} modalClosed={this.hideModal}>
+                {esito === '' ? null : esito}
+                {esitoLogin === '' ? null : esitoLogin}
+                {errorMessage === '' ? null : errorMessage}
             </Modal>);
         }
 
@@ -641,18 +642,18 @@ class Profilo extends Component {
                     <h3>DATI PERSONALI</h3>
                     <div style={{ marginBottom: '10px', fontSize: '18px', lineHeight: '35px' }}>
                         <hr />
-                Email : {email}<br />
-                Username:{this.props.profilo.username !== "" ? this.props.profilo.username : <b>non ancora inserito</b>}<br />
+                Email : {emailVar}<br />
+                Username:{profilo.username !== "" ? profilo.username : <b>non ancora inserito</b>}<br />
                         <hr />
-                Nome : {this.props.profilo.nome !== "" ? this.props.profilo.nome : <b>non ancora inserito</b>}<br />
-                Cognome: {this.props.profilo.cognome !== "" ? this.props.profilo.cognome : <b>non ancora inserito</b>}<br />
-                Data di nascita: {this.props.profilo.dataNascita !== "" ? this.props.profilo.dataNascita : <b>non ancora inserita</b>}<br />
-                Sesso: {this.props.profilo.sesso !== "" ? this.props.profilo.sesso : <b>non ancora inserito</b>}<br />
-                Numero di telefono: {this.props.profilo.numeroTelefono !== "" ? this.props.profilo.numeroTelefono : <b>non ancora inserito</b>}<br />
-                Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità : <b>non ancora inserita</b>}<br />
+                Nome : {profilo.nome !== "" ? profilo.nome : <b>non ancora inserito</b>}<br />
+                Cognome: {profilo.cognome !== "" ? profilo.cognome : <b>non ancora inserito</b>}<br />
+                Data di nascita: {profilo.dataNascita !== "" ? profilo.dataNascita : <b>non ancora inserita</b>}<br />
+                Sesso: {profilo.sesso !== "" ? profilo.sesso : <b>non ancora inserito</b>}<br />
+                Numero di telefono: {profilo.numeroTelefono !== "" ? profilo.numeroTelefono : <b>non ancora inserito</b>}<br />
+                Nazionalità: {profilo.nazionalità !== "" ? profilo.nazionalità : <b>non ancora inserita</b>}<br />
                         <hr />
-                       <div className={this.props.profilo.img ? classes.ImgMediaQuery : null}>
-                            Foto profilo: {this.props.profilo.img !== undefined && this.props.profilo.img !== ''? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
+                       <div className={profilo.img ? classes.ImgMediaQuery : null}>
+                            Foto profilo: {profilo.img !== undefined && profilo.img !== ''? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={profilo.img} alt="" /> : <b>Non ancora inserita</b>}
                         </div>
                     </div>
                     <div>
