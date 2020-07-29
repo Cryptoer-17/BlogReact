@@ -35,7 +35,6 @@ state = {
 //controllo username
 checkValidityOfUsername= (event) =>{
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
-    console.log(newObj);
     let formIsValid = newObj.valid;
     let error = "";
     for (let key in this.props.profili){ //controllo unicità dell'username

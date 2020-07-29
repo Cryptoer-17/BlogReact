@@ -26,7 +26,6 @@ class AnteprimaArticolo extends Component {
         let colore = 'black';
         let variabile;
         const { autore, titolo, sottotitolo, categoria, img, descrizione, clickHeart, data, minuti, id, showDropdown, like,ricerca } = this.props;
-        console.log(ricerca);
         let showModalDelete;
         like.map((object) => {
             if (object.username === localStorage.getItem("username")) {

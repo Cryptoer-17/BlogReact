@@ -231,7 +231,6 @@ class Profilo extends Component {
           }
           axios.post(url,authData)
           .then(response=>{
-             console.log(response)
           })
           .catch(error =>{
             errorePassword=true;
@@ -289,9 +288,7 @@ class Profilo extends Component {
         let c = 0;
         if(formData.username.trim() !== ''){
             let profili = this.props.profili;
-            console.log(profili);
             for(let x in profili){
-                console.log(x);
                 if(profili[x].username ===  formData.username.trim()){
                     c++;
                 }
@@ -321,7 +318,6 @@ class Profilo extends Component {
                         autore: profile.username,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    console.log(articolo);
                     this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
@@ -352,7 +348,6 @@ class Profilo extends Component {
             }
         }, 1000);
         }else {
-            console.log("errore nell'aggiornare il profilo perchè l'username è già in uso");
             this.setState({
                 errorMessage:'Errore nell\'aggiornare il profilo. L\'username scelto è già in uso'
             })
@@ -394,10 +389,8 @@ class Profilo extends Component {
         const updatedFormElement = {
             ...updatedprofileForm[inputIdentifier]
         }
-        console.log(updatedFormElement);
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        console.log(updatedFormElement);
         updatedFormElement.touched = true;
         updatedprofileForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
@@ -428,7 +421,6 @@ class Profilo extends Component {
         if (e !== undefined) {
             reader.readAsDataURL(e);
             reader.onloadend = () => {
-                console.log(reader.result);
                 this.setState({ img: reader.result, anteprimaImg:(<div className={classes.ImgClose}><img className={classes.InputImg} src={reader.result} alt="" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>) })
             }
         }
@@ -471,7 +463,6 @@ class Profilo extends Component {
                 authorization: 'Bearer '+ localStorage.getItem("token"),
             }
           }
-          console.log(anteprima);
         axios.put('http://localhost:4001/articolo/update/' + id , anteprima,config)
             .then(response => {
                 this.props.mount();

@@ -112,7 +112,6 @@ clickCloseImg(){
 }
 
  convertFile = (e)=>  { 
-        console.log(e);
         let reader = new FileReader();
         if(e!==undefined){
             reader.readAsDataURL(e);

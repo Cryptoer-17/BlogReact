@@ -156,7 +156,6 @@ class Modifica extends Component {
                 })
                 const updateTags = [...this.state.tags]
                 let tagsList = [];
-                console.log(updateTags)
                 updateTags.map((tag) => {
                     return tagsList.push(<Tag key={tag} click={() => this.deleteTagHandler(tag)}>{tag} </Tag>);
                 })
