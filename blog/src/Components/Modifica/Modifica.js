@@ -270,6 +270,9 @@ class Modifica extends Component {
         }
         this.setState({ isFormValid: formIsValid, form: newForm })
     }
+    doNothing = ()=>{
+        //do nothing
+    }
     render() {
         const { form, tagInput, tags, tagsList, anteprimaImg, show } = this.state;
         const { loading, esito } = this.props;
@@ -291,6 +294,7 @@ class Modifica extends Component {
                         valid={el.obj.valid}
                         changed={(e) => this.checkValidityOfInput(e, el.id)}
                         shouldValidate={el.obj.validation}
+                        click={this.doNothing}
                     />
                 )}
                 <input className={classes.Input} type="text" placeholder="#tag" value={tagInput}

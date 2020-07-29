@@ -177,7 +177,9 @@ checkValidityOfInput = (event, id) =>{
     }
 
 
-
+doNothing = ()=>{
+    //do nothing
+}
 
 render(){
 
@@ -209,6 +211,7 @@ return(
         valid = { el.obj.valid}
         changed = {(e) => this.checkValidityOfInput(e, el.id)}
         shouldValidate = {el.obj.validation}
+        click={this.doNothing}
         />
         ) }
 

@@ -8,7 +8,7 @@ import Info from '../InfoArticolo/InfoArticolo';
 import Comments from '../../containers/Comments/Comments';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
-
+import * as moment from 'moment';
 
 class Articolo extends Component {
     state = {
@@ -135,10 +135,11 @@ class Articolo extends Component {
                     }
                 }
                 return null;
-            })
+            });
+            let data = moment(articolo.data).toDate().toISOString().substr(0,10)
             articoloVisualizzato =
                 <div className={classes.Articolo}>
-                    <Info className={classes.Info} autore={articolo.autore} categoria={articolo.categoria} data={articolo.data} tempoLettura={articolo.minuti} />
+                    <Info className={classes.Info} autore={articolo.autore} categoria={articolo.categoria} data={data} tempoLettura={articolo.minuti} />
                     <div className={classes.Titolo}>
                         <h1>{articolo.titolo}</h1>
                     </div>
