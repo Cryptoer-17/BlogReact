@@ -80,7 +80,7 @@ submitHandlerSignIn = (event) =>{
     this.props.messageLogin();
       setTimeout(() => {
         window.location.reload();
-    }, 1500); 
+    }, 2500); 
 }
 
 submitHandlerSignUp = (event) =>{   
@@ -93,7 +93,7 @@ submitHandlerSignUp = (event) =>{
     this.props.messageRegister();
     setTimeout(() => {
         window.location.reload();
-    }, 1500); 
+    }, 2500); 
 }
 
 

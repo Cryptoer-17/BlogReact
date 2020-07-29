@@ -37,7 +37,12 @@ export const getProfilo = () =>{
         let temparray=[];
         dispatch(getProfiloStart());
         const token = localStorage.getItem('token');
-        axios.get('/profili.json?auth=' +token)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
+        axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
             dispatch(getAllProfiliSuccess(response.data))
           for(let key in response.data){
@@ -62,47 +67,53 @@ export const setUsername = (username) =>{
     console.log(token);
        let profilo = null;
        let id = "";
-
+      
     return dispatch =>{
-        
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
        dispatch(sendDataStart())
-        axios.get('/profili.json?auth=' +token)
+        axios.get('http://localhost:4001/profili',config)
         .then(response =>{   
-          for(let key in response.data){
-            if(response.data[key].userId === localStorage.getItem("userId"))
-           profilo ={
-               ...response.data[key],
-               username:username
-            }
-            id = key;
-        }; localStorage.setItem("username",username);
-
-        if(profilo!==null){
-         axios.put('/profili/'+ id + '.json?auth='+token,profilo).then(res =>  
-            dispatch(sendDataSuccess(profilo))
-            ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
-        }  
-        else{
-            profilo = {
-                nome: '',
-                cognome:'',
-                dataNascita:'',
-                sesso: '',
-                numeroTelefono:'',
-                nazionalità:'',
-                img:'',
-                username:username,
-                userId:localStorage.getItem('userId').trim(),
-                descrizione:''
-            }
-            axios.post('/profili.json?auth='+token,profilo).then(res=>dispatch(sendDataSuccess(profilo))
-            ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
-        }
-    
-    });      
-         
-                 
-        }     
+            console.log(response);
+            for(let key in response.data){
+                if(response.data[key].userId === localStorage.getItem("userId")){
+                    profilo ={
+                        ...response.data[key],
+                        username:username
+                    }
+                    id = response.data[key]._id;
+            }}; 
+        
+          localStorage.setItem("username",username);
+            if(profilo!==null){
+                console.log("profilo non nullo");
+            axios.put('http://localhost:4001/profilo/update/'+ id,profilo,config).then(res =>  
+                dispatch(sendDataSuccess(profilo))
+                ).catch( err => dispatch(sendDataFail(err), console.log(err)) );
+            }  
+            else{
+                profilo = {
+                    nome: '',
+                    cognome:'',
+                    dataNascita:'',
+                    sesso: '',
+                    numeroTelefono:'',
+                    nazionalità:'',
+                    img:'',
+                    username:username,
+                    userId:localStorage.getItem('userId').trim(),
+                    descrizione:''
+                }
+                axios.post('http://localhost:4001/profilo/save',profilo,config).then(res=>dispatch(sendDataSuccess(profilo))
+                ).catch(err => dispatch(sendDataFail(err), console.log(err)) );
+            }   
+        });      
+            
+                    
+    }     
 
 }
 
@@ -131,7 +142,12 @@ export const sendDataFail = (error) =>{
  export const sendData = (dati) =>{
    return dispatch => {
     dispatch(sendDataStart());
-    axios.post('/profili.json?auth=' + localStorage.getItem("token"), dati)
+    let config = {
+        headers: {
+            authorization: 'Bearer '+ localStorage.getItem("token"),
+        }
+      }
+    axios.post('http://localhost:4001/profilo/save', dati,config)
     .then(res =>{ 
         dispatch(sendDataSuccess(dati))
       })
@@ -167,10 +183,18 @@ export const updateDataFail = (error) =>{
 
 
 export const updateData = (dato,idProfilo) =>{
+    console.log(idProfilo);
+    console.log(dato);
     return dispatch => {
         dispatch(updateDataStart());
-        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.put('http://localhost:4001/profilo/update/' + idProfilo , dato,config)
         .then(res =>{ 
+            console.log("update fatto");
             dispatch(updateDataSuccess(dato))
           })
         .catch(error => { 

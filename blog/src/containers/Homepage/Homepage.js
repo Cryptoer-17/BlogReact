@@ -5,15 +5,13 @@ import Spinner from '../../Components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ScrollTopButton from '../../Components/UI/ScrollUpButton/ScrollTopButton';
-import Modal from '../../Components/UI/Modal/Modal';
-
+import * as moment from 'moment';
 
 class Homepage extends Component{
   
 clickHeartHandler(art){
    
       let length = art.articolo.like.length;
-      console.log(length)
       let c = 0;
       let heartChange = art.articolo.like.map((object)=>{
          if(object.username === localStorage.getItem("username")){
@@ -32,8 +30,13 @@ clickHeartHandler(art){
           ...art.articolo,
           like: heartChange
       } 
-      const id = art.key;
-      axios.put('https://blog-monika-andrea.firebaseio.com/articoli/'+ id + '.json?auth='+localStorage.getItem("token"),anteprima)
+      const id = art.articolo._id;
+      let config = {
+         headers: {
+             authorization: 'Bearer '+ localStorage.getItem("token"),
+         }
+       }
+      axios.put('http://localhost:4001/articolo/update/'+ id,anteprima,config)
       .then(response => {
          this.props.mount();
       })
@@ -57,8 +60,12 @@ render(){
     }else{
        
     articoliVisualizzati = articoli.map((art) =>{
+      let data;
+       if(art.articolo.data){
+         data = moment(art.articolo.data).toDate().toISOString().substr(0,10);
+       }
       return (<AnteprimaArticolo 
-         id={art.key} 
+         id={art.articolo._id} 
          autore={art.articolo.autore}
          categoria = {art.articolo.categoria}
          descrizione = {art.articolo.descrizione}
@@ -67,12 +74,12 @@ render(){
          sottotitolo = {art.articolo.sottotitolo}
          testo = {art.articolo.testo}
          titolo = {art.articolo.titolo}
-         data = {art.articolo.data}
+         data = {data}
          minuti = {art.articolo.minuti}
          disableMore = {true}
          mount = {mount}
          clickHeart = {() => this.clickHeartHandler(art)} 
-         key={art.key}/>);
+         key={art.articolo._id}/>);
    })
 }
    let error;
@@ -96,7 +103,6 @@ return(
 
    <ScrollTopButton/>
 </div>
-
 );
 }
 }

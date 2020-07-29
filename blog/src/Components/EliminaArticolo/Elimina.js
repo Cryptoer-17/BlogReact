@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classes from './Elimina.module.css';
-import Modal from '../UI/Modal/Modal';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 
@@ -10,8 +9,13 @@ const Elimina = (props) => {
 
     const clickBtnSi = () => {
         const id = props.id;
-        setLoading(<Spinner />)
-        axios.delete('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"))
+        setLoading(<Spinner />);
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.delete('http://localhost:4001/articolo/delete/' + id, config)
             .then(response => {
                 setLoading(null);
                 setTimeout(() => {

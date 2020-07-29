@@ -7,8 +7,7 @@ import Modifica from './Components/Modifica/Modifica';
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
-import { FaWindows } from 'react-icons/fa';
-import Tag from './Components/Tag/Tag';
+import * as moment from 'moment';
 
 const asyncNuovoArticolo = asyncComponent(() =>{
   return import('./containers/NuovoArticolo/NuovoArticolo');
@@ -45,35 +44,24 @@ if(userId){
 
   render(){
     
-
-
-    let tempArrayArticolo;
-   
-  /*  tempArrayArticolo={
-      autore:articolo.autore,
-      categoria:articolo.categoria,
-      data:articolo.data,
-      descrizione:articolo.descrizione,
-      minuti:articolo.minuti,
-      sottotitoli:articolo.sottotitoli,
-      tags:articolo.tags,
-      testo:articolo.testo,
-      titolo:articolo.titolo,
-      userId:articolo.userId
-    }*/
-
     let key; 
       let tempArray;
        if(this.props.profilo.length){
-          key=this.props.profilo[0].key;
+         let numeroTelefono = (this.props.profilo[0].profilo.numeroTelefono ===undefined || this.props.profilo[0].profilo.numeroTelefono === null? '' : this.props.profilo[0].profilo.numeroTelefono);
+         let dataNascita = (this.props.profilo[0].profilo.dataNascita ===undefined || this.props.profilo[0].profilo.dataNascita === null? '' : this.props.profilo[0].profilo.dataNascita);
+          if(dataNascita !== ''){
+            dataNascita = moment(dataNascita).toDate().toISOString().substr(0,10);
+          }
+          key=this.props.profilo[0].profilo._id;
           tempArray={
-          nome: (this.props.profilo[0].profilo.nome === undefined ? '' : this.props.profilo[0].profilo.nome),
+          _id:this.props.profilo[0].profilo._id,
+          nome: (this.props.profilo[0].profilo.nome === undefined  ? '' : this.props.profilo[0].profilo.nome),
           cognome:(this.props.profilo[0].profilo.cognome===undefined? '' : this.props.profilo[0].profilo.cognome),
-          dataNascita: this.props.profilo[0].profilo.dataNascita,
+          dataNascita: dataNascita,
           sesso:this.props.profilo[0].profilo.sesso,
-          numeroTelefono:(this.props.profilo[0].profilo.numeroTelefono===undefined ? '' : this.props.profilo[0].profilo.numeroTelefono),
-          nazionalità:this.props.profilo[0].profilo.nazionalità,
-          img: this.props.profilo[0].profilo.img,
+          numeroTelefono:numeroTelefono,
+          nazionalità:(this.props.profilo[0].profilo.nazionalità === undefined? '' : this.props.profilo[0].profilo.nazionalità) ,
+          img: (this.props.profilo[0].profilo.img === null ? undefined : this.props.profilo[0].profilo.img),
           username:this.props.profilo[0].profilo.username,
           descrizione:(this.props.profilo[0].profilo.descrizione === undefined ? '' : this.props.profilo[0].profilo.descrizione)
         }

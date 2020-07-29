@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { auth, provider } from '../../utility/firebase';
-
+import * as moment from 'moment'; 
 export const updateEmailStart = () =>{
     return{
         type:actionTypes.UPDATE_EMAIL_START
@@ -23,22 +23,26 @@ export const updateEmailSuccess = () =>{
 export const updateEmail = (email) =>{
     return dispatch =>{
         dispatch(updateEmailStart());
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
-        const authData ={
-            idToken : localStorage.getItem("token"),
-            email : email,
-            returnSecureToken:true 
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
           }
-        axios.post(url,authData)
+        let url = 'http://localhost:4001/email/update/'+ localStorage.getItem("userId");
+        const authData ={
+            _id:localStorage.getItem("userId"),
+            email : email,
+            username : email,
+          }
+        axios.put(url,authData,config)
         .then(response=>{
+            console.log(response);
             //bisognerà vedere se impostare il refresh token come locale anche se non penso 
             //bisognerà impostare la nuova email
             //bisognerà impostare una nuova expire date
             console.log(response);
             localStorage.removeItem("email");
-            localStorage.setItem('email', response.data.email);
-            localStorage.removeItem("token");
-            localStorage.setItem('token', response.data.idToken);
+            localStorage.setItem('email', response.data.data.email);
             dispatch(updateEmailSuccess());
         })
         .catch(error =>{
@@ -69,17 +73,24 @@ export const updatePasswordFail = () =>{
 export const updatePassword = (props)=>{
     return dispatch=>{
         dispatch(updatePasswordStart());
-        let url= 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+         const email = localStorage.getItem("email");
+        let url= 'http://localhost:4001/password/update/' + localStorage.getItem("userId");
         const authData ={
-            idToken : localStorage.getItem("token"),
+            _id:localStorage.getItem("userId"),
+            email:email,
+            username: email,
             password : props,
-            returnSecureToken:true 
         }
-        axios.post(url,authData)
+        axios.put(url,authData,config)
         .then((response)=>{
             console.log(response)
-            localStorage.removeItem("token");
-            localStorage.setItem('token', response.data.idToken);
+          /*  localStorage.removeItem("token");
+            localStorage.setItem('token', response.data.idToken);*/
             dispatch(updatePasswordSuccess())
         })
         .catch((error)=>{
@@ -127,19 +138,23 @@ export const login = (email, password, isSignup,errore) =>{
     return dispatch =>{
         dispatch(loginStart());
         const authData ={
-          email : email,
+          username : email,
           password : password,
-          returnSecureToken:true 
+          email:email
         }
         console.log(isSignup);
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        //registrazione
+        let url = 'http://localhost:4001/register';
         if(!isSignup){
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+            //login
+            url = 'http://localhost:4001/login';
         }
         axios.post(url, authData)
         .then(response =>{
             console.log(response);
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+            const express = response.data.expiresIn;
+            const expiresIn = moment(express).toDate().getTime();
+            const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
             localStorage.setItem('token', response.data.idToken);
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('userId', response.data.localId);
@@ -173,28 +188,6 @@ export const setLoginRedirectPath = (path) =>{
     }
 
 };
-
-/*
-export const loginCheckState = () =>{
-    return dispatch =>{
-        const token = localStorage.getItem('token');
-        if(!token){
-            dispatch(logout());
-        }else{
-            const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if(expirationDate <= new Date()){
-                dispatch(logout());
-            }else{
-                const userId = localStorage.getItem('userId');
-                dispatch(loginSuccess(token, userId));
-                dispatch(checkLoginTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
-            }
-            
-        }
-    }
-};*/
-
-
 
 
 

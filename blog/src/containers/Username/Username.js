@@ -27,15 +27,17 @@ state = {
         maxLength:15,
         isUsername:true
         }
-},
-isFormValid : false,
-errorMsg:""
+  },
+  isFormValid : false,
+  errorMsg:""
 }
 
 
 //controllo username
 checkValidityOfUsername= (event) =>{
+  console.log(event.target.value);
     let newObj = updateObject(this.state.username,{value: event.target.value, valid:checkValidity(event.target.value, this.state.username.validation), touched:true}); 
+    console.log(newObj);
     let formIsValid = newObj.valid;
     let error = "";
    
@@ -45,10 +47,11 @@ checkValidityOfUsername= (event) =>{
       error = "L'username non è disponibile";
       formIsValid= false;
    }
+  }
 
    this.setState({errorMsg: error,isFormValid:formIsValid, username:newObj});
   
-    }
+    
     }
 
   handlerClickConfirm=()=>{
@@ -65,16 +68,13 @@ checkValidityOfUsername= (event) =>{
    
 
 render(){
-  console.log(this.props.profili)
-const {show, modalClosed, onSetUsername,loading} = this.props;
+const {show, modalClosed,loading} = this.props;
 const {username, isFormValid, errorMsg} = this.state;
 let contenutoModale = <Spinner/>
-
 if(!loading){
 
   contenutoModale =  (<div>
-   <p>Prima di poter pubblicare degli articoli, devi scegliere un username.</p>
-          
+   <p>Prima di poter pubblicare degli articoli o scrivere un commento, devi scegliere un username.</p>
             <Input 
                     value = {username.value}
                     type = {username.type}
@@ -132,11 +132,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-    
         onSetUsername: (username) => dispatch(actions.setUsername(username)),
-        onSendData: (data) => dispatch(actions.sendData(data)),
         onUpdateData:(data,idProfilo) =>dispatch(actions.updateData(data,idProfilo))
-
     };
   };
 

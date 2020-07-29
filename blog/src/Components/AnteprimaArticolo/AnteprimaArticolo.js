@@ -25,7 +25,7 @@ class AnteprimaArticolo extends Component {
     render() {
         let colore = 'black';
         let variabile;
-        const { autore, titolo, sottotitolo, categoria, img, descrizione, clickHeart, data, minuti, id, UpdateArticolo, showDropdown, like } = this.props;
+        const { autore, titolo, sottotitolo, categoria, img, descrizione, clickHeart, data, minuti, id, showDropdown, like } = this.props;
         let showModalDelete;
         like.map((object) => {
             if (object.username === localStorage.getItem("username")) {
@@ -33,6 +33,7 @@ class AnteprimaArticolo extends Component {
                     colore = 'red';
                 }
             }
+            return null;
         })
         variabile = <div>
             {titolo}

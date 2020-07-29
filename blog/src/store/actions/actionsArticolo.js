@@ -1,7 +1,6 @@
 import axios from '../../utility/axios';
 import * as actionTypes from './actionTypes';
 
-
 export const setArticoliSuccess = (articoli) =>{
     return{
         type: actionTypes.SET_ARTICOLI_SUCCESS,
@@ -23,13 +22,17 @@ export const setArticoliFail = (error) =>{
     }
 }
 
-
 export const initArticoli = () =>{
     return dispatch =>{
         const temparray = [];
         dispatch(setArticoliStart());
         const token = localStorage.getItem('token');
-        axios.get('/articoli.json?auth=' +token)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ token,
+            }
+          }
+        axios.get('http://localhost:4001/articoli',config)
         .then(response =>{   
           for(let key in response.data){
             temparray.push({articolo: response.data[key], key: key })
@@ -69,8 +72,12 @@ export const postArticoloStart = () =>{
 export const postArticolo = (articolo) => {
     return dispatch => {
         dispatch(postArticoloStart());
-        console.log(articolo);
-        axios.post('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.post('http://localhost:4001/articolo/save', articolo,config)
         .then(res =>{ 
             dispatch(postArticoloSuccess(articolo))
           })
@@ -108,8 +115,14 @@ export const updateArticoloSuccess = (articolo) =>{
 
 export const updateArticolo = (articolo,idArticolo) =>{
     return dispatch => {
+        console.log(articolo);
         dispatch(postArticoloStart());
-        axios.put('/articoli/'+idArticolo+'.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.put('http://localhost:4001/articolo/update/'+idArticolo, articolo,config)
         .then(res =>{ 
             dispatch(updateArticoloSuccess(articolo))
           })
@@ -131,7 +144,12 @@ export const deleteArticoloSuccess = (articolo) =>{
 export const deleteArticolo = (articolo) =>{
     return dispatch => {
         dispatch(postArticoloStart());
-        axios.delete('/articoli.json?auth='+localStorage.getItem("token"), articolo)
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+        axios.delete('http://localhost:4001/articolo/delete/5f1e8d51bca4d542340477b0', articolo,config)
         .then(res =>{ 
             dispatch(deleteArticoloSuccess(articolo))
           })
@@ -140,41 +158,3 @@ export const deleteArticolo = (articolo) =>{
         });
     }
 }
-
-
-
-
-/*export const updateDataSuccess = (dati) =>{
-    return{
-        type: actionTypes.UPDATE_DATA_SUCCESS,
-        dati: dati
-    }
-} 
-
-export const updateDataStart = () =>{
-    return {
-        type : actionTypes.UPDATE_DATA_START
-    };
-}
-
-export const updateDataFail = (error) =>{
-    
-    return{
-        type : actionTypes.UPDATE_DATA_FAIL,
-        error : error
-    }
-}
-
-
-export const updateData = (dato,idProfilo) =>{
-    return dispatch => {
-        dispatch(updateDataStart());
-        axios.put('/profili/' + idProfilo + '.json?auth='+localStorage.getItem("token"), dato)
-        .then(res =>{ 
-            dispatch(updateDataSuccess(dato))
-          })
-        .catch(error => { 
-            dispatch(updateDataFail(error));
-        });
-    }
-}*/

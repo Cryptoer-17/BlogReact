@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+/* il warning di firebase deve rimanere perchè non si può utilizzare 
+   un diverso import per google auth */
 
    const firebaseConfig = {
     apiKey: "AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU",

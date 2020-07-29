@@ -20,7 +20,8 @@ class Profilo extends Component {
         anteprimaImg: <img className={classes.InputImg} src={this.props.profilo.img} alt="" />,
         presentazione: (this.props.profilo.descrizione ? false : null),//false
         modificaDati: null,
-        img: null,
+        img: (this.props.profilo.img === undefined ? null : this.props.profilo.img),
+        idProfilo:''+this.props.profilo._id+'',
         descrizione: '' + this.props.profilo.descrizione + '',
         formIsValid: (this.props.profilo.dataNascita === undefined ? false : true),
         show: false,
@@ -28,6 +29,7 @@ class Profilo extends Component {
         emailIsValid:true,
         messageModalPassord:null,
         modalPassword: false,
+        errorMessage:'',
         email: {
             elementType: 'input',
             elementConfig: {
@@ -179,16 +181,17 @@ class Profilo extends Component {
         }
     }
 
+
+
     clickMenuHandler = (props) => {
-        console.log(props);
-        this.setState({ showDropdown: !this.state.showDropdown })
-        this.setState({ idArticoloCambiamenti: props })
+       this.setState({ showDropdown: !this.state.showDropdown });
+        this.setState({ idArticoloCambiamenti: props });
     }
     handlerClickPresentazione() {
         this.setState({ presentazione: false })
     }
     hideModal = () => {
-        this.setState({ show: false })
+        this.setState({ show: false, errorMessage:'' })
     }
     showModal = () => {
         this.setState({ show: true })
@@ -221,11 +224,10 @@ class Profilo extends Component {
             newpassword1:passwordData.newpassword1,
             newpassword2:passwordData.newpassword2
         }
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGI-n4ck_c8QjD1hxtunkeLDaGZRLGnrU';
+        let url = 'http://localhost:4001/login';
         const authData ={
-            email : localStorage.getItem("email"),
+            username : localStorage.getItem("email"),
             password:psw.oldpassword,
-            returnSecureToken:true
           }
           axios.post(url,authData)
           .then(response=>{
@@ -269,6 +271,7 @@ class Profilo extends Component {
             formData[formElementIdentifier] = this.state.profileForm[formElementIdentifier].value;
         }
         const profile = {
+            _id:this.state.idProfilo,
             nome: formData.nome,
             cognome: formData.cognome,
             dataNascita: formData.dataNascita.trim(),
@@ -280,10 +283,29 @@ class Profilo extends Component {
             userId: localStorage.getItem('userId').trim(),
             descrizione: this.state.descrizione
         }
-        //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
+
+
+        //faccio il controllo che l'username scelto se inserito, non sià già in uso
+        let c = 0;
+        if(formData.username.trim() != ''){
+            let profili = this.props.profili;
+            console.log(profili);
+            for(let x in profili){
+                console.log(x);
+                if(profili[x].username ===  formData.username.trim()){
+                    console.log("entrato");
+                    console.log("si ferma qui e non fa l'update");
+                    c++;
+                }
+            }
+        }
+
+        if(c<2){
+            //se il profilo è già in firebase allora faccio un update del profilo e poi se è cambiato anche l'username glielo cambio in tutta l'app
         //altrimenti mando il nuovo profilo.
         if (this.props.profiloReducer.length) {
-            this.props.onUpdateData(profile, this.props.profiloReducer[0].key);
+            console.log(this.props.profiloReducer);
+            this.props.onUpdateData(profile, this.props.profiloReducer[0].profilo._id);
             this.props.articoli.map((articolo) => {
                 //faccio il map per ogni articolo per cambiare l'autore e l'username nei messaggi
                 //se non è il proprietario dell'articolo faccio solo il controllo sui messaggi e cambi l'username
@@ -302,7 +324,8 @@ class Profilo extends Component {
                         autore: profile.username,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key)
+                    console.log(articolo);
+                    this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
                 else if (articolo.articolo.userId !== localStorage.getItem("userId")) {
                     let messaggioUpdate;
@@ -318,8 +341,9 @@ class Profilo extends Component {
                         ...articolo.articolo,
                         messaggi: (messaggioUpdate === undefined ? [] : messaggioUpdate),
                     }
-                    this.props.onUpdateArticolo(updateArticolo, articolo.key)
+                    this.props.onUpdateArticolo(updateArticolo, articolo.articolo._id);
                 }
+                return null;
             })
         }
         else {
@@ -329,7 +353,15 @@ class Profilo extends Component {
             if (this.props.esito === "I dati sono stati inviati/modificati con successo.") {
                 window.location.reload();
             }
-        }, 1000)
+        }, 1000);
+        }else {
+            console.log("errore nell'aggiornare il profilo perchè l'username è già in uso");
+            this.setState({
+                errorMessage:'Errore nell\'aggiornare il profilo. L\'username scelto è già in uso'
+            })
+        }
+
+        
     }
     handlerModificaDati() {
         this.setState({ modificaDati: !this.state.modificaDati })
@@ -365,8 +397,10 @@ class Profilo extends Component {
         const updatedFormElement = {
             ...updatedprofileForm[inputIdentifier]
         }
+        console.log(updatedFormElement);
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        console.log(updatedFormElement);
         updatedFormElement.touched = true;
         updatedprofileForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
@@ -397,7 +431,7 @@ class Profilo extends Component {
         if (e !== undefined) {
             reader.readAsDataURL(e);
             reader.onloadend = () => {
-
+                console.log(reader.result);
                 this.setState({ img: reader.result, anteprimaImg:(<div className={classes.ImgClose}><img className={classes.InputImg} src={reader.result} alt="" /><i className="material-icons" onClick = {()=>this.clickCloseImg()}>close</i></div>) })
             }
         }
@@ -417,7 +451,6 @@ class Profilo extends Component {
     }
     clickHeartHandler(art) {
         let length = art.articolo.like.length;
-        console.log(length)
         let c = 0;
         let heartChange = art.articolo.like.map((object) => {
             if (object.username === localStorage.getItem("username")) {
@@ -435,10 +468,15 @@ class Profilo extends Component {
             ...art.articolo,
             like: heartChange
         }
-        const id = art.key;
-        axios.put('https://blog-monika-andrea.firebaseio.com/articoli/' + id + '.json?auth=' + localStorage.getItem("token"), anteprima)
+        const id = art.articolo._id;
+        let config = {
+            headers: {
+                authorization: 'Bearer '+ localStorage.getItem("token"),
+            }
+          }
+          console.log(anteprima);
+        axios.put('http://localhost:4001/articolo/update/' + id , anteprima,config)
             .then(response => {
-                console.log("ok");
                 this.props.mount();
             })
             .catch(error => console.log(error));
@@ -481,7 +519,6 @@ class Profilo extends Component {
                 psw:this.state.password[key]
             })
         }
-        console.log(passwordElementsArray)
         modificaPassword = ( <div><h3>MODIFICA PASSWORD</h3>
            {passwordElementsArray.map(elementArray=>(
                <Input
@@ -555,7 +592,7 @@ class Profilo extends Component {
             if (art.articolo.userId === localStorage.getItem('userId')) {
                 return (
                     <AnteprimaArticolo
-                        id={art.key}
+                        id={art.articolo._id}
                         autore={art.articolo.autore}
                         categoria={art.articolo.categoria}
                         descrizione={art.articolo.descrizione}
@@ -567,7 +604,7 @@ class Profilo extends Component {
                         data={art.articolo.data}
                         minuti={art.articolo.minuti}
                         disableMore={false}
-                        showDropdown={this.state.idArticoloCambiamenti === art.key ? showDropdown : false}
+                        showDropdown={this.state.idArticoloCambiamenti === art.articolo._id ? showDropdown : false}
                         mount={mount}
                         clickMenuHandler={this.clickMenuHandler}
                         UpdateArticolo={this.props.clickUpdateArticolo}
@@ -583,9 +620,9 @@ class Profilo extends Component {
 
         if (loading === false ||    loadingLogin === false) {
             modal = (<Modal show={this.state.show} modalClosed={this.hideModal}>
-                {console.log(this.props.esitoLogin)}
                 {this.props.esito === '' ? null : this.props.esito}
                 {this.props.esitoLogin === '' ? null : this.props.esitoLogin}
+                {this.state.errorMessage === '' ? null : this.state.errorMessage}
             </Modal>);
         }
 
@@ -619,7 +656,7 @@ class Profilo extends Component {
                 Nazionalità: {this.props.profilo.nazionalità !== "" ? this.props.profilo.nazionalità : <b>non ancora inserita</b>}<br />
                         <hr />
                         <div className={this.props.profilo.img ? classes.ImgMediaQuery : null}>
-                            Foto profilo: {this.props.profilo.img !== undefined ? <img  style={{ width: '15%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
+                            Foto profilo: {this.props.profilo.img !== undefined ? <img  style={{ maxHeight:'100%',maxWidth:'100%', marginBottom: '-6%', borderStyle: 'outset' }} src={this.props.profilo.img} alt="" /> : <b>Non ancora inserita</b>}
                         </div>
                     </div>
                     <div>
@@ -641,8 +678,8 @@ const mapStateToProps = state => {
         esito: state.profilo.esitoCaricamento,
         profiloReducer: state.profilo.profilo,
         loadingLogin: state.login.loading,
-        esitoLogin:state.login.esitoCaricamento
-
+        esitoLogin:state.login.esitoCaricamento,
+        profili:state.profilo.profili
     }
 }
 

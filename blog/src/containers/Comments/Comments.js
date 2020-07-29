@@ -48,6 +48,7 @@ class Comments extends Component {
                 colore = Math.floor(Math.random() * colorArray.length - 1 + 1)
                 tempUserArray.push({ username: messaggio.username, colore: colorArray[colore] })
             }
+            return null;
         })
         let commenti
         if (articolo.messaggi !== undefined) {

@@ -7,6 +7,7 @@ const NomePersona = (props)=>{
         if(userPropriety.username === props.children){
             colore = userPropriety.colore
         }
+        return null;
     })
     return(
         <div className={classes.NomePersona} style={{color:colore}}>
