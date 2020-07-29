@@ -242,12 +242,7 @@ class Modifica extends Component {
                 this.props.history.push("/");
                 window.location.reload();
             }
-        }, 2000)
-        
-        
-        await setTimeout(() => this.props.onInitArticoli(), 1000 ) ;  
-        this.showModal();
-        setTimeout(() => this.props.history.push("/") , 3000)
+        }, 2000);
     }
     showModal = () => {
         this.setState({ show: true });

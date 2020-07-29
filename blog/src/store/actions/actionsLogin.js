@@ -154,7 +154,7 @@ export const login = (email, password, isSignup,errore) =>{
             console.log(response);
             const express = response.data.expiresIn;
             const expiresIn = moment(express).toDate().getTime();
-            const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+            const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
             localStorage.setItem('token', response.data.idToken);
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('userId', response.data.localId);

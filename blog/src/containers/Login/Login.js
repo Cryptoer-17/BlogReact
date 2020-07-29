@@ -43,16 +43,13 @@ isFormValid : false,
 isSignup: true
 }
 
-
 switchAuthModeHandler = () =>{
     this.setState(prevState =>{
         return {isSignup : !prevState.isSignup};
     })
 }
 
-
 checkValidityOfInput = (event, id) =>{
-
     let newObj = updateObject(this.state.loginForm[id], {value: event.target.value, valid:checkValidity(event.target.value, this.state.loginForm[id].validation), touched:true});
     let newForm = updateObject(this.state.loginForm, {[id]: {...newObj}});
     let formIsValid = true;
@@ -67,8 +64,7 @@ checkValidityOfUsername= (event) =>{
     let newForm = updateObject(this.state.signUpForm, {username: {...newObj}} );
     let formIsValid = newObj.valid;
     this.setState({isUsernameValid:formIsValid, signUpForm: newForm})
-    }
-
+}
 
 submitHandlerSignIn = (event) =>{   
     event.preventDefault();  
