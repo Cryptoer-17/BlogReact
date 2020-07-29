@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import axios from 'axios';
 import * as moment from 'moment';
+
 class Modifica extends Component {
     state = {
         form: {
@@ -92,8 +93,6 @@ class Modifica extends Component {
                 /*  if (typeof response.data.tags === 'undefined'){
                       response.data.tags = [];
                   }*/
-                  console.log(response);
-                  console.log(response.data[0].sottotitolo);
                 let form = {
                     titolo: {
                         type: "text",
@@ -190,7 +189,6 @@ class Modifica extends Component {
             console.log(tags);
             this.setState({ tagsList: tagsList, tags: tags });
         }
-        
     }
     deleteTagHandler = (tag) => {
         let tagsList = [...this.state.tagsList];
@@ -220,7 +218,6 @@ class Modifica extends Component {
     };
     modifyArticleHandler = async () => {
         const id = this.props.match.params.id;
-        console.log(new Date().toLocaleDateString());
         const articolo = {
             _id:this.props.match.params.id,
             autore: localStorage.getItem("username"),
@@ -237,8 +234,6 @@ class Modifica extends Component {
             titolo: this.state.form.titolo.value.trim(),
             userId: localStorage.getItem("userId")
         }
-        console.log(articolo);
-        console.log(this.state.form.sottotitolo.value.trim());
         this.props.onUpdateArticolo(articolo, id);
         this.setState({ show: true })
         setTimeout(() => {
@@ -246,7 +241,6 @@ class Modifica extends Component {
                 this.props.mount();
                 this.props.history.push("/");
                 window.location.reload();
-                console.log("fatto tutto ");
             }
         }, 2000)
         
